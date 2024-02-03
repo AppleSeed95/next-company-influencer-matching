@@ -162,28 +162,28 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
     if (applyMode) {
       result = await axios.post("api/influencer", body);
       if (result.data.type === "success") {
-        // await axios.post("/api/sendEmail", {
-        //   from: data.emailAddress,
-        //   subject: "【インフルエンサーめぐり】登録申請がありました",
-        //   content: `インフルエンサーめぐりに登録申請がありました。
-        //     \n インフルエンサーめぐりに申請いただきありがとうございます。
-        //     \nログインして確認してください。
-        //     `,
-        // });
-        // await axios.post("/api/sendEmail", {
-        //   to: data.emailAddress,
-        //   subject: "【インフルエンサーめぐり】申請ありがとうございます",
-        //   content: `${data.influencerName} 様。
-        //     \n
-        //     \n インフルエンサーめぐりに申請いただきありがとうございます。
-        //     \n申請内容を確認しますのでしばらくお待ちください。
-        //     \n確認後にご登録いただいたメールアドレスにご連絡します。
-        //     \n
-        //     \n-----------------------------------------------------
-        //     \n不明点がございましたらお問い合わせフォームよりご連絡ください。
-        //     \nhttp://localhost:3000/ask
-        //     `,
-        // });
+        await axios.post("/api/sendEmail", {
+          from: data.emailAddress,
+          subject: "【インフルエンサーめぐり】登録申請がありました",
+          content: `インフルエンサーめぐりに登録申請がありました。
+            \n インフルエンサーめぐりに申請いただきありがとうございます。
+            \nログインして確認してください。
+            `,
+        });
+        await axios.post("/api/sendEmail", {
+          to: data.emailAddress,
+          subject: "【インフルエンサーめぐり】申請ありがとうございます",
+          content: `${data.influencerName} 様。
+            \n
+            \n インフルエンサーめぐりに申請いただきありがとうございます。
+            \n申請内容を確認しますのでしばらくお待ちください。
+            \n確認後にご登録いただいたメールアドレスにご連絡します。
+            \n
+            \n-----------------------------------------------------
+            \n不明点がございましたらお問い合わせフォームよりご連絡ください。
+            \nhttp://localhost:3000/ask
+            `,
+        });
         router.replace("/applyComplete");
       }
     } else {

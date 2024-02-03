@@ -68,7 +68,7 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
         \nID:
         \n${data?.emailAddress}
         \nパスワード：
-        \nパスワード：
+        \n${result.data?.password}
         \n-----------------------------------------------------
         \n不明点がございましたらお問い合わせフォームよりご連絡ください。
         \nhttp://localhost:3000/ask

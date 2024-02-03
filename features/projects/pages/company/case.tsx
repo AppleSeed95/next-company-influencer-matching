@@ -11,6 +11,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import Modal from "../../utils/modal";
+
 const CasePage: React.FC = () => {
   const [data, setData] = useState({
     caseType: "来 店",
@@ -38,6 +39,7 @@ const CasePage: React.FC = () => {
   const { id } = useParams();
   const [showConfirm, setShowConfirm] = useState(false);
   const [confirmMsg, setConfirmMsg] = useState("操作が成功しました。");
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios.get(`/api/case/aCase?id=${id}`);
@@ -95,6 +97,7 @@ const CasePage: React.FC = () => {
     }
     if (isValid) {
       if (saveMode) {
+        setIsLoading(true);
         if (data.id) {
           const result = await axios.put("/api/case", {
             ...body,
@@ -108,17 +111,21 @@ const CasePage: React.FC = () => {
             status: "申請前",
           });
           setError("");
+          setIsLoading(false);
           router.replace("/appliedList");
         }
       } else {
         if (data.id) {
+          setIsLoading(true);
           const result = await axios.put("/api/case", {
             ...body,
             status: "申請中",
           });
           setError("");
+          setIsLoading(false);
           router.back();
         } else {
+          setIsLoading(true);
           const result = await axios.post("/api/case", {
             ...body,
             status: "申請中",
@@ -145,6 +152,7 @@ const CasePage: React.FC = () => {
           `,
           });
           setError("");
+          setIsLoading(false);
           router.replace("/appliedList");
         }
       }
@@ -434,8 +442,10 @@ const CasePage: React.FC = () => {
             <span className="flex ">
               <span>申請</span>
               <img
-                className="w-[14px] ml-[5px]"
-                src="/img/apply.svg"
+                className={
+                  isLoading ? "w-[14px] ml-[5px] rotate" : "w-[14px] ml-[5px]"
+                }
+                src={isLoading ? "/img/refresh.svg" : "/img/apply.svg"}
                 alt="refresh"
               />
             </span>

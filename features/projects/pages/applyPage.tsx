@@ -26,20 +26,20 @@ export default function ApplyPage() {
     setIsLoading(true);
     const result = await axios.put("api/user", { email, type });
     if (result.data.type === "success") {
-      // await axios.post("/api/sendEmail", {
-      //   to: email,
-      //   subject: "【インフルエンサーめぐり】仮申請ありがとうございます",
-      //   content: `インフルエンサーめぐりに仮申請いただきありがとうございます。
-      //     \n 以下のURLから登録申請をお願いします。
-      //     \n※メール本文中のURLを60分以内にクリックしてください。
-      //     \nhttp://localhost:3000/${
-      //       type === "企業" ? "applyCompany" : "applyInfluencer"
-      //     }
-      //     \n-----------------------------------------------------
-      //     \n 不明点がございましたらお問い合わせフォームよりご連絡ください。
-      //     \n http://localhost:3000/ask。
-      //     `,
-      // });
+      await axios.post("/api/sendEmail", {
+        to: email,
+        subject: "【インフルエンサーめぐり】仮申請ありがとうございます",
+        content: `インフルエンサーめぐりに仮申請いただきありがとうございます。
+          \n 以下のURLから登録申請をお願いします。
+          \n※メール本文中のURLを60分以内にクリックしてください。
+          \nhttp://localhost:3000/${
+            type === "企業" ? "applyCompany" : "applyInfluencer"
+          }
+          \n-----------------------------------------------------
+          \n 不明点がございましたらお問い合わせフォームよりご連絡ください。
+          \n http://localhost:3000/ask
+          `,
+      });
       router.push("/applyConfirm");
     } else {
       if (result.data.msg) setError(result.data.msg);

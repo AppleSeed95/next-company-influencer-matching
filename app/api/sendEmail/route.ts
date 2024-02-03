@@ -4,10 +4,11 @@ import { API_KEY } from "./config";
 
 // sgMail.setApiKey(process.env.API_KEY as string);
 sgMail.setApiKey(
-  "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"
+  "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"
 );
 
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
+console.log(ADMIN_EMAIL);
 
 export async function POST(request: NextRequest) {
   try {
