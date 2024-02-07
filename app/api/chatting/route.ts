@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
       }
     });
     await executeQuery(`
-      CREATE TABLE IF NOT EXISTS message ( 
+      CREATE TABLE IF NOT EXISTS message (
         id INT AUTO_INCREMENT PRIMARY KEY,
         roomId int,
         userId int,        
