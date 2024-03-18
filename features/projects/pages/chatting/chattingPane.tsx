@@ -10,7 +10,7 @@ import { useParams } from "next/navigation";
 import axios from "@/node_modules/axios/index";
 console.log(process.env.SOCKET_URL);
 
-const socket = io("localhost:5000");
+const socket = io("http://162.43.4.62/");
 import Image from "next/image";
 import ChattingRooms from "./rooms";
 
