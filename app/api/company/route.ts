@@ -52,6 +52,9 @@ export async function POST(request: NextRequest) {
     const defaultValues = {
       status: "停止中",
       date: todayString,
+      payment: "",
+      paymentFailed: "",
+      plan: "",
       thisMonthCollectionCnt: 0,
       conCurrentCnt: 0,
       monthlyCollectionCnt: 1,
