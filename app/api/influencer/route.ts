@@ -33,6 +33,7 @@ export async function POST(request: NextRequest) {
     const defaultValues = {
       status: "承認待ち",
       date: todayString,
+      prefecture: "",
       userId: userId,
     };
     body = { ...body, ...defaultValues };
