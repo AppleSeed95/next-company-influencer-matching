@@ -16,6 +16,7 @@ export interface InfluencerInfoProps {
   applyMode?: boolean;
 }
 const prefectures = [
+  "",
   "北海道",
   "青森県",
   "岩手県",

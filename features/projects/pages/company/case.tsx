@@ -62,6 +62,7 @@ const CasePage: React.FC = () => {
     }
   };
   const handleRequest = async (saveMode: boolean) => {
+    if(isLoading) return;
     const { targetStatus } = user.user;
 
     if (targetStatus !== "稼動中") {

@@ -24,7 +24,6 @@ export async function PUT(request: NextRequest) {
   try {
     const { update, reason, approveMode, resumeMode, companyId } =
       await request.json();
-    console.log({ update, reason, approveMode, resumeMode, companyId });
 
     const query = approveMode
       ? `UPDATE cases
@@ -62,17 +61,19 @@ export async function PUT(request: NextRequest) {
         });
       }
       const company = result[0];
-      if (company.conCurrentCnt === company.concurrentCollectionCnt) {
-        return NextResponse.json({
-          type: "fail",
-          msg: "同時募集限界なので募集を開始できません。",
-        });
-      }
-      if (company.thisMonthCollectionCnt === company.monthlyCollectionCnt) {
-        return NextResponse.json({
-          type: "fail",
-          msg: "月募集限界なので募集を開始できません。",
-        });
+      if(!company.freeAccount){
+        if (company.conCurrentCnt === company.concurrentCollectionCnt) {
+          return NextResponse.json({
+            type: "fail",
+            msg: "同時募集限界なので募集を開始できません。",
+          });
+        }
+        if (company.thisMonthCollectionCnt === company.monthlyCollectionCnt) {
+          return NextResponse.json({
+            type: "fail",
+            msg: "月募集限界なので募集を開始できません。",
+          });
+        }
       }
       const queryForCompany1 = `UPDATE company SET thisMonthCollectionCnt = ${
         company.thisMonthCollectionCnt + 1
