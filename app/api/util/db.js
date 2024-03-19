@@ -20,7 +20,7 @@ connection.connect(async (error) => {
       email VARCHAR(255)  ,
       password VARCHAR(255)  ,
       name VARCHAR(255) ,
-      role VARCHAR(255) NOT NULL
+      role VARCHAR(255)  
     )
   `,
       (error, result) => {
