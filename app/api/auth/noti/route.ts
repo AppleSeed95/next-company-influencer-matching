@@ -13,9 +13,9 @@ export async function POST(request: NextRequest) {
     await executeQuery(`
         CREATE TABLE IF NOT EXISTS notification (
           id INT AUTO_INCREMENT PRIMARY KEY,
-          companyNoti text NOT NULL,
-          mainNoti text NOT NULL,
-          influencerNoti text NOT NULL
+          companyNoti text  ,
+          mainNoti text  ,
+          influencerNoti text  
         )
       `);
     console.log("Table created successfully!");

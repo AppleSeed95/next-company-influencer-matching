@@ -86,7 +86,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
   applyMode,
 }: InfluencerInfoProps) => {
   const authUser = useRecoilValue(authUserState);
-  const [data, setData] = useState({prefecture:'北海道'});
+  const [data, setData] = useState(null);
   const [genre, setGenre] = useState(JSON.stringify([]));
   const [showConfirm, setShowConfirm] = useState(false);
   const [error, setError] = useState("");
@@ -163,7 +163,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
     if (applyMode) {
       result = await axios.post("api/influencer", body);
       console.log(body);
-      
+
       if (result.data.type === "success") {
         await axios.post("/api/sendEmail", {
           from: data.emailAddress,
