@@ -98,7 +98,6 @@ const CasePage: React.FC = () => {
     }
     if (isValid) {
       if (saveMode) {
-        setIsLoading(true);
         if (data.id) {
           const result = await axios.put("/api/case", {
             ...body,
@@ -117,7 +116,6 @@ const CasePage: React.FC = () => {
         }
       } else {
         if (data.id) {
-          setIsLoading(true);
           const result = await axios.put("/api/case", {
             ...body,
             status: "申請中",
@@ -126,6 +124,7 @@ const CasePage: React.FC = () => {
           setIsLoading(false);
           router.back();
         } else {
+          if (isLoading) return;
           setIsLoading(true);
           const result = await axios.post("/api/case", {
             ...body,
@@ -443,8 +442,10 @@ const CasePage: React.FC = () => {
             <span className="flex ">
               <span>申請</span>
               <img
-                className="w-[14px] ml-[5px]"
-                src="/img/apply.svg"
+                className={
+                  isLoading ? "rotate w-[14px] ml-[5px]" : "w-[14px] ml-[5px]"
+                }
+                src={isLoading ? "/img/refresh.svg" : "/img/apply.svg"}
                 alt="refresh"
               />
             </span>

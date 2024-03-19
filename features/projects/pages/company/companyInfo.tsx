@@ -63,6 +63,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
     if (!applyMode && authUser) fetchData();
   }, []);
   const handleApply = async (isApply) => {
+    if (isLoading) return;
     const keys = Object.keys(msgs);
     let isValid = true;
 
@@ -101,6 +102,8 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
     if (!isValid) return;
     setIsLoading(true);
     if (isApply) {
+      console.log(data);
+
       const res = await axios.post(`api/company`, data);
       if (res.data.type === "success") {
         await axios.post("/api/sendEmail", {

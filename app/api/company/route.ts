@@ -32,13 +32,15 @@ export async function POST(request: NextRequest) {
     if (!rows && !rows.length && rows.length === 0) {
       return NextResponse.json({ type: "error" });
     }
-    const query4 = `SELECT * FROM company where emailAddress = '${body.emailAddress}'`;
-    const rows1 = await executeQuery(query4).catch((e) => {
-      return NextResponse.json({ type: "error" });
-    });
-    if (rows1.length !== 0) {
-      return NextResponse.json({ type: "error" });
-    }
+    // const query4 = `SELECT * FROM company where emailAddress = '${body.emailAddress}'`;
+    // const rows1 = await executeQuery(query4).catch((e) => {
+    //   console.log("error here");
+
+    //   return NextResponse.json({ type: "error" });
+    // });
+    // if (rows1.length !== 0) {
+    //   return NextResponse.json({ type: "error" });
+    // }
     const user = rows[0];
     await executeQuery(
       `UPDATE users SET name = '${body.companyName}' WHERE id = ${user.id}`
