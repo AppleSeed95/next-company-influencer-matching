@@ -8,8 +8,8 @@ export async function POST(request: NextRequest) {
     await executeQuery(`
         CREATE TABLE IF NOT EXISTS users (
           id INT AUTO_INCREMENT PRIMARY KEY,
-          name VARCHAR(255) NOT NULL,
-          email VARCHAR(255) NOT NULL
+          name VARCHAR(255) ,
+          email VARCHAR(255) 
         )
       `);
     console.log("Table created successfully!");
