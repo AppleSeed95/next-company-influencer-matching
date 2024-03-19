@@ -35,30 +35,32 @@ export async function POST(request: NextRequest) {
     let query2 = "";
     const keys = Object.keys(body);
     keys?.map((aKey) => {
-      query1 += aKey + ",";
-      query2 += "'" + body[aKey] + "',";
+      if(aKey !== 'id'){
+        query1 += aKey + ",";
+        query2 += "'" + body[aKey] + "',";
+      }
     });
     // insertQuery += `'${body["ds"]}'`;
     await executeQuery(`
     CREATE TABLE IF NOT EXISTS cases (
       id INT AUTO_INCREMENT PRIMARY KEY,
-      caseType VARCHAR(255) NOT NULL,
-      caseName VARCHAR(255) NOT NULL,
-      caseContent VARCHAR(255) NOT NULL,
-      wantedHashTag VARCHAR(255) NOT NULL,
-      wantedSNS VARCHAR(255) NOT NULL,
-      casePlace VARCHAR(255) NOT NULL,
-      collectionStart VARCHAR(255) NOT NULL,
-      collectionEnd VARCHAR(255) NOT NULL,
-      caseEnd VARCHAR(255) NOT NULL,
-      collectionCnt VARCHAR(255) NOT NULL,
-      addition VARCHAR(255) NOT NULL,
-      status VARCHAR(255) NOT NULL,
-      collectionStatus VARCHAR(255) NOT NULL,
-      date VARCHAR(255) NOT NULL,
-      reason VARCHAR(255) NOT NULL,
+      caseType VARCHAR(255) ,
+      caseName VARCHAR(255) ,
+      caseContent VARCHAR(255) ,
+      wantedHashTag VARCHAR(255) ,
+      wantedSNS VARCHAR(255) ,
+      casePlace VARCHAR(255) ,
+      collectionStart VARCHAR(255) ,
+      collectionEnd VARCHAR(255) ,
+      caseEnd VARCHAR(255) ,
+      collectionCnt VARCHAR(255) ,
+      addition VARCHAR(255) ,
+      status VARCHAR(255) ,
+      collectionStatus VARCHAR(255) ,
+      date VARCHAR(255) ,
+      reason VARCHAR(255) ,
       companyId int,
-      edited BOOLEAN NOT NULL DEFAULT FALSE,
+      edited BOOLEAN  DEFAULT FALSE,
       FOREIGN KEY (companyId) REFERENCES company(id)
     )
   `);
@@ -67,7 +69,8 @@ export async function POST(request: NextRequest) {
       0,
       -1
     )}) VALUES(${query2.slice(0, -1)})`;
-
+      console.log(query);
+      
     const result = await executeQuery(query).catch((e) => {
       return NextResponse.json({ type: "error", msg: "error" });
     });
