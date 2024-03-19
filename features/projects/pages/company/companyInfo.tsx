@@ -159,6 +159,8 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
         if (typeof window !== "undefined") {
           router.push("/applyComplete");
         }
+      } else{
+        setError("エラーが発生した。")
       }
     }
     if (!isApply) {

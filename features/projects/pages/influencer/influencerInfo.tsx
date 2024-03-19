@@ -65,6 +65,7 @@ const prefectures = [
   "沖縄県",
 ];
 const followersOptions = [
+  "",
   "～1,000",
   "1,001～3,000",
   "3,001～5,000",
@@ -106,17 +107,20 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
     if (!applyMode && authUser) fetchData();
   }, []);
   const handleGenreChange = (val) => {
+    
     let isAlreadyExits = false;
     const genre1 = JSON.parse(genre);
     genre1.forEach((a) => {
       if (a === val) isAlreadyExits = true;
     });
     if (!isAlreadyExits) {
+      
       setGenre(JSON.stringify([...genre1, val]));
     } else {
       let filteredArray = genre1.filter((element) => element !== val);
       setGenre(JSON.stringify(filteredArray));
     }
+    
   };
   const handleSend = async (applyMode: boolean) => {
     const body = {
@@ -161,8 +165,14 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
     setIsLoading(true);
     let result;
     if (applyMode) {
+      const defaultSNS = JSON.stringify({account:'',followers:''})
+      if(!body.instagram) body.instagram = defaultSNS;
+      if(!body.tiktok) body.tiktok = defaultSNS;
+      if(!body.youtube) body.youtube = defaultSNS;
+      if(!body.facebook) body.facebook = defaultSNS;
+      if(!body.x) body.x = defaultSNS;
+      if(!body.gender) body.gender = "男性";
       result = await axios.post("api/influencer", body);
-      console.log(body);
 
       if (result.data.type === "success") {
         await axios.post("/api/sendEmail", {
@@ -188,8 +198,11 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
             `,
         });
         router.replace("/applyComplete");
+      } else{
+        setError('エラーが発生した。')
       }
     } else {
+            
       result = await axios.put("api/influencer", body);
       if (result.data.type === "success") {
         setError("");
@@ -850,7 +863,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
           <span>その他のSNS </span>
         </span>
         <TextArea
-          value={data ? data.otherSNS : ""}
+          value={data ? data.otherSNS === 'null' ? "" : data.otherSNS : ""}
           handleChange={(val) => setData({ ...data, otherSNS: val })}
           textAreaClassName="max-w-[380px] grow"
         ></TextArea>

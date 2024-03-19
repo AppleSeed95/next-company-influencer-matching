@@ -143,7 +143,8 @@ export default function CollectedCase() {
   };
   const handleApply = async (caseId: string) => {
     const { targetStatus } = user.user;
-    if (targetStatus !== "稼動中") {
+    
+    if (targetStatus !== "稼働中") {
       setConfirmMsg("稼働中ではないので申請できません。");
       setShowConfirm(true);
       return;

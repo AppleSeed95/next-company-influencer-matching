@@ -277,42 +277,42 @@ export default function InfluencerListPage() {
                       </td>
                       <td className="px-[35px] py-[25px]  border border-[#D3D3D3]">
                         <div className="flex flex-wrap items-center gap-[15px]">
-                          {aData.instagram && (
+                          {JSON.parse(aData.instagram).account !== "" && (
                             <img
                               className="w-[35px]"
                               src="/img/sns/Instagram.svg"
                               alt="instagram"
                             />
                           )}
-                          {aData.tiktok && (
+                          {JSON.parse(aData.tiktok).account !== "" && (
                             <img
                               className="w-[35px]"
                               src="/img/sns/tiktok.svg"
                               alt="tiktok"
                             />
                           )}
-                          {aData.x && (
+                          {JSON.parse(aData.x).account !== "" && (
                             <img
                               className="w-[35px]"
                               src="/img/sns/x.svg"
                               alt="x"
                             />
                           )}
-                          {aData.youtube && (
+                          {JSON.parse(aData.youtube).account !== "" && (
                             <img
                               className="w-[35px]"
                               src="/img/sns/youtube.svg"
                               alt="youtube"
                             />
                           )}
-                          {aData.facebook && (
+                          {JSON.parse(aData.facebook).account !== "" && (
                             <img
                               className="w-[35px]"
                               src="/img/sns/facebook.svg"
                               alt="youtube"
                             />
                           )}
-                          {aData.otherSNS !== "" && (
+                          {aData.otherSNS !== "" && aData.otherSNS !== 'null' && (
                             <span className="text-[#C0C0C0]">etc.</span>
                           )}
                         </div>
@@ -352,7 +352,8 @@ export default function InfluencerListPage() {
           />
         </div>
         <div className="lg:hidden">
-          {optionedData?.map((aData, idx) => (
+          {optionedData?.map((aData, idx) => {            
+            return(
             <div
               key={idx}
               className=" bg-[#F8F9FA] border border-[#D3D3D3]"
@@ -386,42 +387,42 @@ export default function InfluencerListPage() {
                     </div>
                     <span className="mb-[7px] sp:text-spsmall">
                       <div className="flex flex-wrap items-center gap-[15px]">
-                        {aData.instagram && (
+                        {JSON.parse(aData.instagram).account !== "" && (
                           <img
                             className="w-[35px]"
                             src="/img/sns/Instagram.svg"
                             alt="instagram"
                           />
                         )}
-                        {aData.tiktok && (
+                        {JSON.parse(aData.tiktok).account !== "" && (
                           <img
                             className="w-[35px]"
                             src="/img/sns/tiktok.svg"
                             alt="tiktok"
                           />
                         )}
-                        {aData.x && (
+                        {JSON.parse(aData.x).account !== ""&& (
                           <img
                             className="w-[35px]"
                             src="/img/sns/x.svg"
                             alt="x"
                           />
                         )}
-                        {aData.youtube && (
+                        {JSON.parse(aData.youtube).account !== "" && (
                           <img
                             className="w-[35px]"
                             src="/img/sns/youtube.svg"
                             alt="youtube"
                           />
                         )}
-                        {aData.facebook && (
+                        {JSON.parse(aData.facebook).account !== "" && (
                           <img
                             className="w-[35px]"
                             src="/img/sns/facebook.svg"
                             alt="youtube"
                           />
                         )}
-                        {aData.otherSNS !== "" && (
+                        {aData.otherSNS !== "" && aData.otherSNS !== 'null' && (
                           <span className="text-[#C0C0C0]">etc.</span>
                         )}
                       </div>
@@ -446,7 +447,7 @@ export default function InfluencerListPage() {
                 </div>
               )}
             </div>
-          ))}
+          )})}
           <ReactPaginate
             containerClassName="pagination-conatiner"
             pageClassName="pagination-page"

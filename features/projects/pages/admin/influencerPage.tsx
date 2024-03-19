@@ -204,7 +204,7 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
             : ""}
         </div>
       </div>
-      {data?.instagram && (
+      {data?.instagram && JSON.parse(data?.instagram).account !== "" && (
         <div
           className={`flex items-center py-[15px] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px] ${className}`}
         >
@@ -224,7 +224,7 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
           }`}</span>
         </div>
       )}
-      {data?.x && (
+      {data?.x && JSON.parse(data?.x).account !== "" && (
         <div
           className={`flex items-center py-[15px] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px] ${className}`}
         >
@@ -244,7 +244,7 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
           }`}</span>{" "}
         </div>
       )}
-      {data?.facebook && (
+      {data?.facebook && JSON.parse(data?.facebook).account !== "" && (
         <div
           className={`flex items-center py-[15px] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px] ${className}`}
         >
@@ -264,7 +264,7 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
           }`}</span>{" "}
         </div>
       )}
-      {data?.tiktok && (
+      {data?.tiktok && JSON.parse(data?.tiktok).account !== "" && (
         <div
           className={`flex items-center py-[15px] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px] ${className}`}
         >
@@ -280,11 +280,11 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
             </span>
           </span>
           <span>{`フォロワー数：${
-            data?.facebook ? JSON.parse(data?.facebook).followers : ""
+            data?.tiktok ? JSON.parse(data?.tiktok).followers : ""
           }`}</span>{" "}
         </div>
       )}
-      {data?.youtube && (
+      {data?.youtube && JSON.parse(data?.youtube).account !== "" && (
         <div
           className={`flex items-center py-[15px] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px] ${className}`}
         >
@@ -300,11 +300,11 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
             </span>
           </span>
           <span>{`フォロワー数：${
-            data?.facebook ? JSON.parse(data?.facebook).followers : ""
+            data?.youtube ? JSON.parse(data?.youtube).followers : ""
           }`}</span>{" "}
         </div>
       )}
-      {data?.otherSNS && (
+      {data?.otherSNS && data?.otherSNS !== "null" && (
         <div
           className={`flex items-center py-[15px] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px] ${className}`}
         >

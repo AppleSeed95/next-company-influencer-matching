@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ type: "error" });
     });
     if (!rows && !rows.length && rows.length === 0) {
-      return NextResponse.json({ type: "error" });
+      return NextResponse.json({ type: "error",msg:'no user' });
     }
     // const query4 = `SELECT * FROM influencer where emailAddress = '${body.emailAddress}'`;
     // const rows1 = await executeQuery(query4).catch((e) => {
@@ -49,6 +49,7 @@ export async function POST(request: NextRequest) {
         id INT AUTO_INCREMENT PRIMARY KEY,
         influencerName VARCHAR(255)  ,
         influencerNameGana VARCHAR(255)  ,
+        gender VARCHAR(255)  ,
         nickName VARCHAR(255)  ,
         phoneNumber VARCHAR(255)  ,
         emailAddress VARCHAR(255)  ,

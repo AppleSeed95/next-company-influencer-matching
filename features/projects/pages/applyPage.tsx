@@ -14,6 +14,7 @@ export default function ApplyPage() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const onAppy = async () => {
+    if(isLoading) return;
     if (email === "") {
       setError("メールアドレスを入力する必要があります。");
       return;

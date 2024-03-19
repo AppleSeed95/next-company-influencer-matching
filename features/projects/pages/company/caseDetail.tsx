@@ -442,42 +442,42 @@ export default function CaseDetailPage({ caseProps }: caseData) {
                     </td>
                     <td className="px-[35px] py-[25px]  border border-[#D3D3D3] ">
                       <div className="flex flex-wrap items-center gap-[15px]">
-                        {aData.instagram && (
+                        {JSON.parse(aData.instagram).account !== "" && (
                           <img
                             className="w-[35px]"
                             src="/img/sns/Instagram.svg"
                             alt="instagram"
                           />
                         )}
-                        {aData.tiktok && (
+                        {JSON.parse(aData.tiktok).account !== "" && (
                           <img
                             className="w-[35px]"
                             src="/img/sns/tiktok.svg"
                             alt="tiktok"
                           />
                         )}
-                        {aData.x && (
+                        {JSON.parse(aData.x).account !== "" && (
                           <img
                             className="w-[35px]"
                             src="/img/sns/x.svg"
                             alt="x"
                           />
                         )}
-                        {aData.youtube && (
+                        {JSON.parse(aData.youtube).account !== "" && (
                           <img
                             className="w-[35px]"
                             src="/img/sns/youtube.svg"
                             alt="youtube"
                           />
                         )}
-                        {aData.facebook && (
+                        {JSON.parse(aData.facebook).account !== "" && (
                           <img
                             className="w-[35px]"
                             src="/img/sns/facebook.svg"
                             alt="facebook"
                           />
                         )}
-                        {aData.otherSNS && (
+                        {aData.otherSNS && aData.otherSNS !== 'null' && (
                           <span className="text-[#C0C0C0]">etc.</span>
                         )}
                       </div>
@@ -568,42 +568,42 @@ export default function CaseDetailPage({ caseProps }: caseData) {
                     </div>
                     <span className="mb-[7px] sp:text-spsmall">
                       <div className="flex flex-wrap items-center gap-[15px]">
-                        {aData.instagram && (
+                        {JSON.parse(aData.instagram).account !== "" && (
                           <img
                             className="w-[35px]"
                             src="/img/sns/Instagram.svg"
                             alt="instagram"
                           />
                         )}
-                        {aData.tiktok && (
+                        {JSON.parse(aData.tiktok).account !== "" && (
                           <img
                             className="w-[35px]"
                             src="/img/sns/tiktok.svg"
                             alt="tiktok"
                           />
                         )}
-                        {aData.x && (
+                        {JSON.parse(aData.x).account !== "" && (
                           <img
                             className="w-[35px]"
                             src="/img/sns/x.svg"
                             alt="x"
                           />
                         )}
-                        {aData.youtube && (
+                        {JSON.parse(aData.youtube).account !== "" && (
                           <img
                             className="w-[35px]"
                             src="/img/sns/youtube.svg"
                             alt="youtube"
                           />
                         )}
-                        {aData.facebook && (
+                        {JSON.parse(aData.facebook).account !== "" && (
                           <img
                             className="w-[35px]"
                             src="/img/sns/facebook.svg"
                             alt="facebook"
                           />
                         )}
-                        {aData.otherSNS && (
+                        {aData.otherSNS && aData.otherSNS !== "null" && (
                           <span className="text-[#C0C0C0]">etc.</span>
                         )}
                       </div>
