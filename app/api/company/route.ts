@@ -94,10 +94,10 @@ export async function POST(request: NextRequest) {
       concurrentCollectionCnt int  ,
       thisMonthCollectionCnt int,
       conCurrentCnt int,
-      plan VARCHAR(255)  ,
-      freeAccount BOOLEAN   DEFAULT FALSE,
+      plan VARCHAR(255) NOT NULL,
+      freeAccount BOOLEAN NOT NULL DEFAULT FALSE,
       userId int,
-      date VARCHAR(255)  ,
+      date VARCHAR(255) NOT NULL,
       FOREIGN KEY (userId) REFERENCES users(id)
     )
   `);
