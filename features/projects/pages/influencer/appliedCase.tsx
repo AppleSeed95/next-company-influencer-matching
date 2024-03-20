@@ -347,7 +347,7 @@ export default function AppledCase() {
             renderOnZeroPageCount={null}
           />
         </div>
-        <div className="lg:hidden">
+        <div className="lg:hidden grow">
           {currentItems?.map((aData, idx) => (
             <div key={idx} className=" bg-[#F8F9FA] border border-[#D3D3D3]">
               <div className="flex justify-between px-[30px] py-[20px] w-full">
@@ -432,7 +432,9 @@ export default function AppledCase() {
               )}
             </div>
           ))}
-          <ReactPaginate
+        </div>
+        <div className="lg:hidden">
+        <ReactPaginate
             containerClassName="pagination-conatiner"
             pageClassName="pagination-page"
             activeClassName="pagination-active"

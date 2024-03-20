@@ -85,8 +85,8 @@ const CasePage: React.FC = () => {
     };
     const keys = Object.keys(msgs);
     let isValid = true;
-    keys.forEach((aKey) => {
-      if (body[aKey] === "") {
+    keys.forEach((aKey) => {      
+      if (!body[aKey] || body[aKey] === "") {
         if (!isValid) return;
         setError(msgs[aKey]);
         isValid = false;
@@ -95,6 +95,12 @@ const CasePage: React.FC = () => {
     const casePlace = "訪問場所を入力してください";
     if (body.caseType === "来 店" && body.casePlace === "") {
       setError(casePlace);
+      return;
+    }
+    const collectionEndDate = new Date(body.collectionEnd);
+    const caseEndDate = new Date(body.caseEnd);
+    if(!(caseEndDate > collectionEndDate)){
+      setError("イベント終了時間と募集終了時間を正しく選択します。");
       return;
     }
     if (isValid) {
@@ -191,8 +197,8 @@ const CasePage: React.FC = () => {
       <div className="flex  pt-[20px] pb-[8px]  w-[full] border-b-[1px] border-[#DDDDDD] mt-[70px] sp:mt-[96px]">
         <span className="text-title sp:text-sptitle">募集案件登録・編集</span>
       </div>
-      <div className="flex  pt-[20px] pb-[8px] w-[50%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD] mt-[90px] sp:mt-[30px]   sp:px-[18px]">
-        <span className="w-[35%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
+      <div className="flex  pt-[20px] pb-[8px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD] mt-[90px] sp:mt-[30px]   sp:px-[18px]">
+        <span className="w-[30%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
           <span className="text-[#6F6F6F]">案件種別</span>
           <span className="ml-[10px] text-[#EE5736] text-[11px]">必須</span>
         </span>
@@ -205,8 +211,8 @@ const CasePage: React.FC = () => {
           />
         </div>
       </div>
-      <div className="flex  pt-[20px] pb-[8px] w-[50%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
-        <span className="w-[35%] mt-[5px] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
+      <div className="flex  pt-[20px] pb-[8px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+        <span className="w-[30%] mt-[5px] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
           <span>案件名</span>
           <span className="ml-[10px] text-[#EE5736] text-[11px]">必須</span>
         </span>
@@ -218,8 +224,8 @@ const CasePage: React.FC = () => {
           handleChange={(val) => setData({ ...data, caseName: val })}
         />
       </div>
-      <div className="flex pt-[20px] pb-[30px] w-[50%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
-        <span className="w-[35%] mt-[5px] sp:w-[100px] mt-[5px] flex justify-end sp:justify-start  mr-[67px]">
+      <div className="flex pt-[20px] pb-[30px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+        <span className="w-[30%] mt-[5px] sp:w-[100px] mt-[5px] flex justify-end sp:justify-start  mr-[67px]">
           <span>案件内容</span>
           <span className="ml-[10px] text-[#EE5736] text-[11px]">必須</span>
         </span>
@@ -231,8 +237,8 @@ const CasePage: React.FC = () => {
           requirMsg="案件内容を入力してください"
         />
       </div>
-      <div className="flex  pt-[20px] pb-[8px] w-[50%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
-        <span className="w-[35%] mt-[5px] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
+      <div className="flex  pt-[20px] pb-[8px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+        <span className="w-[30%] mt-[5px] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
           <span>希望のハッシュタグ</span>
           <span className="ml-[10px] text-[#EE5736] text-[11px] invisible">
             必須
@@ -245,8 +251,8 @@ const CasePage: React.FC = () => {
           inputClassName="max-w-[250px] grow border-[#D3D3D3] w-[100%]"
         />
       </div>
-      <div className="flex  py-[20px] w-[50%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
-        <span className="w-[35%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
+      <div className="flex  py-[20px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+        <span className="w-[30%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
           <span>希望のSNS</span>
           <span className="ml-[10px] text-[#EE5736] text-[11px] invisible">
             必須
@@ -315,8 +321,8 @@ const CasePage: React.FC = () => {
           />
         </div>
       </div>
-      <div className="flex  pt-[20px] pb-[8px] w-[50%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
-        <span className="w-[35%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
+      <div className="flex  pt-[20px] pb-[8px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+        <span className="w-[30%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
           <span>来店場所</span>
           <span className="ml-[10px] text-[#EE5736] text-[11px] invisible">
             必須
@@ -329,8 +335,8 @@ const CasePage: React.FC = () => {
           inputClassName="max-w-[250px] grow border-[#D3D3D3] w-[100%]"
         />
       </div>
-      <div className="flex  pt-[20px] pb-[8px] w-[50%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
-        <span className="w-[35%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
+      <div className="flex  pt-[20px] pb-[8px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+        <span className="w-[30%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
           <span>募集開始</span>
           <span className="ml-[10px] text-[#EE5736] text-[11px] invisible">
             必須
@@ -345,8 +351,8 @@ const CasePage: React.FC = () => {
           placeholder="yyyy/mm/dd hh:mm"
         />
       </div>
-      <div className="flex  pt-[20px] pb-[8px] w-[50%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
-        <span className="w-[35%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
+      <div className="flex  pt-[20px] pb-[8px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+        <span className="w-[30%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
           <span>募集終了</span>
           <span className="ml-[10px] text-[#EE5736] text-[11px]">必須</span>
         </span>
@@ -358,8 +364,8 @@ const CasePage: React.FC = () => {
           placeholder="yyyy/mm/dd hh:mm"
         />
       </div>
-      <div className="flex  pt-[20px] pb-[8px] w-[50%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
-        <span className="w-[35%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
+      <div className="flex  pt-[20px] pb-[8px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+        <span className="w-[30%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
           <span>案件終了</span>
           <span className="ml-[10px] text-[#EE5736] text-[11px]">必須</span>
         </span>
@@ -371,8 +377,8 @@ const CasePage: React.FC = () => {
           placeholder="yyyy/mm/dd hh:mm"
         />
       </div>
-      <div className="flex  pt-[20px] pb-[8px] w-[50%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
-        <span className="w-[35%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
+      <div className="flex  pt-[20px] pb-[8px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+        <span className="w-[30%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
           <span>募集人数</span>
           <span className="ml-[10px] text-[#EE5736] text-[11px] invisible">
             必須
@@ -385,8 +391,8 @@ const CasePage: React.FC = () => {
           inputClassName="max-w-[250px] grow border-[#D3D3D3] w-[100%]"
         />
       </div>
-      <div className="flex pt-[20px] pb-[8px] w-[50%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
-        <span className="w-[35%] mt-[5px] sp:w-[100px] mt-[5px] flex justify-end sp:justify-start  mr-[67px]">
+      <div className="flex pt-[20px] pb-[8px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+        <span className="w-[30%] mt-[5px] sp:w-[100px] mt-[5px] flex justify-end sp:justify-start  mr-[67px]">
           <span>補足・注意事項</span>
           <span className="ml-[10px] text-[#EE5736] text-[11px] invisible">
             必須
@@ -402,9 +408,9 @@ const CasePage: React.FC = () => {
       {data.id && [
         <div
           key={"1"}
-          className="flex  pt-[20px] pb-[8px] w-[50%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]"
+          className="flex  pt-[20px] pb-[8px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]"
         >
-          <span className="w-[35%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
+          <span className="w-[30%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
             <span>申請状態</span>
             <span className="ml-[10px] text-[#EE5736] text-[11px] invisible">
               必須
@@ -415,9 +421,9 @@ const CasePage: React.FC = () => {
         data.status === "否認" ? (
           <div
             key={"2"}
-            className="flex  pt-[20px] pb-[8px] w-[50%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]"
+            className="flex  pt-[20px] pb-[8px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]"
           >
-            <span className="w-[35%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
+            <span className="w-[30%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
               <span>否認理由</span>
               <span className="ml-[10px] text-[#EE5736] text-[11px] invisible">
                 必須

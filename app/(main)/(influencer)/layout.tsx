@@ -10,7 +10,7 @@ export default function LoginLayout({
     <div>
       <div>
         <Header mode={"influencer"} />
-        <div className="flex">
+        <div className="flex min-h-screen">
           <InfluencerSidebar />
           <div className="w-full bg-[white]">{children}</div>
         </div>

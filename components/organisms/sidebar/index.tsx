@@ -6,7 +6,7 @@ export default function SideBar() {
   const pathName = usePathname();
 
   return (
-    <div className="bg-[#F8F9FA] min-h-[100vh] w-[264px] sp:w-[0px] duration-200">
+    <div className="bg-[#F8F9FA] min-h-[100vh] w-[264px] sp:hidden duration-200">
       <div className="px-[20px] py-[120px]">
         <div
           className={

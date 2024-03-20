@@ -160,7 +160,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
           router.push("/applyComplete");
         }
       } else{
-        setError("エラーが発生した。")
+        setError("メールアドレスが登録されていません。")
       }
     }
     if (!isApply) {

@@ -351,7 +351,7 @@ export default function InfluencerListPage() {
             renderOnZeroPageCount={null}
           />
         </div>
-        <div className="lg:hidden">
+        <div className="lg:hidden grow">
           {optionedData?.map((aData, idx) => {            
             return(
             <div
@@ -448,7 +448,10 @@ export default function InfluencerListPage() {
               )}
             </div>
           )})}
-          <ReactPaginate
+          
+        </div>
+        <div className="lg:hidden">
+        <ReactPaginate
             containerClassName="pagination-conatiner"
             pageClassName="pagination-page"
             activeClassName="pagination-active"

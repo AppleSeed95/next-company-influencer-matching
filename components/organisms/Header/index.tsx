@@ -96,8 +96,8 @@ const Header: React.FC<Headerprops> = ({ mode }: Headerprops) => {
         <div
           className={
             showMenu
-              ? "bg-[#8F8F8F] text-[white] absolute"
-              : "bg-[#8F8F8F] text-[white] absolute pointer-events-none"
+              ? "bg-[#8F8F8F] z-10 text-[white] absolute"
+              : "bg-[#8F8F8F] z-10 text-[white] absolute pointer-events-none"
           }
         >
           <div className="px-[20px]">

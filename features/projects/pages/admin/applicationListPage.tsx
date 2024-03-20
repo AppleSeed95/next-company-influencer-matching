@@ -219,7 +219,7 @@ export default function ApplicationListPage() {
             renderOnZeroPageCount={null}
           />
         </div>
-        <div className="lg:hidden">
+        <div className="lg:hidden grow">
           {currentItems?.map((aData, idx) => (
             <div
               key={idx}
@@ -288,7 +288,9 @@ export default function ApplicationListPage() {
               )}
             </div>
           ))}
-          <ReactPaginate
+        </div>
+        <div className="lg:hidden">
+        <ReactPaginate
             containerClassName="pagination-conatiner"
             pageClassName="pagination-page"
             activeClassName="pagination-active"
