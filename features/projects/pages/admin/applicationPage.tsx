@@ -30,6 +30,7 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
   const [reason, setReason] = useState("");
   const [wantedSNS, setWantedSNS] = useState([]);
   const [error, setError] = useState("");
+  const [valid, setValid] = useState(false);
   const { id } = useParams();
   const router = useRouter();
   const [showConfirm, setShowConfirm] = useState(false);
@@ -41,11 +42,18 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
       } else {
         result = await axios.get(`/api/case/aCase/?id=${id}`);
       }
-      if (result.data) {
+      if(result?.data.type === 'error'){
+        setValid(false);
+        if(!influencerMode && typeof window !== 'undefined'){
+          router.push('/applicationList')
+        }
+      }
+      else {
+        setValid(true);
         setData(result.data);
         setReason(result.data.reason);
+        setWantedSNS(JSON.parse(result.data.wantedSNS));
       }
-      setWantedSNS(JSON.parse(result.data.wantedSNS));
     };
 
     fetchData();
@@ -100,6 +108,7 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
   };
   const widthClass = modalMode ? "" : "w-[40%]";
   const topClass = modalMode ? " pt-[50px]" : "";
+  if(!valid) return <></>
   return (
     <div
       className={

@@ -69,7 +69,7 @@ export default function LoginPage() {
     }
   };
   return (
-    <div className="bg-[#F5F5F5] flex w-full grow">
+    <div className="bg-[#F5F5F5] pt-[90px]  flex w-full grow">
       <div className="bg-[white] px-[20px] w-[614px] sp:w-[90%] rounded-[40px] block m-auto py-[70px] sp:py-[20px] shadow-lg">
         <img
           src="/img/logo(red).svg"

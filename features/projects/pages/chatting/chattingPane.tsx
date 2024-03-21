@@ -95,8 +95,8 @@ export default function ChattingPane() {
   };
   let day = "";
   return (
-    <div>
-      <div className="absolute lg:hidden  right-[20px] top-[180px]">
+    <div className="h-full flex flex-col">
+      <div className="absolute lg:hidden right-[20px] top-[150px]">
         <Image
           alt="hamburger"
           width={70}
@@ -119,7 +119,7 @@ export default function ChattingPane() {
       </div>
 
       <div
-        className="h-[590px] bg-[#F8F9FA] pt-[100px] overflow-y-auto scroll-smooth"
+        className="bg-[#F8F9FA] h-[63vh] pt-[100px] overflow-y-auto scroll-smooth"
         id="pane"
       >
         {data.map((aData, idx) => {
@@ -163,12 +163,12 @@ export default function ChattingPane() {
           ];
         })}
       </div>
-      <div className="h-[130px] flex items-center justify-between border-t-[1px] border-[#DDDDDD]">
+      <div className="h-[10vh] flex items-center justify-between border-t-[1px] border-[#DDDDDD]">
         <TextArea
           handleCtrlEnter={() => handleSendMsg()}
           reset={reset}
           placeholder="メッセージを入力"
-          textAreaClassName="h-[120px] border-0 grow"
+          textAreaClassName="h-[9vh] mt-[1px] border-0 grow"
           handleChange={(val) => setMsg(val)}
           value={msg}
         />

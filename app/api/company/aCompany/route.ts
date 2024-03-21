@@ -31,6 +31,6 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(rows[0]);
   } catch (error) {
     console.error("Error fetching data:", error);
-    return NextResponse.json({ error: error }, { status: 500 });
+    return NextResponse.json({ type: "error" });
   }
 }

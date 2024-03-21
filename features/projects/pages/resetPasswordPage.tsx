@@ -37,7 +37,7 @@ export default function ResetPasswordPage() {
     }
   };
   return (
-    <div className="bg-[#F5F5F5] flex  grow">
+    <div className="bg-[#F5F5F5] pt-[90px]  flex  grow">
       <div className="bg-[white] text-center px-[20px] w-[614px] sp:w-[90%] rounded-[40px] block m-auto py-[70px] sp:py-[20px] shadow-lg">
         <img
           src="/img/logo(red).svg"
