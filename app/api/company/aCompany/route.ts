@@ -22,6 +22,7 @@ interface RowType extends RowDataPacket {
   // Add any other fields you have in your table
 }
 export async function GET(request: NextRequest) {
+  
   const id = request.nextUrl.searchParams.get("id") || "";
   try {
     const query = `SELECT * FROM company where id = ${id}  ORDER BY id DESC`;

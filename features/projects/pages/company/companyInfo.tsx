@@ -9,6 +9,7 @@ import { authUserState } from "@/recoil/atom/auth/authUserAtom";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import Modal from "../../utils/modal";
+import CheckoutPage from "./stripe";
 
 export interface CompanyInfoProps {
   applyMode?: boolean;
@@ -19,6 +20,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
 }: CompanyInfoProps) => {
   const authUser = useRecoilValue(authUserState);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [showPayment, setShowPayment] = useState(false);
   const [agree, setAgree] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState({
@@ -123,9 +125,8 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
             \n電話番号        ：${data.phoneNumber}
             \nメールアドレス   ：${data.emailAddress}
             \n郵便番号         ：${data.postalCode}
-            \n住所             ：${data.address} ${
-            data.building ? data.building : ""
-          }
+            \n住所             ：${data.address} ${data.building ? data.building : ""
+            }
             \n
             \n-----------------------------------------------------
             `,
@@ -159,7 +160,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
         if (typeof window !== "undefined") {
           router.push("/applyComplete");
         }
-      } else{
+      } else {
         setError("メールアドレスが登録されていません。")
       }
     }
@@ -172,7 +173,9 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
     }
     setIsLoading(false);
   };
-
+  const handlePaymentInfoChange = () => {
+    setShowPayment(true);
+  }
   return (
     <div
       className={
@@ -192,6 +195,19 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
           body={confirmMsg}
           onOk={() => setShowConfirm(false)}
           onCancel={() => setShowConfirm(false)}
+        />
+      </div>
+      <div
+        className={
+          showPayment
+            ? "bg-black bg-opacity-25 w-full h-full fixed left-0 top-0 overflow-auto duration-500"
+            : "bg-black bg-opacity-25 w-full h-full fixed left-0 top-0 overflow-auto opacity-0 pointer-events-none duration-500"
+        }
+      >
+        <Modal
+          body={<CheckoutPage />}
+          onOk={() => setShowPayment(false)}
+          onCancel={() => setShowPayment(false)}
         />
       </div>
       {!applyMode && (
@@ -387,6 +403,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
             <Button
               buttonType={ButtonType.DANGER}
               buttonClassName="ml-[40px] sp:ml-[0px]"
+              handleClick={handlePaymentInfoChange}
             >
               決済情報変更
             </Button>
