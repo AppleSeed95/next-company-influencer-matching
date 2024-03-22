@@ -206,16 +206,16 @@ export default function CaseDetailPage({ caseProps }: caseData) {
     const update = state;
     const body = resume
       ? {
-          update,
-          approveMode: false,
-          resumeMode: true,
-          companyId: caseData.companyId,
-        }
+        update,
+        approveMode: false,
+        resumeMode: true,
+        companyId: caseData.companyId,
+      }
       : {
-          update,
-          approveMode: false,
-          companyId: caseData.companyId,
-        };
+        update,
+        approveMode: false,
+        companyId: caseData.companyId,
+      };
     const result = await axios.put(`/api/case/aCase/?id=${id}`, body);
     if (result.data.type === "success") {
       setCollectionStatusTemp(state);
@@ -294,22 +294,20 @@ export default function CaseDetailPage({ caseProps }: caseData) {
               >
                 案件詳細
               </span>
-              <span className="w-[100px]">{`状態: ${
-                collectionStatusTemp ? collectionStatusTemp : ""
-              }`}</span>
+              <span className="w-[100px]">{`状態: ${collectionStatusTemp ? collectionStatusTemp : ""
+                }`}</span>
               <span className="flex flex-wrap">
-                <span>{`募集期間：${
-                  caseData?.collectionStart
-                    ? caseData?.collectionStart.split("T")[0] +
-                      "/" +
-                      caseData?.collectionStart.split("T")[1]
-                    : ""
-                } ～`}</span>
+                <span>{`募集期間：${caseData?.collectionStart
+                  ? caseData?.collectionStart.split("T")[0] +
+                  "/" +
+                  caseData?.collectionStart.split("T")[1]
+                  : ""
+                  } ～`}</span>
                 <span>
                   {caseData?.collectionEnd
                     ? caseData?.collectionEnd.split("T")[0] +
-                      "/" +
-                      caseData?.collectionEnd.split("T")[1]
+                    "/" +
+                    caseData?.collectionEnd.split("T")[1]
                     : ""}
                 </span>
               </span>
@@ -327,16 +325,16 @@ export default function CaseDetailPage({ caseProps }: caseData) {
               )}
               {(collectionStatusTemp === "募集中" ||
                 collectionStatusTemp === "停止中") && (
-                <Button
-                  buttonType={ButtonType.DANGER}
-                  buttonClassName="rounded-[0px] px-[15px] py-[7px]"
-                  handleClick={() => {
-                    handleCollectionStateChange("募集終了");
-                  }}
-                >
-                  募集終了
-                </Button>
-              )}
+                  <Button
+                    buttonType={ButtonType.DANGER}
+                    buttonClassName="rounded-[0px] px-[15px] py-[7px]"
+                    handleClick={() => {
+                      handleCollectionStateChange("募集終了");
+                    }}
+                  >
+                    募集終了
+                  </Button>
+                )}
               {collectionStatusTemp === "募集中" && (
                 <Button
                   buttonType={ButtonType.DEFAULT}
@@ -660,7 +658,7 @@ export default function CaseDetailPage({ caseProps }: caseData) {
           ))}
         </div>
         <div className="lg:hidden">
-        <ReactPaginate
+          <ReactPaginate
             containerClassName="pagination-conatiner"
             pageClassName="pagination-page"
             activeClassName="pagination-active"

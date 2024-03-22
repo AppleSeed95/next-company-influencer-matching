@@ -8,8 +8,8 @@ const CheckoutPage = () => {
         const handleClick = async () => {
             const stripe = await stripePromise;
             const { error } = await stripe.redirectToCheckout({
-                lineItems: [{ price: 'price_1OwZjoHeC7VfJv8UdI0dIqtl', quantity: 1 }],
-                mode: 'subscription',
+                lineItems: [{ price: 'price_1Ox1PQHeC7VfJv8UA2wSiBeX', quantity: 1 }],
+                mode: 'payment',
                 successUrl: `${window.location.origin}/companyInfo`,
                 cancelUrl: `${window.location.origin}/companyInfo`,
             });
@@ -23,7 +23,10 @@ const CheckoutPage = () => {
 
     return (
         <div>
-            <button id="checkoutButton">Checkout</button>
+            <div>
+                お支払いページに移行しますか？
+            </div>
+            <button id="checkoutButton" className='m-[20px] px-[20px] py-[10px] rounded-[5px] text-[white] bg-[#3F8DEB] hover:bg-[#2e6fbe] hover:shadow-lg duration-500 '>確認</button>
         </div>
     );
 };

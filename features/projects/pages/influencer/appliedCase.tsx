@@ -418,12 +418,14 @@ export default function AppledCase() {
                   </div>
 
                   <div className="flex">
-                    {aData.status === "完了" ? (
+                    {aData.status === "完了報告" ? (
                       <div className="text-white text-small bg-[#236997] p-[10px] m-[5px] rounded-lg shadow-sm">
                         完了した
                       </div>
                     ) : (
-                      <Button buttonType={ButtonType.PRIMARY}>
+                      <Button
+                        handleClick={() => handleEndReport(aData.id)}
+                        buttonType={ButtonType.PRIMARY}>
                         <span className="text-small">完了報告</span>
                       </Button>
                     )}
@@ -434,7 +436,7 @@ export default function AppledCase() {
           ))}
         </div>
         <div className="lg:hidden">
-        <ReactPaginate
+          <ReactPaginate
             containerClassName="pagination-conatiner"
             pageClassName="pagination-page"
             activeClassName="pagination-active"
