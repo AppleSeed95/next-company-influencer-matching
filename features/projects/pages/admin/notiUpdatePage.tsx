@@ -2,6 +2,9 @@
 import React, { useEffect, useState } from "react";
 import Button from "@/components/atoms/button";
 import { ButtonType } from "@/components/atoms/buttonType";
+import dynamic from "next/dynamic";
+const Editor = dynamic(() => import("@/components/organisms/CKEditor"), { ssr: false });
+
 import TextArea from "@/components/atoms/textarea";
 import axios from "axios";
 import Modal from "../../utils/modal";
@@ -32,8 +35,8 @@ const NotiPage: React.FC = () => {
       <div
         className={
           showConfirm
-            ? "bg-black bg-opacity-25 w-full h-full fixed left-0 overflow-auto duration-500"
-            : "bg-black bg-opacity-25 w-full h-full fixed left-0 overflow-auto opacity-0 pointer-events-none duration-500"
+            ? "bg-black bg-opacity-25 w-full min-h-screen fixed left-0 top-0 z-10 overflow-auto duration-500"
+            : "bg-black bg-opacity-25 w-full min-h-screen fixed left-0 top-0 z-10 overflow-auto opacity-0 pointer-events-none duration-500"
         }
       >
         <Modal
@@ -50,11 +53,12 @@ const NotiPage: React.FC = () => {
           <span className="text-[18px] sp:text-sm">企業</span>
           <div className="px-[26px] sp:py-[10px] py-[30px]">
             <span className="text-[#6F6F6F]">重要なお知らせ</span>
-            <TextArea
+            <Editor
               value={data?.mainNoti}
-              textAreaClassName="mt-[20px] sp:mt-[10px] w-[100%] h-[120px]   "
-              placeholder="お知らせを入力してください。"
-              handleChange={(val) => setData({ ...data, mainNoti: val })}
+              onChange={(v) => {
+                setData({ ...data, mainNoti: v })
+              }
+              }
             />
             <div className="w-[100%] text-right mt-[20px] sp:mt-[10px]">
               <Button
@@ -75,11 +79,18 @@ const NotiPage: React.FC = () => {
           </div>
           <div className="px-[26px]">
             <span className="text-[#6F6F6F]">お知らせ</span>
-            <TextArea
-              value={data?.companyNoti}
+            {/* <TextArea
+              // value={data?.companyNoti}
               textAreaClassName="mt-[20px] sp:mt-[10px] w-[100%] h-[120px]   "
               placeholder="お知らせを入力してください。"
               handleChange={(val) => setData({ ...data, companyNoti: val })}
+            /> */}
+            <Editor
+              value={data?.companyNoti}
+              onChange={(v) => {
+                setData({ ...data, companyNoti: v })
+              }
+              }
             />
             <div className="w-[100%] text-right mt-[20px] sp:mt-[10px] mb-[46px] sp:mb-[20px]">
               <Button
@@ -103,11 +114,18 @@ const NotiPage: React.FC = () => {
           <span className="text-[18px] sp:text-sm">インフルエンサー</span>
           <div className="px-[26px] py-[30px]">
             <span className="text-[#6F6F6F]">お知らせ</span>
-            <TextArea
+            {/* <TextArea
               value={data?.influencerNoti}
               textAreaClassName="mt-[20px] sp:mt-[10px] w-[100%] h-[120px]    "
               placeholder="お知らせを入力してください。"
               handleChange={(val) => setData({ ...data, influencerNoti: val })}
+            /> */}
+            <Editor
+              value={data?.influencerNoti}
+              onChange={(v) => {
+                setData({ ...data, influencerNoti: v })
+              }
+              }
             />
             <div className="w-[100%] text-right mt-[20px] sp:mt-[10px]">
               <Button

@@ -15,6 +15,7 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
+
 /* *{
   transition-duration: 7000ms;
 } */
@@ -22,24 +23,29 @@
   color: gray;
 } */
 ::-webkit-scrollbar {
-  width: 5px; /* Adjust the width of the scrollbar */
+  width: 5px;
+  /* Adjust the width of the scrollbar */
   height: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #555; /* Set the color of the scrollbar thumb */
+  background-color: #555;
+  /* Set the color of the scrollbar thumb */
   border-radius: 5px;
   transition-duration: 500ms;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #888; /* Set the color when hovering over the thumb */
+  background-color: #888;
+  /* Set the color when hovering over the thumb */
 }
+
 body {
   color: rgb(var(--foreground-rgb));
   background-color: #F5F5F5;
   font-size: 14px;
 }
+
 .chat-me::before {
   content: "";
   position: absolute;
@@ -51,6 +57,7 @@ body {
   /* border-bottom: 20px solid #DEDEDE; */
   border-left: 20px solid #DEDEDE;
 }
+
 .chat-you::before {
   content: "";
   position: absolute;
@@ -62,7 +69,8 @@ body {
   /* border-bottom: 20px solid #DEDEDE; */
   border-right: 20px solid white;
 }
-.rotate{
+
+.rotate {
   animation: rotation 1000ms linear infinite;
 }
 
@@ -70,17 +78,21 @@ body {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
 }
-.pagination-conatiner{
+
+.pagination-conatiner {
   display: flex;
   margin-top: 30px;
   justify-content: center;
   align-items: center;
 }
-.pagination-page,.pagination-disable{
+
+.pagination-page,
+.pagination-disable {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -92,7 +104,8 @@ body {
   text-align: center;
   transition-duration: 500ms;
 }
-.pagination-page:hover{
+
+.pagination-page:hover {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -105,7 +118,8 @@ body {
   text-align: center;
   transition-duration: 500ms;
 }
-.pagination-active{
+
+.pagination-active {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -119,6 +133,52 @@ body {
   text-align: center;
   transition-duration: 500ms;
 }
+
 /* table{
   min-height: 500px;
 } */
+blockquote {
+  border-left: 5px solid rgb(195, 195, 195);
+  padding-left: 20px;
+}
+
+.table {
+  text-align: center;
+}
+
+table {
+  margin-top: 10px;
+}
+
+td {
+  border: 1px solid rgb(195, 195, 195);
+  padding: 10px;
+}
+
+p {
+  font-size: 15px;
+}
+
+h2 {
+  font-size: 40px;
+}
+
+h3 {
+  font-size: 30px;
+}
+
+h4 {
+  font-size: 20px;
+}
+
+ol li {
+  list-style-type: number;
+}
+
+ul li {
+  list-style-type: circle;
+}
+
+i {
+  font-style: italic;
+}
