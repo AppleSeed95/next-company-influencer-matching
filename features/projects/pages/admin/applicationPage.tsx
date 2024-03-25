@@ -42,9 +42,9 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
       } else {
         result = await axios.get(`/api/case/aCase/?id=${id}`);
       }
-      if(result?.data.type === 'error'){
+      if (result?.data.type === 'error') {
         setValid(false);
-        if(!influencerMode && typeof window !== 'undefined'){
+        if (!influencerMode && typeof window !== 'undefined') {
           router.push('/applicationList')
         }
       }
@@ -108,7 +108,15 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
   };
   const widthClass = modalMode ? "" : "w-[40%]";
   const topClass = modalMode ? " pt-[50px]" : "";
-  if(!valid) return <></>
+  const dateString = (dateValue: string) => {
+    const date = new Date(dateValue);
+    if (isNaN(date.getFullYear())) {
+      return "";
+    }
+    const formattedDate = `${date.getFullYear()}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getDate().toString().padStart(2, '0')} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
+    return formattedDate;
+  }
+  if (!valid) return <></>
   return (
     <div
       className={
@@ -275,12 +283,7 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
           <span className="text-[#6F6F6F]">募集期間 </span>
         </span>
         <span>
-          {data?.collectionEnd
-            ? `${data?.collectionStart.replace(
-                "T",
-                " / "
-              )}~${data?.collectionEnd.replace("T", " / ")}`
-            : ""}
+          {`${dateString(data?.collectionStart)} ~ ${dateString(data?.collectionEnd)}`}
         </span>
       </div>
       <div
@@ -292,7 +295,7 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
         <span className="w-[35%] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
           <span className="text-[#6F6F6F]">案件終了日時 </span>
         </span>
-        <span>{data?.caseEnd.replace("T", " / ")}</span>
+        <span>{dateString(data?.caseEnd)}</span>
       </div>
       <div
         className={
@@ -352,8 +355,8 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
         </div>
       )}
       {error !== "" && <div className="m-[10px] text-[#EE5736]">{error}</div>}
-      {!modalMode && (
-        <div className="flex justify-center mt-[36px] mb-[160px] sp:mb-[60px]">
+      {!modalMode && !(data?.status === '承認' || data?.status === '否認') &&
+        (<div className="flex justify-center mt-[36px] mb-[160px] sp:mb-[60px]">
           <Button
             buttonType={ButtonType.PRIMARY}
             buttonClassName="mr-[30px]"
@@ -389,8 +392,8 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
           >
             戻る
           </Button>
-        </div>
-      )}
+        </div>)}
+
       {modalMode && influencerMode && !influencerDetailMode && (
         <Button
           handleClick={() => {

@@ -39,11 +39,13 @@ const SearchBar: React.FC<SearchBarProps> = ({
               const passtest = (aData) => {
                 if (keyword === "") return true;
                 let isMatch = false;
-                keys.forEach((aKey) => {
-                  if (aData[aKey].indexOf(keyword) !== -1) {
-                    console.log(aData[aKey], keyword);
+                [...keys, ...Object.keys(data[0])].forEach((aKey) => {
+                  if (typeof (aData[aKey]) === 'string') {
+                    if (aData[aKey].indexOf(keyword) !== -1) {
+                      console.log(aData[aKey], keyword);
+                    }
+                    isMatch ||= aData[aKey].indexOf(keyword) !== -1;
                   }
-                  isMatch ||= aData[aKey].indexOf(keyword) !== -1;
                 });
                 return isMatch;
               };

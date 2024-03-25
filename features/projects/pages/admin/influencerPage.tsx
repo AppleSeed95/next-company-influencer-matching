@@ -23,6 +23,7 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
 }: InfluencerProps) => {
   const [data, setData] = useState(null);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [error, setError] = useState("");
   const router = useRouter();
   useEffect(() => {
     setData(influencerData);
@@ -32,7 +33,17 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
     if (status) {
       update = { ...data, status: status };
     }
-
+    const emailAddress = data?.emailAddress;
+    const mailFormat = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+    if (emailAddress === "") {
+      setError("メールアドレスを入力してください。");
+      return;
+    }
+    const regex = new RegExp(mailFormat);
+    if (!regex.test(emailAddress)) {
+      setError("メールアドレス形式で入力してください。");
+      return;
+    }
     const result = await axios.put("/api/influencer", update);
     if (result.data) {
       if (status) {
@@ -169,7 +180,7 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
         <span>{data?.phoneNumber}</span>
       </div>
       <div
-        className={`flex items-center py-[15px] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px] ${className}`}
+        className={`flex py-[15px] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px] ${className}`}
       >
         <span className="w-[35%] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
           <span>メールアドレス</span>
@@ -178,6 +189,9 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
           <span>{data?.emailAddress}</span>
         ) : (
           <Input
+            format="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+            formatMsg="メールアドレス形式ではありません"
+            requirMsg="メールアドレスを入力してください。"
             handleChange={(val) => setData({ ...data, emailAddress: val })}
             inputClassName="max-w-[250px] grow border-[#D3D3D3] w-[100%]"
             value={data?.emailAddress}
@@ -193,9 +207,9 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
         <span>{data?.prefecture && data?.prefecture !== "null" ? data?.prefecture : ""}</span>
       </div>
       <div
-        className={`flex py-[15px] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px] ${className}`}
+        className={`flex items-center py-[15px] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px] ${className}`}
       >
-        <span className="w-[35%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
+        <span className="w-[35%] mt-[5px] sp:w-[100px] flex  justify-end sp:justify-start  mr-[67px]">
           <span className="text-[#6F6F6F]">ジャンル</span>
         </span>
         <div className="text-left">
@@ -219,9 +233,8 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
               )}
             </span>
           </span>
-          <span>{`フォロワー数：${
-            data?.instagram ? JSON.parse(data?.instagram).followers : ""
-          }`}</span>
+          <span>{`フォロワー数：${data?.instagram ? JSON.parse(data?.instagram).followers : ""
+            }`}</span>
         </div>
       )}
       {data?.x && JSON.parse(data?.x).account !== "" && (
@@ -239,9 +252,8 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
               )}
             </span>
           </span>
-          <span>{`フォロワー数：${
-            data?.x ? JSON.parse(data?.x).followers : ""
-          }`}</span>{" "}
+          <span>{`フォロワー数：${data?.x ? JSON.parse(data?.x).followers : ""
+            }`}</span>{" "}
         </div>
       )}
       {data?.facebook && JSON.parse(data?.facebook).account !== "" && (
@@ -259,9 +271,8 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
               )}
             </span>
           </span>
-          <span>{`フォロワー数：${
-            data?.facebook ? JSON.parse(data?.facebook).followers : ""
-          }`}</span>{" "}
+          <span>{`フォロワー数：${data?.facebook ? JSON.parse(data?.facebook).followers : ""
+            }`}</span>{" "}
         </div>
       )}
       {data?.tiktok && JSON.parse(data?.tiktok).account !== "" && (
@@ -279,9 +290,8 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
               )}
             </span>
           </span>
-          <span>{`フォロワー数：${
-            data?.tiktok ? JSON.parse(data?.tiktok).followers : ""
-          }`}</span>{" "}
+          <span>{`フォロワー数：${data?.tiktok ? JSON.parse(data?.tiktok).followers : ""
+            }`}</span>{" "}
         </div>
       )}
       {data?.youtube && JSON.parse(data?.youtube).account !== "" && (
@@ -299,9 +309,8 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
               )}
             </span>
           </span>
-          <span>{`フォロワー数：${
-            data?.youtube ? JSON.parse(data?.youtube).followers : ""
-          }`}</span>{" "}
+          <span>{`フォロワー数：${data?.youtube ? JSON.parse(data?.youtube).followers : ""
+            }`}</span>{" "}
         </div>
       )}
       {data?.otherSNS && data?.otherSNS !== "null" && (
@@ -314,8 +323,8 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
           <div>
             {data?.otherSNS
               ? data?.otherSNS
-                  .split("\n")
-                  ?.map((a, key) => <div key={key}>{a}</div>)
+                .split("\n")
+                ?.map((a, key) => <div key={key}>{a}</div>)
               : ""}
           </div>
         </div>
@@ -363,7 +372,9 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
           <span>{data?.status}</span>
         </div>
       )}
-
+      {error !== "" && (
+        <div className="text-center m-[10px] text-[#EE5736]">{error}</div>
+      )}
       {!modalMode && data?.status !== "承認待ち" && (
         <div className="flex justify-center mt-[36px] mb-[160px] sp:mb-[60px]">
           <Button

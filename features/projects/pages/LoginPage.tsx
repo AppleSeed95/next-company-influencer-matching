@@ -52,7 +52,7 @@ export default function LoginPage() {
             router.push("/companyList");
             break;
           case "企業":
-            router.push("/appliedList");
+            router.push("/top");
             break;
           case "インフルエンサー":
             router.push("/collectingCase");
