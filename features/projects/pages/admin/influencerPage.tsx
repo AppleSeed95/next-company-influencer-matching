@@ -15,7 +15,7 @@ export interface InfluencerProps {
   handleApprove?: (val: string, cur?: number) => void;
 }
 interface InfluencerData {
-  nickName: string;
+  nickName?: string;
 }
 
 const InfluencerPage: React.FC<InfluencerProps> = ({

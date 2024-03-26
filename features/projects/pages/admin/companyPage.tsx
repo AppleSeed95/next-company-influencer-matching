@@ -12,7 +12,7 @@ export interface CompanyProps {
   companyData?: CompanyData;
 }
 interface CompanyData {
-  companyName: string;
+  companyName?: string;
   // Add other properties as needed
 }
 const confirmMsg = "操作が成功しました。";
