@@ -1,17 +1,20 @@
 "use client";
 import React from "react";
-import Button, { ButtonType } from "@/components/atoms/button";
+import Button from "@/components/atoms/button";
+import { ButtonType } from "@/components/atoms/buttonType";
 
 export interface InfluencerProps {
   onOk?: () => void;
   body?: React.ReactNode;
   onCancel?: () => void;
+  noFooter?: boolean;
 }
 
 const Modal: React.FC<InfluencerProps> = ({
   onCancel,
   body,
   onOk,
+  noFooter
 }: InfluencerProps) => {
   return (
     <div className="text-center bg-[white]  px-[35px] sp:px-[12px] sp:text-small w-[20%] sp:w-[90%] m-auto relative shadow-lg ">
@@ -25,13 +28,13 @@ const Modal: React.FC<InfluencerProps> = ({
       </button>
       <div className="pt-[30px] mt-[350px]">
         <div>{body}</div>
-        <Button
+        {!noFooter && <Button
           buttonType={ButtonType.PRIMARY}
           handleClick={() => onOk()}
           buttonClassName="m-[20px]"
         >
           確認
-        </Button>
+        </Button>}
       </div>
     </div>
   );

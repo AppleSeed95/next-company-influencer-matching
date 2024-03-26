@@ -7,12 +7,10 @@ export default function LoginLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div>
-      <div>
-        <Header mode={"auth"} />
-        {children}
-        <Footer />
-      </div>
+    <div className="flex flex-col min-h-screen">
+      <Header mode={"auth"} />
+      {children}
+      <Footer />
     </div>
   );
 }

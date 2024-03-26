@@ -22,9 +22,9 @@ interface RowType extends RowDataPacket {
   // Add any other fields you have in your table
 }
 export async function GET(request: NextRequest) {
+  
+  const id = request.nextUrl.searchParams.get("id") || "";
   try {
-    const id = request.nextUrl.searchParams.get("id") || "";
-
     const query = `SELECT * FROM company where id = ${id}  ORDER BY id DESC`;
     const rows = await executeQuery(query).catch((e) => {
       return NextResponse.json({ type: "error" });
@@ -32,6 +32,6 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(rows[0]);
   } catch (error) {
     console.error("Error fetching data:", error);
-    return NextResponse.json({ error: error }, { status: 500 });
+    return NextResponse.json({ type: "error" });
   }
 }

@@ -2,7 +2,7 @@ import LoginOutPage from "@/features/projects/pages/LogOutPage";
 
 function LogOut() {
   return (
-    <div>
+    <div className="flex grow">
       <LoginOutPage />
     </div>
   );

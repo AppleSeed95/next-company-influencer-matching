@@ -10,15 +10,15 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ type: "error" });
     });
     if (!rows && !rows.length && rows.length === 0) {
-      return NextResponse.json({ type: "error" });
+      return NextResponse.json({ type: "error",msg:'no user' });
     }
-    const query4 = `SELECT * FROM influencer where emailAddress = '${body.emailAddress}'`;
-    const rows1 = await executeQuery(query4).catch((e) => {
-      return NextResponse.json({ type: "error" });
-    });
-    if (rows1.length !== 0) {
-      return NextResponse.json({ type: "error" });
-    }
+    // const query4 = `SELECT * FROM influencer where emailAddress = '${body.emailAddress}'`;
+    // const rows1 = await executeQuery(query4).catch((e) => {
+    //   return NextResponse.json({ type: "error" });
+    // });
+    // if (rows1.length !== 0) {
+    //   return NextResponse.json({ type: "error" });
+    // }
     const user = rows[0];
 
     await executeQuery(
@@ -47,19 +47,20 @@ export async function POST(request: NextRequest) {
     await executeQuery(`
       CREATE TABLE IF NOT EXISTS influencer (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        influencerName VARCHAR(255) NOT NULL,
-        influencerNameGana VARCHAR(255) NOT NULL,
-        nickName VARCHAR(255) NOT NULL,
-        phoneNumber VARCHAR(255) NOT NULL,
-        emailAddress VARCHAR(255) NOT NULL,
-        prefecture VARCHAR(255) NOT NULL,
-        genre VARCHAR(255) NOT NULL,
-        instagram VARCHAR(255) NOT NULL,
-        x VARCHAR(255) NOT NULL,
-        facebook VARCHAR(255) NOT NULL,
-        youtube VARCHAR(255) NOT NULL,
-        tiktok VARCHAR(255) NOT NULL,
-        otherSNS VARCHAR(255) NOT NULL,
+        influencerName VARCHAR(255)  ,
+        influencerNameGana VARCHAR(255)  ,
+        gender VARCHAR(255)  ,
+        nickName VARCHAR(255)  ,
+        phoneNumber VARCHAR(255)  ,
+        emailAddress VARCHAR(255)  ,
+        prefecture VARCHAR(255)  ,
+        genre VARCHAR(255)  ,
+        instagram VARCHAR(255)  ,
+        x VARCHAR(255)  ,
+        facebook VARCHAR(255)  ,
+        youtube VARCHAR(255)  ,
+        tiktok VARCHAR(255)  ,
+        otherSNS VARCHAR(255)  ,
         userId int,
         date VARCHAR(255),
         status VARCHAR(255), 

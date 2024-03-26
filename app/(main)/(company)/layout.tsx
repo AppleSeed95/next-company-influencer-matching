@@ -8,12 +8,10 @@ export default function LoginLayout({
 }) {
   return (
     <div>
-      <div>
-        <Header mode={"company"} />
-        <div className="flex">
-          <CompanySideBar />
-          <div className="w-full bg-[white]">{children}</div>
-        </div>
+      <Header mode={"company"} />
+      <div className="flex min-h-screen">
+        <CompanySideBar />
+        <div className="w-full bg-[white]">{children}</div>
       </div>
     </div>
   );

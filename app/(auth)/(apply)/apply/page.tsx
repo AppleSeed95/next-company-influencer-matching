@@ -2,7 +2,7 @@ import ApplyPage from "@/features/projects/pages/applyPage";
 
 function ApplyCompany() {
   return (
-    <div>
+    <div className="flex grow">
       <ApplyPage />
     </div>
   );

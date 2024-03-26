@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Button, { ButtonType } from "@/components/atoms/button";
+import Button from "@/components/atoms/button";
+import { ButtonType } from "@/components/atoms/buttonType";
 import Input from "@/components/atoms/input";
 import Checkbox from "@/components/atoms/checkbox";
 import { useRecoilValue } from "recoil";
@@ -8,6 +9,7 @@ import { authUserState } from "@/recoil/atom/auth/authUserAtom";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import Modal from "../../utils/modal";
+import CheckoutPage from "./stripe";
 
 export interface CompanyInfoProps {
   applyMode?: boolean;
@@ -18,6 +20,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
 }: CompanyInfoProps) => {
   const authUser = useRecoilValue(authUserState);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [showPayment, setShowPayment] = useState(false);
   const [agree, setAgree] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState({
@@ -59,9 +62,13 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
       );
       if (result.data) setData(result.data);
     };
-    if (!applyMode && authUser) fetchData();
+    if (!applyMode && authUser) {
+      fetchData()
+      document.title = '企業情報変更';
+    };
   }, []);
   const handleApply = async (isApply) => {
+    if (isLoading) return;
     const keys = Object.keys(msgs);
     let isValid = true;
 
@@ -100,6 +107,8 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
     if (!isValid) return;
     setIsLoading(true);
     if (isApply) {
+      console.log(data);
+
       const res = await axios.post(`api/company`, data);
       if (res.data.type === "success") {
         await axios.post("/api/sendEmail", {
@@ -119,9 +128,8 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
             \n電話番号        ：${data.phoneNumber}
             \nメールアドレス   ：${data.emailAddress}
             \n郵便番号         ：${data.postalCode}
-            \n住所             ：${data.address} ${
-            data.building ? data.building : ""
-          }
+            \n住所             ：${data.address} ${data.building ? data.building : ""
+            }
             \n
             \n-----------------------------------------------------
             `,
@@ -152,7 +160,11 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
             \nhttp://localhost:3000/ask
             `,
         });
-        router.push("/applyComplete");
+        if (typeof window !== "undefined") {
+          router.push("/applyComplete");
+        }
+      } else {
+        setError("メールアドレスが登録されていません。")
       }
     }
     if (!isApply) {
@@ -164,7 +176,9 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
     }
     setIsLoading(false);
   };
-
+  const handlePaymentInfoChange = () => {
+    setShowPayment(true);
+  }
   return (
     <div
       className={
@@ -184,6 +198,20 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
           body={confirmMsg}
           onOk={() => setShowConfirm(false)}
           onCancel={() => setShowConfirm(false)}
+        />
+      </div>
+      <div
+        className={
+          showPayment
+            ? "bg-black bg-opacity-25 w-full h-full fixed left-0 top-0 overflow-auto duration-500"
+            : "bg-black bg-opacity-25 w-full h-full fixed left-0 top-0 overflow-auto opacity-0 pointer-events-none duration-500"
+        }
+      >
+        <Modal
+          noFooter
+          body={<CheckoutPage />}
+          onOk={() => setShowPayment(false)}
+          onCancel={() => setShowPayment(false)}
         />
       </div>
       {!applyMode && (
@@ -375,10 +403,11 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
             <span>決済</span>
           </span>
           <div className="sp:text-center">
-            <span>{data?.payment}</span>
+            <span>{data?.payment.length > 0 ? data.payment?.substring(0, 10) + '日まで' : ''}</span>
             <Button
               buttonType={ButtonType.DANGER}
               buttonClassName="ml-[40px] sp:ml-[0px]"
+              handleClick={handlePaymentInfoChange}
             >
               決済情報変更
             </Button>

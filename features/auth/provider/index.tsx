@@ -14,8 +14,9 @@ export async function login({
   try {
     const result = await axios.post(`/api/auth`, { id: email, password });
     data = result.data;
-
-    localStorage.setItem("user", JSON.stringify(data.data));
+    if (typeof window !== "undefined") {
+      localStorage.setItem("user", JSON.stringify(data.data));
+    }
   } catch (e) {
     error = e;
   }

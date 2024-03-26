@@ -4,8 +4,9 @@ import { usePathname } from "next/navigation";
 
 export default function InfluencerSidebar() {
   const pathName = usePathname();
+
   return (
-    <div className="bg-[#F8F9FA] min-h-[100vh] w-[280px] sp:w-[0px] duration-200">
+    <div className="bg-[#F8F9FA] min-h-[100vh] w-[280px] sp:hidden duration-200">
       <div className=" pt-[120px] pb-[30px] px-[20px]">
         <div
           className={

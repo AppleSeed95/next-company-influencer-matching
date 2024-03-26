@@ -15,6 +15,7 @@ export interface InputProps {
   formatMsg?: string;
   type?: string;
   handleChange: (val: string) => void;
+  handleKeyPress?: (event: any) => void;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -29,6 +30,7 @@ const Input: React.FC<InputProps> = ({
   formatMsg,
   dateTime,
   type,
+  handleKeyPress,
 }: InputProps) => {
   const [error, setError] = useState("errorMsg");
   const [isValid, setIsValid] = useState(true);
@@ -69,6 +71,7 @@ const Input: React.FC<InputProps> = ({
         onChange={(e) => {
           validate(e.target.value);
         }}
+        onKeyPress={handleKeyPress}
       ></input>
       {(requirMsg || formatMsg) && (
         <div

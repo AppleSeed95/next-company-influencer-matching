@@ -1,16 +1,17 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Button, { ButtonType } from "@/components/atoms/button";
+import Button from "@/components/atoms/button";
+import { ButtonType } from "@/components/atoms/buttonType";
 import TextArea from "@/components/atoms/textarea";
 import io from "socket.io-client";
 import { useRecoilValue } from "recoil";
 import { authUserState } from "@/recoil/atom/auth/authUserAtom";
 import { useParams } from "next/navigation";
 import axios from "@/node_modules/axios/index";
-const socket = io("http://localhost:5000");
+
+const socket = io("https://influencer-meguri.jp");
 import Image from "next/image";
 import ChattingRooms from "./rooms";
-// import controller from "./socketController";
 
 export default function ChattingPane() {
   const user = useRecoilValue(authUserState);
@@ -25,6 +26,7 @@ export default function ChattingPane() {
     socket.on("message", () => {
       setReload(!reload);
     });
+
     socket.emit("info", { roomId: id });
     const fetchData = async () => {
       const result = await axios.get(`/api/chatting?id=${id}`);
@@ -40,6 +42,7 @@ export default function ChattingPane() {
     };
     fetchData();
     fetchRoomData();
+    document.title = 'チャット'
   }, [reload]);
   useEffect(() => {
     const pane = document.getElementById("pane");
@@ -93,8 +96,8 @@ export default function ChattingPane() {
   };
   let day = "";
   return (
-    <div>
-      <div className="absolute lg:hidden  right-[20px] top-[180px]">
+    <div className="h-full flex flex-col">
+      <div className="absolute lg:hidden right-[20px] top-[150px]">
         <Image
           alt="hamburger"
           width={70}
@@ -110,14 +113,14 @@ export default function ChattingPane() {
         className={
           showRooms
             ? "lg:hidden opacity-100 "
-            : "lg:hidden opacity-0 duration-200"
+            : "lg:hidden hidden  duration-200"
         }
       >
         <ChattingRooms />
       </div>
 
       <div
-        className="h-[590px] bg-[#F8F9FA] pt-[100px] overflow-y-auto scroll-smooth"
+        className="bg-[#F8F9FA] h-[63vh] pt-[100px] overflow-y-auto scroll-smooth"
         id="pane"
       >
         {data.map((aData, idx) => {
@@ -161,12 +164,12 @@ export default function ChattingPane() {
           ];
         })}
       </div>
-      <div className="h-[130px] flex items-center justify-between border-t-[1px] border-[#DDDDDD]">
+      <div className="h-[10vh] flex items-center justify-between border-t-[1px] border-[#DDDDDD]">
         <TextArea
           handleCtrlEnter={() => handleSendMsg()}
           reset={reset}
           placeholder="メッセージを入力"
-          textAreaClassName="h-[120px] border-0 grow"
+          textAreaClassName="h-[9vh] mt-[1px] border-0 grow"
           handleChange={(val) => setMsg(val)}
           value={msg}
         />

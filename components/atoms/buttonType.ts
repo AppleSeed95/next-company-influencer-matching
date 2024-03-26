@@ -1,0 +1,8 @@
+export enum ButtonType {
+  PRIMARY,
+  PRIMARYDEFAULT,
+  DANGER,
+  DEFAULT,
+  ROUNDED,
+  OUTLINED,
+}

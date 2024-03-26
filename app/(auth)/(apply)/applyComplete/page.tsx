@@ -2,7 +2,7 @@ import ApplyCompletePage from "@/features/projects/pages/applyCompletePage";
 
 function ApplyCompany() {
   return (
-    <div>
+    <div className="flex grow">
       <ApplyCompletePage />
     </div>
   );

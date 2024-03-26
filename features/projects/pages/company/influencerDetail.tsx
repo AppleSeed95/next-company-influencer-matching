@@ -1,7 +1,6 @@
 import React from "react";
-import Button, { ButtonType } from "@/components/atoms/button";
-import Input from "@/components/atoms/input";
-import TextArea from "@/components/atoms/textarea";
+import Button from "@/components/atoms/button";
+import { ButtonType } from "@/components/atoms/buttonType";
 import Link from "next/link";
 
 export interface InfluencerProps {

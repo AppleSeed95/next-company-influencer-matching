@@ -1,6 +1,7 @@
 "use client";
 import React, { Children } from "react";
 import { ReactNode } from "react";
+import { ButtonType } from "./buttonType";
 
 export interface ButtonProps {
   buttonClassName?: string;
@@ -9,14 +10,7 @@ export interface ButtonProps {
   submit?: boolean;
   handleClick?: () => void;
 }
-export enum ButtonType {
-  PRIMARY,
-  PRIMARYDEFAULT,
-  DANGER,
-  DEFAULT,
-  ROUNDED,
-  OUTLINED,
-}
+
 const classNames = [
   "px-[20px] py-[10px] rounded-[5px] text-[white] bg-[#3F8DEB] hover:bg-[#2e6fbe] hover:shadow-lg duration-500 ",
   "px-[20px] py-[10px] rounded-[5px] text-[white] bg-[#A9A9A9] hover:bg-[#8f8f8f] hover:shadow-lg duration-500 ",

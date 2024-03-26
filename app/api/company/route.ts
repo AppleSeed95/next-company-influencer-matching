@@ -30,15 +30,17 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ type: "error" });
     });
     if (!rows && !rows.length && rows.length === 0) {
-      return NextResponse.json({ type: "error" });
+      return NextResponse.json({ type: "error",msg:'no user' });
     }
-    const query4 = `SELECT * FROM company where emailAddress = '${body.emailAddress}'`;
-    const rows1 = await executeQuery(query4).catch((e) => {
-      return NextResponse.json({ type: "error" });
-    });
-    if (rows1.length !== 0) {
-      return NextResponse.json({ type: "error" });
-    }
+    // const query4 = `SELECT * FROM company where emailAddress = '${body.emailAddress}'`;
+    // const rows1 = await executeQuery(query4).catch((e) => {
+    //   console.log("error here");
+
+    //   return NextResponse.json({ type: "error" });
+    // });
+    // if (rows1.length !== 0) {
+    //   return NextResponse.json({ type: "error" });
+    // }
     const user = rows[0];
     await executeQuery(
       `UPDATE users SET name = '${body.companyName}' WHERE id = ${user.id}`
@@ -52,6 +54,9 @@ export async function POST(request: NextRequest) {
     const defaultValues = {
       status: "停止中",
       date: todayString,
+      payment: "",
+      paymentFailed: "",
+      plan: "",
       thisMonthCollectionCnt: 0,
       conCurrentCnt: 0,
       monthlyCollectionCnt: 1,
@@ -70,23 +75,23 @@ export async function POST(request: NextRequest) {
     await executeQuery(`
     CREATE TABLE IF NOT EXISTS company (
       id INT AUTO_INCREMENT PRIMARY KEY,
-      companyName VARCHAR(255) NOT NULL,
-      companyNameGana VARCHAR(255) NOT NULL,
-      representativeName VARCHAR(255) NOT NULL,
-      representativeNameGana VARCHAR(255) NOT NULL,
-      responsibleName VARCHAR(255) NOT NULL,
-      responsibleNameGana VARCHAR(255) NOT NULL,
-      webSite VARCHAR(255) NOT NULL,
-      phoneNumber VARCHAR(255) NOT NULL,
-      emailAddress VARCHAR(255) NOT NULL,
-      postalCode VARCHAR(255) NOT NULL,
-      address VARCHAR(255) NOT NULL,
-      building VARCHAR(255) NOT NULL,
-      status VARCHAR(255) NOT NULL,
-      payment VARCHAR(255) NOT NULL,
-      paymentFailed VARCHAR(255) NOT NULL,
-      monthlyCollectionCnt int NOT NULL,
-      concurrentCollectionCnt int NOT NULL,
+      companyName VARCHAR(255)  ,
+      companyNameGana VARCHAR(255)  ,
+      representativeName VARCHAR(255)  ,
+      representativeNameGana VARCHAR(255)  ,
+      responsibleName VARCHAR(255)  ,
+      responsibleNameGana VARCHAR(255)  ,
+      webSite VARCHAR(255)  ,
+      phoneNumber VARCHAR(255)  ,
+      emailAddress VARCHAR(255)  ,
+      postalCode VARCHAR(255)  ,
+      address VARCHAR(255)  ,
+      building VARCHAR(255)  ,
+      status VARCHAR(255)  ,
+      payment VARCHAR(255)  ,
+      paymentFailed VARCHAR(255)  ,
+      monthlyCollectionCnt int  ,
+      concurrentCollectionCnt int  ,
       thisMonthCollectionCnt int,
       conCurrentCnt int,
       plan VARCHAR(255) NOT NULL,
@@ -125,7 +130,8 @@ export async function GET() {
 }
 export async function PUT(request: NextRequest) {
   try {
-    const body = await request.json();
+    let body = await request.json();
+    body = body.data;
     let query = "UPDATE company SET ";
     const keys = Object.keys(body);
 
@@ -144,6 +150,7 @@ export async function PUT(request: NextRequest) {
     query = query.slice(0, -2);
     query += " ";
     query += `WHERE id = ${body.id}`;
+    
     await executeQuery(query).catch((e) => {
       return NextResponse.json({ type: "error", msg: "no table exists" });
     });

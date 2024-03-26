@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { executeQuery } from "../../util/db";
 
 export async function GET(request: NextRequest) {
+  const id = request.nextUrl.searchParams.get("id") || "";
   try {
-    const id = request.nextUrl.searchParams.get("id") || "";
     const query = `SELECT * FROM cases where companyId = ${id} ORDER BY id DESC`;
     const rows = await executeQuery(query).catch((e) => {
       return NextResponse.json({ type: "error" });

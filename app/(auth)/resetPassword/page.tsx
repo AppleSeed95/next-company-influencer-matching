@@ -2,7 +2,7 @@ import ResetPasswordPage from "@/features/projects/pages/resetPasswordPage";
 
 function ResetPassword() {
   return (
-    <div>
+    <div className="flex grow">
       <ResetPasswordPage />
     </div>
   );

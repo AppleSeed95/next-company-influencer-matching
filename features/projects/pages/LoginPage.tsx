@@ -1,7 +1,7 @@
 "use client";
 import Button from "@/components/atoms/button";
 import Input from "@/components/atoms/input";
-import { ButtonType } from "@/components/atoms/button";
+import { ButtonType } from "@/components/atoms/buttonType";
 import Link from "next/link";
 import { useRecoilState } from "recoil";
 import { authUserState } from "@/recoil/atom/auth/authUserAtom";
@@ -9,7 +9,7 @@ import { login } from "@/features/auth/provider";
 
 import { useRouter } from "next/navigation";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function LoginPage() {
   const [id, setId] = useState("");
@@ -18,7 +18,9 @@ export default function LoginPage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [_, setAuthUser] = useRecoilState(authUserState);
-
+  useEffect(() => {
+    document.title = 'ログイン';
+  }, [])
   const handleLogin = async () => {
     if (password === "" && id === "") {
       setError("ID・PWを入力してください。");
@@ -46,23 +48,30 @@ export default function LoginPage() {
     } else {
       setIsLoading(false);
       setAuthUser({ user: response.data });
-      switch (response.data?.role) {
-        case "admin":
-          router.push("/companyList");
-          break;
-        case "企業":
-          router.push("/appliedList");
-          break;
-        case "インフルエンサー":
-          router.push("/collectingCase");
+      if (typeof window !== "undefined") {
+        switch (response.data?.role) {
+          case "admin":
+            router.push("/companyList");
+            break;
+          case "企業":
+            router.push("/top");
+            break;
+          case "インフルエンサー":
+            router.push("/collectingCase");
 
-        default:
-          break;
+          default:
+            break;
+        }
       }
     }
   };
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      handleLogin();
+    }
+  };
   return (
-    <div className="bg-[#F5F5F5]  py-[300px] sp:py-[200px]">
+    <div className="bg-[#F5F5F5] pt-[90px]  flex w-full grow">
       <div className="bg-[white] px-[20px] w-[614px] sp:w-[90%] rounded-[40px] block m-auto py-[70px] sp:py-[20px] shadow-lg">
         <img
           src="/img/logo(red).svg"
@@ -73,6 +82,7 @@ export default function LoginPage() {
           <Input
             handleChange={(val) => setId(val)}
             inputClassName={"max-w-[250px] grow"}
+            handleKeyPress={handleKeyPress}
           />
         </div>
         <div className="flex justify-center w-full  mb-[20px] pr-[70px] sp:pr-[30px] sp:mb-[30px]">
@@ -82,6 +92,7 @@ export default function LoginPage() {
           <Input
             password
             handleChange={(val) => setPassword(val)}
+            handleKeyPress={handleKeyPress}
             inputClassName={"max-w-[250px] grow"}
           />
         </div>

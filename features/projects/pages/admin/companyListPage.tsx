@@ -41,6 +41,7 @@ export default function CompanyListPage() {
       setIsLoading(false);
     };
     fetchData();
+    document.title = '企業一覧'
   }, []);
   const handleOptionChange = (val) => {
     const isAlready = options.some((a) => a === val);
@@ -214,7 +215,7 @@ export default function CompanyListPage() {
                         {aData.status}
                       </td>
                       <td className="px-[35px] py-[25px]  border border-[#D3D3D3]">
-                        {aData.payment}
+                        {aData?.payment.length > 0 ? aData.payment?.substring(0, 10) + '日まで' : ''}
                       </td>
                       <td className="px-[35px] py-[25px]  border border-[#D3D3D3]">
                         {aData.freeAccount ? "無料アカウント" : ""}
@@ -251,7 +252,7 @@ export default function CompanyListPage() {
           />
         </div>
 
-        <div className="lg:hidden">
+        <div className="lg:hidden grow">
           {currentItems?.map((aData, idx) => (
             <div
               key={idx}
@@ -303,7 +304,7 @@ export default function CompanyListPage() {
                       決算
                     </div>
                     <span className="mb-[7px] sp:text-spsmall">
-                      {aData.payment}
+                      {aData?.payment.length > 0 ? aData.payment?.substring(0, 10) + '日まで' : ''}
                     </span>
                   </div>
                   <div className="flex my-[10px]">
@@ -318,6 +319,8 @@ export default function CompanyListPage() {
               )}
             </div>
           ))}
+        </div>
+        <div className="lg:hidden">
           <ReactPaginate
             containerClassName="pagination-conatiner"
             pageClassName="pagination-page"

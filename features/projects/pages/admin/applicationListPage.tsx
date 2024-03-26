@@ -40,6 +40,7 @@ export default function ApplicationListPage() {
       setIsLoading(false);
     };
     fetchData();
+    document.title = '申請案件一覧'
   }, []);
   const onItemClick = ({ idx }: { idx: Number }) => {
     if (active === idx) {
@@ -86,6 +87,14 @@ export default function ApplicationListPage() {
     setVisibleData(data);
     makeOptioinedData(data, options);
   };
+  const dateString = (dateValue: string) => {
+    const date = new Date(dateValue);
+    if (isNaN(date.getFullYear())) {
+      return "";
+    }
+    const formattedDate = `${date.getFullYear()}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getDate().toString().padStart(2, '0')} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
+    return formattedDate;
+  }
   return (
     <div className="h-full">
       <div className="flex flex-col h-full px-[30px] sp:px-[12px] pt-[110px] pb-[30px]">
@@ -183,10 +192,7 @@ export default function ApplicationListPage() {
                         {aData.status}
                       </td>
                       <td className="px-[35px] py-[25px]  border border-[#D3D3D3]">
-                        {`${aData.collectionStart.replace(
-                          "T",
-                          " / "
-                        )}~${aData.collectionEnd.replace("T", " / ")}`}
+                        {`${dateString(aData.collectionStart)} ~ ${dateString(aData.collectionEnd)}`}
                       </td>
                       <td className="px-[35px] py-[25px]  border border-[#D3D3D3] ">
                         {aData.date}
@@ -219,7 +225,7 @@ export default function ApplicationListPage() {
             renderOnZeroPageCount={null}
           />
         </div>
-        <div className="lg:hidden">
+        <div className="lg:hidden grow">
           {currentItems?.map((aData, idx) => (
             <div
               key={idx}
@@ -273,7 +279,7 @@ export default function ApplicationListPage() {
                       募集期間
                     </div>
                     <span className="mb-[7px] sp:text-spsmall">
-                      {`${aData.collectionStart}~${aData.collectionEnd}`}
+                      {`${dateString(aData.collectionStart)} ~ ${dateString(aData.collectionEnd)}`}
                     </span>
                   </div>
                   <div className="flex py-[5px]">
@@ -288,6 +294,8 @@ export default function ApplicationListPage() {
               )}
             </div>
           ))}
+        </div>
+        <div className="lg:hidden">
           <ReactPaginate
             containerClassName="pagination-conatiner"
             pageClassName="pagination-page"

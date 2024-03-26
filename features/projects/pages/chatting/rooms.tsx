@@ -22,7 +22,9 @@ const ChattingRooms: React.FC = () => {
       if (result.data.length) {
         setData(result.data);
         if (!id) {
-          router.push(`/chattingInf/${result.data[0].applyId}`);
+          if (typeof window !== "undefined") {
+            router.push(`/chattingInf/${result.data[0].applyId}`);
+          }
         }
         result.data.map((a, key) => {
           if (a.applyId == id) {
@@ -36,7 +38,7 @@ const ChattingRooms: React.FC = () => {
   return (
     <div
       id="parent"
-      className="h-[720px] bg-[white] z-10 border-[1px] border-[#DDDDDD] w-[100%] sp:w-[180px] sp:fixed sp:h-full sp:left-[0px] sp:top-[0px] overflow-y-auto overflow-x-show"
+      className="h-full bg-[white] z-10 border-[1px] border-[#DDDDDD] w-[100%] sp:w-[180px] sp:fixed sp:h-full sp:left-[0px] sp:top-[0px] overflow-y-auto overflow-x-show"
     >
       {data?.map((aData, key) => (
         <Link

@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { executeQuery } from "../../util/db";
 export async function POST(request: NextRequest) {
+  const id = request.nextUrl.searchParams.get("id") || "";
   try {
-    const id = request.nextUrl.searchParams.get("id") || "";
     // const query = `SELECT cases.*, company.companyName
     // FROM cases
     // LEFT JOIN company ON cases.companyId=company.id
@@ -77,10 +77,9 @@ export async function POST(request: NextRequest) {
   }
 }
 export async function GET(request: NextRequest) {
+  const id = request.nextUrl.searchParams.get("id") || "";
+  const type = request.nextUrl.searchParams.get("type") || "";
   try {
-    const id = request.nextUrl.searchParams.get("id") || "";
-    const type = request.nextUrl.searchParams.get("type") || "";
-
     const query = `SELECT * FROM chatroom where ${type}Id = ${id} ORDER BY id DESC`;
 
     const rows = await executeQuery(query).catch((e) => {

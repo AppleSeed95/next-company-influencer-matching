@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { executeQuery } from "../../util/db";
 
 export async function GET(request: NextRequest) {
+  const id = request.nextUrl.searchParams.get("id") || "";
   try {
-    const id = request.nextUrl.searchParams.get("id") || "";
     const query = `SELECT apply.*,influencer.nickName, influencer.instagram,influencer.x,influencer.tiktok,influencer.youtube, influencer.facebook
       FROM apply
       LEFT JOIN influencer ON apply.influencerId = influencer.id

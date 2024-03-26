@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import Button, { ButtonType } from "@/components/atoms/button";
+import Button from "@/components/atoms/button";
+import { ButtonType } from "@/components/atoms/buttonType";
 import Checkbox from "@/components/atoms/checkbox";
 import Input from "@/components/atoms/input";
 import Select from "@/components/atoms/select";
@@ -15,6 +16,7 @@ export interface InfluencerInfoProps {
   applyMode?: boolean;
 }
 const prefectures = [
+  "",
   "北海道",
   "青森県",
   "岩手県",
@@ -64,6 +66,7 @@ const prefectures = [
   "沖縄県",
 ];
 const followersOptions = [
+  "",
   "～1,000",
   "1,001～3,000",
   "3,001～5,000",
@@ -102,20 +105,26 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
         setGenre(result.data.genre);
       }
     };
-    if (!applyMode && authUser) fetchData();
+    if (!applyMode && authUser) {
+      fetchData()
+      document.title = 'インフルエンサー情報変更';
+    };
   }, []);
   const handleGenreChange = (val) => {
+
     let isAlreadyExits = false;
     const genre1 = JSON.parse(genre);
     genre1.forEach((a) => {
       if (a === val) isAlreadyExits = true;
     });
     if (!isAlreadyExits) {
+
       setGenre(JSON.stringify([...genre1, val]));
     } else {
       let filteredArray = genre1.filter((element) => element !== val);
       setGenre(JSON.stringify(filteredArray));
     }
+
   };
   const handleSend = async (applyMode: boolean) => {
     const body = {
@@ -160,7 +169,15 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
     setIsLoading(true);
     let result;
     if (applyMode) {
+      const defaultSNS = JSON.stringify({ account: '', followers: '' })
+      if (!body.instagram) body.instagram = defaultSNS;
+      if (!body.tiktok) body.tiktok = defaultSNS;
+      if (!body.youtube) body.youtube = defaultSNS;
+      if (!body.facebook) body.facebook = defaultSNS;
+      if (!body.x) body.x = defaultSNS;
+      if (!body.gender) body.gender = "男性";
       result = await axios.post("api/influencer", body);
+
       if (result.data.type === "success") {
         await axios.post("/api/sendEmail", {
           from: data.emailAddress,
@@ -185,8 +202,11 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
             `,
         });
         router.replace("/applyComplete");
+      } else {
+        setError('メールアドレスが登録されていません。')
       }
     } else {
+
       result = await axios.put("api/influencer", body);
       if (result.data.type === "success") {
         setError("");
@@ -366,8 +386,8 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
               value={
                 data?.genre
                   ? JSON.parse(data?.genre).includes(
-                      "育児・ファミリー系（ママ、キッズ等）"
-                    )
+                    "育児・ファミリー系（ママ、キッズ等）"
+                  )
                   : false
               }
               title="育児・ファミリー系（ママ、キッズ等）"
@@ -389,8 +409,8 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
               value={
                 data?.genre
                   ? JSON.parse(data?.genre).includes(
-                      "スポーツ・フィットネス・ボディメイク系"
-                    )
+                    "スポーツ・フィットネス・ボディメイク系"
+                  )
                   : false
               }
               handleChange={(val) =>
@@ -512,8 +532,8 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
               value={
                 data?.genre
                   ? JSON.parse(data?.genre).includes(
-                      "花・フラワーアレンジメント系"
-                    )
+                    "花・フラワーアレンジメント系"
+                  )
                   : false
               }
               handleChange={(val) =>
@@ -546,8 +566,8 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
               value={
                 data?.genre
                   ? JSON.parse(data?.genre).includes(
-                      "写真家・フォトグラファー系"
-                    )
+                    "写真家・フォトグラファー系"
+                  )
                   : false
               }
               checkBoxClassName="ml-[25px]"
@@ -581,13 +601,13 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
                   ...data,
                   instagram: data.instagram
                     ? JSON.stringify({
-                        ...JSON.parse(data?.instagram),
-                        account: val,
-                      })
+                      ...JSON.parse(data?.instagram),
+                      account: val,
+                    })
                     : JSON.stringify({
-                        account: val,
-                        followers: "",
-                      }),
+                      account: val,
+                      followers: "",
+                    }),
                 })
               }
               inputClassName="ml-[30px] sp:ml-[0px] grow max-w-[250px]"
@@ -637,13 +657,13 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
                   ...data,
                   x: data.x
                     ? JSON.stringify({
-                        ...JSON.parse(data?.x),
-                        account: val,
-                      })
+                      ...JSON.parse(data?.x),
+                      account: val,
+                    })
                     : JSON.stringify({
-                        account: val,
-                        followers: "",
-                      }),
+                      account: val,
+                      followers: "",
+                    }),
                 })
               }
               inputClassName="ml-[30px] sp:ml-[0px] grow max-w-[250px]"
@@ -689,13 +709,13 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
                   ...data,
                   facebook: data.facebook
                     ? JSON.stringify({
-                        ...JSON.parse(data?.facebook),
-                        account: val,
-                      })
+                      ...JSON.parse(data?.facebook),
+                      account: val,
+                    })
                     : JSON.stringify({
-                        account: val,
-                        followers: "",
-                      }),
+                      account: val,
+                      followers: "",
+                    }),
                 })
               }
               inputClassName="ml-[30px] sp:ml-[0px] grow max-w-[250px]"
@@ -744,13 +764,13 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
                   ...data,
                   tiktok: data.tiktok
                     ? JSON.stringify({
-                        ...JSON.parse(data?.tiktok),
-                        account: val,
-                      })
+                      ...JSON.parse(data?.tiktok),
+                      account: val,
+                    })
                     : JSON.stringify({
-                        account: val,
-                        followers: "",
-                      }),
+                      account: val,
+                      followers: "",
+                    }),
                 })
               }
               inputClassName="ml-[30px] sp:ml-[0px] grow max-w-[250px]"
@@ -799,13 +819,13 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
                   ...data,
                   youtube: data.youtube
                     ? JSON.stringify({
-                        ...JSON.parse(data?.youtube),
-                        account: val,
-                      })
+                      ...JSON.parse(data?.youtube),
+                      account: val,
+                    })
                     : JSON.stringify({
-                        account: val,
-                        followers: "",
-                      }),
+                      account: val,
+                      followers: "",
+                    }),
                 })
               }
               inputClassName="ml-[30px] sp:ml-[0px] grow max-w-[250px]"
@@ -847,7 +867,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
           <span>その他のSNS </span>
         </span>
         <TextArea
-          value={data ? data.otherSNS : ""}
+          value={data ? data.otherSNS === 'null' ? "" : data.otherSNS : ""}
           handleChange={(val) => setData({ ...data, otherSNS: val })}
           textAreaClassName="max-w-[380px] grow"
         ></TextArea>

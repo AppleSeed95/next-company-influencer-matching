@@ -10,17 +10,17 @@ const connection = mysql.createConnection({
 // Connect to the MySQL database
 connection.connect(async (error) => {
   if (error) {
-    console.error("Error connecting to the database:", error);
+    console.error("Error occured while connecting to the database:", error);
   } else {
     console.log("Connected to the database!");
     await connection.query(
       `
     CREATE TABLE IF NOT EXISTS users (
       id INT AUTO_INCREMENT PRIMARY KEY,
-      email VARCHAR(255) NOT NULL,
-      password VARCHAR(255) NOT NULL,
+      email VARCHAR(255)  ,
+      password VARCHAR(255)  ,
       name VARCHAR(255) ,
-      role VARCHAR(255) NOT NULL
+      role VARCHAR(255)  
     )
   `,
       (error, result) => {

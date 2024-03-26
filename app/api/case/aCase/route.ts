@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { executeQuery } from "../../util/db";
 
 export async function GET(request: NextRequest) {
+  const id = request.nextUrl.searchParams.get("id") || "";
   try {
-    const id = request.nextUrl.searchParams.get("id") || "";
     const query = `SELECT cases.*, company.companyName, company.emailAddress, company.representativeName
       FROM cases
       LEFT JOIN company ON cases.companyId=company.id 
@@ -13,18 +13,23 @@ export async function GET(request: NextRequest) {
     const rows = await executeQuery(query).catch((e) => {
       return NextResponse.json({ type: "error" });
     });
-    return NextResponse.json(rows[0]);
+    const companyId = rows[0].companyId;
+    
+    const query1 = `SELECT id FROM cases WHERE companyId = ${companyId}`
+    const rows1 = await executeQuery(query1).catch((e) => {
+      return NextResponse.json({ type: "error" });
+    });
+    return NextResponse.json({data:rows[0],companyCases:rows1});
   } catch (error) {
     console.error("Error fetching data:", error);
     return NextResponse.json({ type: "error" });
   }
 }
 export async function PUT(request: NextRequest) {
+  const id = request.nextUrl.searchParams.get("id") || "";
   try {
-    const id = request.nextUrl.searchParams.get("id") || "";
     const { update, reason, approveMode, resumeMode, companyId } =
       await request.json();
-    console.log({ update, reason, approveMode, resumeMode, companyId });
 
     const query = approveMode
       ? `UPDATE cases
@@ -62,17 +67,19 @@ export async function PUT(request: NextRequest) {
         });
       }
       const company = result[0];
-      if (company.conCurrentCnt === company.concurrentCollectionCnt) {
-        return NextResponse.json({
-          type: "fail",
-          msg: "同時募集限界なので募集を開始できません。",
-        });
-      }
-      if (company.thisMonthCollectionCnt === company.monthlyCollectionCnt) {
-        return NextResponse.json({
-          type: "fail",
-          msg: "月募集限界なので募集を開始できません。",
-        });
+      if(!company.freeAccount){
+        if (company.conCurrentCnt === company.concurrentCollectionCnt) {
+          return NextResponse.json({
+            type: "fail",
+            msg: "同時募集限界なので募集を開始できません。",
+          });
+        }
+        if (company.thisMonthCollectionCnt === company.monthlyCollectionCnt) {
+          return NextResponse.json({
+            type: "fail",
+            msg: "月募集限界なので募集を開始できません。",
+          });
+        }
       }
       const queryForCompany1 = `UPDATE company SET thisMonthCollectionCnt = ${
         company.thisMonthCollectionCnt + 1

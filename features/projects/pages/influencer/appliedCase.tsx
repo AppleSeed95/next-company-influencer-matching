@@ -1,6 +1,7 @@
 "use client";
 
-import Button, { ButtonType } from "@/components/atoms/button";
+import Button from "@/components/atoms/button";
+import { ButtonType } from "@/components/atoms/buttonType";
 import Checkbox from "@/components/atoms/checkbox";
 import SearchBar from "@/components/organisms/searchbar";
 import ApplicationPage from "../admin/applicationPage";
@@ -50,6 +51,7 @@ export default function AppledCase() {
       setIsLoading(false);
     };
     if (user) fetchData();
+    document.title = '応募案件一覧';
   }, [reload]);
   const handleEndReport = async (id) => {
     const result = await axios.put(`/api/apply`, {
@@ -155,7 +157,9 @@ export default function AppledCase() {
   const handleToChat = (id) => {
     const createChatRoom = async () => {
       await axios.post(`/api/chatting/room?id=${id}`);
-      router.push(`/chattingInf/${id}`);
+      if (typeof window !== "undefined") {
+        router.push(`/chattingInf/${id}`);
+      }
     };
     createChatRoom();
   };
@@ -344,7 +348,7 @@ export default function AppledCase() {
             renderOnZeroPageCount={null}
           />
         </div>
-        <div className="lg:hidden">
+        <div className="lg:hidden grow">
           {currentItems?.map((aData, idx) => (
             <div key={idx} className=" bg-[#F8F9FA] border border-[#D3D3D3]">
               <div className="flex justify-between px-[30px] py-[20px] w-full">
@@ -415,12 +419,14 @@ export default function AppledCase() {
                   </div>
 
                   <div className="flex">
-                    {aData.status === "完了" ? (
+                    {aData.status === "完了報告" ? (
                       <div className="text-white text-small bg-[#236997] p-[10px] m-[5px] rounded-lg shadow-sm">
                         完了した
                       </div>
                     ) : (
-                      <Button buttonType={ButtonType.PRIMARY}>
+                      <Button
+                        handleClick={() => handleEndReport(aData.id)}
+                        buttonType={ButtonType.PRIMARY}>
                         <span className="text-small">完了報告</span>
                       </Button>
                     )}
@@ -429,6 +435,8 @@ export default function AppledCase() {
               )}
             </div>
           ))}
+        </div>
+        <div className="lg:hidden">
           <ReactPaginate
             containerClassName="pagination-conatiner"
             pageClassName="pagination-page"

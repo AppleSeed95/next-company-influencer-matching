@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Button, { ButtonType } from "@/components/atoms/button";
+import Button from "@/components/atoms/button";
+import { ButtonType } from "@/components/atoms/buttonType";
 import TextArea from "@/components/atoms/textarea";
 import Link from "next/link";
 import axios from "axios";
@@ -29,9 +30,12 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
   const [reason, setReason] = useState("");
   const [wantedSNS, setWantedSNS] = useState([]);
   const [error, setError] = useState("");
+  const [valid, setValid] = useState(false);
   const { id } = useParams();
   const router = useRouter();
   const [showConfirm, setShowConfirm] = useState(false);
+  const [previousPos, setPreviousPos] = useState(null);
+  const [previousCaseId, setPreviousCaseId] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       let result;
@@ -40,16 +44,36 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
       } else {
         result = await axios.get(`/api/case/aCase/?id=${id}`);
       }
-      if (result.data) {
-        setData(result.data);
-        setReason(result.data.reason);
+      if (result?.data.type === 'error') {
+        setValid(false);
+        if (!influencerMode && typeof window !== 'undefined') {
+          router.push('/applicationList')
+        }
       }
-      setWantedSNS(JSON.parse(result.data.wantedSNS));
+      else {
+        setValid(true);
+        setData(result.data.data);
+        setReason(result.data.reason);
+        setWantedSNS(JSON.parse(result.data.data.wantedSNS));
+        determinePreviousExists(result.data.companyCases);
+        if (!modalMode) {
+          document.title = result.data.data.caseName;
+        }
+      }
     };
 
     fetchData();
   }, [caseID]);
-
+  const determinePreviousExists = (companyCases: [any]) => {
+    let currentPos = 0;
+    for (let i = 0; i < companyCases.length; i++) {
+      if (id == companyCases[i].id) {
+        currentPos = i;
+      }
+    }
+    setPreviousPos(currentPos - 1);
+    setPreviousCaseId(companyCases[currentPos - 1]?.id);
+  }
   const apporove = (val: boolean) => {
     const approveApplication = async () => {
       const reason1 = val ? "" : reason;
@@ -99,6 +123,15 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
   };
   const widthClass = modalMode ? "" : "w-[40%]";
   const topClass = modalMode ? " pt-[50px]" : "";
+  const dateString = (dateValue: string) => {
+    const date = new Date(dateValue);
+    if (isNaN(date.getFullYear())) {
+      return "";
+    }
+    const formattedDate = `${date.getFullYear()}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getDate().toString().padStart(2, '0')} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
+    return formattedDate;
+  }
+  if (!valid) return <></>
   return (
     <div
       className={
@@ -265,9 +298,7 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
           <span className="text-[#6F6F6F]">募集期間 </span>
         </span>
         <span>
-          {data?.collectionEnd
-            ? `${data?.collectionStart}~${data?.collectionEnd}`
-            : ""}
+          {`${dateString(data?.collectionStart)} ~ ${dateString(data?.collectionEnd)}`}
         </span>
       </div>
       <div
@@ -279,7 +310,7 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
         <span className="w-[35%] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
           <span className="text-[#6F6F6F]">案件終了日時 </span>
         </span>
-        <span>{data?.caseEnd}</span>
+        <span>{dateString(data?.caseEnd)}</span>
       </div>
       <div
         className={
@@ -330,17 +361,17 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
             widthClass
           }
         >
-          <div className="flex justify-center float-right">
+          {previousPos !== -1 && <div className="flex justify-center float-right">
             <span className="text-[#3F8DEB]">
-              <Link href={"/"}>前回の申請内容を確認する</Link>
+              <Link href={`/application/${previousCaseId}`}>前回の申請内容を確認する</Link>
             </span>
             <img src="/img/triangle-right.svg" className="w-[11px] ml-[5px]" />
-          </div>
+          </div>}
         </div>
       )}
       {error !== "" && <div className="m-[10px] text-[#EE5736]">{error}</div>}
-      {!modalMode && (
-        <div className="flex justify-center mt-[36px] mb-[160px] sp:mb-[60px]">
+      {!modalMode && !(data?.status === '承認' || data?.status === '否認') &&
+        (<div className="flex justify-center mt-[36px] mb-[160px] sp:mb-[60px]">
           <Button
             buttonType={ButtonType.PRIMARY}
             buttonClassName="mr-[30px]"
@@ -376,8 +407,8 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
           >
             戻る
           </Button>
-        </div>
-      )}
+        </div>)}
+
       {modalMode && influencerMode && !influencerDetailMode && (
         <Button
           handleClick={() => {

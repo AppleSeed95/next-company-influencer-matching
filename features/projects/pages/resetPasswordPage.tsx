@@ -1,8 +1,8 @@
 "use client";
 import Input from "@/components/atoms/input";
 import Button from "@/components/atoms/button";
-import { ButtonType } from "@/components/atoms/button";
-import { useState } from "react";
+import { ButtonType } from "@/components/atoms/buttonType";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
@@ -10,6 +10,9 @@ export default function ResetPasswordPage() {
   const router = useRouter();
   const [error, setError] = useState("");
   const [email, setEmail] = useState("");
+  useEffect(() => {
+    document.title = 'パスワードを再設定する';
+  }, [])
   const handlePasswordChange = async () => {
     const result = await axios.post("/api/user/passwordReset", { email });
     if (result.data.type === "success") {
@@ -29,13 +32,15 @@ export default function ResetPasswordPage() {
           \n http://localhost:3000/ask。
           `,
       });
-      router.push("/login");
+      if (typeof window !== "undefined") {
+        router.push("/login");
+      }
     } else if (result.data.type === "error") {
       setError(result.data.msg);
     }
   };
   return (
-    <div className="bg-[#F5F5F5]  py-[300px] sp:py-[200px]">
+    <div className="bg-[#F5F5F5] pt-[90px]  flex  grow">
       <div className="bg-[white] text-center px-[20px] w-[614px] sp:w-[90%] rounded-[40px] block m-auto py-[70px] sp:py-[20px] shadow-lg">
         <img
           src="/img/logo(red).svg"

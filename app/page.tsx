@@ -4,12 +4,10 @@ import LoginPage from "@/features/projects/pages/LoginPage";
 
 export default function Home() {
   return (
-    <div>
-      <div>
-        <Header mode={"auth"} />
-        <LoginPage />
-        <Footer />
-      </div>
+    <div className="flex flex-col min-h-screen">
+      <Header mode={"auth"} />
+      <LoginPage />
+      <Footer />
     </div>
   );
 }

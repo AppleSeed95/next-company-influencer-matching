@@ -2,8 +2,8 @@
 
 import Checkbox from "@/components/atoms/checkbox";
 import SearchBar from "@/components/organisms/searchbar";
-import Button, { ButtonType } from "@/components/atoms/button";
-import Link from "next/link";
+import Button from "@/components/atoms/button";
+import { ButtonType } from "@/components/atoms/buttonType";
 import ApplicationPage from "../admin/applicationPage";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -55,6 +55,8 @@ export default function CaseDetailPage({ caseProps }: caseData) {
   };
   useEffect(() => {
     setCaseData(caseProps);
+    document.title = '募集案件詳細';
+
     setCollectionStatusTemp(caseProps?.collectionStatus);
     const fetchData = async () => {
       const result = await axios.get(`/api/apply/company?id=${id}`);
@@ -206,16 +208,16 @@ export default function CaseDetailPage({ caseProps }: caseData) {
     const update = state;
     const body = resume
       ? {
-          update,
-          approveMode: false,
-          resumeMode: true,
-          companyId: caseData.companyId,
-        }
+        update,
+        approveMode: false,
+        resumeMode: true,
+        companyId: caseData.companyId,
+      }
       : {
-          update,
-          approveMode: false,
-          companyId: caseData.companyId,
-        };
+        update,
+        approveMode: false,
+        companyId: caseData.companyId,
+      };
     const result = await axios.put(`/api/case/aCase/?id=${id}`, body);
     if (result.data.type === "success") {
       setCollectionStatusTemp(state);
@@ -228,10 +230,20 @@ export default function CaseDetailPage({ caseProps }: caseData) {
   const handleToChat = (id) => {
     const createChatRoom = async () => {
       await axios.post(`/api/chatting/room?id=${id}`);
-      router.push(`/chatting/${id}`);
+      if (typeof window !== "undefined") {
+        router.push(`/chatting/${id}`);
+      }
     };
     createChatRoom();
   };
+  const dateString = (dateValue: string) => {
+    const date = new Date(dateValue);
+    if (isNaN(date.getFullYear())) {
+      return "";
+    }
+    const formattedDate = `${date.getFullYear()}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getDate().toString().padStart(2, '0')} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
+    return formattedDate;
+  }
   return (
     <div className="h-full">
       <div
@@ -292,21 +304,12 @@ export default function CaseDetailPage({ caseProps }: caseData) {
               >
                 案件詳細
               </span>
-              <span className="w-[100px]">{`状態: ${collectionStatusTemp}`}</span>
+              <span className="w-[100px]">{`状態: ${collectionStatusTemp ? collectionStatusTemp : ""
+                }`}</span>
               <span className="flex flex-wrap">
-                <span>{`募集期間：${
-                  caseData?.collectionStart
-                    ? caseData?.collectionStart.split("T")[0] +
-                      "/" +
-                      caseData?.collectionStart.split("T")[1]
-                    : ""
-                } ～`}</span>
+                <span>{`募集期間：${dateString(caseData?.collectionStart)} ～`}</span>
                 <span>
-                  {caseData?.collectionEnd
-                    ? caseData?.collectionEnd.split("T")[0] +
-                      "/" +
-                      caseData?.collectionEnd.split("T")[1]
-                    : ""}
+                  {dateString(caseData?.collectionEnd)}
                 </span>
               </span>
 
@@ -323,16 +326,16 @@ export default function CaseDetailPage({ caseProps }: caseData) {
               )}
               {(collectionStatusTemp === "募集中" ||
                 collectionStatusTemp === "停止中") && (
-                <Button
-                  buttonType={ButtonType.DANGER}
-                  buttonClassName="rounded-[0px] px-[15px] py-[7px]"
-                  handleClick={() => {
-                    handleCollectionStateChange("募集終了");
-                  }}
-                >
-                  募集終了
-                </Button>
-              )}
+                  <Button
+                    buttonType={ButtonType.DANGER}
+                    buttonClassName="rounded-[0px] px-[15px] py-[7px]"
+                    handleClick={() => {
+                      handleCollectionStateChange("募集終了");
+                    }}
+                  >
+                    募集終了
+                  </Button>
+                )}
               {collectionStatusTemp === "募集中" && (
                 <Button
                   buttonType={ButtonType.DEFAULT}
@@ -438,42 +441,42 @@ export default function CaseDetailPage({ caseProps }: caseData) {
                     </td>
                     <td className="px-[35px] py-[25px]  border border-[#D3D3D3] ">
                       <div className="flex flex-wrap items-center gap-[15px]">
-                        {aData.instagram && (
+                        {JSON.parse(aData.instagram).account !== "" && (
                           <img
                             className="w-[35px]"
                             src="/img/sns/Instagram.svg"
                             alt="instagram"
                           />
                         )}
-                        {aData.tiktok && (
+                        {JSON.parse(aData.tiktok).account !== "" && (
                           <img
                             className="w-[35px]"
                             src="/img/sns/tiktok.svg"
                             alt="tiktok"
                           />
                         )}
-                        {aData.x && (
+                        {JSON.parse(aData.x).account !== "" && (
                           <img
                             className="w-[35px]"
                             src="/img/sns/x.svg"
                             alt="x"
                           />
                         )}
-                        {aData.youtube && (
+                        {JSON.parse(aData.youtube).account !== "" && (
                           <img
                             className="w-[35px]"
                             src="/img/sns/youtube.svg"
                             alt="youtube"
                           />
                         )}
-                        {aData.facebook && (
+                        {JSON.parse(aData.facebook).account !== "" && (
                           <img
                             className="w-[35px]"
                             src="/img/sns/facebook.svg"
                             alt="facebook"
                           />
                         )}
-                        {aData.otherSNS && (
+                        {aData.otherSNS && aData.otherSNS !== 'null' && (
                           <span className="text-[#C0C0C0]">etc.</span>
                         )}
                       </div>
@@ -533,7 +536,7 @@ export default function CaseDetailPage({ caseProps }: caseData) {
             renderOnZeroPageCount={null}
           />
         </div>
-        <div className="lg:hidden">
+        <div className="lg:hidden grow">
           {currentItems?.map((aData, idx) => (
             <div key={idx} className=" bg-[#F8F9FA] border border-[#D3D3D3]">
               <div className="flex justify-between px-[30px] py-[20px] w-full">
@@ -564,42 +567,42 @@ export default function CaseDetailPage({ caseProps }: caseData) {
                     </div>
                     <span className="mb-[7px] sp:text-spsmall">
                       <div className="flex flex-wrap items-center gap-[15px]">
-                        {aData.instagram && (
+                        {JSON.parse(aData.instagram).account !== "" && (
                           <img
                             className="w-[35px]"
                             src="/img/sns/Instagram.svg"
                             alt="instagram"
                           />
                         )}
-                        {aData.tiktok && (
+                        {JSON.parse(aData.tiktok).account !== "" && (
                           <img
                             className="w-[35px]"
                             src="/img/sns/tiktok.svg"
                             alt="tiktok"
                           />
                         )}
-                        {aData.x && (
+                        {JSON.parse(aData.x).account !== "" && (
                           <img
                             className="w-[35px]"
                             src="/img/sns/x.svg"
                             alt="x"
                           />
                         )}
-                        {aData.youtube && (
+                        {JSON.parse(aData.youtube).account !== "" && (
                           <img
                             className="w-[35px]"
                             src="/img/sns/youtube.svg"
                             alt="youtube"
                           />
                         )}
-                        {aData.facebook && (
+                        {JSON.parse(aData.facebook).account !== "" && (
                           <img
                             className="w-[35px]"
                             src="/img/sns/facebook.svg"
                             alt="facebook"
                           />
                         )}
-                        {aData.otherSNS && (
+                        {aData.otherSNS && aData.otherSNS !== "null" && (
                           <span className="text-[#C0C0C0]">etc.</span>
                         )}
                       </div>
@@ -654,6 +657,8 @@ export default function CaseDetailPage({ caseProps }: caseData) {
               )}
             </div>
           ))}
+        </div>
+        <div className="lg:hidden">
           <ReactPaginate
             containerClassName="pagination-conatiner"
             pageClassName="pagination-page"

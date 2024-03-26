@@ -2,7 +2,8 @@
 import React, { useState } from "react";
 import { ReactNode } from "react";
 import Input from "@/components/atoms/input";
-import Button, { ButtonType } from "@/components/atoms/button";
+import Button from "@/components/atoms/button";
+import { ButtonType } from "@/components/atoms/buttonType";
 
 export interface SearchBarProps {
   extendChild: ReactNode;
@@ -38,11 +39,13 @@ const SearchBar: React.FC<SearchBarProps> = ({
               const passtest = (aData) => {
                 if (keyword === "") return true;
                 let isMatch = false;
-                keys.forEach((aKey) => {
-                  if (aData[aKey].indexOf(keyword) !== -1) {
-                    console.log(aData[aKey], keyword);
+                [...keys, ...Object.keys(data[0])].forEach((aKey) => {
+                  if (typeof (aData[aKey]) === 'string') {
+                    if (aData[aKey].indexOf(keyword) !== -1) {
+                      console.log(aData[aKey], keyword);
+                    }
+                    isMatch ||= aData[aKey].indexOf(keyword) !== -1;
                   }
-                  isMatch ||= aData[aKey].indexOf(keyword) !== -1;
                 });
                 return isMatch;
               };
@@ -61,7 +64,11 @@ const SearchBar: React.FC<SearchBarProps> = ({
           <span className="text-[#3F8DEB] hover:cursor-pointer sp:text-spsmall sp:hidden">
             オプション検索
           </span>
-          <img src="/img/triangle-down.svg" className="w-[10px] ml-[5px]" />
+          <img
+            src="/img/triangle-down.svg"
+            alt="img"
+            className="w-[10px] ml-[5px]"
+          />
         </div>
       </div>
       {extendChild && showOption && (

@@ -1,6 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Button, { ButtonType } from "@/components/atoms/button";
+import Button from "@/components/atoms/button";
+import { ButtonType } from "@/components/atoms/buttonType";
+import dynamic from "next/dynamic";
+const Editor = dynamic(() => import("@/components/organisms/CKEditor"), { ssr: false });
+
 import TextArea from "@/components/atoms/textarea";
 import axios from "axios";
 import Modal from "../../utils/modal";
@@ -14,6 +18,7 @@ const NotiPage: React.FC = () => {
       if (result.data) setData(result.data.data);
     };
     fetchData();
+    document.title = 'お知らせ更新'
   }, []);
   const handleUpdate = async () => {
     const noti = {
@@ -31,8 +36,8 @@ const NotiPage: React.FC = () => {
       <div
         className={
           showConfirm
-            ? "bg-black bg-opacity-25 w-full h-full fixed left-0 overflow-auto duration-500"
-            : "bg-black bg-opacity-25 w-full h-full fixed left-0 overflow-auto opacity-0 pointer-events-none duration-500"
+            ? "bg-black bg-opacity-25 w-full min-h-screen fixed left-0 top-0 z-10 overflow-auto duration-500"
+            : "bg-black bg-opacity-25 w-full min-h-screen fixed left-0 top-0 z-10 overflow-auto opacity-0 pointer-events-none duration-500"
         }
       >
         <Modal
@@ -55,6 +60,13 @@ const NotiPage: React.FC = () => {
               placeholder="お知らせを入力してください。"
               handleChange={(val) => setData({ ...data, mainNoti: val })}
             />
+            {/* <Editor
+              value={data?.mainNoti}
+              onChange={(v) => {
+                setData({ ...data, mainNoti: v })
+              }
+              }
+            /> */}
             <div className="w-[100%] text-right mt-[20px] sp:mt-[10px]">
               <Button
                 buttonType={ButtonType.PRIMARY}
@@ -80,6 +92,13 @@ const NotiPage: React.FC = () => {
               placeholder="お知らせを入力してください。"
               handleChange={(val) => setData({ ...data, companyNoti: val })}
             />
+            {/* <Editor
+              value={data?.companyNoti}
+              onChange={(v) => {
+                setData({ ...data, companyNoti: v })
+              }
+              }
+            /> */}
             <div className="w-[100%] text-right mt-[20px] sp:mt-[10px] mb-[46px] sp:mb-[20px]">
               <Button
                 buttonType={ButtonType.PRIMARY}
@@ -108,6 +127,13 @@ const NotiPage: React.FC = () => {
               placeholder="お知らせを入力してください。"
               handleChange={(val) => setData({ ...data, influencerNoti: val })}
             />
+            {/* <Editor
+              value={data?.influencerNoti}
+              onChange={(v) => {
+                setData({ ...data, influencerNoti: v })
+              }
+              }
+            /> */}
             <div className="w-[100%] text-right mt-[20px] sp:mt-[10px]">
               <Button
                 buttonType={ButtonType.PRIMARY}

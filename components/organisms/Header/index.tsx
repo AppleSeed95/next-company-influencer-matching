@@ -1,6 +1,5 @@
 "use client";
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRecoilValue, useRecoilState } from "recoil";
 import { authUserState } from "@/recoil/atom/auth/authUserAtom";
@@ -10,14 +9,18 @@ export interface Headerprops {
 }
 
 const Header: React.FC<Headerprops> = ({ mode }: Headerprops) => {
-  const [_, setAuthUser] = useRecoilState(authUserState);
   const [showMenu, setShowMenu] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
   const authUser = useRecoilValue(authUserState);
   const router = useRouter();
   return mode === "auth" ? (
     <div
       key={"auth"}
-      className="h-[90px] bg-[white] flex justify-between items-center px-[25px] absolute top-0 w-full"
+      className="h-[90px] bg-[white] flex justify-between items-center px-[25px] absolute top-0 w-full shadow-lg"
     >
       <img src="/img/logo(red).svg" className="h-[51px] sp:w-[30%]" />
       <div className="flex">
@@ -42,13 +45,17 @@ const Header: React.FC<Headerprops> = ({ mode }: Headerprops) => {
       </div>
     </div>
   ) : (
-    <div key={"main"} className="flex h-[64px] w-full absolute sp:flex-col">
+    <div
+      key={"main"}
+      className="flex h-[64px] w-full absolute sp:flex-col shadow-lg"
+    >
       <div className="bg-[#FF2929] h-[full] px-[15px] flex items-center sp:w-[100%] sp:py-[7px]">
         <img src="/img/logo.svg" className="sp:hidden" />
-        <img src="/img/vector.svg" className="lg:hidden mx-auto" />
+        <img src="/img/Vector.svg" className="lg:hidden mx-auto" />
       </div>
       <div className="flex justify-between items-center w-full bg-[#494D53] sp:py-[14px]">
         <img
+          alt="img"
           src="/img/hamburger.svg"
           className="lg:hidden h-[14px] mx-[22px]"
           onClick={() => {
@@ -56,19 +63,24 @@ const Header: React.FC<Headerprops> = ({ mode }: Headerprops) => {
           }}
         />
         <div className=" text-[white] h-[full] flex items-center px-[32px] text-header">
-          {authUser.user?.name}
+          {isClient && authUser.user?.name}
         </div>
         <img
+          alt="img"
           src="/img/logout.svg"
           className="lg:hidden h-[14px] mx-[22px]"
           onClick={() => {
-            router.push("/logout");
+            if (typeof window !== "undefined") {
+              router.push("/logout");
+            }
           }}
         />
         <div
           className="text-[white] h-[full] flex items-center px-[32px] sp:hidden cursor-pointer"
           onClick={() => {
-            router.push("/logout");
+            if (typeof window !== "undefined") {
+              router.push("/logout");
+            }
           }}
         >
           ログアウト
@@ -77,15 +89,15 @@ const Header: React.FC<Headerprops> = ({ mode }: Headerprops) => {
       <div
         className={
           showMenu
-            ? "relative lg:hidden duration-500"
-            : "relative lg:hidden opacity-0 duration-500"
+            ? "relative lg:hidden"
+            : "relative lg:hidden opacity-0"
         }
       >
         <div
           className={
             showMenu
-              ? "bg-[#8F8F8F] text-[white] absolute"
-              : "bg-[#8F8F8F] text-[white] absolute pointer-events-none"
+              ? "bg-[#8F8F8F] z-10 text-[white] absolute"
+              : "bg-[#8F8F8F] z-10 text-[white] absolute pointer-events-none"
           }
         >
           <div className="px-[20px]">

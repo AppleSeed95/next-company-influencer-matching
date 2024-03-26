@@ -2,16 +2,18 @@
 import Input from "@/components/atoms/input";
 import Checkbox from "@/components/atoms/checkbox";
 import Button from "@/components/atoms/button";
-import { ButtonType } from "@/components/atoms/button";
+import { ButtonType } from "@/components/atoms/buttonType";
 import TextArea from "@/components/atoms/textarea";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function AskPage() {
   const [data, setData] = useState(null);
   const [error, setError] = useState("");
   const [agree, setAgree] = useState(false);
-
+  useEffect(() => {
+    document.title = 'お問い合わせ';
+  }, [])
   const handleAsk = async () => {
     if (!agree) {
       setError("個人情報の取り扱いに同意する必要があります。");

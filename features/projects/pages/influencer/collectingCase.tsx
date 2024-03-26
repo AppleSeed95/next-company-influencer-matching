@@ -1,6 +1,7 @@
 "use client";
 
-import Button, { ButtonType } from "@/components/atoms/button";
+import Button from "@/components/atoms/button";
+import { ButtonType } from "@/components/atoms/buttonType";
 import Checkbox from "@/components/atoms/checkbox";
 import SearchBar from "@/components/organisms/searchbar";
 import ApplicationPage from "../admin/applicationPage";
@@ -54,6 +55,7 @@ export default function CollectedCase() {
         }
       }
       setIsLoading(false);
+      document.title = '募集中案件一覧';
     };
     const fetchApplied = async () => {
       const result = await axios.get(`/api/apply?id=${user.user.targetId}`);
@@ -142,7 +144,8 @@ export default function CollectedCase() {
   };
   const handleApply = async (caseId: string) => {
     const { targetStatus } = user.user;
-    if (targetStatus !== "稼動中") {
+
+    if (targetStatus !== "稼働中") {
       setConfirmMsg("稼働中ではないので申請できません。");
       setShowConfirm(true);
       return;
@@ -157,6 +160,14 @@ export default function CollectedCase() {
       setShowConfirm(true);
     }
   };
+  const dateString = (dateValue: string) => {
+    const date = new Date(dateValue);
+    if (isNaN(date.getFullYear())) {
+      return "";
+    }
+    const formattedDate = `${date.getFullYear()}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getDate().toString().padStart(2, '0')} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
+    return formattedDate;
+  }
   return (
     <div className="h-full">
       <div
@@ -304,18 +315,10 @@ export default function CollectedCase() {
                         {aData.casePlace}
                       </td>
                       <td className="text-center w-[100px] py-[25px]  border border-[#D3D3D3]">
-                        {aData.collectionStart
-                          ? aData.collectionStart.split("T")[0] +
-                            "/" +
-                            aData.collectionStart.split("T")[1]
-                          : ""}
+                        {dateString(aData.collectionStart)}
                       </td>
                       <td className="text-center w-[100px] py-[25px]  border border-[#D3D3D3] ">
-                        {aData.collectionEnd
-                          ? aData.collectionEnd.split("T")[0] +
-                            "/" +
-                            aData.collectionEnd.split("T")[1]
-                          : ""}
+                        {dateString(aData.collectionEnd)}
                       </td>
                       <td className="px-[35px] py-[25px]  border border-[#D3D3D3] text-center">
                         {!alreadyAppliedOrNot(aData.id) ? (
@@ -359,7 +362,7 @@ export default function CollectedCase() {
             renderOnZeroPageCount={null}
           />
         </div>
-        <div className="lg:hidden">
+        <div className="lg:hidden grow">
           {currentItems?.map((aData, idx) => (
             <div key={idx} className=" bg-[#F8F9FA] border border-[#D3D3D3]">
               <div className="flex justify-between px-[30px] py-[20px] w-full">
@@ -412,11 +415,7 @@ export default function CollectedCase() {
                       募集開始
                     </div>
                     <span className="mb-[7px] sp:text-spsmall">
-                      {aData.collectionStart
-                        ? aData.collectionStart.split("T")[0] +
-                          "/" +
-                          aData.collectionStart.split("T")[1]
-                        : ""}
+                      {dateString(aData.collectionStart)}
                     </span>
                   </div>
                   <div className="flex">
@@ -424,11 +423,7 @@ export default function CollectedCase() {
                       募集終了
                     </div>
                     <span className="mb-[7px] sp:text-spsmall">
-                      {aData.collectionEnd
-                        ? aData.collectionEnd.split("T")[0] +
-                          "/" +
-                          aData.collectionEnd.split("T")[1]
-                        : ""}
+                      {dateString(aData.collectionEnd)}
                     </span>
                   </div>
                   <div className="flex">
@@ -451,6 +446,8 @@ export default function CollectedCase() {
               )}
             </div>
           ))}
+        </div>
+        <div className="lg:hidden">
           <ReactPaginate
             containerClassName="pagination-conatiner"
             pageClassName="pagination-page"

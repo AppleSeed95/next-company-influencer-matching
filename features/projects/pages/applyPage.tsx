@@ -1,9 +1,9 @@
 "use client";
 import Input from "@/components/atoms/input";
 import Button from "@/components/atoms/button";
-import { ButtonType } from "@/components/atoms/button";
+import { ButtonType } from "@/components/atoms/buttonType";
 import RadioBtn from "@/components/atoms/radio";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
@@ -13,7 +13,11 @@ export default function ApplyPage() {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  useEffect(() => {
+    document.title = '申し込みページ';
+  }, [])
   const onAppy = async () => {
+    if (isLoading) return;
     if (email === "") {
       setError("メールアドレスを入力する必要があります。");
       return;
@@ -32,22 +36,23 @@ export default function ApplyPage() {
         content: `インフルエンサーめぐりに仮申請いただきありがとうございます。
           \n 以下のURLから登録申請をお願いします。
           \n※メール本文中のURLを60分以内にクリックしてください。
-          \nhttp://localhost:3000/${
-            type === "企業" ? "applyCompany" : "applyInfluencer"
+          \nhttp://localhost:3000/${type === "企業" ? "applyCompany" : "applyInfluencer"
           }
           \n-----------------------------------------------------
           \n 不明点がございましたらお問い合わせフォームよりご連絡ください。
           \n http://localhost:3000/ask
           `,
       });
-      router.push("/applyConfirm");
+      if (typeof window !== "undefined") {
+        router.push("/applyConfirm");
+      }
     } else {
       if (result.data.msg) setError(result.data.msg);
     }
     setIsLoading(false);
   };
   return (
-    <div className="bg-[#F5F5F5]  py-[300px] sp:py-[200px]">
+    <div className="bg-[#F5F5F5] pt-[90px]  flex  grow">
       <div className="bg-[white] text-center px-[20px] w-[614px] sp:w-[90%] rounded-[40px] block m-auto py-[70px] sp:py-[20px] shadow-lg">
         <img
           src="/img/logo(red).svg"

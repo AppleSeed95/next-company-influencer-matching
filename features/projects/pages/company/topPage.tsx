@@ -13,6 +13,7 @@ export default function TopPage({ influencerMode }: topProps) {
       const result = await axios.get("/api/auth/noti");
       setData(result.data?.data);
     };
+    document.title = '管理画面TOP'
     fetchData();
   }, []);
   return (
@@ -26,7 +27,7 @@ export default function TopPage({ influencerMode }: topProps) {
             <span className="text-header text-[#EE5736] ">重要なお知らせ</span>
             <div className="py-[30px]">
               {data?.mainNoti.split("\n")?.map((a, key) => (
-                <div key={key}>{a}</div>
+                <div dangerouslySetInnerHTML={{ __html: a }} key={key} />
               ))}
             </div>
           </div>
@@ -36,11 +37,11 @@ export default function TopPage({ influencerMode }: topProps) {
           <div className="py-[30px]">
             {influencerMode
               ? data?.influencerNoti
-                  .split("\n")
-                  ?.map((a, key) => <div key={key}>{a}</div>)
+                .split("\n")
+                ?.map((a, key) => <div key={key} dangerouslySetInnerHTML={{ __html: a }} />)
               : data?.companyNoti
-                  .split("\n")
-                  ?.map((a, key) => <div key={key}>{a}</div>)}
+                .split("\n")
+                ?.map((a, key) => <div key={key} dangerouslySetInnerHTML={{ __html: a }} />)}
           </div>
         </div>
       </div>

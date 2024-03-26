@@ -7,7 +7,10 @@ const Auth = ({ children }: { children: React.ReactNode }) => {
   const authUser = useRecoilValue(authUserState);
   const router = useRouter();
   const [_, setAuthUser] = useRecoilState(authUserState);
-  const savedUser = localStorage.getItem("user");
+  let savedUser = null;
+  if (typeof window !== "undefined") {
+    savedUser = localStorage.getItem("user");
+  }
   let parsedUser;
   if (savedUser) {
     try {
@@ -17,7 +20,9 @@ const Auth = ({ children }: { children: React.ReactNode }) => {
     }
   }
   if (!parsedUser) {
-    router.push("/logout");
+    if (typeof window !== "undefined") {
+      router.push("/logout");
+    }
   }
   if (savedUser && !authUser.user) {
     if (savedUser) {
