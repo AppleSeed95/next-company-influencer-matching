@@ -2,7 +2,7 @@
 import Input from "@/components/atoms/input";
 import Button from "@/components/atoms/button";
 import { ButtonType } from "@/components/atoms/buttonType";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
@@ -10,6 +10,9 @@ export default function ResetPasswordPage() {
   const router = useRouter();
   const [error, setError] = useState("");
   const [email, setEmail] = useState("");
+  useEffect(() => {
+    document.title = 'パスワードを再設定する';
+  }, [])
   const handlePasswordChange = async () => {
     const result = await axios.post("/api/user/passwordReset", { email });
     if (result.data.type === "success") {

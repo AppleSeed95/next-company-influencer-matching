@@ -9,10 +9,13 @@ import Modal from "../../utils/modal";
 import { useRouter } from "next/navigation";
 const confirmMsg = "操作が成功しました。";
 export interface InfluencerProps {
-  influencerData?: object;
+  influencerData?: InfluencerData;
   modalMode?: boolean;
   onCancel?: () => void;
   handleApprove?: (val: string, cur?: number) => void;
+}
+interface InfluencerData {
+  nickName: string;
 }
 
 const InfluencerPage: React.FC<InfluencerProps> = ({
@@ -27,6 +30,9 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
   const router = useRouter();
   useEffect(() => {
     setData(influencerData);
+    if (!modalMode) {
+      document.title = influencerData.nickName;
+    }
   }, [influencerData]);
   const handleUpdate = async (status) => {
     let update = data;

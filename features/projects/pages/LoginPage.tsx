@@ -9,7 +9,7 @@ import { login } from "@/features/auth/provider";
 
 import { useRouter } from "next/navigation";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function LoginPage() {
   const [id, setId] = useState("");
@@ -18,7 +18,9 @@ export default function LoginPage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [_, setAuthUser] = useRecoilState(authUserState);
-
+  useEffect(() => {
+    document.title = 'ログイン';
+  }, [])
   const handleLogin = async () => {
     if (password === "" && id === "") {
       setError("ID・PWを入力してください。");

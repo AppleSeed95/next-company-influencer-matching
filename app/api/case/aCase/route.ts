@@ -13,7 +13,13 @@ export async function GET(request: NextRequest) {
     const rows = await executeQuery(query).catch((e) => {
       return NextResponse.json({ type: "error" });
     });
-    return NextResponse.json(rows[0]);
+    const companyId = rows[0].companyId;
+    
+    const query1 = `SELECT id FROM cases WHERE companyId = ${companyId}`
+    const rows1 = await executeQuery(query1).catch((e) => {
+      return NextResponse.json({ type: "error" });
+    });
+    return NextResponse.json({data:rows[0],companyCases:rows1});
   } catch (error) {
     console.error("Error fetching data:", error);
     return NextResponse.json({ type: "error" });

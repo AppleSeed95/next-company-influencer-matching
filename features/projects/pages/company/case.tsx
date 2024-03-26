@@ -44,10 +44,11 @@ const CasePage: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios.get(`/api/case/aCase?id=${id}`);
-      if (result.data) setData(result.data);
-      setWantedSNS(JSON.parse(result.data.wantedSNS));
+      if (result.data) setData(result.data.data);
+      setWantedSNS(JSON.parse(result.data?.data.wantedSNS));
     };
     if (id) fetchData();
+    document.title = '募集案件登録・編集';
   }, []);
   const handleSNSChange = (val: string) => {
     let isAlreadyExits = false;
@@ -62,7 +63,7 @@ const CasePage: React.FC = () => {
     }
   };
   const handleRequest = async (saveMode: boolean) => {
-    if(isLoading) return;
+    if (isLoading) return;
     const { targetStatus } = user.user;
 
     if (targetStatus !== "稼動中") {
@@ -85,7 +86,7 @@ const CasePage: React.FC = () => {
     };
     const keys = Object.keys(msgs);
     let isValid = true;
-    keys.forEach((aKey) => {      
+    keys.forEach((aKey) => {
       if (!body[aKey] || body[aKey] === "") {
         if (!isValid) return;
         setError(msgs[aKey]);
@@ -99,7 +100,7 @@ const CasePage: React.FC = () => {
     }
     const collectionEndDate = new Date(body.collectionEnd);
     const caseEndDate = new Date(body.caseEnd);
-    if(!(caseEndDate > collectionEndDate)){
+    if (!(caseEndDate > collectionEndDate)) {
       setError("イベント終了時間と募集終了時間を正しく選択します。");
       return;
     }
@@ -167,6 +168,7 @@ const CasePage: React.FC = () => {
   };
   const determineEditable = () => {
     let startable;
+
     if (!data.collectionStatus) {
       startable =
         !data.status || data.status === "申請前" || data.status === "否認";

@@ -41,6 +41,7 @@ export default function CompanyListPage() {
       setIsLoading(false);
     };
     fetchData();
+    document.title = '企業一覧'
   }, []);
   const handleOptionChange = (val) => {
     const isAlready = options.some((a) => a === val);

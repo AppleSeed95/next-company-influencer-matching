@@ -130,7 +130,8 @@ export async function GET() {
 }
 export async function PUT(request: NextRequest) {
   try {
-    const body = await request.json();
+    let body = await request.json();
+    body = body.data;
     let query = "UPDATE company SET ";
     const keys = Object.keys(body);
 
@@ -149,6 +150,7 @@ export async function PUT(request: NextRequest) {
     query = query.slice(0, -2);
     query += " ";
     query += `WHERE id = ${body.id}`;
+    
     await executeQuery(query).catch((e) => {
       return NextResponse.json({ type: "error", msg: "no table exists" });
     });

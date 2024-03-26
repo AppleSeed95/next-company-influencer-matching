@@ -47,6 +47,7 @@ export default function AppliedList() {
       setIsLoading(false);
     };
     if (user) fetchData();
+    document.title = '登録案件一覧'
   }, []);
   const makeOptioinedData = (visibleData, result, result1) => {
     let resultData = [];
@@ -136,7 +137,14 @@ export default function AppliedList() {
       setActive(idx);
     }
   };
-
+  const dateString = (dateValue: string) => {
+    const date = new Date(dateValue);
+    if (isNaN(date.getFullYear())) {
+      return "";
+    }
+    const formattedDate = `${date.getFullYear()}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getDate().toString().padStart(2, '0')} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
+    return formattedDate;
+  }
   return (
     <div className="h-full">
       <div className="flex flex-col h-full px-[30px] sp:px-[12px] pt-[110px] pb-[30px]">
@@ -269,18 +277,10 @@ export default function AppliedList() {
                         {aData.collectionStatus}
                       </td>
                       <td className="text-center w-[100px] py-[25px]  border border-[#D3D3D3]">
-                        {aData.collectionStart
-                          ? aData.collectionStart.split("T")[0] +
-                            "/" +
-                            aData.collectionStart.split("T")[1]
-                          : ""}
+                        {dateString(aData.collectionStart)}
                       </td>
                       <td className="text-center w-[100px] py-[25px]  border border-[#D3D3D3] ">
-                        {aData.collectionEnd
-                          ? aData.collectionEnd.split("T")[0] +
-                            "/" +
-                            aData.collectionEnd.split("T")[1]
-                          : ""}
+                        {dateString(aData.collectionEnd)}
                       </td>
                       <td className="py-[25px]  border border-[#D3D3D3]">
                         <Link href={`/caseDetail/${aData.id}`} target="_blank">
@@ -380,11 +380,7 @@ export default function AppliedList() {
                       募集開始
                     </div>
                     <span className="mb-[7px] sp:text-spsmall">
-                      {aData.collectionStart
-                        ? aData.collectionStart.split("T")[0] +
-                          "/" +
-                          aData.collectionStart.split("T")[1]
-                        : ""}
+                      {dateString(aData.collectionStart)}
                     </span>
                   </div>
                   <div className="flex my-[10px]">
@@ -392,11 +388,7 @@ export default function AppliedList() {
                       募集終了
                     </div>
                     <span className="mb-[7px] sp:text-spsmall">
-                      {aData.collectionEnd
-                        ? aData.collectionEnd.split("T")[0] +
-                          "/" +
-                          aData.collectionEnd.split("T")[1]
-                        : ""}
+                      {dateString(aData.collectionEnd)}
                     </span>
                   </div>
                   <div className="flex my-[10px]">
@@ -410,7 +402,7 @@ export default function AppliedList() {
           ))}
         </div>
         <div className="lg:hidden">
-        <ReactPaginate
+          <ReactPaginate
             containerClassName="pagination-conatiner"
             pageClassName="pagination-page"
             activeClassName="pagination-active"

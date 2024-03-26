@@ -34,6 +34,8 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
   const { id } = useParams();
   const router = useRouter();
   const [showConfirm, setShowConfirm] = useState(false);
+  const [previousPos, setPreviousPos] = useState(null);
+  const [previousCaseId, setPreviousCaseId] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       let result;
@@ -50,15 +52,28 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
       }
       else {
         setValid(true);
-        setData(result.data);
+        setData(result.data.data);
         setReason(result.data.reason);
-        setWantedSNS(JSON.parse(result.data.wantedSNS));
+        setWantedSNS(JSON.parse(result.data.data.wantedSNS));
+        determinePreviousExists(result.data.companyCases);
+        if (!modalMode) {
+          document.title = result.data.data.caseName;
+        }
       }
     };
 
     fetchData();
   }, [caseID]);
-
+  const determinePreviousExists = (companyCases: [any]) => {
+    let currentPos = 0;
+    for (let i = 0; i < companyCases.length; i++) {
+      if (id == companyCases[i].id) {
+        currentPos = i;
+      }
+    }
+    setPreviousPos(currentPos - 1);
+    setPreviousCaseId(companyCases[currentPos - 1]?.id);
+  }
   const apporove = (val: boolean) => {
     const approveApplication = async () => {
       const reason1 = val ? "" : reason;
@@ -346,12 +361,12 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
             widthClass
           }
         >
-          <div className="flex justify-center float-right">
+          {previousPos !== -1 && <div className="flex justify-center float-right">
             <span className="text-[#3F8DEB]">
-              <Link href={"/"}>前回の申請内容を確認する</Link>
+              <Link href={`/application/${previousCaseId}`}>前回の申請内容を確認する</Link>
             </span>
             <img src="/img/triangle-right.svg" className="w-[11px] ml-[5px]" />
-          </div>
+          </div>}
         </div>
       )}
       {error !== "" && <div className="m-[10px] text-[#EE5736]">{error}</div>}

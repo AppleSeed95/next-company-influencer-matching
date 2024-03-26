@@ -51,6 +51,7 @@ export default function AppledCase() {
       setIsLoading(false);
     };
     if (user) fetchData();
+    document.title = '応募案件一覧';
   }, [reload]);
   const handleEndReport = async (id) => {
     const result = await axios.put(`/api/apply`, {

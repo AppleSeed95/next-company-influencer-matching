@@ -55,6 +55,8 @@ export default function CaseDetailPage({ caseProps }: caseData) {
   };
   useEffect(() => {
     setCaseData(caseProps);
+    document.title = '募集案件詳細';
+
     setCollectionStatusTemp(caseProps?.collectionStatus);
     const fetchData = async () => {
       const result = await axios.get(`/api/apply/company?id=${id}`);
@@ -234,6 +236,14 @@ export default function CaseDetailPage({ caseProps }: caseData) {
     };
     createChatRoom();
   };
+  const dateString = (dateValue: string) => {
+    const date = new Date(dateValue);
+    if (isNaN(date.getFullYear())) {
+      return "";
+    }
+    const formattedDate = `${date.getFullYear()}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getDate().toString().padStart(2, '0')} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
+    return formattedDate;
+  }
   return (
     <div className="h-full">
       <div
@@ -297,18 +307,9 @@ export default function CaseDetailPage({ caseProps }: caseData) {
               <span className="w-[100px]">{`状態: ${collectionStatusTemp ? collectionStatusTemp : ""
                 }`}</span>
               <span className="flex flex-wrap">
-                <span>{`募集期間：${caseData?.collectionStart
-                  ? caseData?.collectionStart.split("T")[0] +
-                  "/" +
-                  caseData?.collectionStart.split("T")[1]
-                  : ""
-                  } ～`}</span>
+                <span>{`募集期間：${dateString(caseData?.collectionStart)} ～`}</span>
                 <span>
-                  {caseData?.collectionEnd
-                    ? caseData?.collectionEnd.split("T")[0] +
-                    "/" +
-                    caseData?.collectionEnd.split("T")[1]
-                    : ""}
+                  {dateString(caseData?.collectionEnd)}
                 </span>
               </span>
 

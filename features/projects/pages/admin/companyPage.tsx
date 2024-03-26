@@ -9,7 +9,11 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import Modal from "../../utils/modal";
 export interface CompanyProps {
-  companyData?: object;
+  companyData?: CompanyData;
+}
+interface CompanyData {
+  companyName: string;
+  // Add other properties as needed
 }
 const confirmMsg = "操作が成功しました。";
 const CompanyPage: React.FC<CompanyProps> = ({ companyData }: CompanyProps) => {
@@ -19,6 +23,7 @@ const CompanyPage: React.FC<CompanyProps> = ({ companyData }: CompanyProps) => {
   const [error, setError] = useState("");
   useEffect(() => {
     setData(companyData);
+    document.title = companyData?.companyName;
   }, [companyData]);
   const handleUpdate = async () => {
     const emailAddress = data?.emailAddress;

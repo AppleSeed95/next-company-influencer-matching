@@ -62,7 +62,10 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
       );
       if (result.data) setData(result.data);
     };
-    if (!applyMode && authUser) fetchData();
+    if (!applyMode && authUser) {
+      fetchData()
+      document.title = '企業情報変更';
+    };
   }, []);
   const handleApply = async (isApply) => {
     if (isLoading) return;

@@ -18,6 +18,7 @@ const NotiPage: React.FC = () => {
       if (result.data) setData(result.data.data);
     };
     fetchData();
+    document.title = 'お知らせ更新'
   }, []);
   const handleUpdate = async () => {
     const noti = {

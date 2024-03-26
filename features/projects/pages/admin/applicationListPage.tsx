@@ -40,6 +40,7 @@ export default function ApplicationListPage() {
       setIsLoading(false);
     };
     fetchData();
+    document.title = '申請案件一覧'
   }, []);
   const onItemClick = ({ idx }: { idx: Number }) => {
     if (active === idx) {

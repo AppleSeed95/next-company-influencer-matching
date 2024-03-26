@@ -42,6 +42,7 @@ export default function ChattingPane() {
     };
     fetchData();
     fetchRoomData();
+    document.title = 'チャット'
   }, [reload]);
   useEffect(() => {
     const pane = document.getElementById("pane");

@@ -13,16 +13,16 @@ const CaseDetail: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios.get(`/api/case/aCase?id=${id}`);
-      if(result.data.type === 'error'){  
-        setValid(false);      
+      if (result.data.type === 'error') {
+        setValid(false);
         if (typeof window !== "undefined") {
           router.push("/appliedList");
         }
       }
       else {
-        setData(result.data);
+        setData(result.data.data);
         setValid(true);
-    }
+      }
     };
     fetchData();
   }, [id]);

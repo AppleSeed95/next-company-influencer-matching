@@ -4,6 +4,7 @@ import { executeQuery } from "../util/db";
 export async function POST(request: NextRequest) {
   try {
     let body = await request.json();
+    
     const today = new Date();
     const todayString = `${today.getFullYear()}/${
       today.getMonth() + 1
@@ -75,6 +76,8 @@ export async function GET(request: NextRequest) {
 export async function PUT(request: NextRequest) {
   try {
     const body = await request.json();
+    console.log(body);
+    
     let query = "UPDATE apply SET ";
     const keys = Object.keys(body);
 

@@ -13,6 +13,7 @@ export default function TopPage({ influencerMode }: topProps) {
       const result = await axios.get("/api/auth/noti");
       setData(result.data?.data);
     };
+    document.title = '管理画面TOP'
     fetchData();
   }, []);
   return (

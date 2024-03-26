@@ -49,6 +49,7 @@ export default function InfluencerListPage() {
       setIsLoading(false);
     };
     fetchData();
+    document.title = 'インフルエンサー一覧';
   }, []);
   const makeOptioinedData = (visibleData, result, result1) => {
     let resultData = [];
