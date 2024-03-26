@@ -89,8 +89,8 @@ const Header: React.FC<Headerprops> = ({ mode }: Headerprops) => {
       <div
         className={
           showMenu
-            ? "relative lg:hidden duration-500"
-            : "relative lg:hidden opacity-0 duration-500"
+            ? "relative lg:hidden"
+            : "relative lg:hidden opacity-0"
         }
       >
         <div

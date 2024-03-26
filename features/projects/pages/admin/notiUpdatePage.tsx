@@ -53,13 +53,19 @@ const NotiPage: React.FC = () => {
           <span className="text-[18px] sp:text-sm">企業</span>
           <div className="px-[26px] sp:py-[10px] py-[30px]">
             <span className="text-[#6F6F6F]">重要なお知らせ</span>
-            <Editor
+            <TextArea
+              value={data?.mainNoti}
+              textAreaClassName="mt-[20px] sp:mt-[10px] w-[100%] h-[120px]   "
+              placeholder="お知らせを入力してください。"
+              handleChange={(val) => setData({ ...data, mainNoti: val })}
+            />
+            {/* <Editor
               value={data?.mainNoti}
               onChange={(v) => {
                 setData({ ...data, mainNoti: v })
               }
               }
-            />
+            /> */}
             <div className="w-[100%] text-right mt-[20px] sp:mt-[10px]">
               <Button
                 buttonType={ButtonType.PRIMARY}
@@ -79,19 +85,19 @@ const NotiPage: React.FC = () => {
           </div>
           <div className="px-[26px]">
             <span className="text-[#6F6F6F]">お知らせ</span>
-            {/* <TextArea
-              // value={data?.companyNoti}
+            <TextArea
+              value={data?.companyNoti}
               textAreaClassName="mt-[20px] sp:mt-[10px] w-[100%] h-[120px]   "
               placeholder="お知らせを入力してください。"
               handleChange={(val) => setData({ ...data, companyNoti: val })}
-            /> */}
-            <Editor
+            />
+            {/* <Editor
               value={data?.companyNoti}
               onChange={(v) => {
                 setData({ ...data, companyNoti: v })
               }
               }
-            />
+            /> */}
             <div className="w-[100%] text-right mt-[20px] sp:mt-[10px] mb-[46px] sp:mb-[20px]">
               <Button
                 buttonType={ButtonType.PRIMARY}
@@ -114,19 +120,19 @@ const NotiPage: React.FC = () => {
           <span className="text-[18px] sp:text-sm">インフルエンサー</span>
           <div className="px-[26px] py-[30px]">
             <span className="text-[#6F6F6F]">お知らせ</span>
-            {/* <TextArea
+            <TextArea
               value={data?.influencerNoti}
               textAreaClassName="mt-[20px] sp:mt-[10px] w-[100%] h-[120px]    "
               placeholder="お知らせを入力してください。"
               handleChange={(val) => setData({ ...data, influencerNoti: val })}
-            /> */}
-            <Editor
+            />
+            {/* <Editor
               value={data?.influencerNoti}
               onChange={(v) => {
                 setData({ ...data, influencerNoti: v })
               }
               }
-            />
+            /> */}
             <div className="w-[100%] text-right mt-[20px] sp:mt-[10px]">
               <Button
                 buttonType={ButtonType.PRIMARY}

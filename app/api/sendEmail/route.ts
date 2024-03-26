@@ -14,16 +14,16 @@ export async function POST(request: NextRequest) {
       subject,
       text: content,
     };
-    // console.log(msg);
+    console.log(msg);
     
-    const res = await sgMail.send(msg).catch((e) => {
-      console.log(e);
-    });
-    if (!res) {
-      return NextResponse.json({ type: "error" });
-    }
-    return NextResponse.json(res);
-    // return NextResponse.json({type:'success'});
+    // const res = await sgMail.send(msg).catch((e) => {
+    //   console.log(e);
+    // });
+    // if (!res) {
+    //   return NextResponse.json({ type: "error" });
+    // }
+    // return NextResponse.json(res);
+    return NextResponse.json({type:'success'});
   } catch (error) {
     throw error;
   }
