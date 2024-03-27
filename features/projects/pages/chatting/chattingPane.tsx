@@ -9,7 +9,7 @@ import { authUserState } from "@/recoil/atom/auth/authUserAtom";
 import { useParams } from "next/navigation";
 import axios from "@/node_modules/axios/index";
 
-const socket = io("https://influencer-meguri.jp");
+const socket = io("http://influencer-meguri.jp");
 import Image from "next/image";
 import ChattingRooms from "./rooms";
 
