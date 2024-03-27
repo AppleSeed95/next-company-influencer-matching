@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
     let query2 = "";
     const keys = Object.keys(body);
     keys?.map((aKey) => {
-      if(aKey !== 'id'){
+      if (aKey !== "id") {
         query1 += aKey + ",";
         query2 += "'" + body[aKey] + "',";
       }
@@ -69,8 +69,7 @@ export async function POST(request: NextRequest) {
       0,
       -1
     )}) VALUES(${query2.slice(0, -1)})`;
-      console.log(query);
-      
+
     const result = await executeQuery(query).catch((e) => {
       return NextResponse.json({ type: "error", msg: "error" });
     });
@@ -88,6 +87,8 @@ export async function GET() {
     WHERE cases.status != '申請前'
     ORDER BY cases.id DESC`;
     // const query = `SELECT * FROM cases`;
+    console.log("running");
+
     const rows = await executeQuery(query).catch((e) => {
       return NextResponse.json({ type: "error" });
     });
