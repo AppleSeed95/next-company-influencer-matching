@@ -86,8 +86,6 @@ export async function GET() {
     LEFT JOIN company ON cases.companyId=company.id
     WHERE cases.status != '申請前'
     ORDER BY cases.id DESC`;
-    // const query = `SELECT * FROM cases`;
-    console.log("running");
 
     const rows = await executeQuery(query).catch((e) => {
       return NextResponse.json({ type: "error" });
