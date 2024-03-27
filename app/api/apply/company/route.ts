@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { executeQuery } from "../../util/db";
 
+export async function POST() {
+  return NextResponse.json({ type: "success" });
+}
 export async function GET(request: NextRequest) {
   const id = request.nextUrl.searchParams.get("id") || "";
   try {

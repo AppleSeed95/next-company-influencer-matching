@@ -23,3 +23,6 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ type: "error", msg: "no table exists" });
   }
 }
+export async function POST() {
+  return NextResponse.json({ type: "success" });
+}

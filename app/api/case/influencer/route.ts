@@ -1,6 +1,9 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { executeQuery } from "../../util/db";
 
+export async function POST() {
+  return NextResponse.json({ type: "success" });
+}
 export async function GET() {
   try {
     const query = `SELECT cases.*, company.companyName
