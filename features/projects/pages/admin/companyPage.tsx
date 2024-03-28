@@ -47,7 +47,7 @@ const CompanyPage: React.FC<CompanyProps> = ({ companyData }: CompanyProps) => {
       setError('同時募集数を入力してください。')
       return;
     }
-    const result = await axios.put("/api/company", { data });
+    const result = await axios.put("/api/company", data);
     if (result.data.type === "success") {
       setShowConfirm(true);
       setError("")
