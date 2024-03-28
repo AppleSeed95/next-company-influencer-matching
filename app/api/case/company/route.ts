@@ -14,3 +14,6 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ type: "error" });
   }
 }
+export async function POST() {
+  return NextResponse.json({ type: "success" });
+}
