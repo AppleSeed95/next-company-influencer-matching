@@ -15,7 +15,7 @@ function Case() {
     const fetchPaymentInfo = async () => {
       const { data } = await axios.get(`/api/company/aCompany/getPayment?id=${id}`)
       if (data) {
-        const paymentInfo = new Date(data.data.payment);
+        const paymentInfo = new Date(data.data?.payment);
         const today = new Date(data.todayString);
         const payed = paymentInfo > today;
         if (!payed) {
