@@ -410,7 +410,7 @@ const CasePage: React.FC = () => {
       {data.id && [
         <div
           key={"1"}
-          className="flex  pt-[20px] pb-[8px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]"
+          className="flex items-center  pt-[20px] pb-[8px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]"
         >
           <span className="w-[30%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
             <span>申請状態</span>
@@ -422,7 +422,7 @@ const CasePage: React.FC = () => {
         </div>,
         <div
           key={"1"}
-          className="flex  pt-[20px] pb-[8px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]"
+          className="flex items-center pt-[20px] pb-[8px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]"
         >
           <span className="w-[30%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
             <span>募集状況</span>
