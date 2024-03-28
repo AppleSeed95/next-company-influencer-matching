@@ -375,7 +375,7 @@ export default function CaseDetailPage({ caseProps }: caseData) {
                 <div className="flex flex-wrap">
                   <Checkbox
                     prefix="状態 ： "
-                    title={"承認待ち"}
+                    title={"申請中"}
                     handleChange={(v) => handleOptionChange("承認待ち")}
                     checkBoxClassName="mr-[20px]"
                   />
@@ -388,6 +388,11 @@ export default function CaseDetailPage({ caseProps }: caseData) {
                     title={"否認"}
                     checkBoxClassName="mr-[20px]"
                     handleChange={(v) => handleOptionChange("否認")}
+                  />
+                  <Checkbox
+                    title={"完了報告"}
+                    checkBoxClassName="mr-[20px]"
+                    handleChange={(v) => handleOptionChange("完了報告")}
                   />
                   <Checkbox
                     title={"完了"}

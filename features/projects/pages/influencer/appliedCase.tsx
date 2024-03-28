@@ -311,14 +311,14 @@ export default function AppledCase() {
                           <div className="text-white bg-[#236997] p-[10px] m-[5px] rounded-lg shadow-sm">
                             完了した
                           </div>
-                        ) : (
+                        ) : aData.status === '承認' ? (
                           <Button
                             handleClick={() => handleEndReport(aData.id)}
                             buttonType={ButtonType.PRIMARY}
                           >
                             <span className="text-small">完了報告</span>
                           </Button>
-                        )}
+                        ) : ''}
                       </td>
                     </tr>
                   ))}
@@ -420,16 +420,17 @@ export default function AppledCase() {
 
                   <div className="flex">
                     {aData.status === "完了報告" ? (
-                      <div className="text-white text-small bg-[#236997] p-[10px] m-[5px] rounded-lg shadow-sm">
+                      <div className="text-white bg-[#236997] p-[10px] m-[5px] rounded-lg shadow-sm">
                         完了した
                       </div>
-                    ) : (
+                    ) : aData.status === '承認' ? (
                       <Button
                         handleClick={() => handleEndReport(aData.id)}
-                        buttonType={ButtonType.PRIMARY}>
+                        buttonType={ButtonType.PRIMARY}
+                      >
                         <span className="text-small">完了報告</span>
                       </Button>
-                    )}
+                    ) : ''}
                   </div>
                 </div>
               )}
