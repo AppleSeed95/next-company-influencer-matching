@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ type: "error" });
     });
     if (!rows && !rows.length && rows.length === 0) {
-      return NextResponse.json({ type: "error",msg:'no user' });
+      return NextResponse.json({ type: "error", msg: "no user" });
     }
     // const query4 = `SELECT * FROM company where emailAddress = '${body.emailAddress}'`;
     // const rows1 = await executeQuery(query4).catch((e) => {
@@ -131,7 +131,7 @@ export async function GET() {
 export async function PUT(request: NextRequest) {
   try {
     let body = await request.json();
-    body = body.data;
+
     let query = "UPDATE company SET ";
     const keys = Object.keys(body);
 
@@ -150,7 +150,7 @@ export async function PUT(request: NextRequest) {
     query = query.slice(0, -2);
     query += " ";
     query += `WHERE id = ${body.id}`;
-    
+
     await executeQuery(query).catch((e) => {
       return NextResponse.json({ type: "error", msg: "no table exists" });
     });
