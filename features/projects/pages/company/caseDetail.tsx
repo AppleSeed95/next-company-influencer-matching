@@ -278,7 +278,7 @@ export default function CaseDetailPage({ caseProps }: caseData) {
           <InfluencerPage
             handleApprove={handleApprove}
             modalMode
-            showButton={currentApply.status !== "否認" && currentApply.status !== "否決"}
+            showButton={currentApply?.status !== "否認" && currentApply?.status !== "否決"}
             influencerData={influencerData}
             onCancel={() => setShowInfluencer(false)}
           />
