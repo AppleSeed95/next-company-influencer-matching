@@ -493,7 +493,7 @@ export default function CaseDetailPage({ caseProps }: caseData) {
                       </div>
                     </td>
                     <td className="px-[35px] py-[25px]  border border-[#D3D3D3] hover:cursor-pointer">
-                      {aData.status}
+                      {aData.status === '否決' ? '否認' : aData.status}
                     </td>
                     <td className="px-[35px] py-[25px]  border border-[#D3D3D3]">
                       {aData.date}
@@ -509,7 +509,7 @@ export default function CaseDetailPage({ caseProps }: caseData) {
                     <td className="w-[100px] py-[25px]  border text-center border-[#D3D3D3] ">
                       {aData.status === "完了" ? (
                         <div className="text-white bg-[#236997] p-[10px] m-[5px] rounded-lg shadow-sm">
-                          完了した
+                          完了
                         </div>
                       ) : (
                         <Button
@@ -624,7 +624,7 @@ export default function CaseDetailPage({ caseProps }: caseData) {
                       状態
                     </div>
                     <span className="mb-[7px] sp:text-spsmall">
-                      {aData.status}
+                      {aData.status === '否決' ? '否認' : aData.status}
                     </span>
                   </div>
                   <div className="flex">

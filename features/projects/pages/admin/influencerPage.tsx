@@ -460,7 +460,7 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
             buttonClassName="mr-[30px]"
           >
             <span className="flex items-center">
-              <span>否決</span>
+              <span>否認</span>
             </span>
           </Button>
           <Button
