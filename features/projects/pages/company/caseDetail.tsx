@@ -116,6 +116,12 @@ export default function CaseDetailPage({ caseProps }: caseData) {
         ...visibleData.filter((aData) => aData.status === "否認"),
       ];
     }
+    if (result.some((aOption) => aOption === "完了報告")) {
+      resultData = [
+        ...resultData,
+        ...visibleData.filter((aData) => aData.status === "完了報告"),
+      ];
+    }
     if (result.some((aOption) => aOption === "完了")) {
       resultData = [
         ...resultData,
