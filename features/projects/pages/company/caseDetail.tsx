@@ -151,7 +151,7 @@ export default function CaseDetailPage({ caseProps }: caseData) {
   };
   const handleApprove = async (val: string, cur: number) => {
     // 承認 否決
-    const id = cur ? cur : currentApply;
+    const id = cur ? cur : currentApply.id;
     const result = await axios.put(`/api/apply`, {
       status: val,
       id,
@@ -442,7 +442,7 @@ export default function CaseDetailPage({ caseProps }: caseData) {
                     <td className="px-[35px] py-[25px]  border border-[#D3D3D3] hover:cursor-pointer">
                       <span
                         onClick={() => {
-                          setCurrentApply(aData.id);
+                          setCurrentApply(aData);
                           setInfluencerId(aData.influencerId);
                           setShowInfluencer(true);
                         }}
@@ -555,7 +555,7 @@ export default function CaseDetailPage({ caseProps }: caseData) {
                 <div className="flex">
                   <span
                     onClick={() => {
-                      setCurrentApply(aData.id);
+                      setCurrentApply(aData);
                       setInfluencerId(aData.influencerId);
                       setShowInfluencer(true);
                     }}
