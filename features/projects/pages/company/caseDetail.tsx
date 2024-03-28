@@ -42,7 +42,7 @@ export default function CaseDetailPage({ caseProps }: caseData) {
   const [options, setOptions] = useState([]);
 
   const [itemOffset, setItemOffset] = useState(0);
-  const itemsPerPage = 1;
+  const itemsPerPage = 10;
   const endOffset = itemOffset + itemsPerPage;
   const currentItems = optionedData.slice(itemOffset, endOffset);
   const pageCount = Math.ceil(optionedData.length / itemsPerPage);
