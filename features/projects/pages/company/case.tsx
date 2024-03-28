@@ -117,8 +117,13 @@ const CasePage: React.FC = () => {
       setError(casePlace);
       return;
     }
+    const collectionStart = body.collectionStart ? new Date(body.collectionStart) : "";
     const collectionEndDate = new Date(body.collectionEnd);
     const caseEndDate = new Date(body.caseEnd);
+    if (collectionStart !== '' && !(collectionEndDate > collectionStart)) {
+      setError("募集開始時間と募集終了時間を正しく選択してください。");
+      return;
+    }
     if (!(caseEndDate > collectionEndDate)) {
       setError("イベント終了時間と募集終了時間を正しく選択します。");
       return;
