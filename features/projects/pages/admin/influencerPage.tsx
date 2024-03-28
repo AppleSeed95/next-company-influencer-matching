@@ -11,6 +11,7 @@ const confirmMsg = "操作が成功しました。";
 export interface InfluencerProps {
   influencerData?: InfluencerData;
   modalMode?: boolean;
+  showButton?: boolean;
   onCancel?: () => void;
   handleApprove?: (val: string, cur?: number) => void;
 }
@@ -21,6 +22,7 @@ interface InfluencerData {
 const InfluencerPage: React.FC<InfluencerProps> = ({
   influencerData,
   modalMode,
+  showButton,
   onCancel,
   handleApprove,
 }: InfluencerProps) => {
@@ -443,7 +445,7 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
           </Button>
         </div>
       )}
-      {modalMode && (
+      {modalMode && showButton && (
         <div className="flex justify-center mt-[36px] pb-[30px] sp:mb-[60px]">
           <Button
             buttonType={ButtonType.PRIMARY}
