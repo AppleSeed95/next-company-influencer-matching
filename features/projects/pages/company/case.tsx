@@ -420,6 +420,18 @@ const CasePage: React.FC = () => {
           </span>
           <div>{data.status}</div>
         </div>,
+        <div
+          key={"1"}
+          className="flex  pt-[20px] pb-[8px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]"
+        >
+          <span className="w-[30%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
+            <span>募集状況</span>
+            <span className="ml-[10px] text-[#EE5736] text-[11px] invisible">
+              必須
+            </span>
+          </span>
+          <div>{data.collectionStatus}</div>
+        </div>,
         data.status === "否認" ? (
           <div
             key={"2"}
