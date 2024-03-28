@@ -77,6 +77,25 @@ const CasePage: React.FC = () => {
       wantedSNS: JSON.stringify(wantedSNS),
       companyId: user.user?.targetId,
     };
+    if (saveMode) {
+      if (data.id) {
+        const result = await axios.put("/api/case", {
+          ...body,
+          status: "申請前",
+        });
+        setError("");
+        setShowConfirm(true);
+      } else {
+        const result = await axios.post("/api/case", {
+          ...body,
+          status: "申請前",
+        });
+        setError("");
+        setIsLoading(false);
+        router.replace("/appliedList");
+      }
+      return;
+    }
     const msgs = {
       caseType: "案件種別を選択してください",
       caseName: "案件概要を入力してください",
@@ -105,43 +124,25 @@ const CasePage: React.FC = () => {
       return;
     }
     if (isValid) {
-      if (saveMode) {
-        if (data.id) {
-          const result = await axios.put("/api/case", {
-            ...body,
-            status: "申請前",
-          });
-          setError("");
-          setShowConfirm(true);
-        } else {
-          const result = await axios.post("/api/case", {
-            ...body,
-            status: "申請前",
-          });
-          setError("");
-          setIsLoading(false);
-          router.replace("/appliedList");
-        }
+      if (data.id) {
+        const result = await axios.put("/api/case", {
+          ...body,
+          status: "申請中",
+        });
+        setError("");
+        setIsLoading(false);
+        router.back();
       } else {
-        if (data.id) {
-          const result = await axios.put("/api/case", {
-            ...body,
-            status: "申請中",
-          });
-          setError("");
-          setIsLoading(false);
-          router.back();
-        } else {
-          if (isLoading) return;
-          setIsLoading(true);
-          const result = await axios.post("/api/case", {
-            ...body,
-            status: "申請中",
-          });
-          await axios.post("/api/sendEmail", {
-            to: user.user?.email,
-            subject: "【インフルエンサーめぐり】募集案件の登録申請をしました",
-            content: `${user.user?.name} 様
+        if (isLoading) return;
+        setIsLoading(true);
+        const result = await axios.post("/api/case", {
+          ...body,
+          status: "申請中",
+        });
+        await axios.post("/api/sendEmail", {
+          to: user.user?.email,
+          subject: "【インフルエンサーめぐり】募集案件の登録申請をしました",
+          content: `${user.user?.name} 様
           \nいつもインフルエンサーめぐりをご利用いただきありがとうございます。
           \n
           \n募集案件の登録申請を受け付けました。
@@ -150,18 +151,17 @@ const CasePage: React.FC = () => {
           \n 不明点がございましたらお問い合わせフォームよりご連絡ください。
           \n http://localhost:3000/ask。
           `,
-          });
-          await axios.post("/api/sendEmail", {
-            from: user.user?.email,
-            subject: "【インフルエンサーめぐり】募集案件の登録申請がありました",
-            content: `募集案件の登録申請がありました。
+        });
+        await axios.post("/api/sendEmail", {
+          from: user.user?.email,
+          subject: "【インフルエンサーめぐり】募集案件の登録申請がありました",
+          content: `募集案件の登録申請がありました。
           \nログインして確認してください。
           \n
           `,
-          });
-          setError("");
-          router.replace("/appliedList");
-        }
+        });
+        setError("");
+        router.replace("/appliedList");
       }
     }
     setIsLoading(false);
