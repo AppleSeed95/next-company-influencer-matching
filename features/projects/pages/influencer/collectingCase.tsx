@@ -146,7 +146,7 @@ export default function CollectedCase() {
     const { targetStatus } = user.user;
 
     if (targetStatus !== "稼働中") {
-      setConfirmMsg("稼働中ではないので申請できません。");
+      setConfirmMsg("応募できません");
       setShowConfirm(true);
       return;
     }
@@ -292,7 +292,7 @@ export default function CollectedCase() {
                   </tr>
                 </thead>
                 <tbody>
-                  {currentItems?.map((aData, idx) => (
+                  {currentItems?.filter((aItem) => !alreadyAppliedOrNot(aItem.id)).map((aData, idx) => (
                     <tr key={idx}>
                       <td className="px-[35px] py-[25px]  border border-[#D3D3D3] hover:cursor-pointer">
                         {aData.companyName}
