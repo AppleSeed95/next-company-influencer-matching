@@ -90,8 +90,7 @@ export async function PUT(request: NextRequest) {
     }
     const today = new Date();
     const todayString = today.toString();
-    // const randomString = generateRandomString();
-    const randomString = `12345`;
+    const randomString = generateRandomString();
     const saltRounds = 10;
     const salt = bcrypt.genSaltSync(saltRounds);
     const hash = bcrypt.hashSync(randomString, salt);
