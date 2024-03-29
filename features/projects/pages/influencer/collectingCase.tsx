@@ -58,7 +58,7 @@ export default function CollectedCase() {
       document.title = '募集中案件一覧';
     };
     const fetchApplied = async () => {
-      const result = await axios.get(`/api/apply?id=${user.user.targetId}`);
+      const result = await axios.get(`/api/apply?id=${user.user?.targetId}`);
       if (result.data) setAppliedCase(result.data);
     };
     if (user) {
@@ -152,7 +152,7 @@ export default function CollectedCase() {
     }
     const result = await axios.post("/api/apply", {
       caseId,
-      influencerId: user.user.targetId,
+      influencerId: user.user?.targetId,
     });
     if (result.data.type === "success") {
       setReload(!reload);

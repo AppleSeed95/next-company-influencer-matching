@@ -57,7 +57,7 @@ export default function LoginPage() {
             router.push("/top");
             break;
           case "インフルエンサー":
-            router.push("/collectingCase");
+            router.push("/influencerTop");
 
           default:
             break;
