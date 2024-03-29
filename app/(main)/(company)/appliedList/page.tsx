@@ -17,9 +17,9 @@ function AppleidList() {
         const paymentInfo = new Date(data.data?.payment);
         const today = new Date(data.todayString);
         const payed = paymentInfo > today;
-        // if (!payed) {
-        //   router.push('/paymentRequire');
-        // }
+        if (!payed) {
+          router.push('/paymentRequire');
+        }
       }
     }
     fetchPaymentInfo();
