@@ -203,7 +203,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
   const handlePaymentInfoChange = () => {
     setShowPayment(true);
   }
-  if (!applyId || (applyMode && expired)) {
+  if (applyMode && (!applyId || expired)) {
     return (
       <div className="flex grow min-h-full">
         <AppyExpired />

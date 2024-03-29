@@ -238,7 +238,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
     }
     setIsLoading(false);
   };
-  if (!applyId || (applyMode && expired)) {
+  if (applyMode && (!applyId || expired)) {
     return (
       <div className="flex grow min-h-full">
         <AppyExpired />
