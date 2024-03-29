@@ -8,8 +8,9 @@ interface AuthUserState {
     email?: string;
     targetId?: number;
     targetStatus?: string;
+    targetName?: string;
     isFree?: number;
-    payment?:string
+    payment?: string;
   } | null;
 }
 

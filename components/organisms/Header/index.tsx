@@ -63,7 +63,7 @@ const Header: React.FC<Headerprops> = ({ mode }: Headerprops) => {
           }}
         />
         <div className=" text-[white] h-[full] flex items-center px-[32px] text-header">
-          {isClient && authUser.user?.name}
+          {isClient && authUser.user?.targetName}
         </div>
         <img
           alt="img"

@@ -51,11 +51,18 @@ export async function POST(request: NextRequest) {
     const targetStatus = result1[0].status;
     const isFree = result1[0].freeAccount ? result1[0].freeAccount : true;
     let data = { ...user, targetId, targetStatus, isFree };
-    if(user.role === "企業") {
-      data = {...data, payment: result1[0].payment}
+    if (user.role === "企業") {
+      data = {
+        ...data,
+        payment: result1[0].payment,
+        targetName: result1[0].companyName,
+      };
+    } else {
+      data = { ...data, targetName: result1[0].nickName };
     }
     return NextResponse.json({
-      type: "success",data
+      type: "success",
+      data,
     });
   } catch (error) {
     console.error("Error creating table or inserting record:", error);

@@ -53,7 +53,7 @@ export default function CompanySidebar() {
           <Link href={"/pdfdownload"}>マニュアル</Link>
         </div>
         <div className="p-[12px] text-[14px]">
-          <Link href={"/ask"}>運営へのお問い合わせ</Link>
+          <Link href={"/ask"} target="_blank">運営へのお問い合わせ</Link>
         </div>
       </div>
     </div>
