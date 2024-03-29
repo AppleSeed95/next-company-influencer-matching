@@ -39,6 +39,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
     building: "",
     date: "",
     status: "",
+    paymentCnt: 0
   });
   const msgs = {
     companyName: "企業名を入力してください",
@@ -496,11 +497,11 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
               />
             </span>
           </Button>
-          <Button buttonType={ButtonType.PRIMARY} buttonClassName="mr-[30px]">
+          {data?.paymentCnt >= 2 && < Button buttonType={ButtonType.PRIMARY} buttonClassName="mr-[30px]">
             <span className="flex ">
               <span>解約</span>
             </span>
-          </Button>
+          </Button>}
           <Button
             buttonType={ButtonType.DEFAULT}
             buttonClassName="rounded-[5px]"
@@ -509,8 +510,9 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
             戻る
           </Button>
         </div>
-      )}
-    </div>
+      )
+      }
+    </div >
   );
 };
 export default CompanyInfoPage;

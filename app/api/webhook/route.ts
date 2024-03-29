@@ -43,11 +43,7 @@ export async function POST(request: NextRequest) {
         updateString = lastPaymentInfo.toISOString();
       }
       let paymentCnt = rows[0].paymentCnt;
-      console.log(rows[0]);
-
       if (!(paymentCnt > 0)) {
-        console.log("here", paymentCnt > 0);
-
         paymentCnt = 0;
       }
       paymentCnt++;
