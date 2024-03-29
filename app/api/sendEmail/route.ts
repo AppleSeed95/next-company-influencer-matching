@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import sgMail from "@sendgrid/mail";
 import { ADMIN_EMAIL } from "./config";
-console.log(process.env.API_KEY);
 
 sgMail.setApiKey(process.env.API_KEY);
 
