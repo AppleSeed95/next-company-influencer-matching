@@ -58,10 +58,7 @@ export default function CollectedCase() {
       if (result.data.length !== 0) {
         setCaseId(result.data[0]?.id);
         if (result.data?.length) {
-          console.log(result.data);
-
           let data = result.data.filter((aItem) => !alreadyAppliedOrNot(aItem.id));
-          console.log(data)
           setData(data);
           setVisibleData(data);
           setOptionedData(data);

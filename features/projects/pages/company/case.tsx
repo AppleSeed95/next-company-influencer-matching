@@ -36,7 +36,7 @@ const CasePage: React.FC = () => {
   const user = getUser();
 
   const [wantedSNS, setWantedSNS] = useState([]);
-  const [error, setError] = useState("");
+  const [error, setError] = useState([]);
   const { id } = useParams();
   const [showConfirm, setShowConfirm] = useState(false);
   const [confirmMsg, setConfirmMsg] = useState("操作が成功しました。");
@@ -71,7 +71,6 @@ const CasePage: React.FC = () => {
       setShowConfirm(true);
       return;
     }
-
     const body = {
       ...data,
       wantedSNS: JSON.stringify(wantedSNS),
@@ -83,19 +82,20 @@ const CasePage: React.FC = () => {
           ...body,
           status: "申請前",
         });
-        setError("");
+        setError([]);
         setShowConfirm(true);
       } else {
         const result = await axios.post("/api/case", {
           ...body,
           status: "申請前",
         });
-        setError("");
+        setError([]);
         setIsLoading(false);
         router.replace("/appliedList");
       }
       return;
     }
+    let errorList = [];
     const msgs = {
       caseType: "案件種別を選択してください",
       caseName: "案件概要を入力してください",
@@ -104,37 +104,42 @@ const CasePage: React.FC = () => {
       caseEnd: "案件終了を入力してください",
     };
     const keys = Object.keys(msgs);
-    let isValid = true;
+    let isValid = false;
     keys.forEach((aKey) => {
       if (!body[aKey] || body[aKey] === "") {
-        if (!isValid) return;
-        setError(msgs[aKey]);
-        isValid = false;
+        errorList.push(msgs[aKey]);
+      } else {
+        if (aKey === 'caseEnd') isValid = true;
       }
     });
     const casePlace = "訪問場所を入力してください";
     if (body.caseType === "来 店" && body.casePlace === "") {
-      setError(casePlace);
-      return;
+      errorList.push(casePlace);
+      isValid = false;
     }
     const collectionStart = body.collectionStart ? new Date(body.collectionStart) : "";
     const collectionEndDate = new Date(body.collectionEnd);
     const caseEndDate = new Date(body.caseEnd);
-    if (collectionStart !== '' && !(collectionEndDate > collectionStart)) {
-      setError("募集開始時間と募集終了時間を正しく選択してください。");
-      return;
+    if (collectionStart !== '' && body.caseEnd !== '' && body.collectionEnd !== '' && !(collectionEndDate > collectionStart)) {
+      errorList.push("募集開始時間と募集終了時間を正しく選択してください")
+      isValid = false;
     }
-    if (!(caseEndDate > collectionEndDate)) {
-      setError("イベント終了時間と募集終了時間を正しく選択します。");
+    if (body.caseEnd !== '' && body.collectionEnd !== '' && !(caseEndDate > collectionEndDate)) {
+      errorList.push("イベント終了時間と募集終了時間を正しく選択します")
+      isValid = false;
+    }
+    if (errorList.length !== 0) {
+      setError(errorList);
       return;
     }
     if (isValid) {
+      setError([]);
       if (data.id) {
         const result = await axios.put("/api/case", {
           ...body,
           status: "申請中",
         });
-        setError("");
+        setError([]);
         setIsLoading(false);
         router.back();
       } else {
@@ -165,7 +170,7 @@ const CasePage: React.FC = () => {
           \n
           `,
         });
-        setError("");
+        setError([]);
         router.replace("/appliedList");
       }
     }
@@ -207,7 +212,6 @@ const CasePage: React.FC = () => {
       <div className="flex  pt-[20px] pb-[8px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD] mt-[90px] sp:mt-[30px]   sp:px-[18px]">
         <span className="w-[30%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
           <span className="text-[#6F6F6F]">案件種別</span>
-          <span className="ml-[10px] text-[#EE5736] text-[11px]">必須</span>
         </span>
         <div className="flex">
           <RadioBtn
@@ -454,8 +458,11 @@ const CasePage: React.FC = () => {
           ""
         ),
       ]}
-      {error !== "" && (
-        <div className="text-center m-[10px] text-[#EE5736]">{error}</div>
+      {error.length !== 0 && (
+        error.map((aError, idx) => (
+          <div className="text-center m-[10px] text-[#EE5736]" key={idx}>{aError}</div>
+        )
+        )
       )}
       <div className="flex justify-center mt-[36px] mb-[160px] sp:mb-[60px]">
         {determineEditable() && [

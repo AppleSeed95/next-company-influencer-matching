@@ -39,11 +39,13 @@ const CompanyPage: React.FC<CompanyProps> = ({ companyData }: CompanyProps) => {
       setError("メールアドレス形式で入力してください。");
       return;
     }
-    if (monthlyCollectionCnt <= 0) {
+    console.log(monthlyCollectionCnt);
+
+    if (!(monthlyCollectionCnt > 0)) {
       setError('月の募集数を入力してください。')
       return;
     }
-    if (concurrentCollectionCnt <= 0) {
+    if (!(concurrentCollectionCnt > 0)) {
       setError('同時募集数を入力してください。')
       return;
     }
@@ -193,8 +195,10 @@ const CompanyPage: React.FC<CompanyProps> = ({ companyData }: CompanyProps) => {
           type={"number"}
           inputClassName="w-[138px] border-[#D3D3D3]"
           value={data?.monthlyCollectionCnt}
-          handleChange={(val) =>
-            setData({ ...data, monthlyCollectionCnt: val })
+          handleChange={(val) => {
+            const valNumber = val === '' ? 0 : val
+            setData({ ...data, monthlyCollectionCnt: valNumber })
+          }
           }
         />
       </div>
@@ -206,8 +210,10 @@ const CompanyPage: React.FC<CompanyProps> = ({ companyData }: CompanyProps) => {
           type={"number"}
           inputClassName="w-[138px] border-[#D3D3D3]"
           value={data?.concurrentCollectionCnt}
-          handleChange={(val) =>
-            setData({ ...data, concurrentCollectionCnt: val })
+          handleChange={(val) => {
+            const valNumber = val === '' ? 0 : val
+            setData({ ...data, concurrentCollectionCnt: valNumber })
+          }
           }
         />
       </div>

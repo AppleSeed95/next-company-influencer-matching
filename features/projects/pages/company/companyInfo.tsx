@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Button from "@/components/atoms/button";
 import { ButtonType } from "@/components/atoms/buttonType";
 import Input from "@/components/atoms/input";
-// import Checkbox from "@/components/atoms/checkbox";
+import Checkbox from "@/components/atoms/checkbox";
 import { useRecoilValue } from "recoil";
 import { authUserState } from "@/recoil/atom/auth/authUserAtom";
 import axios from "axios";
@@ -21,7 +21,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
   const authUser = useRecoilValue(authUserState);
   const [showConfirm, setShowConfirm] = useState(false);
   const [showPayment, setShowPayment] = useState(false);
-  const [agree, setAgree] = useState(true);
+  const [agree, setAgree] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState({
     companyName: "",
@@ -101,7 +101,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
       isValid = false;
       return;
     }
-    if (!agree) {
+    if (!agree && applyMode) {
       setError("個人情報の取り扱いに同意する必要があります。");
       return;
     }
@@ -435,7 +435,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
           </div>
         </div>
       )}
-      {/* <div className="flex justify-center">
+      {applyMode && <div className="flex justify-center">
         <Checkbox
           prefix={""}
           value={agree}
@@ -452,7 +452,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
             setAgree(isChecked);
           }}
         />
-      </div> */}
+      </div>}
       {error !== "" && (
         <div className="text-center m-[10px] text-[#EE5736]">{error}</div>
       )}

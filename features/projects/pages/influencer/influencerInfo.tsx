@@ -83,6 +83,7 @@ const msgs = {
   nickName: "ニックネームを入力してください",
   phoneNumber: "電話番号を入力してください ",
   emailAddress: "メールアドレスを入力してください  ",
+  prefecture: '都道府県を選択してください'
 };
 const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
   applyMode,
@@ -136,8 +137,6 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
 
     keys.forEach((aKey) => {
       if (body[aKey] === "" || !body[aKey]) {
-        console.log(body[aKey]);
-
         if (!isValid) return;
         setError(msgs[aKey]);
         isValid = false;
@@ -162,7 +161,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
       isValid = false;
       return;
     }
-    if (!agree) {
+    if (!agree && applyMode) {
       setError("個人情報の取り扱いに同意する必要があります。");
       return;
     }
@@ -280,6 +279,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
       <div className="flex  py-[15px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
         <span className="mt-[5px] w-[35%] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
           <span>ニックネーム</span>
+          {<span className="ml-[10px] text-[#EE5736] text-[11px]">必須</span>}
         </span>
         <Input
           requirMsg="ニックネームを入力してください"
@@ -291,6 +291,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
       <div className="flex  py-[15px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
         <span className="mt-[5px] w-[35%] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
           <span>電話番号</span>
+          {<span className="ml-[10px] text-[#EE5736] text-[11px]">必須</span>}
         </span>
         <Input
           requirMsg="電話番号を入力してください"
@@ -304,6 +305,8 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
       <div className="flex  py-[15px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
         <span className="mt-[5px] w-[35%] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
           <span>メールアドレス</span>
+          {<span className="ml-[10px] text-[#EE5736] text-[11px]">必須</span>}
+
         </span>
         <Input
           formatMsg="メールアドレス形式ではありません"
@@ -318,6 +321,8 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
       <div className="flex items-center py-[15px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
         <span className="w-[35%] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
           <span>都道府県</span>
+          {<span className="ml-[10px] text-[#EE5736] text-[11px]">必須</span>}
+
         </span>
 
         <Select
@@ -335,6 +340,8 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
       <div className="flex  py-[15px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
         <span className="w-[35%] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
           <span>ジャンル</span>
+          {<span className="ml-[10px] text-[#EE5736] text-[11px]">必須</span>}
+
         </span>
         <div>
           <div className="flex py-[5px]">
@@ -873,7 +880,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
         ></TextArea>
       </div>
       <div className="flex justify-center">
-        <Checkbox
+        {applyMode && <Checkbox
           prefix={""}
           value={agree}
           checkBoxClassName="mt-[36px]"
@@ -888,7 +895,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
           handleChange={(isChecked) => {
             setAgree(isChecked);
           }}
-        />
+        />}
       </div>
       {error !== "" && (
         <div className="text-center m-[10px] text-[#EE5736]">{error}</div>

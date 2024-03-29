@@ -60,10 +60,10 @@ const Input: React.FC<InputProps> = ({
           password
             ? "password"
             : dateTime
-            ? "datetime-local"
-            : type
-            ? type
-            : "text"
+              ? "datetime-local"
+              : type
+                ? type
+                : "text"
         }
         defaultValue={value}
         className={"border border-[#AEAEAE] h-[35px] pl-[12px]  w-full"}

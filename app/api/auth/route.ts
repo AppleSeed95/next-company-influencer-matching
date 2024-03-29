@@ -33,7 +33,10 @@ export async function POST(request: NextRequest) {
     //   });
     // }
     if (user.role === "admin") {
-      return NextResponse.json({ type: "success", data: user });
+      return NextResponse.json({
+        type: "success",
+        data: { ...user, targetName: "管理者" },
+      });
     }
     const type = user.role === "企業" ? "company" : "influencer";
     const result1 = await executeQuery(
