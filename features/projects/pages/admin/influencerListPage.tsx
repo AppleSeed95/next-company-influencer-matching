@@ -315,7 +315,7 @@ export default function InfluencerListPage() {
                               alt="youtube"
                             />
                           )}
-                          {aData.otherSNS !== "" && aData.otherSNS !== 'null' && (
+                          {aData.otherSNS !== "" && aData.otherSNS !== 'null' && aData.otherSNS !== null && (
                             <span className="text-[#C0C0C0]">etc.</span>
                           )}
                         </div>
