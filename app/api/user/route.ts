@@ -27,6 +27,51 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: error });
   }
 }
+export async function GET(request: NextRequest) {
+  const id = request.nextUrl.searchParams.get("id") || "";
+  const query = `SELECT * FROM users where id = ${id}`;
+  const rows = await executeQuery(query).catch((e) => {
+    return NextResponse.json({
+      type: "error",
+    });
+  });
+
+  const current = new Date();
+  const currentTime = current.toString();
+  if (!rows[0] || rows.length === 0) {
+    return NextResponse.json({
+      type: "error",
+    });
+  } else {
+    return NextResponse.json({
+      ...rows[0],
+      current: currentTime,
+    });
+  }
+}
+export async function DELETE(request: NextRequest) {
+  const id = request.nextUrl.searchParams.get("id") || "";
+  const query1 = `select name from users where id = ${id} `;
+  const row = await executeQuery(query1).catch((e) => {
+    return NextResponse.json({
+      type: "error",
+    });
+  });
+  if (row[0].name.length > 0) {
+    return NextResponse.json({
+      type: "success",
+    });
+  }
+  const query = `delete from users where id = ${id}`;
+  const result = await executeQuery(query).catch((e) => {
+    return NextResponse.json({
+      type: "error",
+    });
+  });
+  return NextResponse.json({
+    type: "success",
+  });
+}
 export async function PUT(request: NextRequest) {
   try {
     const { email, type } = await request.json();
@@ -43,17 +88,28 @@ export async function PUT(request: NextRequest) {
         msg: "メールアドレスが既に登録されている",
       });
     }
-    const randomString = generateRandomString();
+    const today = new Date();
+    const todayString = today.toString();
+    // const randomString = generateRandomString();
+    const randomString = `12345`;
     const saltRounds = 10;
     const salt = bcrypt.genSaltSync(saltRounds);
+    const hash = bcrypt.hashSync(randomString, salt);
     await executeQuery(`
-      INSERT INTO users (email,password ,role)
-      VALUES ('${email}','${"12345"}','${type}')
+      INSERT INTO users (email,password ,role, applyTime, plainPassword)
+      VALUES ('${email}','${hash}','${type}', '${todayString}', '${randomString}')
       `);
-    return NextResponse.json({
-      type: "success",
-      data: { email, password: randomString },
+    const rows1 = await executeQuery(query3).catch((e) => {
+      return NextResponse.json({
+        type: "error",
+      });
     });
+    if (rows1.length) {
+      return NextResponse.json({
+        type: "success",
+        data: { email, password: randomString, id: rows1[0].id },
+      });
+    }
   } catch (e) {
     console.error("Error creating user record:", e);
     return NextResponse.json({ type: "error" });

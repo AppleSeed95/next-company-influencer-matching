@@ -69,7 +69,7 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
         \n
         \n-----------------------------------------------------
         \n不明点がございましたらお問い合わせフォームよりご連絡ください。
-        \nhttp://localhost:3000/ask
+        \nhttps://influencer-meguri.jp/ask
 
         `;
           subject = "【インフルエンサーめぐり】申請ありがとうございました";
@@ -83,7 +83,7 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
         \n-----------------------------------------------------
         \n▼アカウント情報
         \nログインURL：
-        \nhttp://localhost:3000/login
+        \nhttps://influencer-meguri.jp/login
         \n
         \nID:
         \n${data?.emailAddress}
@@ -91,7 +91,7 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
         \n${result.data?.password}
         \n-----------------------------------------------------
         \n不明点がございましたらお問い合わせフォームよりご連絡ください。
-        \nhttp://localhost:3000/ask
+        \nhttps://influencer-meguri.jp/ask
         `;
           subject = "【インフルエンサーめぐり】登録が完了しました";
         }

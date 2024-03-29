@@ -7,9 +7,10 @@ import Checkbox from "@/components/atoms/checkbox";
 import { useRecoilValue } from "recoil";
 import { authUserState } from "@/recoil/atom/auth/authUserAtom";
 import axios from "axios";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Modal from "../../utils/modal";
 import CheckoutPage from "./stripe";
+import AppyExpired from "./applyExpired";
 
 export interface CompanyInfoProps {
   applyMode?: boolean;
@@ -55,7 +56,11 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
     address: "住所を入力してください",
   };
   const [error, setError] = useState("");
+  const [expired, setExpired] = useState(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const applyId = searchParams.get('id');
+
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios.get(
@@ -63,10 +68,29 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
       );
       if (result.data) setData(result.data);
     };
+    const getAppliedUserData = async () => {
+      const result = await axios.get(`/api/user?id=${applyId}`);
+      if (result.data.type === 'error') {
+        setExpired(true);
+      }
+      else {
+        const applyTime = new Date(result.data.applyTime);
+        const currentTime = new Date(result.data.current);
+        const timeDiff = currentTime.getTime() - applyTime.getTime();
+        const minutesDiff = timeDiff / (1000 * 60);
+        if (minutesDiff > 60) {
+          await axios.delete(`/api/user?id=${applyId}`);
+          setExpired(true);
+        }
+      }
+    }
     if (!applyMode && authUser) {
       fetchData()
       document.title = '企業情報変更';
     };
+    if (applyMode && applyId) {
+      getAppliedUserData();
+    }
   }, []);
   const handleApply = async (isApply) => {
     if (isLoading) return;
@@ -108,9 +132,8 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
     if (!isValid) return;
     setIsLoading(true);
     if (isApply) {
-      console.log(data);
-
       const res = await axios.post(`api/company`, data);
+
       if (res.data.type === "success") {
         await axios.post("/api/sendEmail", {
           from: data.emailAddress,
@@ -146,7 +169,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
             \n---------------------------------------------
             \n▼アカウント情報
             \nログインURL：
-            \nhttp://localhost:3000
+            \nhttps://influencer-meguri.jp
             \nID：
             \n${data.emailAddress}
             \nパスワード：
@@ -158,7 +181,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
             \n
             \n-----------------------------------------------------
             \n不明点がございましたらお問い合わせフォームよりご連絡ください。
-            \nhttp://localhost:3000/ask
+            \nhttps://influencer-meguri.jp/ask
             `,
         });
         if (typeof window !== "undefined") {
@@ -180,12 +203,19 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
   const handlePaymentInfoChange = () => {
     setShowPayment(true);
   }
+  if (!applyId || (applyMode && expired)) {
+    return (
+      <div className="flex grow min-h-full">
+        <AppyExpired />
+      </div>
+    )
+  }
   return (
     <div
       className={
         applyMode
-          ? "text-center px-[35px] sp:px-[12px] sp:text-small pt-[200px]"
-          : "text-center px-[35px] sp:px-[12px] sp:text-small bg-[white]"
+          ? "text-center px-[35px] sp:px-[12px] sp:text-small pt-[200px] w-full"
+          : "text-center px-[35px] sp:px-[12px] sp:text-small bg-[white] w-full"
       }
     >
       <div

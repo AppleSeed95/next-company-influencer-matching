@@ -25,13 +25,15 @@ export async function POST(request: NextRequest) {
       });
     }
     const user = result[0];
+
     const isMatch = await bcrypt.compare(body.password, user.password);
-    // if (!isMatch) {
-    //   return NextResponse.json({
-    //     type: "error",
-    //     msg: "入力に誤りがあります。",
-    //   });
-    // }
+    console.log(body.password, user.password, isMatch);
+    if (!isMatch) {
+      return NextResponse.json({
+        type: "error",
+        msg: "入力に誤りがあります。",
+      });
+    }
     if (user.role === "admin") {
       return NextResponse.json({
         type: "success",
@@ -44,6 +46,8 @@ export async function POST(request: NextRequest) {
     ).catch((e) => {
       return NextResponse.json({ type: "error" });
     });
+    console.log(result1);
+
     if (!result1 || !result1.length || result1.length === 0) {
       return NextResponse.json({
         type: "error",

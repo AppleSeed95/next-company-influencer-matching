@@ -2,7 +2,7 @@ import CompanyInfoPage from "@/features/projects/pages/company/companyInfo";
 
 function ApplyCompany() {
   return (
-    <div>
+    <div className="flex h-full grow">
       <CompanyInfoPage applyMode />
     </div>
   );
