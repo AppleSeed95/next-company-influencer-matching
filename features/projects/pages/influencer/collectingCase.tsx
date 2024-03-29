@@ -49,9 +49,10 @@ export default function CollectedCase() {
       if (result.data.length !== 0) {
         setCaseId(result.data[0]?.id);
         if (result.data?.length) {
-          setData(result.data);
-          setVisibleData(result.data);
-          setOptionedData(result.data);
+          let data = result.data.filter((aItem) => !alreadyAppliedOrNot(aItem.id));
+          setData(data);
+          setVisibleData(data);
+          setOptionedData(data);
         }
       }
       setIsLoading(false);
@@ -292,7 +293,7 @@ export default function CollectedCase() {
                   </tr>
                 </thead>
                 <tbody>
-                  {currentItems?.filter((aItem) => !alreadyAppliedOrNot(aItem.id)).map((aData, idx) => (
+                  {currentItems?.map((aData, idx) => (
                     <tr key={idx}>
                       <td className="px-[35px] py-[25px]  border border-[#D3D3D3] hover:cursor-pointer">
                         {aData.companyName}
