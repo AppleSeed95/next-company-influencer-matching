@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Button from "@/components/atoms/button";
 import { ButtonType } from "@/components/atoms/buttonType";
 import Input from "@/components/atoms/input";
-import Checkbox from "@/components/atoms/checkbox";
+// import Checkbox from "@/components/atoms/checkbox";
 import { useRecoilValue } from "recoil";
 import { authUserState } from "@/recoil/atom/auth/authUserAtom";
 import axios from "axios";
