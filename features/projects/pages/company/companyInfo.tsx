@@ -497,7 +497,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
               />
             </span>
           </Button>
-          {data?.paymentCnt >= 2 && < Button buttonType={ButtonType.PRIMARY} buttonClassName="mr-[30px]">
+          {data?.paymentCnt >= 6 && < Button buttonType={ButtonType.PRIMARY} buttonClassName="mr-[30px]">
             <span className="flex ">
               <span>解約</span>
             </span>
