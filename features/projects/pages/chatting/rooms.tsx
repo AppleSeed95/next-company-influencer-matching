@@ -59,7 +59,7 @@ const ChattingRooms: React.FC = () => {
               id={key === active ? "active" : `room${key}`}
             >
               <div className="font-bold text-[16px]">{aData.caseName}</div>
-              <div className="font-italic">
+              <div className="italic">
                 {user.user.role === "企業"
                   ? aData.influencerName
                   : aData.companyName}
