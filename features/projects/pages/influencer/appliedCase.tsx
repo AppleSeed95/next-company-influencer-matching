@@ -221,7 +221,7 @@ export default function AppledCase() {
                     handleChange={(v) => handleOptionChange1("承認")}
                   />
                   <Checkbox
-                    title={"否決"}
+                    title={"否認"}
                     checkBoxClassName="mr-[20px]"
                     handleChange={(v) => handleOptionChange1("否決")}
                   />
@@ -296,7 +296,7 @@ export default function AppledCase() {
                         {aData.casePlace}
                       </td>
                       <td className="text-center w-[100px] py-[25px]  border border-[#D3D3D3]">
-                        {aData.status}
+                        {aData.status === '否決' ? '否認' : aData.status}
                       </td>
                       <td className="text-center w-[100px] py-[25px]  border border-[#D3D3D3] ">
                         <img
@@ -419,7 +419,7 @@ export default function AppledCase() {
                   </div>
 
                   <div className="flex">
-                    {aData.status === "完了報告" ? (
+                    {aData.status === "完了報告" || aData.status === '完了' ? (
                       <div className="text-white bg-[#236997] p-[10px] m-[5px] rounded-lg shadow-sm">
                         完了した
                       </div>
