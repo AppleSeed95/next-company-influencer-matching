@@ -21,7 +21,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
   const authUser = useRecoilValue(authUserState);
   const [showConfirm, setShowConfirm] = useState(false);
   const [showPayment, setShowPayment] = useState(false);
-  const [agree, setAgree] = useState(false);
+  const [agree, setAgree] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [data, setData] = useState({
     companyName: "",
@@ -434,7 +434,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
           </div>
         </div>
       )}
-      <div className="flex justify-center">
+      {/* <div className="flex justify-center">
         <Checkbox
           prefix={""}
           value={agree}
@@ -451,7 +451,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
             setAgree(isChecked);
           }}
         />
-      </div>
+      </div> */}
       {error !== "" && (
         <div className="text-center m-[10px] text-[#EE5736]">{error}</div>
       )}
