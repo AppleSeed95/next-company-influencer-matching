@@ -169,7 +169,7 @@ export default function CaseDetailPage({ caseProps }: caseData) {
           
           \n-----------------------------------------------------
           \n 不明点がございましたらお問い合わせフォームよりご連絡ください。
-          \n http://localhost:3000/ask。
+          \n https://influencer-meguri.jp/ask。
           `,
         });
       if (val === "承認")
@@ -182,7 +182,7 @@ export default function CaseDetailPage({ caseProps }: caseData) {
           \n
           \n-----------------------------------------------------
           \n 不明点がございましたらお問い合わせフォームよりご連絡ください。
-          \n http://localhost:3000/ask。
+          \n https://influencer-meguri.jp/ask。
           `,
         });
       setShowInfluencer(false);

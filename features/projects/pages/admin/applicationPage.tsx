@@ -98,7 +98,7 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
           \n否認理由をご確認の上、再申請をお願いします。
           \n-----------------------------------------------------
           \n 不明点がございましたらお問い合わせフォームよりご連絡ください。
-          \n http://localhost:3000/ask。
+          \n https://influencer-meguri.jp/ask。
           `,
           });
         if (update === "承認")
@@ -110,7 +110,7 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
           \n募集案件「 ${data?.caseName} 」を承認しましたのでログインしてご確認ください。
           \n-----------------------------------------------------
           \n 不明点がございましたらお問い合わせフォームよりご連絡ください。
-          \n http://localhost:3000/ask。
+          \n https://influencer-meguri.jp/ask。
           `,
           });
         setShowConfirm(true);

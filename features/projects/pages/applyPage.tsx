@@ -41,7 +41,7 @@ export default function ApplyPage() {
           }?id=${result.data.data.id}
           \n-----------------------------------------------------
           \n 不明点がございましたらお問い合わせフォームよりご連絡ください。
-          \n http://localhost:3000/ask
+          \n https://influencer-meguri.jp/ask
           `,
       });
       if (typeof window !== "undefined") {

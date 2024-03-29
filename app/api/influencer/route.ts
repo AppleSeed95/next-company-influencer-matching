@@ -98,6 +98,11 @@ export async function GET() {
 export async function PUT(request: NextRequest) {
   try {
     const body = await request.json();
+    const userEmail = body.emailAddress;
+    const query1 = `select plainPassword from users where emailAddress = '${userEmail}'`;
+    const rows = await executeQuery(query1).catch((e) => {
+      return NextResponse.json({ type: "error", msg: "no table exists" });
+    });
     let query = "UPDATE influencer SET ";
     const keys = Object.keys(body);
 
@@ -112,7 +117,10 @@ export async function PUT(request: NextRequest) {
     await executeQuery(query).catch((e) => {
       return NextResponse.json({ type: "error" });
     });
-    return NextResponse.json({ type: "success" });
+    return NextResponse.json({
+      type: "success",
+      password: rows[0].plainPassword,
+    });
   } catch (error) {
     console.error("Error fetching data:", error);
     return NextResponse.json({ type: "error" });

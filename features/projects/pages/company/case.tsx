@@ -159,7 +159,7 @@ const CasePage: React.FC = () => {
           \n申請確認を確認しますのでしばらくお待ちください。
           \n-----------------------------------------------------
           \n 不明点がございましたらお問い合わせフォームよりご連絡ください。
-          \n http://localhost:3000/ask。
+          \n https://influencer-meguri.jp/ask。
           `,
         });
         await axios.post("/api/sendEmail", {
