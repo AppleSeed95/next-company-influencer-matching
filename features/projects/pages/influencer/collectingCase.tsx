@@ -43,6 +43,15 @@ export default function CollectedCase() {
 
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
+    const fetchApplied = async () => {
+      const result = await axios.get(`/api/apply?id=${user.user?.targetId}`);
+      if (result.data) setAppliedCase(result.data);
+    };
+    if (user) {
+      fetchApplied();
+    }
+  }, [reload]);
+  useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
       const result = await axios.get("/api/case/influencer");
@@ -61,15 +70,10 @@ export default function CollectedCase() {
       setIsLoading(false);
       document.title = '募集中案件一覧';
     };
-    const fetchApplied = async () => {
-      const result = await axios.get(`/api/apply?id=${user.user?.targetId}`);
-      if (result.data) setAppliedCase(result.data);
-    };
     if (user) {
-      fetchApplied();
       fetchData();
     }
-  }, [reload]);
+  }, [reload, appliedCase])
   const makeOptioinedData = (visibleData, result, result1) => {
     let resultData = [];
     if (result.length === 0) {
