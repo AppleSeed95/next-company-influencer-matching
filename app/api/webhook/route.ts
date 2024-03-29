@@ -43,7 +43,13 @@ export async function POST(request: NextRequest) {
         updateString = lastPaymentInfo.toISOString();
       }
       let paymentCnt = rows[0].paymentCnt;
-      if (!(paymentCnt > 0)) paymentCnt = 0;
+      console.log(paymentCnt);
+
+      if (!(paymentCnt > 0)) {
+        console.log("here", paymentCnt > 0);
+
+        paymentCnt = 0;
+      }
       paymentCnt++;
       const query1 = `update company set payment = '${updateString}', paymentCnt = ${paymentCnt} where emailAddress = '${email}'`;
       await executeQuery(query1).catch((e) => {
