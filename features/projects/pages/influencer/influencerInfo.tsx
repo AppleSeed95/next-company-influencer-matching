@@ -943,6 +943,8 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
           <Button
             buttonType={ButtonType.DEFAULT}
             buttonClassName="rounded-[5px]"
+            handleClick={() => router.back()}
+
           >
             戻る
           </Button>
