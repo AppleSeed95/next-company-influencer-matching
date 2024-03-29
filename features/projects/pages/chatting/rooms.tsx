@@ -15,8 +15,7 @@ const ChattingRooms: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios.get(
-        `/api/chatting/room?id=${user.user.targetId}&type=${
-          user.user.role === "企業" ? "company" : "influencer"
+        `/api/chatting/room?id=${user.user.targetId}&type=${user.user.role === "企業" ? "company" : "influencer"
         }`
       );
       if (result.data.length) {
@@ -60,8 +59,8 @@ const ChattingRooms: React.FC = () => {
               id={key === active ? "active" : `room${key}`}
             >
               {user.user.role === "企業"
-                ? aData.influencerName
-                : aData.companyName}
+                ? aData.caseName + aData.influencerName
+                : aData.caseName + aData.companyName}
             </div>
           </div>
         </Link>

@@ -8,7 +8,7 @@ export async function POST(request: NextRequest) {
     // LEFT JOIN company ON cases.companyId=company.id
     // ORDER BY cases.id DESC`;
     const preQuery = `SELECT apply.*, company.companyName,company.id AS companyId,
-    influencer.influencerName,influencer.id AS incluencerId,cases.caseName
+    influencer.nickName,influencer.id AS incluencerId,cases.caseName
     FROM apply  
     LEFT JOIN influencer ON apply.influencerId = influencer.id  
     LEFT JOIN cases ON apply.caseId = cases.id  
@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
       companyName: rows[0].companyName,
       companyId: rows[0].companyId,
       influencerId: rows[0].influencerId,
-      influencerName: rows[0].influencerName,
+      influencerName: rows[0].nickName,
       caseName: rows[0].caseName,
     };
     const keys = Object.keys(body);
