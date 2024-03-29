@@ -99,7 +99,8 @@ export async function PUT(request: NextRequest) {
   try {
     const body = await request.json();
     const userEmail = body.emailAddress;
-    const query1 = `select plainPassword from users where emailAddress = '${userEmail}'`;
+
+    const query1 = `select plainPassword from users where email = '${userEmail}'`;
     const rows = await executeQuery(query1).catch((e) => {
       return NextResponse.json({ type: "error", msg: "no table exists" });
     });
@@ -117,6 +118,7 @@ export async function PUT(request: NextRequest) {
     await executeQuery(query).catch((e) => {
       return NextResponse.json({ type: "error" });
     });
+
     return NextResponse.json({
       type: "success",
       password: rows[0].plainPassword,

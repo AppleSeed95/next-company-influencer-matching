@@ -47,7 +47,7 @@ export async function POST(request: NextRequest) {
         paymentCnt = 0;
       }
       paymentCnt++;
-      const query1 = `update company set payment = '${updateString}', paymentCnt = ${paymentCnt} where emailAddress = '${email}'`;
+      const query1 = `update company set payment = '${updateString}', paymentCnt = ${paymentCnt} , thisMonthCollectionCnt = 0 where emailAddress = '${email}'`;
       await executeQuery(query1).catch((e) => {
         return NextResponse.json({ type: "error" });
       });
