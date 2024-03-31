@@ -41,6 +41,7 @@ export default function ResetPasswordPage() {
       }
     } else if (result.data.type === "error") {
       setError(result.data.msg);
+      setIsLoading(false);
     }
   };
   return (
