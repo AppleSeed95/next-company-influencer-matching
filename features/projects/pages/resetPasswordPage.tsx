@@ -10,14 +10,17 @@ export default function ResetPasswordPage() {
   const router = useRouter();
   const [error, setError] = useState("");
   const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     document.title = 'パスワードを再設定する';
   }, [])
   const handlePasswordChange = async () => {
+    setIsLoading(true);
     const result = await axios.post("/api/user/passwordReset", { email });
     if (result.data.type === "success") {
+
       await axios.post("/api/sendEmail", {
-        to: result.data.email,
+        to: result.data.data.email,
         subject: "【インフルエンサーめぐり】パスワード再発行",
         content: `
           \n いつもインフルエンサーめぐりをご利用いただきありがとうございます。
@@ -26,12 +29,13 @@ export default function ResetPasswordPage() {
           \n-----------------------------------------------------
           \n▼アカウント情報
           \nパスワード：
-          \n${result.data.password}
+          \n${result.data.data.password}
           \n----------------------------------------------------- 
           \n不明点がございましたらお問い合わせフォームよりご連絡ください。
           \n https://influencer-meguri.jp/ask。
           `,
       });
+      setIsLoading(false);
       if (typeof window !== "undefined") {
         router.push("/login");
       }
@@ -58,10 +62,20 @@ export default function ResetPasswordPage() {
         </div>
         <div className="text-center mb-[10px]">
           <Button
-            handleClick={() => handlePasswordChange()}
             buttonType={ButtonType.PRIMARY}
+            buttonClassName="mr-[30px]"
+            handleClick={() => handlePasswordChange()}
           >
-            メール送信
+            <span className="flex ">
+              <span>申請</span>
+              <img
+                className={
+                  isLoading ? "rotate w-[14px] ml-[5px]" : "w-[14px] ml-[5px]"
+                }
+                src={isLoading ? "/img/refresh.svg" : "/img/apply.svg"}
+                alt="refresh"
+              />
+            </span>
           </Button>
         </div>
         {error !== "" && (
