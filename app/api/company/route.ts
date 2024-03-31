@@ -34,7 +34,6 @@ export async function POST(request: NextRequest) {
     }
     // const query4 = `SELECT * FROM company where emailAddress = '${body.emailAddress}'`;
     // const rows1 = await executeQuery(query4).catch((e) => {
-    //   console.log("error here");
 
     //   return NextResponse.json({ type: "error" });
     // });
@@ -107,7 +106,6 @@ export async function POST(request: NextRequest) {
       0,
       -1
     )}) VALUES(${query2.slice(0, -1)})`;
-    console.log(query);
 
     await executeQuery(query).catch((e) => {
       return NextResponse.json({ type: "error", msg: "error" });

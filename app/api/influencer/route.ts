@@ -72,7 +72,6 @@ export async function POST(request: NextRequest) {
       0,
       -1
     )}) VALUES(${query2.slice(0, -1)})`;
-    console.log(query);
 
     await executeQuery(query).catch((e) => {
       return NextResponse.json({ type: "error", msg: "error" });

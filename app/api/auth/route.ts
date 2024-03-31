@@ -27,8 +27,6 @@ export async function POST(request: NextRequest) {
     const user = result[0];
 
     const isMatch = await bcrypt.compare(body.password, user.password);
-    // const isMatch = true;
-    console.log(body.password, user.password, isMatch);
     if (!isMatch) {
       return NextResponse.json({
         type: "error",
@@ -47,7 +45,6 @@ export async function POST(request: NextRequest) {
     ).catch((e) => {
       return NextResponse.json({ type: "error" });
     });
-    console.log(result1);
 
     if (!result1 || !result1.length || result1.length === 0) {
       return NextResponse.json({

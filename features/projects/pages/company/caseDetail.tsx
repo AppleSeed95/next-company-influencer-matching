@@ -359,7 +359,6 @@ export default function CaseDetailPage({ caseProps }: caseData) {
                   buttonType={ButtonType.DEFAULT}
                   buttonClassName="rounded-[0px]"
                   handleClick={() => {
-                    console.log(caseData.edited);
 
                     if (caseData.edited) {
                       handleCollectionStateChange("募集中");

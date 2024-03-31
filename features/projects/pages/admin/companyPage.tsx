@@ -39,7 +39,6 @@ const CompanyPage: React.FC<CompanyProps> = ({ companyData }: CompanyProps) => {
       setError("メールアドレス形式で入力してください。");
       return;
     }
-    console.log(monthlyCollectionCnt);
 
     if (!(monthlyCollectionCnt > 0)) {
       setError('月の募集数を入力してください。')
