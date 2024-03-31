@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
     const salt = bcrypt.genSaltSync(saltRounds);
     const hashedPassword = bcrypt.hashSync(randomString, salt);
     await executeQuery(`
-        UPDATE users SET password = '${hashedPassword}'
+        UPDATE users SET password = '${hashedPassword}', plainPassword = '${randomString}'
         WHERE email = '${email}'
         `);
     return NextResponse.json({
