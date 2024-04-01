@@ -69,7 +69,8 @@ const Input: React.FC<InputProps> = ({
         className={"border border-[#AEAEAE] h-[35px] pl-[12px]  w-full"}
         placeholder={placeholder}
         onInput={(e) => {
-          validate(e.target.value);
+          const target = e.target as HTMLInputElement;
+          validate(target.value);
         }}
         onKeyPress={handleKeyPress}
       ></input>
