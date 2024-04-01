@@ -31,6 +31,7 @@ const TextArea: React.FC<TextAreaProps> = ({
     if (!notRequired && val === "") {
       setError(requirMsg);
       handleChange(val);
+      setTextValue(val);
       setIsValid(false);
       return;
     }
@@ -59,9 +60,9 @@ const TextArea: React.FC<TextAreaProps> = ({
         className={
           resizable
             ? "px-[12px] py-[7px] w-full border resize-none	 border-[#D3D3D3] " +
-              textAreaClassName
+            textAreaClassName
             : "px-[12px] py-[7px] w-full border resize-none	 border-[#D3D3D3] " +
-              textAreaClassName
+            textAreaClassName
         }
         placeholder={placeholder}
       ></textarea>
