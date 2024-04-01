@@ -193,7 +193,7 @@ const CompanyPage: React.FC<CompanyProps> = ({ companyData }: CompanyProps) => {
         <Input
           type={"number"}
           requirMsg="月の募集数を入力してください。"
-          inputClassName="w-[138px] border-[#D3D3D3]"
+          inputClassName="w-[170px] border-[#D3D3D3]"
           value={data?.monthlyCollectionCnt}
           handleChange={(val) => {
             const valNumber = val === '' ? 0 : val
@@ -209,7 +209,7 @@ const CompanyPage: React.FC<CompanyProps> = ({ companyData }: CompanyProps) => {
         <Input
           type={"number"}
           requirMsg="同時募集数を入力してください。"
-          inputClassName="w-[138px] border-[#D3D3D3]"
+          inputClassName="w-[170px] border-[#D3D3D3]"
           value={data?.concurrentCollectionCnt}
           handleChange={(val) => {
             const valNumber = val === '' ? 0 : val
