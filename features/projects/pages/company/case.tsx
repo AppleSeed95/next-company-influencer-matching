@@ -178,6 +178,9 @@ const CasePage: React.FC = () => {
   };
   const determineEditable = () => {
     let startable: boolean;
+    if (data.collectionStatus === "") {
+      return true;
+    }
 
     if (data.collectionStatus === '募集前') {
       startable =
