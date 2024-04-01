@@ -464,13 +464,13 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
             <span>否認</span>
           </span>
         </Button>}
-        <Button
+        {modalMode && <Button
           handleClick={() => onCancel()}
           buttonType={ButtonType.DEFAULT}
           buttonClassName="rounded-[5px]"
         >
           戻る
-        </Button>
+        </Button>}
       </div>
     </div>
   );
