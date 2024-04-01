@@ -34,8 +34,6 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
   const { id } = useParams();
   const router = useRouter();
   const [showConfirm, setShowConfirm] = useState(false);
-  const [previousPos, setPreviousPos] = useState(null);
-  const [previousCaseId, setPreviousCaseId] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       let result;
@@ -55,7 +53,6 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
         setData(result.data.data);
         setReason(result.data.data.reason);
         setWantedSNS(JSON.parse(result.data.data.wantedSNS));
-        determinePreviousExists(result.data.companyCases);
         if (!modalMode) {
           document.title = result.data.data.caseName;
         }
@@ -64,21 +61,9 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
 
     fetchData();
   }, [caseID]);
-  const determinePreviousExists = (companyCases: [any]) => {
-    let currentPos = 0;
-    for (let i = 0; i < companyCases.length; i++) {
-      if (id == companyCases[i].id) {
-        currentPos = i;
-      }
-    }
-    setPreviousPos(currentPos - 1);
-    setPreviousCaseId(companyCases[currentPos - 1]?.id);
-  }
   const apporove = (val: boolean) => {
     const approveApplication = async () => {
       const reason1 = val ? "" : reason;
-      console.log(reason, reason1);
-
       if (!val && (reason1 === "" || reason1 === undefined)) {
         setError("否認理由を入力してください");
         return;
@@ -359,57 +344,66 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
       {!modalMode && (
         <div
           className={
-            "flex  py-[20px]  sp:w-full m-auto  sp:px-[18px] justify-end " +
+            "flex  py-[20px]  sp:w-full m-auto  sp:px-[18px] justify-between " +
             widthClass
           }
         >
-          {previousPos !== -1 && <div className="flex justify-center float-right">
+          <div className={data?.next > 0 ? "flex justify-center float-right" : "flex justify-center float-right invisible"}>
+            <img src="/img/triangle-right.svg" className="w-[11px] ml-[5px] transform rotate-180 mr-[10px]" />
             <span className="text-[#3F8DEB]">
-              <Link href={`/application/${previousCaseId}`}>前回の申請内容を確認する</Link>
+              <Link href={`/application/${data?.next}`}>次の申請内容に戻る</Link>
+            </span>
+          </div>
+          <div className={data?.previous > 0 ? "flex justify-center float-right" : "flex justify-center float-right invisible"}>
+            <span className="text-[#3F8DEB]">
+              <Link href={`/application/${data?.previous}`}>前回の申請内容を確認する</Link>
             </span>
             <img src="/img/triangle-right.svg" className="w-[11px] ml-[5px]" />
-          </div>}
+          </div>
+
         </div>
       )}
       {error !== "" && <div className="m-[10px] text-[#EE5736]">{error}</div>}
-      {!modalMode && !(data?.status === '承認' || data?.status === '否認') &&
-        (<div className="flex justify-center mt-[36px] mb-[160px] sp:mb-[60px]">
-          <Button
-            buttonType={ButtonType.PRIMARY}
-            buttonClassName="mr-[30px]"
-            handleClick={() => apporove(true)}
-          >
-            <span className="flex items-center">
-              <span>承認</span>
-              <img
-                className="w-[14px] ml-[5px]"
-                src="/img/approve.svg"
-                alt="approve"
-              />
-            </span>
-          </Button>
-          <Button
-            buttonType={ButtonType.DANGER}
-            buttonClassName="mr-[30px]"
-            handleClick={() => apporove(false)}
-          >
-            <span className="flex items-center">
-              <span>否認</span>
-              <img
-                className="w-[14px] ml-[5px]"
-                src="/img/cross.svg"
-                alt="cross"
-              />
-            </span>
-          </Button>
-          <Button
-            buttonType={ButtonType.DEFAULT}
-            buttonClassName="rounded-[5px]"
-            handleClick={() => router.back()}
-          >
-            戻る
-          </Button>
-        </div>)}
+
+      <div className="flex justify-center mt-[36px] mb-[160px] sp:mb-[60px]">
+        {!modalMode && (data?.status === '申請中') && ([<Button
+          key={'1'}
+          buttonType={ButtonType.PRIMARY}
+          buttonClassName="mr-[30px]"
+          handleClick={() => apporove(true)}
+        >
+          <span className="flex items-center">
+            <span>承認</span>
+            <img
+              className="w-[14px] ml-[5px]"
+              src="/img/approve.svg"
+              alt="approve"
+            />
+          </span>
+        </Button>,
+        <Button
+          key={'2'}
+          buttonType={ButtonType.DANGER}
+          buttonClassName="mr-[30px]"
+          handleClick={() => apporove(false)}
+        >
+          <span className="flex items-center">
+            <span>否認</span>
+            <img
+              className="w-[14px] ml-[5px]"
+              src="/img/cross.svg"
+              alt="cross"
+            />
+          </span>
+        </Button>])}
+        <Button
+          buttonType={ButtonType.DEFAULT}
+          buttonClassName="rounded-[5px]"
+          handleClick={() => router.push("/applicationList")}
+        >
+          戻る
+        </Button>
+      </div>
 
       {modalMode && influencerMode && !influencerDetailMode && (
         <Button

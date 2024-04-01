@@ -33,9 +33,10 @@ export default function ApplicationListPage() {
       setIsLoading(true);
       const result = await axios.get("/api/case");
       if (result.data?.length) {
-        setData(result.data);
-        setVisibleData(result.data);
-        setOptionedData(result.data);
+        const resultData = result.data.filter((aData => !(aData.next > 0)))
+        setData(resultData);
+        setVisibleData(resultData);
+        setOptionedData(resultData);
       }
       setIsLoading(false);
     };

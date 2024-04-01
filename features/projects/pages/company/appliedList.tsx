@@ -39,9 +39,11 @@ export default function AppliedList() {
         `/api/case/company?id=${user.user?.targetId}`
       );
       if (result.data?.length) {
-        setData(result.data);
-        setVisibleData(result.data);
-        setOptionedData(result.data);
+        const resultData = result.data.filter((aData => !(aData.next > 0)));
+
+        setData(resultData);
+        setVisibleData(resultData);
+        setOptionedData(resultData);
         setIsLoading(false);
       }
       setIsLoading(false);

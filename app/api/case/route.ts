@@ -29,16 +29,27 @@ export async function POST(request: NextRequest) {
     const defaultValues = {
       date: todayString,
       collectionStatus: "募集前",
+      next: 0,
     };
     body = { ...body, ...defaultValues };
     let query1 = "";
     let query2 = "";
     const keys = Object.keys(body);
+    let isReApply = false;
     keys?.map((aKey) => {
-      if (aKey !== "id") {
-        query1 += aKey + ",";
-        query2 += "'" + body[aKey] + "',";
-      }
+      if (aKey === "previous") isReApply = true;
+      if (
+        aKey === "id" ||
+        aKey === "companyName" ||
+        aKey === "emailAddress" ||
+        aKey === "representativeName"
+      )
+        return;
+      query1 += aKey + ",";
+      query2 +=
+        typeof body[aKey] === "string"
+          ? "'" + body[aKey] + "',"
+          : body[aKey] + ",";
     });
     // insertQuery += `'${body["ds"]}'`;
     await executeQuery(`
@@ -60,6 +71,8 @@ export async function POST(request: NextRequest) {
       date VARCHAR(255) ,
       reason VARCHAR(255) ,
       companyId int,
+      previous int,
+      next int,
       edited BOOLEAN  DEFAULT FALSE,
       FOREIGN KEY (companyId) REFERENCES company(id)
     )
@@ -69,10 +82,21 @@ export async function POST(request: NextRequest) {
       0,
       -1
     )}) VALUES(${query2.slice(0, -1)})`;
+    console.log(query);
 
     const result = await executeQuery(query).catch((e) => {
       return NextResponse.json({ type: "error", msg: "error" });
     });
+    if (isReApply) {
+      const query1 = `select * from cases where previous = ${body.previous}`;
+      const row = await executeQuery(query1).catch((e) => {
+        return NextResponse.json({ type: "error" });
+      });
+      const query2 = `update cases set next = ${row[0].id} where id = ${body.previous}`;
+      const result = await executeQuery(query2).catch((e) => {
+        return NextResponse.json({ type: "error" });
+      });
+    }
     return NextResponse.json({ type: "success" });
   } catch (error) {
     console.error("Error creating table or inserting record:", error);

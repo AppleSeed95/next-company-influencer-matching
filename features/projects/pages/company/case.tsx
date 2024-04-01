@@ -135,8 +135,9 @@ const CasePage: React.FC = () => {
     if (isValid) {
       setError([]);
       if (data.id) {
-        const result = await axios.put("/api/case", {
+        const result = await axios.post("/api/case", {
           ...body,
+          previous: data.id,
           status: "申請中",
         });
         setError([]);
@@ -149,30 +150,30 @@ const CasePage: React.FC = () => {
           ...body,
           status: "申請中",
         });
-        await axios.post("/api/sendEmail", {
-          to: user.user?.email,
-          subject: "【インフルエンサーめぐり】募集案件の登録申請をしました",
-          content: `${user.user?.name} 様
-          \nいつもインフルエンサーめぐりをご利用いただきありがとうございます。
-          \n
-          \n募集案件の登録申請を受け付けました。
-          \n申請確認を確認しますのでしばらくお待ちください。
-          \n-----------------------------------------------------
-          \n 不明点がございましたらお問い合わせフォームよりご連絡ください。
-          \n https://influencer-meguri.jp/ask。
-          `,
-        });
-        await axios.post("/api/sendEmail", {
-          from: user.user?.email,
-          subject: "【インフルエンサーめぐり】募集案件の登録申請がありました",
-          content: `募集案件の登録申請がありました。
-          \nログインして確認してください。
-          \n
-          `,
-        });
-        setError([]);
-        router.replace("/appliedList");
       }
+      await axios.post("/api/sendEmail", {
+        to: user.user?.email,
+        subject: "【インフルエンサーめぐり】募集案件の登録申請をしました",
+        content: `${user.user?.name} 様
+        \nいつもインフルエンサーめぐりをご利用いただきありがとうございます。
+        \n
+        \n募集案件の登録申請を受け付けました。
+        \n申請確認を確認しますのでしばらくお待ちください。
+        \n-----------------------------------------------------
+        \n 不明点がございましたらお問い合わせフォームよりご連絡ください。
+        \n https://influencer-meguri.jp/ask。
+        `,
+      });
+      await axios.post("/api/sendEmail", {
+        from: user.user?.email,
+        subject: "【インフルエンサーめぐり】募集案件の登録申請がありました",
+        content: `募集案件の登録申請がありました。
+        \nログインして確認してください。
+        \n
+        `,
+      });
+      setError([]);
+      router.replace("/appliedList");
     }
     setIsLoading(false);
   };
