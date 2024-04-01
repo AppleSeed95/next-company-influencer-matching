@@ -365,7 +365,7 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
       )}
       {error !== "" && <div className="m-[10px] text-[#EE5736]">{error}</div>}
 
-      <div className="flex justify-center mt-[36px] mb-[160px] sp:mb-[60px]">
+      <div className={modalMode ? "" : "flex justify-center mt-[36px] mb-[160px] sp:mb-[60px]"}>
         {!modalMode && (data?.status === '申請中') && ([<Button
           key={'1'}
           buttonType={ButtonType.PRIMARY}
@@ -396,13 +396,13 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
             />
           </span>
         </Button>])}
-        <Button
+        {!modalMode && <Button
           buttonType={ButtonType.DEFAULT}
           buttonClassName="rounded-[5px]"
           handleClick={() => router.push("/applicationList")}
         >
           戻る
-        </Button>
+        </Button>}
       </div>
 
       {modalMode && influencerMode && !influencerDetailMode && (

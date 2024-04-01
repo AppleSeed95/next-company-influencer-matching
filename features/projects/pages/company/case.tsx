@@ -433,8 +433,8 @@ const CasePage: React.FC = () => {
             </span>
           </span>
           <div>{data.status}</div>
-        </div>,
-        <div
+        </div>, data.status !== "申請中" &&
+        < div
           key={"2"}
           className="flex items-center pt-[20px] pb-[8px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]"
         >
@@ -463,12 +463,14 @@ const CasePage: React.FC = () => {
           ""
         ),
       ]}
-      {error.length !== 0 && (
-        error.map((aError, idx) => (
-          <div className="text-center m-[10px] text-[#EE5736]" key={idx}>{aError}</div>
+      {
+        error.length !== 0 && (
+          error.map((aError, idx) => (
+            <div className="text-center m-[10px] text-[#EE5736]" key={idx}>{aError}</div>
+          )
+          )
         )
-        )
-      )}
+      }
       <div className="flex justify-center mt-[36px] mb-[160px] sp:mb-[60px]">
         {determineEditable() && [
           <Button
@@ -513,7 +515,7 @@ const CasePage: React.FC = () => {
           </Button>
         </Link>
       </div>
-    </div>
+    </div >
   );
 };
 export default CasePage;
