@@ -104,16 +104,16 @@ export default function CaseDetailPage({ caseProps }: caseData) {
         ...visibleData.filter((aData) => aData.status === "申請中"),
       ];
     }
+    if (result.some((aOption) => aOption === "否決")) {
+      resultData = [
+        ...resultData,
+        ...visibleData.filter((aData) => aData.status === "否決"),
+      ];
+    }
     if (result.some((aOption) => aOption === "承認")) {
       resultData = [
         ...resultData,
         ...visibleData.filter((aData) => aData.status === "承認"),
-      ];
-    }
-    if (result.some((aOption) => aOption === "否認")) {
-      resultData = [
-        ...resultData,
-        ...visibleData.filter((aData) => aData.status === "否認"),
       ];
     }
     if (result.some((aOption) => aOption === "完了報告")) {
@@ -393,7 +393,7 @@ export default function CaseDetailPage({ caseProps }: caseData) {
                   <Checkbox
                     title={"否認"}
                     checkBoxClassName="mr-[20px]"
-                    handleChange={(v) => handleOptionChange("否認")}
+                    handleChange={(v) => handleOptionChange("否決")}
                   />
                   <Checkbox
                     title={"完了報告"}
@@ -511,7 +511,7 @@ export default function CaseDetailPage({ caseProps }: caseData) {
                         <div className="text-white bg-[#236997] p-[10px] m-[5px] rounded-lg shadow-sm">
                           完了
                         </div>}
-                      {aData.status === '承認' && <Button
+                      {aData.status === '承認' || aData.status === '完了報告' && <Button
                         handleClick={() => handleApprove("完了", aData.id)}
                         buttonType={ButtonType.PRIMARY}
                       >
@@ -649,18 +649,17 @@ export default function CaseDetailPage({ caseProps }: caseData) {
                   </div>
                   <div className="flex">
                     <span className="mb-[7px] sp:text-spsmall">
-                      {aData.status === "完了" ? (
+                      {aData.status === "完了" &&
                         <div className="text-white bg-[#236997] p-[10px] m-[5px] rounded-lg shadow-sm">
-                          完了した
-                        </div>
-                      ) : (
-                        <Button
-                          handleClick={() => handleApprove("完了", aData.id)}
-                          buttonType={ButtonType.PRIMARY}
-                        >
                           完了
-                        </Button>
-                      )}
+                        </div>}
+                      {aData.status === '承認' || aData.status === '完了報告' && <Button
+                        handleClick={() => handleApprove("完了", aData.id)}
+                        buttonType={ButtonType.PRIMARY}
+                      >
+                        完了
+                      </Button>
+                      }
                     </span>
                   </div>
                 </div>
