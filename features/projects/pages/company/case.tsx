@@ -177,12 +177,13 @@ const CasePage: React.FC = () => {
     setIsLoading(false);
   };
   const determineEditable = () => {
-    let startable;
+    let startable: boolean;
 
-    if (!data.collectionStatus) {
+    if (data.collectionStatus === '募集前') {
       startable =
         !data.status || data.status === "申請前" || data.status === "否認";
     } else {
+
       startable =
         (data.status === "承認" && data.collectionStatus === "停止中") ||
         (data.status === "否認" && data.collectionStatus === "募集中") ||
@@ -430,7 +431,7 @@ const CasePage: React.FC = () => {
           <div>{data.status}</div>
         </div>,
         <div
-          key={"1"}
+          key={"2"}
           className="flex items-center pt-[20px] pb-[8px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]"
         >
           <span className="w-[30%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
@@ -443,7 +444,7 @@ const CasePage: React.FC = () => {
         </div>,
         data.status === "否認" ? (
           <div
-            key={"2"}
+            key={"3"}
             className="flex  pt-[20px] pb-[8px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]"
           >
             <span className="w-[30%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">

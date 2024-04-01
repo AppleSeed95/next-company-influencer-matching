@@ -53,7 +53,7 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
       else {
         setValid(true);
         setData(result.data.data);
-        setReason(result.data.reason);
+        setReason(result.data.data.reason);
         setWantedSNS(JSON.parse(result.data.data.wantedSNS));
         determinePreviousExists(result.data.companyCases);
         if (!modalMode) {
@@ -77,7 +77,9 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
   const apporove = (val: boolean) => {
     const approveApplication = async () => {
       const reason1 = val ? "" : reason;
-      if (!val && reason === "") {
+      console.log(reason, reason1);
+
+      if (!val && (reason1 === "" || reason1 === undefined)) {
         setError("否認理由を入力してください");
         return;
       }
