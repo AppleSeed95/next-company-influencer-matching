@@ -65,7 +65,7 @@ export default function InfluencerListPage() {
     if (result.some((aOption) => aOption === "稼働中")) {
       resultData = [
         ...resultData,
-        ...visibleData.filter((aData) => aData.status === "稼働中"),
+        ...visibleData.filter((aData) => aData.status === "稼働中" || aData.status === "稼動中"),
       ];
     }
     if (result.some((aOption) => aOption === "停止中")) {

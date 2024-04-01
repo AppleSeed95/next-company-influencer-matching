@@ -67,7 +67,7 @@ export default function CompanyListPage() {
     if (result.some((aOption) => aOption === "稼動中")) {
       resultData = [
         ...resultData,
-        ...visibleData.filter((aData) => aData.status === "稼動中"),
+        ...visibleData.filter((aData) => aData.status === "稼動中" || aData.status === "稼働中"),
       ];
     }
     if (result.some((aOption) => aOption === "停止中")) {

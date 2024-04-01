@@ -199,7 +199,7 @@ export default function CaseDetailPage({ caseProps }: caseData) {
     resume?: boolean
   ) => {
     if (state === "募集中") {
-      if (user.user.targetStatus !== "稼動中") {
+      if (user.user.targetStatus !== "稼動中" && user.user.targetStatus !== "稼働中") {
         setConfirmMsg("承認されていないため、募集をうまくできません。");
         setShowConfirm(true);
         return;

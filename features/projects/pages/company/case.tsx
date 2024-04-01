@@ -66,7 +66,7 @@ const CasePage: React.FC = () => {
     if (isLoading) return;
     const { targetStatus } = user.user;
 
-    if (targetStatus !== "稼動中") {
+    if (targetStatus !== "稼動中" && targetStatus !== "稼働中") {
       setConfirmMsg("稼働中ではないので申請できません。");
       setShowConfirm(true);
       return;
