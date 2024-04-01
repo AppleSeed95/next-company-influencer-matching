@@ -57,7 +57,8 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
       if (status) {
         let content = "";
         let subject = "";
-        if (status === "否認") {
+
+        if (status === "停止中") {
           content = `
         ${data?.influencerName}様
         \nインフルエンサーめぐりに申請いただきありがとうございました。
@@ -74,7 +75,7 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
         `;
           subject = "【インフルエンサーめぐり】申請ありがとうございました";
         }
-        if (status === "稼働中") {
+        if (status === "稼働中" || status === "稼動中") {
           content = `
         ${data?.influencerName}様
         \nインフルエンサーめぐりに申請いただきありがとうございました。

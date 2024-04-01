@@ -14,10 +14,9 @@ export async function POST(request: NextRequest) {
       subject,
       text: content,
     };
-    // console.log(msg);
 
     const res = await sgMail.send(msg).catch((e) => {
-      console.log(e);
+      console.log(e.response.body.errors);
     });
     if (!res) {
       return NextResponse.json({ type: "error" });

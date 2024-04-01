@@ -142,7 +142,7 @@ export default function CollectedCase() {
   const handleApply = async (caseId: string) => {
     const { targetStatus } = user.user;
 
-    if (targetStatus !== "稼働中") {
+    if (targetStatus !== "稼働中" && targetStatus !== "稼動中") {
       setConfirmMsg("応募できません");
       setShowConfirm(true);
       return;
