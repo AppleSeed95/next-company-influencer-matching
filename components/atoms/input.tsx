@@ -43,11 +43,19 @@ const Input: React.FC<InputProps> = ({
     }
     handleChange(val);
     if (format) {
-      const regex = new RegExp(format);
-      if (!regex.test(val.trim())) {
-        setError(formatMsg);
-        setIsValid(false);
-        return;
+      if (format === 'n') {
+        if (isNaN(parseInt(val))) {
+          setError(formatMsg);
+          setIsValid(false);
+          return;
+        }
+      } else {
+        const regex = new RegExp(format);
+        if (!regex.test(val.trim())) {
+          setError(formatMsg);
+          setIsValid(false);
+          return;
+        }
       }
     }
     setIsValid(true);

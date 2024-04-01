@@ -192,6 +192,8 @@ const CompanyPage: React.FC<CompanyProps> = ({ companyData }: CompanyProps) => {
         </span>
         <Input
           type={"number"}
+          format="n"
+          formatMsg="月の募集数は半角数字で入力してください。"
           requirMsg="月の募集数を入力してください。"
           inputClassName="w-[170px] border-[#D3D3D3]"
           value={data?.monthlyCollectionCnt}
@@ -208,6 +210,8 @@ const CompanyPage: React.FC<CompanyProps> = ({ companyData }: CompanyProps) => {
         </span>
         <Input
           type={"number"}
+          format="n"
+          formatMsg="同時募集数は半角数字で入力してください。"
           requirMsg="同時募集数を入力してください。"
           inputClassName="w-[170px] border-[#D3D3D3]"
           value={data?.concurrentCollectionCnt}

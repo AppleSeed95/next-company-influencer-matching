@@ -61,8 +61,8 @@ const ChattingRooms: React.FC = () => {
               <div className="font-bold text-[16px]">{aData.caseName}</div>
               <div className="italic">
                 {user.user.role === "企業"
-                  ? aData.influencerName
-                  : aData.companyName}
+                  ? aData.nickName
+                  : aData.cName}
               </div>
             </div>
           </div>
