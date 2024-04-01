@@ -93,7 +93,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
   const [data, setData] = useState(null);
   const [genre, setGenre] = useState(JSON.stringify([]));
   const [showConfirm, setShowConfirm] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState([]);
   const [agree, setAgree] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [expired, setExpired] = useState(false);
@@ -156,37 +156,36 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
       ...data,
       genre,
     };
+    const ErrorList = [];
     const keys = Object.keys(msgs);
     let isValid = true;
 
     keys.forEach((aKey) => {
       if (body[aKey] === "" || !body[aKey]) {
-        if (!isValid) return;
-        setError(msgs[aKey]);
+        ErrorList.push(msgs[aKey]);
         isValid = false;
-        return;
       }
     });
-    if (!isValid) return;
+    if (JSON.parse(genre).length === 0) {
+      ErrorList.push("ジャンルを選択してください");
+      isValid = false;
+    }
     let phonePattern = /^0\d{1,4}-\d{1,4}-\d{4}$/;
     if (!phonePattern.test(data.phoneNumber.trim())) {
-      setError("電話番号形式ではありません");
+      ErrorList.push("電話番号形式ではありません");
       isValid = false;
-      return;
     }
     let mailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!mailPattern.test(data.emailAddress.trim())) {
-      setError("メールアドレス形式ではありません");
+      ErrorList.push("メールアドレス形式ではありません");
       isValid = false;
-      return;
-    }
-    if (JSON.parse(genre).length === 0) {
-      setError("ジャンルを選択してください");
-      isValid = false;
-      return;
     }
     if (!agree && applyMode) {
-      setError("個人情報の取り扱いに同意する必要があります。");
+      ErrorList.push("個人情報の取り扱いに同意する必要があります。");
+      isValid = false;
+    }
+    if (!isValid) {
+      setError(ErrorList);
       return;
     }
     setIsLoading(true);
@@ -226,13 +225,13 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
         });
         router.replace("/applyComplete");
       } else {
-        setError('メールアドレスが登録されていません。')
+        ErrorList.push('メールアドレスが登録されていません。')
       }
     } else {
 
       result = await axios.put("api/influencer", body);
       if (result.data.type === "success") {
-        setError("");
+        setError([]);
         setShowConfirm(true);
       }
     }
@@ -928,8 +927,10 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
           }}
         />}
       </div>
-      {error !== "" && (
-        <div className="text-center m-[10px] text-[#EE5736]">{error}</div>
+      {error.length !== 0 && (
+        error.map((aError, idx) =>
+          <div key={idx} className="text-center m-[10px] text-[#EE5736]">{aError}</div>
+        )
       )}
       <div className="flex justify-center mt-[36px] mb-[160px] sp:mb-[60px]">
         {!applyMode && (
