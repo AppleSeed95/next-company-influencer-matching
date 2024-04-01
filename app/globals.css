@@ -182,7 +182,7 @@ ul li {
 i {
   font-style: italic;
 }
-.button:after {
+/* .button:after {
   content: "";
   background: #f1f1f1;
   display: block;
@@ -202,4 +202,4 @@ i {
   margin: 0;
   opacity: 0.5;
   transition: 0s
-}
+} */

@@ -36,6 +36,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
         {!title && (
           <Button
             handleClick={() => {
+              console.log(data);
+
               const passtest = (aData) => {
                 if (keyword === "") return true;
                 let isMatch = false;

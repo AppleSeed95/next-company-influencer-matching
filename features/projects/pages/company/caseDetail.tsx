@@ -98,10 +98,10 @@ export default function CaseDetailPage({ caseProps }: caseData) {
     if (result.length === 0) {
       resultData = visibleData;
     }
-    if (result.some((aOption) => aOption === "承認待ち")) {
+    if (result.some((aOption) => aOption === "申請中")) {
       resultData = [
         ...resultData,
-        ...visibleData.filter((aData) => aData.status === "承認待ち"),
+        ...visibleData.filter((aData) => aData.status === "申請中"),
       ];
     }
     if (result.some((aOption) => aOption === "承認")) {
@@ -278,7 +278,7 @@ export default function CaseDetailPage({ caseProps }: caseData) {
           <InfluencerPage
             handleApprove={handleApprove}
             modalMode
-            showButton={currentApply?.status !== "否認" && currentApply?.status !== "否決"}
+            showButton={currentApply?.status === "申請中"}
             influencerData={influencerData}
             onCancel={() => setShowInfluencer(false)}
           />
@@ -382,7 +382,7 @@ export default function CaseDetailPage({ caseProps }: caseData) {
                   <Checkbox
                     prefix="状態 ： "
                     title={"申請中"}
-                    handleChange={(v) => handleOptionChange("承認待ち")}
+                    handleChange={(v) => handleOptionChange("申請中")}
                     checkBoxClassName="mr-[20px]"
                   />
                   <Checkbox
@@ -507,18 +507,17 @@ export default function CaseDetailPage({ caseProps }: caseData) {
                       />
                     </td>
                     <td className="w-[100px] py-[25px]  border text-center border-[#D3D3D3] ">
-                      {aData.status === "完了" ? (
+                      {aData.status === "完了" &&
                         <div className="text-white bg-[#236997] p-[10px] m-[5px] rounded-lg shadow-sm">
                           完了
-                        </div>
-                      ) : (
-                        <Button
-                          handleClick={() => handleApprove("完了", aData.id)}
-                          buttonType={ButtonType.PRIMARY}
-                        >
-                          完了
-                        </Button>
-                      )}
+                        </div>}
+                      {aData.status === '承認' && <Button
+                        handleClick={() => handleApprove("完了", aData.id)}
+                        buttonType={ButtonType.PRIMARY}
+                      >
+                        完了
+                      </Button>
+                      }
                     </td>
                   </tr>
                 ))}

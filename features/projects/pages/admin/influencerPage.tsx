@@ -445,35 +445,33 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
           </Button>
         </div>
       )}
-      {modalMode && showButton && (
-        <div className="flex justify-center mt-[36px] pb-[30px] sp:mb-[60px]">
-          <Button
-            buttonType={ButtonType.PRIMARY}
-            handleClick={() => handleApprove("承認")}
-            buttonClassName="mr-[30px]"
-          >
-            <span className="flex items-center">
-              <span>承認</span>
-            </span>
-          </Button>
-          <Button
-            buttonType={ButtonType.DANGER}
-            handleClick={() => handleApprove("否決")}
-            buttonClassName="mr-[30px]"
-          >
-            <span className="flex items-center">
-              <span>否認</span>
-            </span>
-          </Button>
-          <Button
-            handleClick={() => onCancel()}
-            buttonType={ButtonType.DEFAULT}
-            buttonClassName="rounded-[5px]"
-          >
-            戻る
-          </Button>
-        </div>
-      )}
+      <div className="flex justify-center mt-[36px] pb-[30px] sp:mb-[60px]">
+        {modalMode && showButton && <Button
+          buttonType={ButtonType.PRIMARY}
+          handleClick={() => handleApprove("承認")}
+          buttonClassName="mr-[30px]"
+        >
+          <span className="flex items-center">
+            <span>承認</span>
+          </span>
+        </Button>}
+        {modalMode && showButton && <Button
+          buttonType={ButtonType.DANGER}
+          handleClick={() => handleApprove("否決")}
+          buttonClassName="mr-[30px]"
+        >
+          <span className="flex items-center">
+            <span>否認</span>
+          </span>
+        </Button>}
+        <Button
+          handleClick={() => onCancel()}
+          buttonType={ButtonType.DEFAULT}
+          buttonClassName="rounded-[5px]"
+        >
+          戻る
+        </Button>
+      </div>
     </div>
   );
 };

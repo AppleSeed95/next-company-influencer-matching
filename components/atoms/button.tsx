@@ -30,7 +30,7 @@ const Button: React.FC<ButtonProps> = ({
     <button
       type={submit ? "submit" : "button"}
       onClick={handleClick}
-      className={'button shadow-lg relative ' + classNames[buttonType] + buttonClassName}
+      className={classNames[buttonType] + buttonClassName}
     >
       <div className="bg-[#a33f28]"></div>
       {children}

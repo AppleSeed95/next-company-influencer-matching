@@ -60,8 +60,8 @@ export default function CollectedCase() {
         if (result.data?.length) {
           let data = result.data.filter((aItem) => !alreadyAppliedOrNot(aItem.id));
           setData(data);
-          setVisibleData(data);
           setOptionedData(data);
+          setVisibleData(data);
         }
       }
       setIsLoading(false);
@@ -120,14 +120,6 @@ export default function CollectedCase() {
       : [...options, val];
     setOptions(result);
     makeOptioinedData(visibleData, result, options1);
-  };
-  const handleOptionChange1 = (val) => {
-    const isAlready = options1.some((a) => a === val);
-    const result = isAlready
-      ? options1.filter((aOptioin) => aOptioin !== val)
-      : [...options1, val];
-    setOptions1(result);
-    makeOptioinedData(visibleData, options, result);
   };
   const handleSearch = (data) => {
     setVisibleData(data);

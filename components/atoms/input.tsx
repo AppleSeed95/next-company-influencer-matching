@@ -73,18 +73,20 @@ const Input: React.FC<InputProps> = ({
         }}
         onKeyPress={handleKeyPress}
       ></input>
-      {(requirMsg || formatMsg) && (
-        <div
-          className={
-            isValid
-              ? "text-left text-[#EE5736] text-[11px] opacity-0  duration-700"
-              : "text-left text-[#EE5736] text-[11px] duration-700"
-          }
-        >
-          {error}
-        </div>
-      )}
-    </div>
+      {
+        (requirMsg || formatMsg) && (
+          <div
+            className={
+              isValid
+                ? "text-left text-[#EE5736] text-[11px] opacity-0  duration-700"
+                : "text-left text-[#EE5736] text-[11px] duration-700"
+            }
+          >
+            {error}
+          </div>
+        )
+      }
+    </div >
   );
 };
 
