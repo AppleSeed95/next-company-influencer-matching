@@ -87,7 +87,7 @@ export default function CompanyListPage() {
     if (result1.some((aOption) => aOption === "未登録")) {
       resultData1 = [
         ...resultData1,
-        ...resultData.filter((aData) => aData.payment === "未登録"),
+        ...resultData.filter((aData) => aData.payment === ""),
       ];
     }
     if (result1.some((aOption) => aOption === "失敗")) {

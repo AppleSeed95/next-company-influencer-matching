@@ -62,10 +62,10 @@ export default function InfluencerListPage() {
         ...visibleData.filter((aData) => aData.status === "承認待ち"),
       ];
     }
-    if (result.some((aOption) => aOption === "稼動中")) {
+    if (result.some((aOption) => aOption === "稼働中")) {
       resultData = [
         ...resultData,
-        ...visibleData.filter((aData) => aData.status === "稼動中"),
+        ...visibleData.filter((aData) => aData.status === "稼働中"),
       ];
     }
     if (result.some((aOption) => aOption === "停止中")) {
@@ -160,9 +160,9 @@ export default function InfluencerListPage() {
                     checkBoxClassName="mr-[20px]"
                   />
                   <Checkbox
-                    title={"稼動中"}
+                    title={"稼働中"}
                     checkBoxClassName="mr-[20px]"
-                    handleChange={(val) => handleOptionChange("稼動中")}
+                    handleChange={(val) => handleOptionChange("稼働中")}
                   />
                   <Checkbox
                     title={"停止中"}
