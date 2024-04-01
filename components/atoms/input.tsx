@@ -68,7 +68,7 @@ const Input: React.FC<InputProps> = ({
         defaultValue={value}
         className={"border border-[#AEAEAE] h-[35px] pl-[12px]  w-full"}
         placeholder={placeholder}
-        onChange={(e) => {
+        onInput={(e) => {
           validate(e.target.value);
         }}
         onKeyPress={handleKeyPress}

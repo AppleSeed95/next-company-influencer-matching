@@ -186,12 +186,13 @@ const CompanyPage: React.FC<CompanyProps> = ({ companyData }: CompanyProps) => {
           <option value={"退会"}>退会</option>
         </Select>
       </div>
-      <div className="flex items-center py-[20px] w-[50%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]  sp:px-[18px]">
+      <div className="flex  py-[20px] w-[50%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]  sp:px-[18px]">
         <span className="w-[35%] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
           <span>月の募集数</span>
         </span>
         <Input
           type={"number"}
+          requirMsg="月の募集数を入力してください。"
           inputClassName="w-[138px] border-[#D3D3D3]"
           value={data?.monthlyCollectionCnt}
           handleChange={(val) => {
@@ -201,12 +202,13 @@ const CompanyPage: React.FC<CompanyProps> = ({ companyData }: CompanyProps) => {
           }
         />
       </div>
-      <div className="flex items-center py-[20px] w-[50%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+      <div className="flex  py-[20px] w-[50%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
         <span className="w-[35%] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
           <span>同時募集数</span>
         </span>
         <Input
           type={"number"}
+          requirMsg="同時募集数を入力してください。"
           inputClassName="w-[138px] border-[#D3D3D3]"
           value={data?.concurrentCollectionCnt}
           handleChange={(val) => {
