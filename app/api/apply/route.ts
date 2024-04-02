@@ -71,7 +71,6 @@ export async function GET(request: NextRequest) {
     const rows = await executeQuery(query).catch((e) => {
       return NextResponse.json({ type: "error" });
     });
-    console.log(query, rows);
 
     return NextResponse.json(rows);
   } catch (error) {
@@ -82,7 +81,6 @@ export async function GET(request: NextRequest) {
 export async function PUT(request: NextRequest) {
   try {
     const body = await request.json();
-    console.log(body);
 
     let query = "UPDATE apply SET ";
     const keys = Object.keys(body);
