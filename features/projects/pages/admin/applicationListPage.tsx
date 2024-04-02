@@ -101,7 +101,11 @@ export default function ApplicationListPage() {
       <div className="flex flex-col h-full px-[30px] sp:px-[12px] pt-[110px] pb-[30px]">
         <div className="text-title sp:hidden">申請案件一覧</div>
         <SearchBar
-          data={data}
+          data={data.map((aData) => {
+            if (aData.caseEnd) aData.caseEnd = dateString(aData.caseEnd);
+            if (aData.collectionEnd) aData.collectionEnd = `${dateString(aData.collectionStart)} ~ ${dateString(aData.collectionEnd)}`;
+            return aData;
+          })}
           setVisibleData={handleSearch}
           keys={[
             "companyName",
@@ -193,7 +197,7 @@ export default function ApplicationListPage() {
                         {aData.status}
                       </td>
                       <td className="px-[35px] py-[25px]  border border-[#D3D3D3]">
-                        {`${dateString(aData.collectionStart)} ~ ${dateString(aData.collectionEnd)}`}
+                        {`${dateString(aData.collectionStart)} ~ ${dateString(aData.collectionEnd)}` !== ' ~ ' ? `${dateString(aData.collectionStart)} ~ ${dateString(aData.collectionEnd)}` : ''}
                       </td>
                       <td className="px-[35px] py-[25px]  border border-[#D3D3D3] ">
                         {aData.date}

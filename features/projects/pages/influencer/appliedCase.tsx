@@ -163,6 +163,14 @@ export default function AppledCase() {
     };
     createChatRoom();
   };
+  const dateString = (dateValue: string) => {
+    const date = new Date(dateValue);
+    if (isNaN(date.getFullYear())) {
+      return "";
+    }
+    const formattedDate = `${date.getFullYear()}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getDate().toString().padStart(2, '0')} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
+    return formattedDate;
+  }
   return (
     <div className="h-full">
       <div
@@ -186,7 +194,11 @@ export default function AppledCase() {
       <div className="flex flex-col h-full px-[30px] sp:px-[12px] pt-[110px] pb-[30px]">
         <div className="text-title sp:hidden">応募案件一覧</div>
         <SearchBar
-          data={data}
+          data={data.map((aData) => {
+            if (aData.caseEnd) aData.caseEnd = dateString(aData.caseEnd);
+            if (aData.collectionEnd) aData.collectionEnd = `${dateString(aData.collectionStart)} ~ ${dateString(aData.collectionEnd)}`;
+            return aData;
+          })}
           setVisibleData={handleSearch}
           keys={["companyName", "caseName", "casePlace"]}
           extendChild={

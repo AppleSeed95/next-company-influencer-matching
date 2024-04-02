@@ -56,7 +56,7 @@ export async function GET(request: NextRequest) {
     // FROM apply
     // LEFT JOIN apply ON apply.caseId = cases.id
     // ORDER BY apply.id DESC`
-    const query = `SELECT apply.*, cases.caseName,cases.caseType,cases.casePlace ,company.companyName
+    const query = `SELECT apply.*, cases.* ,company.companyName
       FROM apply
       LEFT JOIN cases ON apply.caseId = cases.id
       LEFT JOIN company ON cases.companyId = company.id
