@@ -56,7 +56,11 @@ export async function GET(request: NextRequest) {
     // FROM apply
     // LEFT JOIN apply ON apply.caseId = cases.id
     // ORDER BY apply.id DESC`
-    const query = `SELECT apply.*, cases.* ,company.companyName
+    const query = `SELECT apply.*, cases.caseType,cases.caseName,cases.caseContent,cases.wantedHashTag,
+      cases.wantedSNS, cases.casePlace, cases.collectionStart, cases.collectionEnd, cases.addition, cases.collectionStatus,
+      cases.reason,
+      cases.caseEnd,
+      company.companyName
       FROM apply
       LEFT JOIN cases ON apply.caseId = cases.id
       LEFT JOIN company ON cases.companyId = company.id
@@ -67,6 +71,8 @@ export async function GET(request: NextRequest) {
     const rows = await executeQuery(query).catch((e) => {
       return NextResponse.json({ type: "error" });
     });
+    console.log(query, rows);
+
     return NextResponse.json(rows);
   } catch (error) {
     console.error("Error fetching data:", error);
@@ -76,6 +82,7 @@ export async function GET(request: NextRequest) {
 export async function PUT(request: NextRequest) {
   try {
     const body = await request.json();
+    console.log(body);
 
     let query = "UPDATE apply SET ";
     const keys = Object.keys(body);
@@ -88,7 +95,8 @@ export async function PUT(request: NextRequest) {
     query = query.slice(0, -2);
     query += " ";
     query += `WHERE id = ${body.id}`;
-    await executeQuery(query);
+    console.log(query);
+
     let query1 = `SELECT apply.*,cases.caseName,influencer.influencerName,company.representativeName,company.emailAddress
     FROM apply
     LEFT JOIN cases ON apply.caseId = cases.id
