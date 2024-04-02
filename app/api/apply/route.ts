@@ -95,8 +95,9 @@ export async function PUT(request: NextRequest) {
     query = query.slice(0, -2);
     query += " ";
     query += `WHERE id = ${body.id}`;
-    console.log(query);
-
+    const result = await executeQuery(query).catch((e) => {
+      return NextResponse.json({ type: "error" });
+    });
     let query1 = `SELECT apply.*,cases.caseName,influencer.influencerName,company.representativeName,company.emailAddress
     FROM apply
     LEFT JOIN cases ON apply.caseId = cases.id
