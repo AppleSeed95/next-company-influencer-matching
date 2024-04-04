@@ -11,7 +11,7 @@ export default function ChatLayout({
         <span className="text-title sp:text-sptitle">チャット</span>
       </div>
       <div className="h-full pt-[6vh]">
-        <div className="sp:w-[100%] px-[40px] sp:px-[10px] pb-[7vh] flex h-full max-h-[90vh]">
+        <div className="sp:w-[100%] px-[40px] sp:px-[10px] pb-[7vh] flex h-full max-h-[80vh]">
           <div className="w-[30%] sp:w-[0] sp:hidden">
             <ChattingRooms />
           </div>
