@@ -20,7 +20,7 @@ const CompanyPage: React.FC<CompanyProps> = ({ companyData }: CompanyProps) => {
   const router = useRouter();
   const [data, setData] = useState(null);
   const [showConfirm, setShowConfirm] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState([]);
   useEffect(() => {
     setData(companyData);
     document.title = companyData?.companyName;
@@ -30,28 +30,38 @@ const CompanyPage: React.FC<CompanyProps> = ({ companyData }: CompanyProps) => {
     const monthlyCollectionCnt = data?.monthlyCollectionCnt;
     const concurrentCollectionCnt = data?.concurrentCollectionCnt;
     const mailFormat = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+    const errorList = [];
+    let isValid = true;
     if (emailAddress === "") {
-      setError("メールアドレスを入力してください。");
-      return;
+      // setError("メールアドレスを入力してください。");
+      errorList.push("メールアドレスを入力してください。")
+      isValid = false;
     }
     const regex = new RegExp(mailFormat);
-    if (!regex.test(emailAddress)) {
-      setError("メールアドレス形式で入力してください。");
-      return;
+    if (emailAddress !== "" && !regex.test(emailAddress)) {
+      // setError("メールアドレス形式で入力してください。");
+      errorList.push("メールアドレス形式で入力してください。")
+      isValid = false;
     }
 
     if (!(monthlyCollectionCnt > 0)) {
-      setError('月の募集数を入力してください。')
-      return;
+      errorList.push("月の募集数を入力してください。")
+      isValid = false;
+      // setError('月の募集数を入力してください。')
     }
     if (!(concurrentCollectionCnt > 0)) {
-      setError('同時募集数を入力してください。')
+      errorList.push("同時募集数を入力してください。")
+      isValid = false;
+      // setError('同時募集数を入力してください。')
+    }
+    if (!isValid) {
+      setError(errorList);
       return;
     }
     const result = await axios.put("/api/company", data);
     if (result.data.type === "success") {
       setShowConfirm(true);
-      setError("")
+      setError([])
     }
   };
   const dateString = (dateValue: string) => {
@@ -245,9 +255,12 @@ const CompanyPage: React.FC<CompanyProps> = ({ companyData }: CompanyProps) => {
           handleChange={(val) => setData({ ...data, freeAccount: val })}
         />
       </div>
-      {error !== "" && (
-        <div className="text-center m-[10px] text-[#EE5736]">{error}</div>
-      )}
+      {error.length !== 0 &&
+        error.map((aError, idx) => (
+          <div className="text-center m-[10px] text-[#EE5736]" key={idx}>{aError}</div>
+        ))
+
+      }
       <div className="flex items-center justify-center mt-[36px] mb-[160px] sp:mb-[60px]">
         <Button
           buttonType={ButtonType.PRIMARY}

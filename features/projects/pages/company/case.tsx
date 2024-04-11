@@ -138,7 +138,7 @@ const CasePage: React.FC = () => {
         const result = await axios.post("/api/case", {
           ...body,
           previous: data.id,
-          status: "申請中",
+          status: data.status === '承認' ? "承認 / 申請中" : "申請中",
         });
         setError([]);
         setIsLoading(false);
@@ -185,11 +185,11 @@ const CasePage: React.FC = () => {
 
     if (data.collectionStatus === '募集前') {
       startable =
-        !data.status || data.status === "申請前" || data.status === "否認";
+        !data.status || data.status === "申請前" || data.status === "否認" || data.status === "承認";
     } else {
 
       startable =
-        (data.status === "承認" && data.collectionStatus === "停止中") ||
+        (data.status === "承認" && data.collectionStatus !== "募集終了") ||
         (data.status === "否認" && data.collectionStatus === "募集中") ||
         data.status === "申請前" ||
         (data.status === "否認" && data.collectionStatus === "停止");
@@ -433,7 +433,7 @@ const CasePage: React.FC = () => {
             </span>
           </span>
           <div>{data.status}</div>
-        </div>, data.status !== "申請中" &&
+        </div>, data.status === "承認" &&
         < div
           key={"2"}
           className="flex items-center pt-[20px] pb-[8px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]"

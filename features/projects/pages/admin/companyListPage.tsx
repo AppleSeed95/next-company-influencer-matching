@@ -112,12 +112,35 @@ export default function CompanyListPage() {
       setActive(idx);
     }
   };
+  const composeSearchData = (data) =>
+  (data.map((aData) => {
+    const keys = Object.keys(aData);
+    let stringifiedAData = {};
+    keys.map((aKey) => {
+      stringifiedAData[aKey] = aData[aKey] + '';
+    })
+    return stringifiedAData;
+  })
+  )
+  const dateString = (dateValue: string) => {
+    const date = new Date(dateValue);
+    if (isNaN(date.getFullYear())) {
+      return "";
+    }
+    const formattedDate = `${date.getFullYear()}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getDate().toString().padStart(2, '0')} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
+    return formattedDate;
+  }
   return (
     <div className="h-full">
       <div className="flex flex-col h-full px-[30px] sp:px-[12px] pt-[110px] pb-[30px]">
         <div className="text-title sp:hidden">企業一覧</div>
         <SearchBar
-          data={data}
+          data={composeSearchData(data.map((aData) => {
+            if (aData.address) aData.address = `${aData?.address} - ${aData?.building}`;
+            if (aData.payment) aData.payment = dateString(aData.payment);
+            // if (aData.collectionEnd) aData.collectionEnd = `${dateString(aData.collectionStart)} ~ ${dateString(aData.collectionEnd)}`;
+            return aData;
+          }))}
           setVisibleData={handleSearch}
           keys={["companyName", "responsibleName", "date"]}
           extendChild={

@@ -366,7 +366,7 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
       {error !== "" && <div className="m-[10px] text-[#EE5736]">{error}</div>}
 
       <div className={modalMode ? "" : "flex justify-center mt-[36px] mb-[60px] sp:mb-[60px]"}>
-        {!modalMode && (data?.status === '申請中') && ([<Button
+        {!modalMode && (data?.status === '申請中' || data?.status === '承認 / 申請中') && ([<Button
           key={'1'}
           buttonType={ButtonType.PRIMARY}
           buttonClassName="mr-[30px]"
