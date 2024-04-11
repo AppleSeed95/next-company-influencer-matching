@@ -205,7 +205,7 @@ export default function CaseDetailPage({ caseProps }: caseData) {
         return;
       }
 
-      if (caseData.status !== "承認") {
+      if (!(caseData.status === "承認" || caseData.status === '承認 / 否認')) {
         setConfirmMsg("承認されていないため、募集を開始できません。");
         setShowConfirm(true);
         return;
@@ -511,7 +511,7 @@ export default function CaseDetailPage({ caseProps }: caseData) {
                         <div className="text-white bg-[#236997] p-[10px] m-[5px] rounded-lg shadow-sm">
                           完了
                         </div>}
-                      {aData.status === '承認' || aData.status === '完了報告' && <Button
+                      {(aData.status === '承認' || aData.status === '完了報告') && <Button
                         handleClick={() => handleApprove("完了", aData.id)}
                         buttonType={ButtonType.PRIMARY}
                       >
@@ -653,7 +653,7 @@ export default function CaseDetailPage({ caseProps }: caseData) {
                         <div className="text-white bg-[#236997] p-[10px] m-[5px] rounded-lg shadow-sm">
                           完了
                         </div>}
-                      {aData.status === '承認' || aData.status === '完了報告' && <Button
+                      {(aData.status === '承認' || aData.status === '完了報告') && <Button
                         handleClick={() => handleApprove("完了", aData.id)}
                         buttonType={ButtonType.PRIMARY}
                       >

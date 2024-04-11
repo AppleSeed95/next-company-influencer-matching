@@ -27,6 +27,7 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
   onCancel,
 }: ApplicatinProps) => {
   const [data, setData] = useState(null);
+  const [previousData, setPreviousData] = useState(null);
   const [reason, setReason] = useState("");
   const [wantedSNS, setWantedSNS] = useState([]);
   const [error, setError] = useState("");
@@ -41,6 +42,10 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
         result = await axios.get(`/api/case/aCase/?id=${caseID}`);
       } else {
         result = await axios.get(`/api/case/aCase/?id=${id}`);
+        if (result.data.data.previous > 0) {
+          const previouseResult = await axios.get(`/api/case/aCase/?id=${result.data.data.previous}`);
+          setPreviousData(previouseResult.data.data);
+        }
       }
       if (result?.data.type === 'error') {
         setValid(false);
@@ -68,14 +73,15 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
         setError("否認理由を入力してください");
         return;
       }
-      const update = val ? "承認" : "否認";
+      const reject = data.status === '承認 / 申請中' ? "承認 / 否認" : "否認";
+      const update = val ? "承認" : reject;
       const result = await axios.put(`/api/case/aCase/?id=${id}`, {
         update,
         reason: reason1,
         approveMode: true,
       });
       if (result.data.type === "success") {
-        if (update === "否認")
+        if (update === reject)
           await axios.post("/api/sendEmail", {
             to: data?.emailAddress,
             subject: "【インフルエンサーめぐり】募集案件を否認しました",
@@ -138,7 +144,7 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
           body={confirmMsg}
           onOk={() => {
             setShowConfirm(false);
-            router.back();
+            router.push('/applicationList')
           }}
           onCancel={() => setShowConfirm(false)}
         />
@@ -354,7 +360,7 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
               <Link href={`/application/${data?.next}`}>次の申請内容に戻る</Link>
             </span>
           </div>
-          <div className={data?.previous > 0 ? "flex justify-center float-right" : "flex justify-center float-right invisible"}>
+          <div className={data?.previous > 0 && previousData?.status != '申請前' ? "flex justify-center float-right" : "flex justify-center float-right invisible"}>
             <span className="text-[#3F8DEB]">
               <Link href={`/application/${data?.previous}`}>前回の申請内容を確認する</Link>
             </span>

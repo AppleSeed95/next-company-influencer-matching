@@ -74,6 +74,18 @@ export default function AppliedList() {
         ...visibleData.filter((aData) => aData.status === "承認"),
       ];
     }
+    if (result.some((aOption) => aOption === "承認 / 申請中")) {
+      resultData = [
+        ...resultData,
+        ...visibleData.filter((aData) => aData.status === "承認 / 申請中"),
+      ];
+    }
+    if (result.some((aOption) => aOption === "承認 / 否認")) {
+      resultData = [
+        ...resultData,
+        ...visibleData.filter((aData) => aData.status === "承認 / 否認"),
+      ];
+    }
     if (result.some((aOption) => aOption === "否認")) {
       resultData = [
         ...resultData,
@@ -188,6 +200,16 @@ export default function AppliedList() {
                     title={"承認"}
                     checkBoxClassName="mr-[20px]"
                     handleChange={(v) => handleOptionChange("承認")}
+                  />
+                  <Checkbox
+                    title={"承認 / 申請中"}
+                    checkBoxClassName="mr-[20px]"
+                    handleChange={(v) => handleOptionChange("承認 / 申請中")}
+                  />
+                  <Checkbox
+                    title={"承認 / 否認	"}
+                    checkBoxClassName="mr-[20px]"
+                    handleChange={(v) => handleOptionChange("承認 / 否認")}
                   />
                   <Checkbox
                     title={"否認"}

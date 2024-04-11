@@ -12,6 +12,7 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import Modal from "../../utils/modal";
+import { log } from "console";
 
 const CasePage: React.FC = () => {
   const [data, setData] = useState({
@@ -135,10 +136,16 @@ const CasePage: React.FC = () => {
     if (isValid) {
       setError([]);
       if (data.id) {
+        const currentSavedResult = await axios.get(`/api/case/aCase?id=${id}`);
+        if (currentSavedResult.data.data.collectionStatus === "募集中") {
+          setConfirmMsg("既に募集中なので再申請できません。");
+          setShowConfirm(true);
+          return;
+        }
         const result = await axios.post("/api/case", {
           ...body,
           previous: data.id,
-          status: data.status === '承認' ? "承認 / 申請中" : "申請中",
+          status: data.status === '承認' || data.status === '承認 / 否認' ? "承認 / 申請中" : "申請中",
         });
         setError([]);
         setIsLoading(false);
@@ -185,15 +192,16 @@ const CasePage: React.FC = () => {
 
     if (data.collectionStatus === '募集前') {
       startable =
-        !data.status || data.status === "申請前" || data.status === "否認" || data.status === "承認";
+        !data.status || data.status === "申請前" || data.status === "否認" || data.status === "承認 / 否認" || data.status === "承認";
     } else {
-
       startable =
         (data.status === "承認" && data.collectionStatus !== "募集終了") ||
         (data.status === "否認" && data.collectionStatus === "募集中") ||
         data.status === "申請前" ||
         (data.status === "否認" && data.collectionStatus === "停止");
     }
+    console.log(startable);
+
     return startable;
   };
   return (
