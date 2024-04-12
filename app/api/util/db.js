@@ -50,10 +50,51 @@ connection.connect(async (error) => {
                   if (error) {
                     console.error("Error creating admin:", error);
                     return;
+                  } else {
+                    connection.query(
+                      `
+                      CREATE TABLE IF NOT EXISTS plan (
+                        id INT AUTO_INCREMENT PRIMARY KEY,
+                        name VARCHAR(255)  ,
+                        priceID VARCHAR(255)  ,
+                        monthCnt int  ,
+                        concurrentCnt int
+                      )
+                      `, (error, result) => {
+                      if (error) {
+                        console.error("Error creating plan:", error);
+                        return;
+                      }
+                      connection.query(`
+                      SELECT COUNT(*) AS count FROM plan
+                      `, (error, result) => {
+                        if (error) {
+                          console.error("Error counting plan:", error);
+                          return;
+                        }
+                        if (result[0].count !== 0) {
+                          console.log("plan already exists.");
+                        } else {
+                          connection.query(
+                            `
+                          INSERT INTO plan (name,priceID,monthCnt ,concurrentCnt)
+                          VALUES ('fist','price',3 ,3)
+                          `, (error, result) => {
+                            if (error) {
+                              console.error("Error creating admin:", error);
+                            }
+                          })
+                        }
+                      }
+                      )
+                      console.log("Plan created successfully.");
+                    }
+                    )
                   }
                   console.log("Admin created successfully.");
                 }
               );
+
             }
           }
         );

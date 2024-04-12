@@ -1,16 +1,22 @@
 import { useEffect, useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
+import axios from 'axios';
 
 const stripePromise = loadStripe('pk_test_51OV8DpHeC7VfJv8UJXLcBhECs81qBUSwD7ZJQmNuFtbien8WQCuZ2SCzkOYu2siAwkH1x4GqvCPUJqOVXQULsoz200ctmm80cL');
 
-const CheckoutPage = () => {
+interface priceProps {
+    priceID: string;
+}
+
+const CheckoutPage = ({ priceID }: priceProps) => {
     const [isLoading, setIsLoading] = useState(false);
+
     useEffect(() => {
         const handleClick = async () => {
             setIsLoading(true);
             const stripe = await stripePromise;
             const { error } = await stripe.redirectToCheckout({
-                lineItems: [{ price: 'price_1Ox1PQHeC7VfJv8UA2wSiBeX', quantity: 1 }],
+                lineItems: [{ price: priceID, quantity: 1 }],
                 mode: 'payment',
                 successUrl: `${window.location.origin}/companyInfo`,
                 cancelUrl: `${window.location.origin}/companyInfo`,
@@ -21,7 +27,7 @@ const CheckoutPage = () => {
         };
 
         document.querySelector('#checkoutButton').addEventListener('click', handleClick);
-    }, []);
+    }, [priceID]);
 
     return (
         <div className='pb-[5px]'>

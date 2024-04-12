@@ -15,7 +15,6 @@ import AppyExpired from "./applyExpired";
 export interface CompanyInfoProps {
   applyMode?: boolean;
 }
-const confirmMsg = "操作が成功しました。";
 const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
   applyMode,
 }: CompanyInfoProps) => {
@@ -40,7 +39,9 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
     building: "",
     date: "",
     status: "",
-    paymentCnt: 0
+    paymentCnt: 0,
+    plan: 0,
+    priceID: ''
   });
   const msgs = {
     companyName: "企業名を入力してください",
@@ -60,12 +61,14 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
   const router = useRouter();
   const searchParams = useSearchParams();
   const applyId = searchParams.get('id');
+  const [confirmMsg, setConfirmMsg] = useState('操作が成功しました。')
 
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios.get(
         `/api/company/aCompany?id=${authUser.user?.targetId}`
       );
+
       if (result.data) setData(result.data);
     };
     const getAppliedUserData = async () => {
@@ -193,8 +196,13 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
     }
     if (!isApply) {
       const res = await axios.put(`api/company`, data);
-      if (res.data) {
+      if (res.data.type === 'success') {
+        setConfirmMsg('操作が成功しました。');
         setError("");
+        setShowConfirm(true);
+      }
+      else {
+        setConfirmMsg(res.data.msg);
         setShowConfirm(true);
       }
     }
@@ -240,7 +248,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
       >
         <Modal
           noFooter
-          body={<CheckoutPage />}
+          body={<CheckoutPage priceID={data?.priceID} />}
           onOk={() => setShowPayment(false)}
           onCancel={() => setShowPayment(false)}
         />

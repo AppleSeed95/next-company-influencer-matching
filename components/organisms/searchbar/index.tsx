@@ -22,7 +22,6 @@ const SearchBar: React.FC<SearchBarProps> = ({
 }: SearchBarProps) => {
   const [showOption, setShowOption] = useState(false);
   const [keyword, setKeyword] = useState("");
-  console.log(data);
 
   return (
     <div className="bg-[#F8F9FA] w-full border border-[#D3D3D3] mt-[28px] sp:mt-[0px] px-[35px] sp:px-[14px] mb-[34px] sp:mb-[14px]">

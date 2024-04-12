@@ -24,7 +24,9 @@ interface RowType extends RowDataPacket {
 export async function GET(request: NextRequest) {
   const id = request.nextUrl.searchParams.get("id") || "";
   try {
-    const query = `SELECT * FROM company where id = ${id}  ORDER BY id DESC`;
+    const query = `SELECT company.*, plan.priceID FROM company
+      LEFT JOIN plan ON  company.plan = plan.id 
+      where  company.id = ${id} ORDER BY id DESC`;
     const rows = await executeQuery(query).catch((e) => {
       return NextResponse.json({ type: "error" });
     });

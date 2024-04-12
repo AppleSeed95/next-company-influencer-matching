@@ -15,14 +15,20 @@ interface CompanyData {
   companyName?: string;
   // Add other properties as needed
 }
-const confirmMsg = "操作が成功しました。";
 const CompanyPage: React.FC<CompanyProps> = ({ companyData }: CompanyProps) => {
   const router = useRouter();
   const [data, setData] = useState(null);
   const [showConfirm, setShowConfirm] = useState(false);
   const [error, setError] = useState([]);
+  const [confirmMsg, setConfirmMsg] = useState('操作が成功しました。');
+  const [plans, setPlans] = useState([]);
   useEffect(() => {
     setData(companyData);
+    const fetchPlans = async () => {
+      const { data } = await axios.get('/api/auth/plan');
+      setPlans(data.data);
+    }
+    fetchPlans();
     document.title = companyData?.companyName;
   }, [companyData]);
   const handleUpdate = async () => {
@@ -58,11 +64,15 @@ const CompanyPage: React.FC<CompanyProps> = ({ companyData }: CompanyProps) => {
       setError(errorList);
       return;
     }
-    const result = await axios.put("/api/company", data);
+    const planUpdae = data.plan !== '' ? data.plan : plans[0].id;
+    const result = await axios.put("/api/company", { ...data, plan: planUpdae });
     if (result.data.type === "success") {
-      setShowConfirm(true);
-      setError([])
+      setConfirmMsg('操作が成功しました。')
+    } else {
+      setConfirmMsg(result.data.msg ?? 'エラーが発生した。')
     }
+    setShowConfirm(true);
+    setError([])
   };
   const dateString = (dateValue: string) => {
     const date = new Date(dateValue);
@@ -241,9 +251,9 @@ const CompanyPage: React.FC<CompanyProps> = ({ companyData }: CompanyProps) => {
           value={data?.plan}
           handleChange={(val) => setData({ ...data, plan: val })}
         >
-          <option value={"月1プラン"}>月1プラン</option>
-          <option value={"月2プラン"}>月2プラン</option>
-          <option value={"月3プラン"}>月3プラン</option>
+          {plans.map((aPlan, idx) => (
+            <option value={aPlan.id} key={idx}>{aPlan.name}</option>
+          ))}
         </Select>
       </div>
       <div className="flex items-center py-[20px] w-[50%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">

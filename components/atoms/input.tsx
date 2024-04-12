@@ -73,7 +73,7 @@ const Input: React.FC<InputProps> = ({
                 ? type
                 : "text"
         }
-        defaultValue={value}
+        value={value}
         className={"border border-[#AEAEAE] h-[35px] pl-[12px]  w-full"}
         placeholder={placeholder}
         onInput={(e) => {

@@ -55,7 +55,7 @@ export async function POST(request: NextRequest) {
       date: todayString,
       payment: "",
       paymentFailed: "",
-      plan: "",
+      plan: 1,
       thisMonthCollectionCnt: 0,
       conCurrentCnt: 0,
       monthlyCollectionCnt: 1,
@@ -68,7 +68,10 @@ export async function POST(request: NextRequest) {
     const keys = Object.keys(body);
     keys?.map((aKey) => {
       query1 += aKey + ",";
-      query2 += "'" + body[aKey] + "',";
+      query2 +=
+        typeof body[aKey] === "string"
+          ? "'" + body[aKey] + "',"
+          : +body[aKey] + ",";
     });
     // insertQuery += `'${body["ds"]}'`;
     await executeQuery(`
@@ -94,11 +97,12 @@ export async function POST(request: NextRequest) {
       thisMonthCollectionCnt int ,
       paymentCnt int ,
       conCurrentCnt int,
-      plan VARCHAR(255) NOT NULL,
+      plan int,
       freeAccount BOOLEAN NOT NULL DEFAULT FALSE,
       userId int,
       date VARCHAR(255) NOT NULL,
-      FOREIGN KEY (userId) REFERENCES users(id)
+      FOREIGN KEY (userId) REFERENCES users(id),
+      FOREIGN KEY (plan) REFERENCES plan(id)
     )
   `);
     console.log("Table created successfully!");
@@ -106,6 +110,7 @@ export async function POST(request: NextRequest) {
       0,
       -1
     )}) VALUES(${query2.slice(0, -1)})`;
+    console.log(query);
 
     await executeQuery(query).catch((e) => {
       return NextResponse.json({ type: "error", msg: "error" });
@@ -131,7 +136,17 @@ export async function GET() {
 export async function PUT(request: NextRequest) {
   try {
     let body = await request.json();
-
+    const userEmail = body.emailAddress;
+    const query1 = `select id, plainPassword from users where email = '${userEmail}'`;
+    const rows1 = await executeQuery(query1).catch((e) => {
+      return NextResponse.json({ type: "error" });
+    });
+    if (rows1.length > 0 && rows1[0].id !== body.userId) {
+      return NextResponse.json({
+        type: "error",
+        msg: "入力したEメールアドレスがすでに登録されています。",
+      });
+    }
     let query = "UPDATE company SET ";
     const keys = Object.keys(body);
 
@@ -139,7 +154,7 @@ export async function PUT(request: NextRequest) {
       body.freeAccount == 1 || body.freeAccount == true ? 1 : 0;
 
     keys?.map((aKey) => {
-      if (aKey !== "id" && aKey !== "userId") {
+      if (aKey !== "id" && aKey !== "userId" && aKey !== "priceID") {
         if (aKey === "freeAccount") {
           query += `${aKey} = ${freeAccount}, `;
         } else {
@@ -150,9 +165,14 @@ export async function PUT(request: NextRequest) {
     query = query.slice(0, -2);
     query += " ";
     query += `WHERE id = ${body.id}`;
+    console.log(query);
 
     await executeQuery(query).catch((e) => {
       return NextResponse.json({ type: "error", msg: "no table exists" });
+    });
+    const userQuery = `UPDATE users SET email = '${userEmail}' where id = ${body.userId}`;
+    await executeQuery(userQuery).catch((e) => {
+      return NextResponse.json({ type: "error" });
     });
     return NextResponse.json({ type: "success" });
   } catch (error) {

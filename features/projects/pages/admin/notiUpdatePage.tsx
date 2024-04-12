@@ -2,8 +2,6 @@
 import React, { useEffect, useState } from "react";
 import Button from "@/components/atoms/button";
 import { ButtonType } from "@/components/atoms/buttonType";
-import dynamic from "next/dynamic";
-const Editor = dynamic(() => import("@/components/organisms/CKEditor"), { ssr: false });
 
 import TextArea from "@/components/atoms/textarea";
 import axios from "axios";

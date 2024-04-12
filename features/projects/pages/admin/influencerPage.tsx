@@ -7,7 +7,6 @@ import Select from "@/components/atoms/select";
 import axios from "axios";
 import Modal from "../../utils/modal";
 import { useRouter } from "next/navigation";
-const confirmMsg = "操作が成功しました。";
 export interface InfluencerProps {
   influencerData?: InfluencerData;
   modalMode?: boolean;
@@ -27,6 +26,7 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
   handleApprove,
 }: InfluencerProps) => {
   const [data, setData] = useState(null);
+  const [confirmMsg, setConfirmMsg] = useState('操作が成功しました。')
   const [showConfirm, setShowConfirm] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
@@ -102,6 +102,11 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
           content: content,
         });
       }
+      if (result.data.type === 'error') {
+        setConfirmMsg(result.data.msg ?? 'エラーが発生しました。');
+      } else {
+        setConfirmMsg('操作が成功しました。');
+      }
       setShowConfirm(true);
     }
   };
@@ -123,8 +128,8 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
       >
         <Modal
           body={confirmMsg}
-          onOk={() => router.back()}
-          onCancel={() => router.back()}
+          onOk={() => setShowConfirm(false)}
+          onCancel={() => setShowConfirm(false)}
         />
       </div>
       {!modalMode && (

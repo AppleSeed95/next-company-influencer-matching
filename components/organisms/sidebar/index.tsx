@@ -44,6 +44,15 @@ export default function SideBar() {
         >
           <Link href={"/notification"}>お知らせ更新</Link>
         </div>
+        <div
+          className={
+            pathName.indexOf("plan") !== -1
+              ? "p-[12px] text-[14px] text-[#3F8DEB]"
+              : "p-[12px] text-[14px] "
+          }
+        >
+          <Link href={"/planManage"}>プラン管理</Link>
+        </div>
       </div>
     </div>
   );

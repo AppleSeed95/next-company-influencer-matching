@@ -12,7 +12,6 @@ import { authUserState } from "@/recoil/atom/auth/authUserAtom";
 import { useRouter, useSearchParams } from "next/navigation";
 import Modal from "../../utils/modal";
 import AppyExpired from "../company/applyExpired";
-const confirmMsg = "操作が成功しました。";
 export interface InfluencerInfoProps {
   applyMode?: boolean;
 }
@@ -89,6 +88,7 @@ const msgs = {
 const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
   applyMode,
 }: InfluencerInfoProps) => {
+  const [confirmMsg, setConfirmMsg] = useState("操作が成功しました。")
   const authUser = useRecoilValue(authUserState);
   const [data, setData] = useState(null);
   const [genre, setGenre] = useState(JSON.stringify([]));
@@ -170,6 +170,10 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
       ErrorList.push("ジャンルを選択してください");
       isValid = false;
     }
+    if (isValid === false) {
+      setError(ErrorList);
+      return
+    }
     let phonePattern = /^0\d{1,4}-\d{1,4}-\d{4}$/;
     if (data.phoneNumber !== '' && !phonePattern.test(data.phoneNumber.trim())) {
       ErrorList.push("電話番号形式ではありません");
@@ -231,7 +235,11 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
 
       result = await axios.put("api/influencer", body);
       if (result.data.type === "success") {
+        setConfirmMsg('操作が成功しました。');
         setError([]);
+        setShowConfirm(true);
+      } else {
+        setConfirmMsg(result.data.msg ?? "error");
         setShowConfirm(true);
       }
     }

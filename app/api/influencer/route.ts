@@ -98,14 +98,22 @@ export async function PUT(request: NextRequest) {
   try {
     const body = await request.json();
     const userEmail = body.emailAddress;
-
-    const query1 = `select plainPassword from users where email = '${userEmail}'`;
-    const rows = await executeQuery(query1).catch((e) => {
-      return NextResponse.json({ type: "error", msg: "no table exists" });
+    const query1 = `select id, plainPassword from users where email = '${userEmail}'`;
+    const rows1 = await executeQuery(query1).catch((e) => {
+      return NextResponse.json({ type: "error" });
+    });
+    if (rows1.length > 0 && rows1[0].id !== body.userId) {
+      return NextResponse.json({
+        type: "error",
+        msg: "入力したEメールアドレスがすでに登録されています。",
+      });
+    }
+    const query2 = `select id, plainPassword from users where id = ${body.userId}`;
+    const rows2 = await executeQuery(query2).catch((e) => {
+      return NextResponse.json({ type: "error" });
     });
     let query = "UPDATE influencer SET ";
     const keys = Object.keys(body);
-
     keys?.map((aKey) => {
       if (aKey !== "id" && aKey !== "userId") {
         query += `${aKey} = '${body[aKey]}', `;
@@ -114,13 +122,18 @@ export async function PUT(request: NextRequest) {
     query = query.slice(0, -2);
     query += " ";
     query += `WHERE id = ${body.id}`;
+
     await executeQuery(query).catch((e) => {
       return NextResponse.json({ type: "error" });
     });
+    const userQuery = `UPDATE users SET email = '${userEmail}' where id = ${body.userId}`;
 
+    await executeQuery(userQuery).catch((e) => {
+      return NextResponse.json({ type: "error" });
+    });
     return NextResponse.json({
       type: "success",
-      password: rows[0].plainPassword,
+      password: rows2[0].plainPassword,
     });
   } catch (error) {
     console.error("Error fetching data:", error);

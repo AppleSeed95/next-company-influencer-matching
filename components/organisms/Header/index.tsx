@@ -130,6 +130,13 @@ const Header: React.FC<Headerprops> = ({ mode }: Headerprops) => {
               >
                 <Link href={"/notification"}>お知らせ更新</Link>
               </div>,
+              <div
+                key={"admin5"}
+                className="p-[12px] text-[14px]"
+                onClick={() => setShowMenu(false)}
+              >
+                <Link href={"/planManage"}>プラン管理</Link>
+              </div>,
             ]}
             {mode === "company" && [
               <div
