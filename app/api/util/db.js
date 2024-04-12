@@ -78,7 +78,7 @@ connection.connect(async (error) => {
                           connection.query(
                             `
                           INSERT INTO plan (name,priceID,monthCnt ,concurrentCnt)
-                          VALUES ('fist','price',3 ,3)
+                          VALUES ('fist','price_1Ox1PQHeC7VfJv8UA2wSiBeX',3 ,3)
                           `, (error, result) => {
                             if (error) {
                               console.error("Error creating admin:", error);

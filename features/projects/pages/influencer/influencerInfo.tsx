@@ -170,10 +170,6 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
       ErrorList.push("ジャンルを選択してください");
       isValid = false;
     }
-    if (isValid === false) {
-      setError(ErrorList);
-      return
-    }
     let phonePattern = /^0\d{1,4}-\d{1,4}-\d{4}$/;
     if (data.phoneNumber !== '' && !phonePattern.test(data.phoneNumber.trim())) {
       ErrorList.push("電話番号形式ではありません");
@@ -499,13 +495,11 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
             <Checkbox
               value={
                 data?.genre
-                  ? JSON.parse(data?.genre).includes("アパレル・ファッション系")
+                  ? JSON.parse(data?.genre).includes("漫画・イラスト系")
                   : false
               }
-              handleChange={(val) =>
-                handleGenreChange("アパレル・ファッション系")
-              }
-              title="アパレル・ファッション系"
+              title="漫画・イラスト系"
+              handleChange={(val) => handleGenreChange("漫画・イラスト系")}
             />
             <Checkbox
               value={
@@ -520,16 +514,6 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
           </div>
           <div className="flex py-[5px]">
             <Checkbox
-              value={
-                data?.genre
-                  ? JSON.parse(data?.genre).includes("漫画・イラスト系")
-                  : false
-              }
-              title="漫画・イラスト系"
-              handleChange={(val) => handleGenreChange("漫画・イラスト系")}
-            />
-            <Checkbox
-              checkBoxClassName="ml-[25px]"
               title="アート系"
               value={
                 data?.genre

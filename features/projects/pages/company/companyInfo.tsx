@@ -56,7 +56,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
     postalCode: "郵便番号を入力してください",
     address: "住所を入力してください",
   };
-  const [error, setError] = useState("");
+  const [error, setError] = useState([]);
   const [expired, setExpired] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -99,40 +99,37 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
     if (isLoading) return;
     const keys = Object.keys(msgs);
     let isValid = true;
-
+    let ErrorList = [];
     keys.forEach((aKey) => {
       if (data[aKey] === "") {
-        if (!isValid) return;
-        setError(msgs[aKey]);
+        ErrorList.push(msgs[aKey]);
         isValid = false;
-        return;
       }
     });
-    if (!isValid) return;
-
     let phonePattern = /^0\d{1,4}-\d{1,4}-\d{4}$/;
     if (!phonePattern.test(data.phoneNumber.trim())) {
-      setError("電話番号形式ではありません");
+
+      ErrorList.push('電話番号形式ではありません');
       isValid = false;
-      return;
     }
     let mailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!mailPattern.test(data.emailAddress.trim())) {
-      setError("メールアドレス形式ではありません");
+      ErrorList.push('メールアドレス形式ではありません');
       isValid = false;
-      return;
     }
     let postalCodePattern = /^\d{3}-\d{4}$/;
     if (!postalCodePattern.test(data.postalCode.trim())) {
-      setError("郵便番号形式ではありません");
+      ErrorList.push('郵便番号形式ではありません');
       isValid = false;
-      return;
     }
     if (!agree && applyMode) {
-      setError("個人情報の取り扱いに同意する必要があります。");
+      ErrorList.push('個人情報の取り扱いに同意する必要があります。');
+      isValid = false;
+    }
+    if (!isValid) {
+      setError(ErrorList);
       return;
     }
-    if (!isValid) return;
     setIsLoading(true);
     if (isApply) {
       const res = await axios.post(`api/company`, data);
@@ -191,14 +188,14 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
           router.push("/applyComplete");
         }
       } else {
-        setError("メールアドレスが登録されていません。")
+        setError(["メールアドレスが登録されていません。"])
       }
     }
     if (!isApply) {
       const res = await axios.put(`api/company`, data);
       if (res.data.type === 'success') {
         setConfirmMsg('操作が成功しました。');
-        setError("");
+        setError([]);
         setShowConfirm(true);
       }
       else {
@@ -491,10 +488,10 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
           }}
         />
       </div>}
-      {error !== "" && (
-        <div className="text-center m-[10px] text-[#EE5736]">{error}</div>
-      )}
-
+      {error.length > 0 && error.map((aError, idx) => (
+        <div key={idx} className="text-center m-[10px] text-[#EE5736]">{aError}</div>
+      ))
+      }
       {applyMode ? (
         <div className="flex justify-center mt-[36px] mb-[160px] sp:mb-[60px]">
           <Button

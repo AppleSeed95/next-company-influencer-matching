@@ -47,7 +47,7 @@ const Input: React.FC<InputProps> = ({
       return;
     }
     handleChange(val);
-    if (format) {
+    if (format && val?.length > 0) {
       if (format === 'n') {
         if (isNaN(parseInt(val))) {
           setError(formatMsg);

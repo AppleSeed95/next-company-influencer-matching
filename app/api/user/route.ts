@@ -57,7 +57,7 @@ export async function DELETE(request: NextRequest) {
       type: "error",
     });
   });
-  if (row[0].name.length > 0) {
+  if (row[0].name > 0) {
     return NextResponse.json({
       type: "success",
     });

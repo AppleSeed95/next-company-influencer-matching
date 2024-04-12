@@ -67,11 +67,13 @@ export async function POST(request: NextRequest) {
     let query2 = "";
     const keys = Object.keys(body);
     keys?.map((aKey) => {
-      query1 += aKey + ",";
-      query2 +=
-        typeof body[aKey] === "string"
-          ? "'" + body[aKey] + "',"
-          : +body[aKey] + ",";
+      if (!(aKey === "priceID")) {
+        query1 += aKey + ",";
+        query2 +=
+          typeof body[aKey] === "string"
+            ? "'" + body[aKey] + "',"
+            : +body[aKey] + ",";
+      }
     });
     // insertQuery += `'${body["ds"]}'`;
     await executeQuery(`
@@ -110,6 +112,7 @@ export async function POST(request: NextRequest) {
       0,
       -1
     )}) VALUES(${query2.slice(0, -1)})`;
+    console.log(query);
 
     await executeQuery(query).catch((e) => {
       return NextResponse.json({ type: "error", msg: "error" });

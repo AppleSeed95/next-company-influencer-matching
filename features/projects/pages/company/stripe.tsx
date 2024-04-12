@@ -16,7 +16,7 @@ const CheckoutPage = ({ priceID }: priceProps) => {
             setIsLoading(true);
             const stripe = await stripePromise;
             const { error } = await stripe.redirectToCheckout({
-                lineItems: [{ price: priceID, quantity: 1 }],
+                lineItems: [{ price: priceID.trim(), quantity: 1 }],
                 mode: 'payment',
                 successUrl: `${window.location.origin}/companyInfo`,
                 cancelUrl: `${window.location.origin}/companyInfo`,
