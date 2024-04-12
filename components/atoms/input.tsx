@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export interface InputProps {
   inputClassName?: string;
@@ -34,6 +34,11 @@ const Input: React.FC<InputProps> = ({
 }: InputProps) => {
   const [error, setError] = useState("errorMsg");
   const [isValid, setIsValid] = useState(true);
+  useEffect(() => {
+    if (value !== '') {
+      validate(value);
+    }
+  }, [value])
   const validate = (val: string) => {
     if (!notRequired && val === "") {
       setError(requirMsg);
