@@ -21,7 +21,6 @@ export async function PUT(request: NextRequest) {
     const query = `
       UPDATE plan set name = '${name}', priceID = '${priceID}', monthCnt = ${monthCnt}, concurrentCnt = ${concurrentCnt} WHERE id = ${id}
     `;
-    console.log(query);
 
     await executeQuery(query).catch((e) => {
       return NextResponse.json({ type: "error" });
