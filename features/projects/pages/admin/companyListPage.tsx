@@ -97,7 +97,7 @@ export default function CompanyListPage() {
       ];
     }
     if (result1.some((aOption) => aOption === "無料アカウント")) {
-      resultData1 = resultData1.filter((aData) => aData.freeAccount === 1);
+      resultData1 = resultData1.filter((aData) => aData.freeAccount === 1 || aData.freeAccount === '1');
     }
     setOptionedData(resultData1.sort((a, b) => -(a.id - b.id)));
   };
@@ -138,7 +138,6 @@ export default function CompanyListPage() {
           data={composeSearchData(data.map((aData) => {
             if (aData.address) aData.address = `${aData?.address} - ${aData?.building}`;
             if (aData.payment) aData.payment = dateString(aData.payment);
-            // if (aData.collectionEnd) aData.collectionEnd = `${dateString(aData.collectionStart)} ~ ${dateString(aData.collectionEnd)}`;
             return aData;
           }))}
           setVisibleData={handleSearch}
@@ -241,7 +240,7 @@ export default function CompanyListPage() {
                         {aData?.payment.length > 0 ? aData.payment?.substring(0, 10) + '日まで' : ''}
                       </td>
                       <td className="px-[35px] py-[25px]  border border-[#D3D3D3]">
-                        {aData.freeAccount ? "無料アカウント" : ""}
+                        {aData.freeAccount === '1' || aData.freeAccount == 1 ? "無料アカウント" : ""}
                       </td>
                       <td className="px-[35px] py-[25px]  border border-[#D3D3D3] ">
                         {aData.date}

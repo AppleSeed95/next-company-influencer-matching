@@ -10,6 +10,7 @@ interface AuthUserState {
     targetStatus?: string;
     targetName?: string;
     isFree?: number;
+    active?: number;
     payment?: string;
   } | null;
 }

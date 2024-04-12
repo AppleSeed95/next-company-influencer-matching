@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { executeQuery } from "../util/db";
+import { use } from "react";
 const bcrypt = require("bcrypt");
 
 export interface RowType {
@@ -7,6 +8,27 @@ export interface RowType {
   email: string;
   password: string;
   role: string;
+}
+
+export async function PUT(request: NextRequest) {
+  const id = request.nextUrl.searchParams.get("id") || "";
+  const { val } = await request.json();
+  try {
+    const update = val ? 1 : 0;
+
+    const query = `
+      UPDATE users set active = ${update} where id = ${id}
+    `;
+    await executeQuery(query).catch((e) => {
+      return NextResponse.json({ type: "error" });
+    });
+    return NextResponse.json({
+      type: "success",
+    });
+  } catch (error) {
+    console.error("Error creating table or inserting record:", error);
+    return NextResponse.json({ error: error });
+  }
 }
 
 export async function POST(request: NextRequest) {
@@ -52,11 +74,25 @@ export async function POST(request: NextRequest) {
         type: "error",
         msg: "入力に誤りがあります。",
       });
+    } else {
+      if (user.role === "企業" && user.active === 0) {
+        const payment = result[0].payment;
+        const paymentInfo = new Date(payment);
+        const today = new Date();
+        const allowed = paymentInfo > today;
+        if (!allowed) {
+          return NextResponse.json({
+            type: "error",
+            msg: "使用期間が切れました。",
+          });
+        }
+      }
     }
     const targetId = result1[0].id;
     const targetStatus = result1[0].status;
     const isFree = result1[0].freeAccount ? result1[0].freeAccount : true;
-    let data = { ...user, targetId, targetStatus, isFree };
+    const active = user.active;
+    let data = { ...user, targetId, targetStatus, isFree, active };
     if (user.role === "企業") {
       data = {
         ...data,

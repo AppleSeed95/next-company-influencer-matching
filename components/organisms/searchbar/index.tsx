@@ -29,7 +29,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
         {!title && (
           <Input
             handleChange={(v) => {
-              if (v) setKeyword(v.trim())
+              setKeyword(v?.trim())
             }}
             inputClassName="max-w-[420px] grow sp:text-sp text-small border-[#D3D3D3]"
             placeholder=" キーワードを入力してください"
@@ -40,7 +40,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
           <Button
             handleClick={() => {
               const passtest = (aData) => {
-                if (keyword === "") return true;
+                if (keyword === "" || !keyword) return true;
                 let isMatch = false;
                 [...keys, ...Object.keys(data[0])].forEach((aKey) => {
                   if (typeof (aData[aKey]) === 'string') {

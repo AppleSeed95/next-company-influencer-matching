@@ -20,6 +20,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
 }: CompanyInfoProps) => {
   const authUser = useRecoilValue(authUserState);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [active, setActive] = useState(1);
   const [showPayment, setShowPayment] = useState(false);
   const [agree, setAgree] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -41,7 +42,8 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
     status: "",
     paymentCnt: 0,
     plan: 0,
-    priceID: ''
+    priceID: '',
+    userId: 0,
   });
   const msgs = {
     companyName: "企業名を入力してください",
@@ -62,15 +64,17 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
   const searchParams = useSearchParams();
   const applyId = searchParams.get('id');
   const [confirmMsg, setConfirmMsg] = useState('操作が成功しました。')
+  const fetchData = async () => {
+    const result = await axios.get(
+      `/api/company/aCompany?id=${authUser.user?.targetId}`
+    );
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios.get(
-        `/api/company/aCompany?id=${authUser.user?.targetId}`
-      );
-
-      if (result.data) setData(result.data);
+    if (result.data) {
+      setData(result.data)
+      setActive(result.data.active);
     };
+  };
+  useEffect(() => {
     const getAppliedUserData = async () => {
       const result = await axios.get(`/api/user?id=${applyId}`);
       if (result.data.type === 'error') {
@@ -88,7 +92,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
       }
     }
     if (!applyMode && authUser) {
-      fetchData()
+      fetchData();
       document.title = '企業情報変更';
     };
     if (applyMode && applyId) {
@@ -214,6 +218,14 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
         <AppyExpired />
       </div>
     )
+  }
+  const handleUpdateAccount = async (val) => {
+    const res = await axios.put(`/api/auth?id=${data?.userId}`, { val: val });
+    if (res.data.type === 'success') {
+      setConfirmMsg('操作が成功しました。');
+      setShowConfirm(true);
+      fetchData();
+    }
   }
   return (
     <div
@@ -532,9 +544,18 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
               />
             </span>
           </Button>
-          {data?.paymentCnt >= 6 && < Button buttonType={ButtonType.PRIMARY} buttonClassName="mr-[30px]">
+          {(data?.paymentCnt >= 6 && active === 1) && < Button buttonType={ButtonType.PRIMARY} buttonClassName="mr-[30px]"
+            handleClick={() => handleUpdateAccount(false)}
+          >
             <span className="flex ">
               <span>解約</span>
+            </span>
+          </Button>}
+          {active === 0 && < Button buttonType={ButtonType.PRIMARY} buttonClassName="mr-[30px]"
+            handleClick={() => handleUpdateAccount(true)}
+          >
+            <span className="flex ">
+              <span>継続</span>
             </span>
           </Button>}
           <Button

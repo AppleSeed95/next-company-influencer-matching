@@ -22,7 +22,8 @@ connection.connect(async (error) => {
       name VARCHAR(255) ,
       role VARCHAR(255)  ,
       applyTime VARCHAR(255),
-      plainPassword VARCHAR(255)
+      plainPassword VARCHAR(255),
+      active BOOLEAN NOT NULL DEFAULT TRUE
     )
   `,
       (error, result) => {

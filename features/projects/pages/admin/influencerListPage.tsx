@@ -43,6 +43,8 @@ export default function InfluencerListPage() {
       const result = await axios.get("/api/influencer");
       if (result.data?.length) {
         setData(result.data);
+        console.log(result.data);
+
         setOptionedData(result.data);
         setVisibleData(result.data);
       }
@@ -79,6 +81,7 @@ export default function InfluencerListPage() {
       return;
     }
     let resultData1 = [];
+
     if (result1.some((aOption) => aOption === "instagram")) {
       resultData1 = [
         ...resultData1,
@@ -110,9 +113,10 @@ export default function InfluencerListPage() {
       ];
     }
     if (result1.some((aOption) => aOption === "etc")) {
+
       resultData1 = [
         ...resultData1,
-        ...resultData.filter((aData) => (aData.otherSNS !== "" && aData.otherSNS !== "null" && !resultData1.some((aResult) => aResult.id === aData.id))),
+        ...resultData.filter((aData) => (aData.otherSNS !== "" && aData.otherSNS !== "null" && aData.otherSNS !== null && !resultData1.some((aResult) => aResult.id === aData.id))),
       ];
     }
     setOptionedData(resultData1.sort((a, b) => -(a.id - b.id)));
