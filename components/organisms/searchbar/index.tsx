@@ -28,7 +28,9 @@ const SearchBar: React.FC<SearchBarProps> = ({
       <div className="flex gap-x-[20px] sp:gap-x-[12px] py-[12px] items-center  ">
         {!title && (
           <Input
-            handleChange={(v) => setKeyword(v.trim())}
+            handleChange={(v) => {
+              if (v) setKeyword(v.trim())
+            }}
             inputClassName="max-w-[420px] grow sp:text-sp text-small border-[#D3D3D3]"
             placeholder=" キーワードを入力してください"
           />
