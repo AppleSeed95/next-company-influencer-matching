@@ -156,7 +156,12 @@ export async function PUT(request: NextRequest) {
       body.freeAccount == 1 || body.freeAccount == true ? 1 : 0;
 
     keys?.map((aKey) => {
-      if (aKey !== "id" && aKey !== "userId" && aKey !== "priceID") {
+      if (
+        aKey !== "id" &&
+        aKey !== "userId" &&
+        aKey !== "priceID" &&
+        aKey !== "active"
+      ) {
         if (aKey === "freeAccount") {
           query += `${aKey} = ${freeAccount}, `;
         } else {
@@ -167,6 +172,7 @@ export async function PUT(request: NextRequest) {
     query = query.slice(0, -2);
     query += " ";
     query += `WHERE id = ${body.id}`;
+
     await executeQuery(query).catch((e) => {
       return NextResponse.json({ type: "error", msg: "no table exists" });
     });
