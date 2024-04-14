@@ -171,12 +171,12 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
       isValid = false;
     }
     let phonePattern = /^0\d{1,4}-\d{1,4}-\d{4}$/;
-    if (data.phoneNumber?.length > 0 && !phonePattern.test(data?.phoneNumber.trim())) {
+    if (data?.phoneNumber?.length > 0 && !phonePattern.test(data?.phoneNumber.trim())) {
       ErrorList.push("電話番号形式ではありません");
       isValid = false;
     }
     let mailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (data.emailAddress?.length > 0 && !mailPattern.test(data?.emailAddress.trim())) {
+    if (data?.emailAddress?.length > 0 && !mailPattern.test(data?.emailAddress.trim())) {
       ErrorList.push("メールアドレス形式ではありません");
       isValid = false;
     }
