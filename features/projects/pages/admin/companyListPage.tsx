@@ -137,7 +137,7 @@ export default function CompanyListPage() {
         <SearchBar
           data={composeSearchData(data.map((aData) => {
             if (aData.address) aData.address = `${aData?.address} - ${aData?.building}`;
-            if (aData.payment) aData.payment = dateString(aData.payment);
+            if (aData.payment) aData.payment = aData.payment.substring(0, 10) + '日まで'
             return aData;
           }))}
           setVisibleData={handleSearch}
