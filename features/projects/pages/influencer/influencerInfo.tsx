@@ -225,7 +225,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
         });
         router.replace("/applyComplete");
       } else {
-        ErrorList.push('メールアドレスが登録されていません。')
+        setError(["メールアドレスが登録されていません。"])
       }
     } else {
 

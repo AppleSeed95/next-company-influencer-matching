@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
     const rows = await executeQuery(query3).catch((e) => {
       return NextResponse.json({ type: "error" });
     });
-    if (!rows && !rows.length && rows.length === 0) {
+    if (!rows || !rows.length || rows.length === 0) {
       return NextResponse.json({ type: "error", msg: "no user" });
     }
     // const query4 = `SELECT * FROM influencer where emailAddress = '${body.emailAddress}'`;
