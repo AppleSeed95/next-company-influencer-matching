@@ -202,7 +202,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
 
       if (result.data.type === "success") {
         await axios.post("/api/sendEmail", {
-          from: data.emailAddress,
+          from: data?.emailAddress,
           subject: "【インフルエンサーめぐり】登録申請がありました",
           content: `インフルエンサーめぐりに登録申請がありました。
             \n インフルエンサーめぐりに申請いただきありがとうございます。
@@ -212,7 +212,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
         await axios.post("/api/sendEmail", {
           to: data.emailAddress,
           subject: "【インフルエンサーめぐり】申請ありがとうございます",
-          content: `${data.influencerName} 様。
+          content: `${data?.influencerName?.length ? data?.influencerName : data?.nickName} 様。
             \n
             \n インフルエンサーめぐりに申請いただきありがとうございます。
             \n申請内容を確認しますのでしばらくお待ちください。
@@ -283,7 +283,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
         <Input
           handleChange={(val) => setData({ ...data, influencerName: val })}
           inputClassName="max-w-[250px] grow border-[#D3D3D3] w-[100%]"
-          value={data ? data.influencerName : ""}
+          value={data?.influencerName?.length > 0 && data?.influencerName !== 'null' ? data.influencerName : ""}
         />
       </div>
       <div className="flex items-center py-[15px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
@@ -293,7 +293,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
         <Input
           handleChange={(val) => setData({ ...data, influencerNameGana: val })}
           inputClassName="max-w-[250px] grow border-[#D3D3D3] w-[100%]"
-          value={data ? data.influencerNameGana : ""}
+          value={data?.influencerNameGana?.length > 0 && data?.influencerNameGana !== 'null' ? data.influencerNameGana : ""}
         />
       </div>
       <div className="flex items-center py-[15px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
