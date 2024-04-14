@@ -121,7 +121,7 @@ export default function AppledCase() {
     if (result1.some((aOption) => aOption === "完了")) {
       resultData1 = [
         ...resultData1,
-        ...resultData.filter((aData) => aData.status === "完了"),
+        ...resultData.filter((aData) => aData.status === "完了" || aData.status === "完了報告"),
       ];
     }
     setOptionedData(resultData1.sort((a, b) => -(a.id - b.id)));
