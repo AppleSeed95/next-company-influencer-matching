@@ -171,7 +171,7 @@ const CompanyPage: React.FC<CompanyProps> = ({ companyData }: CompanyProps) => {
         <span className="w-[35%] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
           <span className="text-[#6F6F6F]">住所</span>
         </span>
-        <span>{`${data?.address} - ${data?.building}`}</span>
+        <span>{data?.building?.length > 0 ? `${data?.address} - ${data?.building}` : data?.address}</span>
       </div>
       <div className="flex items-center py-[20px] w-[50%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
         <span className="w-[35%] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">

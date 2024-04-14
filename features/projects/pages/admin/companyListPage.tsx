@@ -136,8 +136,8 @@ export default function CompanyListPage() {
         <div className="text-title sp:hidden">企業一覧</div>
         <SearchBar
           data={composeSearchData(data.map((aData) => {
-            if (aData.address) aData.address = `${aData?.address} - ${aData?.building}`;
-            if (aData.payment) aData.payment = aData.payment.substring(0, 10) + '日まで'
+            if (aData.address) aData.address = aData?.building?.length > 0 ? `${aData?.address} - ${aData?.building}` : aData?.address;
+            if (aData.payment) aData.payment = aData.payment.substring(0, 10) + ''
             return aData;
           }))}
           setVisibleData={handleSearch}
@@ -237,7 +237,7 @@ export default function CompanyListPage() {
                         {aData.status}
                       </td>
                       <td className="px-[35px] py-[25px]  border border-[#D3D3D3]">
-                        {aData?.payment.length > 0 ? aData.payment?.substring(0, 10) + '日まで' : ''}
+                        {aData?.payment.length > 0 ? aData.payment?.substring(0, 10) + '' : ''}
                       </td>
                       <td className="px-[35px] py-[25px]  border border-[#D3D3D3]">
                         {aData.freeAccount === '1' || aData.freeAccount == 1 ? "無料アカウント" : ""}
@@ -326,7 +326,7 @@ export default function CompanyListPage() {
                       決算
                     </div>
                     <span className="mb-[7px] sp:text-spsmall">
-                      {aData?.payment.length > 0 ? aData.payment?.substring(0, 10) + '日まで' : ''}
+                      {aData?.payment.length > 0 ? aData.payment?.substring(0, 10) + '' : ''}
                     </span>
                   </div>
                   <div className="flex my-[10px]">

@@ -212,8 +212,8 @@ export default function CollectedCase() {
         <div className="text-title sp:hidden">募集中案件一覧</div>
         <SearchBar
           data={composeSearchData(data.map((aData) => {
-            if (aData.address) aData.address = `${aData?.address} - ${aData?.building}`;
-            if (aData.payment) aData.payment = aData.payment.substring(0, 10) + '日まで'
+            if (aData.collectionStart) aData.collectionStart = dateString(aData.collectionStart);
+            if (aData.collectionEnd) aData.collectionEnd = dateString(aData.collectionEnd);
             return aData;
           }))}
           // data={composeSearchData}
