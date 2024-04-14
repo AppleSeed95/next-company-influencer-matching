@@ -221,7 +221,7 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
         <span>{data?.prefecture && data?.prefecture !== "null" ? data?.prefecture : ""}</span>
       </div>
       <div
-        className={`flex items-center py-[15px] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px] ${className}`}
+        className={`flex  py-[15px] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px] ${className}`}
       >
         <span className="w-[35%] mt-[5px] sp:w-[100px] flex  justify-end sp:justify-start  mr-[67px]">
           <span className="text-[#6F6F6F]">ジャンル</span>
