@@ -160,7 +160,7 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
         >
           <span className="text-[#6F6F6F]">お名前</span>
         </span>
-        <span>{data?.influencerName}</span>
+        <span>{data?.influencerName?.length > 0 && data?.influencerName !== 'null' ? data.influencerName : ""}</span>
       </div>
       <div
         className={`flex items-center py-[15px] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px] ${className}`}
@@ -168,7 +168,7 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
         <span className="w-[35%] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
           <span className="text-[#6F6F6F]">名前ガーナ</span>
         </span>
-        <span>{data?.influencerNameGana}</span>
+        <span>{data?.influencerNameGana?.length > 0 && data?.influencerNameGana !== 'null' ? data.influencerNameGana : ""}</span>
       </div>
       <div
         className={`flex items-center py-[15px] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px] ${className}`}
