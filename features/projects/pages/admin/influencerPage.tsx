@@ -54,6 +54,7 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
     }
     const result = await axios.put("/api/influencer", update);
     if (result.data) {
+      setError("");
       if (status) {
         let content = "";
         let subject = "";
