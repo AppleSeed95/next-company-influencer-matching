@@ -28,19 +28,17 @@ const SearchBar: React.FC<SearchBarProps> = ({
     }
   };
   const handleSearch = () => {
-    () => {
-      const passtest = (aData) => {
-        if (keyword === "" || !keyword) return true;
-        let isMatch = false;
-        [...keys, ...Object.keys(data[0])].forEach((aKey) => {
-          if (typeof (aData[aKey]) === 'string') {
-            isMatch ||= aData[aKey].indexOf(keyword) !== -1;
-          }
-        });
-        return isMatch;
-      };
-      setVisibleData(data.filter(passtest));
-    }
+    const passtest = (aData) => {
+      if (keyword === "" || !keyword) return true;
+      let isMatch = false;
+      [...keys, ...Object.keys(data[0])].forEach((aKey) => {
+        if (typeof (aData[aKey]) === 'string') {
+          isMatch ||= aData[aKey].indexOf(keyword) !== -1;
+        }
+      });
+      return isMatch;
+    };
+    setVisibleData(data.filter(passtest));
   }
   return (
     <div className="bg-[#F8F9FA] w-full border border-[#D3D3D3] mt-[28px] sp:mt-[0px] px-[35px] sp:px-[14px] mb-[34px] sp:mb-[14px]">
