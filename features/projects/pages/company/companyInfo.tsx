@@ -111,18 +111,18 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
       }
     });
     let phonePattern = /^0\d{1,4}-\d{1,4}-\d{4}$/;
-    if (!phonePattern.test(data.phoneNumber.trim())) {
+    if (data.phoneNumber.trim() !== '' && !phonePattern.test(data.phoneNumber.trim())) {
 
       ErrorList.push('電話番号形式ではありません');
       isValid = false;
     }
     let mailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (!mailPattern.test(data.emailAddress.trim())) {
+    if (data.emailAddress.trim() !== '' && !mailPattern.test(data.emailAddress.trim())) {
       ErrorList.push('メールアドレス形式ではありません');
       isValid = false;
     }
     let postalCodePattern = /^\d{3}-\d{4}$/;
-    if (!postalCodePattern.test(data.postalCode.trim())) {
+    if (data.postalCode.trim() !== '' && !postalCodePattern.test(data.postalCode.trim())) {
       ErrorList.push('郵便番号形式ではありません');
       isValid = false;
     }
