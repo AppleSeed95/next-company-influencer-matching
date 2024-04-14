@@ -44,10 +44,6 @@ const SearchBar: React.FC<SearchBarProps> = ({
                 let isMatch = false;
                 [...keys, ...Object.keys(data[0])].forEach((aKey) => {
                   if (typeof (aData[aKey]) === 'string') {
-                    if (aData[aKey].indexOf(keyword) !== -1) {
-                      console.log(aKey, aData[aKey]);
-
-                    }
                     isMatch ||= aData[aKey].indexOf(keyword) !== -1;
                   }
                 });
