@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { executeQuery } from "../util/db";
-import { use } from "react";
 const bcrypt = require("bcrypt");
 
 export interface RowType {

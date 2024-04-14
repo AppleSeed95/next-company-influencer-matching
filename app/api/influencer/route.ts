@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
     const user = rows[0];
 
     await executeQuery(
-      `UPDATE users SET name = '${body.influencerName}' WHERE id = ${user.id}`
+      `UPDATE users SET name = '${body.nickName}' WHERE id = ${user.id}`
     );
     const userId = user.id;
 
