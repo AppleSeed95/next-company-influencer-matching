@@ -161,7 +161,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
     let isValid = true;
 
     keys.forEach((aKey) => {
-      if (body[aKey] === "" || !body[aKey]) {
+      if (body[aKey] === "" || !body[aKey] || !body[aKey]) {
         ErrorList.push(msgs[aKey]);
         isValid = false;
       }
