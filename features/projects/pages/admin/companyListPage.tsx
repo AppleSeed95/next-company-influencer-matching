@@ -135,11 +135,7 @@ export default function CompanyListPage() {
       <div className="flex flex-col h-full px-[30px] sp:px-[12px] pt-[110px] pb-[30px]">
         <div className="text-title sp:hidden">企業一覧</div>
         <SearchBar
-          data={composeSearchData(data.map((aData) => {
-            if (aData.address) aData.address = `${aData?.address} - ${aData?.building}`;
-            if (aData.payment) aData.payment = aData.payment.substring(0, 10) + '日まで'
-            return aData;
-          }))}
+          data={data}
           setVisibleData={handleSearch}
           keys={["companyName", "responsibleName", "date"]}
           extendChild={

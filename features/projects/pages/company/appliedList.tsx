@@ -169,6 +169,7 @@ export default function AppliedList() {
     return stringifiedAData;
   })
   )
+
   return (
     <div className="h-full">
       <div className="flex flex-col h-full px-[30px] sp:px-[12px] pt-[110px] pb-[30px]">

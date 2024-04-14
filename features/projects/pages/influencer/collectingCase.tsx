@@ -165,6 +165,16 @@ export default function CollectedCase() {
     const formattedDate = `${date.getFullYear()}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getDate().toString().padStart(2, '0')} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
     return formattedDate;
   }
+  const composeSearchData = (data) =>
+  (data.map((aData) => {
+    const keys = Object.keys(aData);
+    let stringifiedAData = {};
+    keys.map((aKey) => {
+      stringifiedAData[aKey] = aData[aKey] + '';
+    })
+    return stringifiedAData;
+  })
+  )
   return (
     <div className="h-full">
       <div
@@ -201,7 +211,12 @@ export default function CollectedCase() {
       <div className="flex flex-col h-full px-[30px] sp:px-[12px] pt-[110px] pb-[30px]">
         <div className="text-title sp:hidden">募集中案件一覧</div>
         <SearchBar
-          data={data}
+          data={composeSearchData(data.map((aData) => {
+            if (aData.address) aData.address = `${aData?.address} - ${aData?.building}`;
+            if (aData.payment) aData.payment = aData.payment.substring(0, 10) + '日まで'
+            return aData;
+          }))}
+          // data={composeSearchData}
           setVisibleData={handleSearch}
           keys={[
             "companyName",
