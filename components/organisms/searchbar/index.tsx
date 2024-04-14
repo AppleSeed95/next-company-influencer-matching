@@ -22,6 +22,26 @@ const SearchBar: React.FC<SearchBarProps> = ({
 }: SearchBarProps) => {
   const [showOption, setShowOption] = useState(false);
   const [keyword, setKeyword] = useState("");
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      handleSearch();
+    }
+  };
+  const handleSearch = () => {
+    () => {
+      const passtest = (aData) => {
+        if (keyword === "" || !keyword) return true;
+        let isMatch = false;
+        [...keys, ...Object.keys(data[0])].forEach((aKey) => {
+          if (typeof (aData[aKey]) === 'string') {
+            isMatch ||= aData[aKey].indexOf(keyword) !== -1;
+          }
+        });
+        return isMatch;
+      };
+      setVisibleData(data.filter(passtest));
+    }
+  }
   return (
     <div className="bg-[#F8F9FA] w-full border border-[#D3D3D3] mt-[28px] sp:mt-[0px] px-[35px] sp:px-[14px] mb-[34px] sp:mb-[14px]">
       <div className="flex gap-x-[20px] sp:gap-x-[12px] py-[12px] items-center  ">
@@ -30,6 +50,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
             handleChange={(v) => {
               setKeyword(v?.trim())
             }}
+            handleKeyPress={handleKeyPress}
             inputClassName="max-w-[420px] grow sp:text-sp text-small border-[#D3D3D3]"
             placeholder=" キーワードを入力してください"
           />
@@ -37,19 +58,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
         {title && title}
         {!title && (
           <Button
-            handleClick={() => {
-              const passtest = (aData) => {
-                if (keyword === "" || !keyword) return true;
-                let isMatch = false;
-                [...keys, ...Object.keys(data[0])].forEach((aKey) => {
-                  if (typeof (aData[aKey]) === 'string') {
-                    isMatch ||= aData[aKey].indexOf(keyword) !== -1;
-                  }
-                });
-                return isMatch;
-              };
-              setVisibleData(data.filter(passtest));
-            }}
+            handleClick={handleSearch}
             buttonType={ButtonType.DEFAULT}
             buttonClassName="sp:text-small sp:px-[12px]"
           >
