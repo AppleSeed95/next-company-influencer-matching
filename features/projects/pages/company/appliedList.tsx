@@ -159,6 +159,16 @@ export default function AppliedList() {
     const formattedDate = `${date.getFullYear()}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getDate().toString().padStart(2, '0')} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
     return formattedDate;
   }
+  const composeSearchData = (data) =>
+  (data.map((aData) => {
+    const keys = Object.keys(aData);
+    let stringifiedAData = {};
+    keys.map((aKey) => {
+      stringifiedAData[aKey] = aData[aKey] + '';
+    })
+    return stringifiedAData;
+  })
+  )
   return (
     <div className="h-full">
       <div className="flex flex-col h-full px-[30px] sp:px-[12px] pt-[110px] pb-[30px]">
@@ -175,7 +185,12 @@ export default function AppliedList() {
           </Button>
         </Link>
         <SearchBar
-          data={data}
+          // data={data}
+          data={composeSearchData(data.map((aData) => {
+            if (aData.collectionStart) aData.collectionStart = dateString(aData.collectionStart);
+            if (aData.collectionEnd) aData.collectionEnd = dateString(aData.collectionEnd);
+            return aData;
+          }))}
           setVisibleData={handleSearch}
           keys={["caseName", "caseType", "collectionStart", "collectionEnd"]}
           extendChild={
