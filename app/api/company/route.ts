@@ -149,6 +149,15 @@ export async function PUT(request: NextRequest) {
         msg: "入力したEメールアドレスがすでに登録されています。",
       });
     }
+    const query2 = `select monthCnt, concurrentCnt from plan where priceID = ${body.priceID}`;
+    const rows2 = await executeQuery(query1).catch((e) => {
+      return NextResponse.json({ type: "error" });
+    });
+    body = {
+      ...body,
+      monthlyCollectionCnt: rows2[0].monthCnt,
+      concurrentCollectionCnt: rows2[0].conCurrentCnt,
+    };
     let query = "UPDATE company SET ";
     const keys = Object.keys(body);
 
