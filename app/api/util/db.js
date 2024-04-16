@@ -2,7 +2,7 @@ import mysql from "mysql";
 
 const connection = mysql.createConnection({
   host: "localhost",
-  user: "postfixadmin",
+  user: "root",
   password: "password",
   database: "project",
 });
