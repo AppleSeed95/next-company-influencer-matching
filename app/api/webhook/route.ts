@@ -17,6 +17,8 @@ export async function POST(request: NextRequest) {
     // const event = stripe.webhooks.constructEvent(buf.toString(), signature, stripeWebhookSecret);
     if (body.type === "payment_intent.succeeded") {
       const email = body.data.object.receipt_email;
+      console.log(body.data);
+
       const query = `SELECT company.payment, company.paymentCnt
                             FROM company
                             LEFT JOIN users ON company.emailAddress = users.email
