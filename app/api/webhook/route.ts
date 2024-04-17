@@ -58,6 +58,8 @@ export async function POST(request: NextRequest) {
                       monthlyCollectionCnt = ${rows2[0].monthCnt},
                       concurrentCollectionCnt = ${rows2[0].concurrentCnt},
                       thisMonthCollectionCnt = 0 where emailAddress = '${email}'`;
+      console.log(rows2[0], query1);
+
       await executeQuery(query1).catch((e) => {
         return NextResponse.json({ type: "error" });
       });
@@ -66,8 +68,6 @@ export async function POST(request: NextRequest) {
         updated: email,
         result: updateString,
       });
-    } else if (body.type === "checkout.session.completed") {
-      console.log(body);
     }
     return NextResponse.json({ received: true });
   } catch (error) {
