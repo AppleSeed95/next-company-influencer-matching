@@ -38,8 +38,6 @@ export async function POST(request: NextRequest) {
       const rows2 = await executeQuery(query2).catch((e) => {
         return NextResponse.json({ type: "error" });
       });
-      console.log(rows2);
-
       const currentDate = new Date();
       currentDate.setDate(currentDate.getDate() + 30);
       const dateString = currentDate.toISOString();
@@ -56,7 +54,10 @@ export async function POST(request: NextRequest) {
         paymentCnt = 0;
       }
       paymentCnt++;
-      const query1 = `update company set payment = '${updateString}', paymentCnt = ${paymentCnt} , thisMonthCollectionCnt = 0 where emailAddress = '${email}'`;
+      const query1 = `update company set payment = '${updateString}', paymentCnt = ${paymentCnt} ,
+                      monthlyCollectionCnt = ${rows2[0].monthCnt},
+                      concurrentCollectionCnt = ${rows2[0].concurrentCnt},
+                      thisMonthCollectionCnt = 0 where emailAddress = '${email}'`;
       await executeQuery(query1).catch((e) => {
         return NextResponse.json({ type: "error" });
       });
