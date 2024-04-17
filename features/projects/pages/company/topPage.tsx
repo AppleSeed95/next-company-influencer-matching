@@ -32,6 +32,14 @@ export default function TopPage({ influencerMode }: topProps) {
     fetchData();
     fetchCompanyData();
   }, [authUser]);
+  const dateString = (dateValue: string) => {
+    const date = new Date(dateValue);
+    if (isNaN(date.getFullYear())) {
+      return "";
+    }
+    const formattedDate = `${date.getFullYear()}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getDate().toString().padStart(2, '0')} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
+    return formattedDate;
+  }
   return (
     <div className="bg-[white] px-[35px] sp:px-[12px] sp:text-small ">
       <div className="flex items-center py-[20px]  w-[full] border-b-[1px] border-[#DDDDDD] mt-[70px] sp:mt-[96px]">
@@ -42,7 +50,7 @@ export default function TopPage({ influencerMode }: topProps) {
           <div className="border-b-[1px] border-[#DDDDDD] mx-[30px]">
             {companyData?.active === 0 && <div className="p-[10px] mb-[10px] border-[1px] shadow-lg bg-[#ffdbd9] border-[#ffb0ab]">
               <div>
-                利用期限：{companyData?.payment}
+                利用期限：{dateString(companyData?.payment)}
               </div>
               <div>
                 期限後はログインできなくなります。継続される場合は
