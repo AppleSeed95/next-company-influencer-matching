@@ -17,8 +17,6 @@ export async function POST(request: NextRequest) {
     // const event = stripe.webhooks.constructEvent(buf.toString(), signature, stripeWebhookSecret);
     if (body.type === "payment_intent.succeeded") {
       const email = body.data.object.receipt_email;
-      console.log(body.data);
-
       const query = `SELECT company.payment, company.paymentCnt
                             FROM company
                             LEFT JOIN users ON company.emailAddress = users.email
@@ -58,6 +56,8 @@ export async function POST(request: NextRequest) {
         updated: email,
         result: updateString,
       });
+    } else if (body.type === "checkout.session.completed") {
+      console.log(body);
     }
     return NextResponse.json({ received: true });
   } catch (error) {
