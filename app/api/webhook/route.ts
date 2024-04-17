@@ -31,6 +31,15 @@ export async function POST(request: NextRequest) {
           msg: "no result.",
         });
       }
+      const query2 = `SELECT plan.monthCnt, plan.concurrentCnt from plan
+                      LEFT JOIN company ON company.plan = plan.id
+                      WHERE company.emailAddress = '${email}'
+                      `;
+      const rows2 = await executeQuery(query2).catch((e) => {
+        return NextResponse.json({ type: "error" });
+      });
+      console.log(rows2);
+
       const currentDate = new Date();
       currentDate.setDate(currentDate.getDate() + 30);
       const dateString = currentDate.toISOString();

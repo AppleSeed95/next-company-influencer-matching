@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
-import axios from 'axios';
 
 const stripePromise = loadStripe('pk_test_51OV8DpHeC7VfJv8UJXLcBhECs81qBUSwD7ZJQmNuFtbien8WQCuZ2SCzkOYu2siAwkH1x4GqvCPUJqOVXQULsoz200ctmm80cL');
 
