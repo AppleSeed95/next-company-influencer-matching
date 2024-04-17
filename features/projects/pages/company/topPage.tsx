@@ -37,7 +37,7 @@ export default function TopPage({ influencerMode }: topProps) {
     if (isNaN(date.getFullYear())) {
       return "";
     }
-    const formattedDate = `${date.getFullYear()}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getDate().toString().padStart(2, '0')} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`;
+    const formattedDate = `${date.getFullYear()}年 ${(date.getMonth() + 1).toString().padStart(2, '0')}月 ${date.getDate().toString().padStart(2, '0')}日`;
     return formattedDate;
   }
   return (

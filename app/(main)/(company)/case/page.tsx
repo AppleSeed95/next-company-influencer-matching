@@ -19,7 +19,7 @@ function Case() {
         const today = new Date(data.todayString);
         const payed = paymentInfo > today;
         if (!payed) {
-          // router.push('/paymentRequire');
+          router.push('/paymentRequire');
         }
       }
     }
