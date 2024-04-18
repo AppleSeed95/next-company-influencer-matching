@@ -65,14 +65,19 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
   const applyId = searchParams.get('id');
   const [confirmMsg, setConfirmMsg] = useState('操作が成功しました。')
   const fetchData = async () => {
-    const result = await axios.get(
-      `/api/company/aCompany?id=${authUser.user?.targetId}`
-    );
+    try {
+      const result = await axios.get(
+        `/api/company/aCompany?id=${authUser.user?.targetId}`
+      );
 
-    if (result.data) {
-      setData(result.data)
-      setActive(result.data.active);
-    };
+      if (result.data) {
+        setData(result.data)
+        setActive(result.data.active);
+      };
+    } catch (e) {
+      router.push('logout')
+    }
+
   };
   useEffect(() => {
     const getAppliedUserData = async () => {

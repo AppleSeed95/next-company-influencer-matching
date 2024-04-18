@@ -7,6 +7,7 @@ import ReactPaginate from "react-paginate";
 import Link from "next/link";
 import axios from "axios";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function InfluencerListPage() {
   const [active, setActive] = useState(null);
@@ -18,6 +19,7 @@ export default function InfluencerListPage() {
   const [itemOffset, setItemOffset] = useState(0);
   const itemsPerPage = 10;
   const endOffset = itemOffset + itemsPerPage;
+  const router = useRouter();
 
   const currentItems = optionedData.slice(itemOffset, endOffset);
   const pageCount = Math.ceil(optionedData.length / itemsPerPage);
@@ -40,15 +42,18 @@ export default function InfluencerListPage() {
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
-      const result = await axios.get("/api/influencer");
-      if (result.data?.length) {
-        setData(result.data);
-        console.log(result.data);
+      try {
+        const result = await axios.get("/api/influencer");
+        if (result.data?.length) {
+          setData(result.data);
 
-        setOptionedData(result.data);
-        setVisibleData(result.data);
+          setOptionedData(result.data);
+          setVisibleData(result.data);
+        }
+        setIsLoading(false);
+      } catch (e) {
+        router.push('logout')
       }
-      setIsLoading(false);
     };
     fetchData();
     document.title = 'インフルエンサー一覧';

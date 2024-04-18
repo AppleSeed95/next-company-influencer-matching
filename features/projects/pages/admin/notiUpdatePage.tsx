@@ -7,13 +7,23 @@ import TextArea from "@/components/atoms/textarea";
 import axios from "axios";
 import Modal from "../../utils/modal";
 const confirmMsg = "操作が成功しました。";
+import { useRouter } from "next/navigation";
+
 const NotiPage: React.FC = () => {
   const [data, setData] = useState(null);
   const [showConfirm, setShowConfirm] = useState(false);
+  const router = useRouter();
+
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get("/api/auth/noti");
-      if (result.data) setData(result.data.data);
+      try {
+        const result = await axios.get("/api/auth/noti");
+        if (result.data) setData(result.data.data);
+      } catch (e) {
+        router.push('logout')
+
+      }
+
     };
     fetchData();
     document.title = 'お知らせ更新'

@@ -14,22 +14,26 @@ const ChattingRooms: React.FC = () => {
   const [active, setActive] = useState(0);
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get(
-        `/api/chatting/room?id=${user.user?.targetId}&type=${user.user.role === "企業" ? "company" : "influencer"
-        }`
-      );
-      if (result.data.length) {
-        setData(result.data);
-        if (!id) {
-          if (typeof window !== "undefined") {
-            router.push(`/chattingInf/${result.data[0].applyId}`);
+      try {
+        const result = await axios.get(
+          `/api/chatting/room?id=${user.user?.targetId}&type=${user.user.role === "企業" ? "company" : "influencer"
+          }`
+        );
+        if (result.data.length) {
+          setData(result.data);
+          if (!id) {
+            if (typeof window !== "undefined") {
+              router.push(`/chattingInf/${result.data[0].applyId}`);
+            }
           }
+          result.data.map((a, key) => {
+            if (a.applyId == id) {
+              setActive(key);
+            }
+          });
         }
-        result.data.map((a, key) => {
-          if (a.applyId == id) {
-            setActive(key);
-          }
-        });
+      } catch (e) {
+        router.push('logout')
       }
     };
     fetchData();

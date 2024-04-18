@@ -2,6 +2,7 @@
 import { useRecoilValue, useRecoilState } from "recoil";
 import { authUserState } from "@/recoil/atom/auth/authUserAtom";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
 const Auth = ({ children }: { children: React.ReactNode }) => {
   const authUser = useRecoilValue(authUserState);
@@ -10,6 +11,8 @@ const Auth = ({ children }: { children: React.ReactNode }) => {
   let savedUser = null;
   if (typeof window !== "undefined") {
     savedUser = localStorage.getItem("user");
+    const token = localStorage.getItem('token');
+    axios.defaults.headers.common["Authorization"] = token;
   }
   let parsedUser;
   if (savedUser) {

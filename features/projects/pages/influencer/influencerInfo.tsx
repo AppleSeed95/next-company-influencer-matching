@@ -103,12 +103,16 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
   const applyId = searchParams.get('id');
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get(
-        `/api/influencer/aInfluencer?id=${authUser.user?.targetId}`
-      );
-      if (result.data) {
-        setData(result.data);
-        setGenre(result.data.genre);
+      try {
+        const result = await axios.get(
+          `/api/influencer/aInfluencer?id=${authUser.user?.targetId}`
+        );
+        if (result.data) {
+          setData(result.data);
+          setGenre(result.data.genre);
+        }
+      } catch (e) {
+        router.push('logout')
       }
     };
     const getAppliedUserData = async () => {

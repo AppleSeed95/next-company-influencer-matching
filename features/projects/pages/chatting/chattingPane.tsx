@@ -8,6 +8,7 @@ import { useRecoilValue } from "recoil";
 import { authUserState } from "@/recoil/atom/auth/authUserAtom";
 import { useParams } from "next/navigation";
 import axios from "@/node_modules/axios/index";
+import { useRouter } from "next/navigation";
 
 const socket = io("https://influencer-meguri.jp");
 import Image from "next/image";
@@ -22,6 +23,8 @@ export default function ChattingPane() {
   const [reset, setReset] = useState(false);
   const [msg, setMsg] = useState("");
   const { id } = useParams();
+  const router = useRouter();
+
   useEffect(() => {
     socket.on("message", () => {
       setReload(!reload);
@@ -29,15 +32,23 @@ export default function ChattingPane() {
 
     socket.emit("info", { roomId: id });
     const fetchData = async () => {
-      const result = await axios.get(`/api/chatting?id=${id}`);
-      if (result.data?.length) {
-        setData(result.data);
+      try {
+        const result = await axios.get(`/api/chatting?id=${id}`);
+        if (result.data?.length) {
+          setData(result.data);
+        }
+      } catch (e) {
+        router.push('logout')
       }
     };
     const fetchRoomData = async () => {
-      const result = await axios.get(`/api/chatting/chattingRoom?id=${id}`);
-      if (result.data) {
-        setRoomData(result.data);
+      try {
+        const result = await axios.get(`/api/chatting/chattingRoom?id=${id}`);
+        if (result.data) {
+          setRoomData(result.data);
+        }
+      } catch (e) {
+        router.push('logout')
       }
     };
     fetchData();

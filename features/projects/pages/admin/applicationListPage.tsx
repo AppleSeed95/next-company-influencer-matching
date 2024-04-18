@@ -7,6 +7,8 @@ import Link from "next/link";
 import axios from "axios";
 import Image from "next/image";
 import ReactPaginate from "react-paginate";
+import { useRouter } from "next/navigation";
+
 
 export default function ApplicationListPage() {
   const [active, setActive] = useState(null);
@@ -27,18 +29,25 @@ export default function ApplicationListPage() {
     );
     setItemOffset(newOffset);
   };
+  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
-      const result = await axios.get("/api/case");
-      if (result.data?.length) {
-        const resultData = result.data.filter((aData => !(aData.next > 0)))
-        setData(resultData);
-        setVisibleData(resultData);
-        setOptionedData(resultData);
+      try {
+        const result = await axios.get("/api/case");
+        if (result.data?.length) {
+          const resultData = result.data.filter((aData => !(aData.next > 0)))
+          setData(resultData);
+          setVisibleData(resultData);
+          setOptionedData(resultData);
+        }
+        setIsLoading(false);
+      } catch (e) {
+        router.push('logout')
+
       }
-      setIsLoading(false);
+
     };
     fetchData();
     document.title = '申請案件一覧'

@@ -7,6 +7,7 @@ import Link from "next/link";
 import axios from "axios";
 import Image from "next/image";
 import ReactPaginate from "react-paginate";
+import { useRouter } from "next/navigation";
 
 export default function CompanyListPage() {
   const [active, setActive] = useState(-1);
@@ -20,6 +21,7 @@ export default function CompanyListPage() {
   const endOffset = itemOffset + itemsPerPage;
   const currentItems = optionedData.slice(itemOffset, endOffset);
   const pageCount = Math.ceil(optionedData.length / itemsPerPage);
+  const router = useRouter();
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % optionedData.length;
     console.log(
@@ -32,13 +34,18 @@ export default function CompanyListPage() {
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
-      const res = await axios.get("api/company");
-      if (res.data?.length) {
-        setData(res.data);
-        setOptionedData(res.data);
-        setVisibleData(res.data);
+      try {
+        const res = await axios.get("api/company");
+        if (res.data?.length) {
+          setData(res.data);
+          setOptionedData(res.data);
+          setVisibleData(res.data);
+        }
+        setIsLoading(false);
       }
-      setIsLoading(false);
+      catch (e) {
+        router.push("/logout");
+      }
     };
     fetchData();
     document.title = '企業一覧'

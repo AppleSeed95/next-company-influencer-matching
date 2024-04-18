@@ -37,30 +37,34 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
   const [showConfirm, setShowConfirm] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
-      let result;
-      if (influencerMode) {
-        result = await axios.get(`/api/case/aCase/?id=${caseID}`);
-      } else {
-        result = await axios.get(`/api/case/aCase/?id=${id}`);
-        if (result.data.data.previous > 0) {
-          const previouseResult = await axios.get(`/api/case/aCase/?id=${result.data.data.previous}`);
-          setPreviousData(previouseResult.data.data);
+      try {
+        let result;
+        if (influencerMode) {
+          result = await axios.get(`/api/case/aCase/?id=${caseID}`);
+        } else {
+          result = await axios.get(`/api/case/aCase/?id=${id}`);
+          if (result.data.data.previous > 0) {
+            const previouseResult = await axios.get(`/api/case/aCase/?id=${result.data.data.previous}`);
+            setPreviousData(previouseResult.data.data);
+          }
         }
-      }
-      if (result?.data.type === 'error') {
-        setValid(false);
-        if (!influencerMode && typeof window !== 'undefined') {
-          router.push('/applicationList')
+        if (result?.data.type === 'error') {
+          setValid(false);
+          if (!influencerMode && typeof window !== 'undefined') {
+            router.push('/applicationList')
+          }
         }
-      }
-      else {
-        setValid(true);
-        setData(result.data.data);
-        setReason(result.data.data.reason);
-        setWantedSNS(JSON.parse(result.data.data.wantedSNS));
-        if (!modalMode) {
-          document.title = result.data.data.caseName;
+        else {
+          setValid(true);
+          setData(result.data.data);
+          setReason(result.data.data.reason);
+          setWantedSNS(JSON.parse(result.data.data.wantedSNS));
+          if (!modalMode) {
+            document.title = result.data.data.caseName;
+          }
         }
+      } catch (e) {
+        router.push('logout')
       }
     };
 

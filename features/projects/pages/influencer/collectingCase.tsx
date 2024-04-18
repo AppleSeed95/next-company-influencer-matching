@@ -12,6 +12,8 @@ import { authUserState } from "@/recoil/atom/auth/authUserAtom";
 import axios from "axios";
 import Image from "next/image";
 import ReactPaginate from "react-paginate";
+import { useRouter } from "next/navigation";
+
 
 export default function CollectedCase() {
   const user = useRecoilValue(authUserState);
@@ -40,12 +42,19 @@ export default function CollectedCase() {
     );
     setItemOffset(newOffset);
   };
+  const router = useRouter();
 
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     const fetchApplied = async () => {
-      const result = await axios.get(`/api/apply?id=${user.user?.targetId}`);
-      if (result.data) setAppliedCase(result.data);
+      try {
+        const result = await axios.get(`/api/apply?id=${user.user?.targetId}`);
+        if (result.data) setAppliedCase(result.data);
+      } catch (e) {
+        router.push('logout')
+
+      }
+
     };
     if (user) {
       fetchApplied();

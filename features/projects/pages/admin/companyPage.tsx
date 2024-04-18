@@ -8,6 +8,7 @@ import Select from "@/components/atoms/select";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import Modal from "../../utils/modal";
+
 export interface CompanyProps {
   companyData?: CompanyData;
 }
@@ -25,8 +26,13 @@ const CompanyPage: React.FC<CompanyProps> = ({ companyData }: CompanyProps) => {
   useEffect(() => {
     setData(companyData);
     const fetchPlans = async () => {
-      const { data } = await axios.get('/api/auth/plan');
-      setPlans(data.data);
+      try {
+        const { data } = await axios.get('/api/auth/plan');
+        setPlans(data.data);
+      } catch (e) {
+        router.push('logout')
+      }
+
     }
     fetchPlans();
     document.title = companyData?.companyName;

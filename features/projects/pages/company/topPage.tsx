@@ -4,6 +4,7 @@ import axios from "axios";
 import { useRecoilValue } from "recoil";
 import { authUserState } from "@/recoil/atom/auth/authUserAtom";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 
 export interface topProps {
@@ -14,11 +15,18 @@ export default function TopPage({ influencerMode }: topProps) {
   const [data, setData] = useState(null);
   const [companyData, setCompanyData] = useState(null);
   const authUser = useRecoilValue(authUserState);
+  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get("/api/auth/noti");
-      setData(result.data?.data);
+      try {
+        const result = await axios.get("/api/auth/noti");
+        setData(result.data?.data);
+      } catch (e) {
+        router.push('logout')
+
+      }
+
     };
     const fetchCompanyData = async () => {
       const result = await axios.get(

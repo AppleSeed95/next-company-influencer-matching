@@ -10,6 +10,7 @@ import Button from "@/components/atoms/button";
 import { ButtonType } from "@/components/atoms/buttonType";
 import Image from "next/image";
 import ReactPaginate from "react-paginate";
+import { useRouter } from "next/navigation";
 
 export default function AppliedList() {
   const [active, setActive] = useState(null);
@@ -32,21 +33,27 @@ export default function AppliedList() {
     );
     setItemOffset(newOffset);
   };
+  const router = useRouter();
+
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
-      const result = await axios.get(
-        `/api/case/company?id=${user.user?.targetId}`
-      );
-      if (result.data?.length) {
-        const resultData = result.data.filter((aData => !(aData.next > 0)));
+      try {
+        const result = await axios.get(
+          `/api/case/company?id=${user.user?.targetId}`
+        );
+        if (result.data?.length) {
+          const resultData = result.data.filter((aData => !(aData.next > 0)));
 
-        setData(resultData);
-        setVisibleData(resultData);
-        setOptionedData(resultData);
+          setData(resultData);
+          setVisibleData(resultData);
+          setOptionedData(resultData);
+          setIsLoading(false);
+        }
         setIsLoading(false);
+      } catch (e) {
+        router.push('logout')
       }
-      setIsLoading(false);
     };
     if (user) fetchData();
     document.title = '登録案件一覧'

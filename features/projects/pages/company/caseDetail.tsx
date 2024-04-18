@@ -59,13 +59,18 @@ export default function CaseDetailPage({ caseProps }: caseData) {
 
     setCollectionStatusTemp(caseProps?.collectionStatus);
     const fetchData = async () => {
-      const result = await axios.get(`/api/apply/company?id=${id}`);
-      if (result.data?.length) {
-        setData(result.data);
-        setVisibleData(result.data);
-        setOptionedData(result.data);
-        setInfluencerData(result.data[0].influencerId);
+      try {
+        const result = await axios.get(`/api/apply/company?id=${id}`);
+        if (result.data?.length) {
+          setData(result.data);
+          setVisibleData(result.data);
+          setOptionedData(result.data);
+          setInfluencerData(result.data[0].influencerId);
+        }
+      } catch (e) {
+        router.push('logout')
       }
+
     };
     fetchData();
     // if (caseData?.collectionStart) {

@@ -5,6 +5,7 @@ import axios from "axios";
 import Modal from "../../utils/modal";
 import Button from "@/components/atoms/button";
 import { ButtonType } from "@/components/atoms/buttonType";
+import { useRouter } from "next/navigation";
 
 const PlanManagePage: React.FC = () => {
     const [reload, setReload] = useState(false);
@@ -18,10 +19,18 @@ const PlanManagePage: React.FC = () => {
     const [error, setError] = useState([]);
     const [confirmMsg, setConfirmMsg] = useState('操作が成功しました。')
     const [active, setActive] = useState(0);
+    const router = useRouter();
+
     useEffect(() => {
         const fetchData = async () => {
-            const { data } = await axios.get('/api/auth/plan');
-            setPlanData(data.data);
+            try {
+                const { data } = await axios.get('/api/auth/plan');
+                setPlanData(data.data);
+            } catch (e) {
+                router.push('logout')
+
+            }
+
         };
         fetchData();
         document.title = 'プラン管理'

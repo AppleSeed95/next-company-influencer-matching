@@ -44,9 +44,13 @@ const CasePage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios.get(`/api/case/aCase?id=${id}`);
-      if (result.data) setData(result.data.data);
-      setWantedSNS(JSON.parse(result.data?.data.wantedSNS));
+      try {
+        const result = await axios.get(`/api/case/aCase?id=${id}`);
+        if (result.data) setData(result.data.data);
+        setWantedSNS(JSON.parse(result.data?.data.wantedSNS));
+      } catch (e) {
+        router.push('logout')
+      }
     };
     if (id) fetchData();
     document.title = '募集案件登録・編集';

@@ -31,6 +31,7 @@ export default function AppledCase() {
   const endOffset = itemOffset + itemsPerPage;
   const currentItems = optionedData.slice(itemOffset, endOffset);
   const pageCount = Math.ceil(optionedData.length / itemsPerPage);
+
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % optionedData.length;
     console.log(
@@ -41,14 +42,18 @@ export default function AppledCase() {
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
-      const result = await axios.get(`/api/apply?id=${user.user?.targetId}`);
-      if (result.data?.length) {
-        setCaseId(result.data[0].caseId);
-        setData(result.data);
-        setVisibleData(result.data);
-        setOptionedData(result.data);
+      try {
+        const result = await axios.get(`/api/apply?id=${user.user?.targetId}`);
+        if (result.data?.length) {
+          setCaseId(result.data[0].caseId);
+          setData(result.data);
+          setVisibleData(result.data);
+          setOptionedData(result.data);
+        }
+        setIsLoading(false);
+      } catch (e) {
+        router.push('logout')
       }
-      setIsLoading(false);
     };
     if (user) fetchData();
     document.title = '応募案件一覧';
