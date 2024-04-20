@@ -4,13 +4,18 @@ import { headers } from "next/headers";
 import { comparePassword } from "./app/api/user/util";
 
 export async function middleware(request: NextRequest) {
+  console.log(request.nextUrl.pathname);
+
   const notRequireAuth =
     request.nextUrl.pathname.startsWith("/api/auth") ||
+    request.nextUrl.pathname.startsWith("/api/sendEmail") ||
+    request.nextUrl.pathname.startsWith("/api/user") ||
+    request.nextUrl.pathname.startsWith("/api/company") ||
+    request.nextUrl.pathname.startsWith("/api/influencer") ||
     request.nextUrl.pathname.startsWith("/api/apply");
   if (!notRequireAuth) {
     const requestHeaders = new Headers(request.headers);
     const AuthorizationHeader = requestHeaders.get("authorization");
-    console.log("auth", AuthorizationHeader);
     const headersList = headers();
     const token = headersList.get("authorization");
     // const userInfo = token.split(":");

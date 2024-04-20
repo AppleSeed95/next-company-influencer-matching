@@ -17,8 +17,8 @@ const CheckoutPage = ({ priceID }: priceProps) => {
             const { error } = await stripe.redirectToCheckout({
                 lineItems: [{ price: priceID.trim(), quantity: 1 }],
                 mode: 'payment',
-                successUrl: `${window.location.origin}/companyInfo`,
-                cancelUrl: `${window.location.origin}/companyInfo`,
+                successUrl: `${window.location.origin}/companyInfo?type=success`,
+                cancelUrl: `${window.location.origin}/companyInfo?type=fail`,
             });
             if (error) {
                 console.error('Error:', error);
