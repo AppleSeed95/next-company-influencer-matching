@@ -129,7 +129,11 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
       >
         <Modal
           body={confirmMsg}
-          onOk={() => setShowConfirm(false)}
+          onOk={() => {
+            setShowConfirm(false)
+            router.back();
+          }
+          }
           onCancel={() => setShowConfirm(false)}
         />
       </div>
