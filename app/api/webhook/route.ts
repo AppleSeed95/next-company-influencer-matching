@@ -12,7 +12,6 @@ export async function POST(request: NextRequest) {
   // const buf = await buffer(request)
   // const signature = request.headers.get('stripe-signature');
   const body = await request.json();
-  console.log("success");
   try {
     // Verify the signature using the Stripe webhook secret
     // const event = stripe.webhooks.constructEvent(buf.toString(), signature, stripeWebhookSecret);
