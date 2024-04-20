@@ -11,6 +11,7 @@ export async function middleware(request: NextRequest) {
     request.nextUrl.pathname.startsWith("/api/user") ||
     request.nextUrl.pathname.startsWith("/api/company") ||
     request.nextUrl.pathname.startsWith("/api/influencer") ||
+    request.nextUrl.pathname.startsWith("/api/chatting") ||
     request.nextUrl.pathname.startsWith("/api/apply");
   if (!notRequireAuth) {
     const requestHeaders = new Headers(request.headers);
