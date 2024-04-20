@@ -338,7 +338,10 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
       >
         <Modal
           body={confirmMsg}
-          onOk={() => setShowConfirm(false)}
+          onOk={() => {
+            setShowConfirm(false)
+            router.push("/companyInfo");
+          }}
           onCancel={() => {
             setShowConfirm(false)
             router.push("/companyInfo");
