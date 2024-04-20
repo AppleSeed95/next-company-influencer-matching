@@ -16,6 +16,8 @@ export async function POST(request: NextRequest) {
     // Verify the signature using the Stripe webhook secret
     // const event = stripe.webhooks.constructEvent(buf.toString(), signature, stripeWebhookSecret);
     if (body.type === "payment_intent.succeeded") {
+      console.log("success");
+
       const email = body.data.object.receipt_email;
       const query = `SELECT company.payment, company.paymentCnt
                             FROM company

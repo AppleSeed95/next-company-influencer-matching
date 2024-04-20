@@ -83,6 +83,8 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
   };
   const sentEmail = async (type: string) => {
     if (type === 'success') {
+      console.log('sending');
+
       await axios.post("/api/sendEmail", {
         to: data.emailAddress,
         subject: "【インフルエンサーめぐり】解約を受け付けました",
@@ -98,9 +100,9 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
           }
           `,
       });
-      if (typeof window !== "undefined") {
-        router.push("/companyInfo");
-      }
+      // if (typeof window !== "undefined") {
+      //   router.push("/companyInfo");
+      // }
     }
     if (type === 'fail') {
       await axios.post("/api/sendEmail", {
@@ -118,9 +120,9 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
           }
           `,
       });
-      if (typeof window !== "undefined") {
-        router.push("/companyInfo");
-      }
+      // if (typeof window !== "undefined") {
+      //   router.push("/companyInfo");
+      // }
     }
   }
   useEffect(() => {
