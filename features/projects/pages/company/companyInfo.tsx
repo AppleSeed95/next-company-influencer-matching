@@ -60,6 +60,8 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
   };
   const [error, setError] = useState([]);
   const [expired, setExpired] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [fail, setFail] = useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
   const applyId = searchParams.get('id');
@@ -83,40 +85,12 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
   };
   const sentEmail = async (type: string) => {
     if (type === 'success') {
-      await axios.post("/api/sendEmail", {
-        to: data.emailAddress,
-        subject: "【インフルエンサーめぐり】解約を受け付けました",
-        content: `${data?.representativeName} 様
-          \n
-          \nいつもインフルエンサーめぐりをご利用いただきありがとうございます。
-          \n 正常に決済が完了しました。
-          \n引き続き、サービスをご利用ください。
-          \n
-          \n-----------------------------------------------------
-          \n不明点がございましたらお問い合わせフォームよりご連絡ください。
-          \nhttps://influencer-meguri.jp/ask
-          }
-          `,
-      });
+      setSuccess(true);
       setShowConfirm(true);
       setConfirmMsg('お支払いが成功しました。');
     }
     if (type === 'fail') {
-      await axios.post("/api/sendEmail", {
-        to: data.emailAddress,
-        subject: "【インフルエンサーめぐり】決済ができませんでした",
-        content: `${data?.representativeName} 様
-          \n
-          \nいつもインフルエンサーめぐりをご利用いただきありがとうございます。
-          \n決済ができませんでした。
-          \nログインしてご確認をお願いします。
-          \nhttps://influencer-meguri.jp/companyInfo
-          \n-----------------------------------------------------
-          \n不明点がございましたらお問い合わせフォームよりご連絡ください。
-          \nhttps://influencer-meguri.jp/ask
-          }
-          `,
-      });
+      setFail(true);
       setShowConfirm(true);
       setConfirmMsg('お支払いに失敗しました。');
     }
@@ -338,7 +312,41 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
       >
         <Modal
           body={confirmMsg}
-          onOk={() => {
+          onOk={async () => {
+            if (success) {
+              await axios.post("/api/sendEmail", {
+                to: data.emailAddress,
+                subject: "【インフルエンサーめぐり】解約を受け付けました",
+                content: `${data?.representativeName} 様
+                  \n
+                  \nいつもインフルエンサーめぐりをご利用いただきありがとうございます。
+                  \n 正常に決済が完了しました。
+                  \n引き続き、サービスをご利用ください。
+                  \n
+                  \n-----------------------------------------------------
+                  \n不明点がございましたらお問い合わせフォームよりご連絡ください。
+                  \nhttps://influencer-meguri.jp/ask
+                  }
+                  `,
+              });
+            }
+            if (fail) {
+              await axios.post("/api/sendEmail", {
+                to: data.emailAddress,
+                subject: "【インフルエンサーめぐり】決済ができませんでした",
+                content: `${data?.representativeName} 様
+                  \n
+                  \nいつもインフルエンサーめぐりをご利用いただきありがとうございます。
+                  \n決済ができませんでした。
+                  \nログインしてご確認をお願いします。
+                  \nhttps://influencer-meguri.jp/companyInfo
+                  \n-----------------------------------------------------
+                  \n不明点がございましたらお問い合わせフォームよりご連絡ください。
+                  \nhttps://influencer-meguri.jp/ask
+                  }
+                  `,
+              });
+            }
             setShowConfirm(false)
             router.push("/companyInfo");
           }}
