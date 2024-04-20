@@ -15,7 +15,6 @@ export async function login({
     const result = await axios.post(`/api/auth`, { id: email, password });
     data = result.data;
     if (typeof window !== "undefined") {
-      console.log('setting authorization', data);
       axios.defaults.headers.common["Authorization"] = data.token;
       localStorage.setItem("user", JSON.stringify(data.data));
       localStorage.setItem('token', data.token)
