@@ -46,12 +46,25 @@ export async function POST(request: NextRequest) {
       });
     }
     const user = result[0];
-    if (user.role === "admin" && body.password === "12345") {
-      return NextResponse.json({
-        type: "success",
-        data: { ...user, targetName: "管理者" },
-        token: user.password + ":" + user.email,
-      });
+    if (user.role === "admin") {
+      if (!(user?.password.length > 0)) {
+        if (body.password === "12345") {
+          return NextResponse.json({
+            type: "success",
+            data: { ...user, targetName: "管理者" },
+            token: user.password + ":" + user.email,
+          });
+        }
+      } else {
+        const isMatch = await bcrypt.compare(body.password, user.password);
+        if (isMatch) {
+          return NextResponse.json({
+            type: "success",
+            data: { ...user, targetName: "管理者" },
+            token: user.password + ":" + user.email,
+          });
+        }
+      }
     }
     const isMatch = await bcrypt.compare(body.password, user.password);
     // const isMatch = true;
