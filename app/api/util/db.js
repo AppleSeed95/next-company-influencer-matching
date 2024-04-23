@@ -3,8 +3,8 @@ import mysql from "mysql";
 const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "kAZ5dB4*/x2.|mC2-4Rp",
-  // password: "password",
+  // password: "kAZ5dB4*/x2.|mC2-4Rp",
+  password: "password",
   database: "project",
 });
 
@@ -46,7 +46,7 @@ connection.connect(async (error) => {
               connection.query(
                 `
               INSERT INTO users (email,password,name ,role)
-              VALUES ('test@gmail.com','12345','管理者' ,'admin')
+              VALUES ('support@influencer-meguri.jp','12345','管理者' ,'admin')
               `,
                 (error, result) => {
                   if (error) {
