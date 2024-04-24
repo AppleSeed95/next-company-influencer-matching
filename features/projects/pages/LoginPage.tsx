@@ -35,7 +35,7 @@ export default function LoginPage() {
       return;
     }
     setIsLoading(true);
-    const { data: response, error } = await login({ email: id.trim(), password: password.trim() });
+    const { data: response, error } = await login({ email: id?.trim(), password: password?.trim() });
     setIsLoading(false);
     if (response.error || !response.type) {
       setError("サーバーでエラーが発生しました。");
