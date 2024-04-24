@@ -105,6 +105,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
         setExpired(true);
       }
       else {
+        setData({ ...data, emailAddress: result.data.email })
         const applyTime = new Date(result.data.applyTime);
         const currentTime = new Date(result.data.current);
         const timeDiff = currentTime.getTime() - applyTime.getTime();
@@ -489,7 +490,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
           }}
         />
       </div>
-      <div className="flex  pt-[15px] pb-[5px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+      {!applyMode && <div className="flex  pt-[15px] pb-[5px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
         <span className="w-[35%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
           <span>メールアドレス</span>
           {<span className="ml-[10px] text-[#EE5736] text-[11px]">必須</span>}
@@ -504,7 +505,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
             setData({ ...data, emailAddress: val });
           }}
         />
-      </div>
+      </div>}
       <div className="flex  pt-[15px] pb-[5px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
         <span className="w-[35%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
           <span>郵便番号</span>

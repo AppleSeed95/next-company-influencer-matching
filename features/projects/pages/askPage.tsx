@@ -6,40 +6,46 @@ import { ButtonType } from "@/components/atoms/buttonType";
 import TextArea from "@/components/atoms/textarea";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 export default function AskPage() {
   const [data, setData] = useState(null);
-  const [error, setError] = useState("");
+  const [error, setError] = useState([]);
   const [agree, setAgree] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
   useEffect(() => {
     document.title = 'お問い合わせ';
   }, [])
   const handleAsk = async () => {
-    if (!agree) {
-      setError("個人情報の取り扱いに同意する必要があります。");
-      return;
-    }
+    setIsLoading(true);
+    const errorList = [];
+
     if (!data.name || data.name === "") {
-      setError("名前を入力してください。");
-      return;
+      errorList.push('名前を入力してください。');
     }
     if (!data.email || data.email === "") {
-      setError("メールアドレスを入力してください。");
-      return;
+      errorList.push('メールアドレスを入力してください。');
     }
     if (!data.emailConfirm || data.emailConfirm === "") {
-      setError("メールアドレスの確認を入力してください。");
-      return;
+      errorList.push('メールアドレスの確認を入力してください。');
     }
     let mailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (!mailPattern.test(data.email.trim())) {
-      setError("メールアドレス形式ではありません");
-      return;
+    if (data.email?.length > 0 && !mailPattern.test(data.email?.trim())) {
+      errorList.push('メールアドレス形式ではありません');
     }
     if (data.email !== data.emailConfirm) {
-      setError("メールアドレスが一致しません");
+      errorList.push('メールアドレスが一致しません');
+    }
+    if (!agree) {
+      errorList.push('個人情報の取り扱いに同意する必要があります。');
+    }
+    if (errorList.length > 0) {
+      setError(errorList);
+      setIsLoading(false);
       return;
     }
+    setError([]);
     await axios.post("/api/sendEmail", {
       to: data.email,
       subject: "【インフルエンサーめぐり】お問い合わせを受け付けました",
@@ -73,6 +79,8 @@ export default function AskPage() {
           \n-----------------------------------------------------
           `,
     });
+    setIsLoading(false);
+    router.push('askConfirm');
   };
   return (
     <div className="text-center">
@@ -158,11 +166,24 @@ export default function AskPage() {
       </div>
       <div className="text-center mt-[42px]">
         <Button buttonType={ButtonType.PRIMARY} handleClick={handleAsk}>
-          確認画面へ
+          <div className="flex items-center">
+            {isLoading ? (
+              <img
+                src="/img/refresh.svg"
+                alt="rotate"
+                className="mr-[5px] rotate"
+              />
+            ) : (
+              ""
+            )}
+            確認画面へ
+          </div>
         </Button>
-        {error !== "" && (
-          <div className="mt-[10px] text-center text-[#EE5736]">{error}</div>
-        )}
+        {error.length !== 0 &&
+          error.map((aError, idx) => (
+            <div className="text-center m-[10px] text-[#EE5736]" key={idx}>{aError}</div>
+          ))
+        }
       </div>
       <div className="mt-[154px] mb-[27px] flex justify-between w-[334px] m-auto text-[#AAAAAA]">
         <span className="underline underline-offset-[5px]">

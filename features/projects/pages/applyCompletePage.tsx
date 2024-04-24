@@ -12,7 +12,7 @@ export default function ApplyCompletePage() {
           className="blcok m-auto w-[265px] sp:hidden mb-[50px]"
         />
         <div className="m-[50px] text-left">
-          〇〇サービスにご申請ありがとうございます。 <br />
+          インフルエンサーめぐりにご申請ありがとうございます。 <br />
           内容を確認しますのでしばらくお待ちください。
           <br />
           不明点がございましたらお問い合わせフォームからご連絡ください。

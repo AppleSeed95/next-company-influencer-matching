@@ -61,7 +61,7 @@ export default function ApplyPage() {
         />
         <div className="m-[50px] text-center">
           <div className="py-[10px]">
-            〇〇サービスをご覧いただきありがとうございます。
+            インフルエンサーめぐりをご覧いただきありがとうございます。
           </div>
           <div className="py-[10px]">
             {type === "企業"

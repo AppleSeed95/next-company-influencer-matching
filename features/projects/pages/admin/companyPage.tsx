@@ -275,7 +275,6 @@ const CompanyPage: React.FC<CompanyProps> = ({ companyData }: CompanyProps) => {
         error.map((aError, idx) => (
           <div className="text-center m-[10px] text-[#EE5736]" key={idx}>{aError}</div>
         ))
-
       }
       <div className="flex items-center justify-center mt-[36px] mb-[160px] sp:mb-[60px]">
         <Button

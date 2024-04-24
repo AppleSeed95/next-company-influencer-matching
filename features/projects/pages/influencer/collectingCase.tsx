@@ -52,7 +52,6 @@ export default function CollectedCase() {
         if (result.data) setAppliedCase(result.data);
       } catch (e) {
         router.push('logout')
-
       }
 
     };

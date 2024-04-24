@@ -47,7 +47,7 @@ export async function POST(request: NextRequest) {
     }
     const user = result[0];
     if (user.role === "admin") {
-      if (!(user?.password.length > 0)) {
+      if (!(user?.plainPassword?.length > 0)) {
         if (body.password === "12345") {
           return NextResponse.json({
             type: "success",

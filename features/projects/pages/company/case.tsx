@@ -12,7 +12,6 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useRouter } from "next/navigation";
 import Modal from "../../utils/modal";
-import { log } from "console";
 
 const CasePage: React.FC = () => {
   const [data, setData] = useState({
@@ -193,7 +192,9 @@ const CasePage: React.FC = () => {
     if (data.collectionStatus === "") {
       return true;
     }
-
+    if (data.collectionStatus === '停止中') {
+      return false;
+    }
     if (data.collectionStatus === '募集前') {
       startable =
         !data.status || data.status === "申請前" || data.status === "否認" || data.status === "承認 / 否認" || data.status === "承認";
