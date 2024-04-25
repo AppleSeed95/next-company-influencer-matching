@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
     const { to, subject, content, from } = body;
     const msg = {
       to: to ? to : ADMIN_EMAIL,
-      from: from ? from : ADMIN_EMAIL,
+      from: ADMIN_EMAIL,
       subject,
       text: content,
     };
