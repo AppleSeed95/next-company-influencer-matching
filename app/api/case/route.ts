@@ -22,6 +22,18 @@ interface RowType extends RowDataPacket {
 export async function POST(request: NextRequest) {
   try {
     let body = await request.json();
+    const companyId = body.companyId;
+    const preQuery = `SELECT * FROM company where id=${companyId}`;
+    const rows = await executeQuery(preQuery).catch((e) => {
+      return NextResponse.json({ type: "error" });
+    });
+    const companyStatus = rows[0].status;
+    if (companyStatus !== "稼働中" && companyStatus !== "稼動中") {
+      return NextResponse.json({
+        type: "error",
+        msg: "稼働中ではないので申請できません。",
+      });
+    }
     const today = new Date();
     const todayString = `${today.getFullYear()}/${
       today.getMonth() + 1
@@ -122,6 +134,18 @@ export async function GET() {
 export async function PUT(request: NextRequest) {
   try {
     const requestBody = await request.json();
+    const companyId = requestBody.companyId;
+    const preQuery = `SELECT * FROM company where id=${companyId}`;
+    const rows = await executeQuery(preQuery).catch((e) => {
+      return NextResponse.json({
+        type: "error",
+        msg: "稼働中ではないので申請できません。",
+      });
+    });
+    const companyStatus = rows[0].status;
+    if (companyStatus !== "稼働中" && companyStatus !== "稼動中") {
+      return NextResponse.json({ type: "error", msg: "応募できません" });
+    }
     const body = { ...requestBody, edited: true };
     let query = "UPDATE cases SET ";
     const keys = Object.keys(body);

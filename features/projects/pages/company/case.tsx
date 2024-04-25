@@ -68,13 +68,6 @@ const CasePage: React.FC = () => {
   };
   const handleRequest = async (saveMode: boolean) => {
     if (isLoading) return;
-    const { targetStatus } = user.user;
-
-    if (targetStatus !== "稼動中" && targetStatus !== "稼働中") {
-      setConfirmMsg("稼働中ではないので申請できません。");
-      setShowConfirm(true);
-      return;
-    }
     const body = {
       ...data,
       wantedSNS: JSON.stringify(wantedSNS),
@@ -86,6 +79,11 @@ const CasePage: React.FC = () => {
           ...body,
           status: "申請前",
         });
+        if (result.data.type === 'error') {
+          setConfirmMsg(result.data.msg);
+          setShowConfirm(true);
+          return;
+        }
         setError([]);
         setShowConfirm(true);
       } else {
@@ -93,6 +91,11 @@ const CasePage: React.FC = () => {
           ...body,
           status: "申請前",
         });
+        if (result.data.type === 'error') {
+          setConfirmMsg(result.data.msg);
+          setShowConfirm(true);
+          return;
+        }
         setError([]);
         setIsLoading(false);
         router.replace("/appliedList");
@@ -150,6 +153,11 @@ const CasePage: React.FC = () => {
           previous: data.id,
           status: data.status === '承認' || data.status === '承認 / 否認' ? "承認 / 申請中" : "申請中",
         });
+        if (result.data.type === 'error') {
+          setConfirmMsg(result.data.msg);
+          setShowConfirm(true);
+          return;
+        }
         setError([]);
         setIsLoading(false);
         router.back();
@@ -160,6 +168,11 @@ const CasePage: React.FC = () => {
           ...body,
           status: "申請中",
         });
+        if (result.data.type === 'error') {
+          setConfirmMsg(result.data.msg);
+          setShowConfirm(true);
+          return;
+        }
       }
       await axios.post("/api/sendEmail", {
         to: user.user?.email,

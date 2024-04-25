@@ -148,13 +148,6 @@ export default function CollectedCase() {
     }
   };
   const handleApply = async (caseId: string) => {
-    const { targetStatus } = user.user;
-
-    if (targetStatus !== "稼働中" && targetStatus !== "稼動中") {
-      setConfirmMsg("応募できません");
-      setShowConfirm(true);
-      return;
-    }
     const result = await axios.post("/api/apply", {
       caseId,
       influencerId: user.user?.targetId,
@@ -162,6 +155,10 @@ export default function CollectedCase() {
     if (result.data.type === "success") {
       setReload(!reload);
       setConfirmMsg("操作が成功しました。");
+      setShowConfirm(true);
+    }
+    else {
+      setConfirmMsg(result.data.msg);
       setShowConfirm(true);
     }
   };

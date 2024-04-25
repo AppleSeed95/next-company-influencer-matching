@@ -4,7 +4,26 @@ import { executeQuery } from "../util/db";
 export async function POST(request: NextRequest) {
   try {
     let body = await request.json();
-
+    const influencerId = body.influencerId;
+    const caseId = body.caseId;
+    const preQuery = `SELECT * FROM influencer where id=${influencerId}`;
+    const rows = await executeQuery(preQuery).catch((e) => {
+      return NextResponse.json({ type: "error" });
+    });
+    const influencerStatus = rows[0].status;
+    if (influencerStatus !== "稼働中" && influencerStatus !== "稼動中") {
+      return NextResponse.json({ type: "error", msg: "応募できません" });
+    }
+    const preQuery1 = `SELECT company.* FROM company
+    LEFT JOIN cases on cases.companyId = company.id
+     where cases.id=${caseId}`;
+    const rows1 = await executeQuery(preQuery1).catch((e) => {
+      return NextResponse.json({ type: "error" });
+    });
+    const companyStatus = rows1[0].status;
+    if (companyStatus !== "稼働中" && companyStatus !== "稼動中") {
+      return NextResponse.json({ type: "error", msg: "応募できません" });
+    }
     const today = new Date();
     const todayString = `${today.getFullYear()}/${
       today.getMonth() + 1
@@ -21,7 +40,6 @@ export async function POST(request: NextRequest) {
       query1 += aKey + ",";
       query2 += "'" + body[aKey] + "',";
     });
-    // insertQuery += `'${body["ds"]}'`;
     await executeQuery(`
       CREATE TABLE IF NOT EXISTS apply (
         id INT AUTO_INCREMENT PRIMARY KEY,
