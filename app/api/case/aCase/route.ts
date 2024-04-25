@@ -14,12 +14,12 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ type: "error" });
     });
     const companyId = rows[0].companyId;
-    
-    const query1 = `SELECT id FROM cases WHERE companyId = ${companyId}`
+
+    const query1 = `SELECT id FROM cases WHERE companyId = ${companyId}`;
     const rows1 = await executeQuery(query1).catch((e) => {
       return NextResponse.json({ type: "error" });
     });
-    return NextResponse.json({data:rows[0],companyCases:rows1});
+    return NextResponse.json({ data: rows[0], companyCases: rows1 });
   } catch (error) {
     console.error("Error fetching data:", error);
     return NextResponse.json({ type: "error" });
@@ -30,7 +30,17 @@ export async function PUT(request: NextRequest) {
   try {
     const { update, reason, approveMode, resumeMode, companyId } =
       await request.json();
-
+    const preQuery = `SELECT * FROM company where id=${companyId}`;
+    const rows = await executeQuery(preQuery).catch((e) => {
+      return NextResponse.json({ type: "error" });
+    });
+    const companyStatus = rows[0].status;
+    if (companyStatus !== "稼働中" && companyStatus !== "稼動中") {
+      return NextResponse.json({
+        type: "error",
+        msg: "承認されていないため、募集をうまくできません。",
+      });
+    }
     const query = approveMode
       ? `UPDATE cases
     SET status = '${update}',reason = '${reason}'
@@ -67,7 +77,7 @@ export async function PUT(request: NextRequest) {
         });
       }
       const company = result[0];
-      if(!company.freeAccount){
+      if (!company.freeAccount) {
         if (company.conCurrentCnt === company.concurrentCollectionCnt) {
           return NextResponse.json({
             type: "fail",
