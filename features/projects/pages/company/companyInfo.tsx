@@ -275,7 +275,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
             <br/>-----------------------------------------------------
             <br/>不明点がございましたらお問い合わせフォームよりご連絡ください。
             </div>https://influencer-meguri.jp/ask
-            }
+            
             `,
         });
       } else {
@@ -290,7 +290,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
             <br/>-----------------------------------------------------
             <br/>不明点がございましたらお問い合わせフォームよりご連絡ください。
             </div>https://influencer-meguri.jp/ask
-            }
+            
             `,
         });
       }
@@ -330,7 +330,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
                   <br/>-----------------------------------------------------
                   <br/>不明点がございましたらお問い合わせフォームよりご連絡ください。
                   </div>https://influencer-meguri.jp/ask
-                  }
+                  
                   `,
               });
             }

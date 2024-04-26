@@ -77,7 +77,7 @@ export default function AppledCase() {
           <br/>URL   ：http://localhost:3000/caseDetail/${result.data.caseID}
           <br/>-----------------------------------------------------
           <br/> 不明点がございましたらお問い合わせフォームよりご連絡ください。
-          </div> https://influencer-meguri.jp/ask。
+          </div> https://influencer-meguri.jp/ask
           `,
       });
       setReload(!reload);
