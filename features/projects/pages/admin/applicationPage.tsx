@@ -89,31 +89,37 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
           await axios.post("/api/sendEmail", {
             to: data?.emailAddress,
             subject: "【インフルエンサーめぐり】募集案件を否認しました",
-            content: `${data?.representativeName}様
-          \n いつもインフルエンサーめぐりをご利用いただきありがとうございます。
-          \n募集案件「 ${data.caseName} 」を否認しました。
-          \n否認理由をご確認の上、再申請をお願いします。
-          \n-----------------------------------------------------
-          \n 不明点がございましたらお問い合わせフォームよりご連絡ください。
-          \n https://influencer-meguri.jp/ask。
+            html: `
+            <div>
+            ${data?.representativeName}様
+          <br/> いつもインフルエンサーめぐりをご利用いただきありがとうございます。
+          <br/>募集案件「 ${data.caseName} 」を否認しました。
+          <br/>否認理由をご確認の上、再申請をお願いします。
+          <br/>-----------------------------------------------------
+          <br/> 不明点がございましたらお問い合わせフォームよりご連絡ください。
+          </div> 
+          https://influencer-meguri.jp/ask
           `,
           });
         if (update === "承認")
           await axios.post("/api/sendEmail", {
             to: data?.emailAddress,
             subject: "【インフルエンサーめぐり】募集案件を承認しました",
-            content: `${data?.representativeName}様
-          \n いつもインフルエンサーめぐりをご利用いただきありがとうございます。
-          \n募集案件「 ${data?.caseName} 」を承認しましたのでログインしてご確認ください。
-          \n-----------------------------------------------------
-          \n 不明点がございましたらお問い合わせフォームよりご連絡ください。
-          \n https://influencer-meguri.jp/ask。
+            html: `
+            <div>
+            ${data?.representativeName}様
+          <br/> いつもインフルエンサーめぐりをご利用いただきありがとうございます。
+          <br/>募集案件「 ${data?.caseName} 」を承認しましたのでログインしてご確認ください。
+          <br/>-----------------------------------------------------
+          <br/> 不明点がございましたらお問い合わせフォームよりご連絡ください。
+          </div>https://influencer-meguri.jp/ask
           `,
           });
         setShowConfirm(true);
         setError("");
       } else {
-        setError("サーバーでエラーが発生しました。");
+        const msg = result.data.msg ?? 'サーバーでエラーが発生しました。';
+        setError(msg);
       }
     };
     approveApplication();

@@ -7,12 +7,13 @@ sgMail.setApiKey(process.env.API_KEY);
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { to, subject, content, from } = body;
+    const { to, subject, text, html } = body;
     const msg = {
       to: to ? to : ADMIN_EMAIL,
       from: ADMIN_EMAIL,
       subject,
-      text: content,
+      text: text,
+      html: html ?? "",
     };
 
     const res = await sgMail.send(msg).catch((e) => {

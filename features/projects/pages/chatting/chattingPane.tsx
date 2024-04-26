@@ -68,18 +68,20 @@ export default function ChattingPane() {
       await axios.post("/api/sendEmail", {
         to: roomData?.infEmail,
         subject: "【【インフルエンサーめぐり】チャットが届きました",
-        content: `${roomData?.influencerName} 様。
-          \n いつもインフルエンサーめぐりをご利用いただきありがとうございます。
-          \n以下の案件からチャットが届いてます。
-          \nログインしてご確認をお願いします。
-          \n
-          \n企業名：${roomData?.companyName}
-          \n案件名：${roomData?.caseName}
-          \nURL ：https://localhost:3000/chattingInf/${id}
-          \n
-          \n-----------------------------------------------------
-          \n 不明点がございましたらお問い合わせフォームよりご連絡ください。
-          \n https://influencer-meguri.jp/ask。
+        html: `
+          <div>
+          ${roomData?.influencerName} 様。
+          <br/> いつもインフルエンサーめぐりをご利用いただきありがとうございます。
+          <br/>以下の案件からチャットが届いてます。
+          <br/>ログインしてご確認をお願いします。
+          <br/>
+          <br/>企業名：${roomData?.companyName}
+          <br/>案件名：${roomData?.caseName}
+          <br/>URL ：https://localhost:3000/chattingInf/${id}
+          <br/>
+          <br/>-----------------------------------------------------
+          <br/> 不明点がございましたらお問い合わせフォームよりご連絡ください。
+          </div> https://influencer-meguri.jp/ask
           `,
       });
     }
@@ -87,18 +89,20 @@ export default function ChattingPane() {
       await axios.post("/api/sendEmail", {
         to: roomData?.companyEmail,
         subject: "【インフルエンサーめぐり】チャットが届きました",
-        content: `${roomData?.representativeName} 様。
-          \n いつもインフルエンサーめぐりをご利用いただきありがとうございます。
-          \n以下の案件でチャットが届いてます。
-          \nログインしてご確認をお願いします。
-          \n
-          \n案件名：${roomData?.caseName}
-          \nインフルエンサー名：${roomData?.influencerName}
-          \nURL ：https://localhost:3000/chatting/${id}
-          \n
-          \n-----------------------------------------------------
-          \n 不明点がございましたらお問い合わせフォームよりご連絡ください。
-          \n https://influencer-meguri.jp/ask。
+        html: `
+          <div>
+          ${roomData?.representativeName} 様。
+          <br/> いつもインフルエンサーめぐりをご利用いただきありがとうございます。
+          <br/>以下の案件でチャットが届いてます。
+          <br/>ログインしてご確認をお願いします。
+          <br/>
+          <br/>案件名：${roomData?.caseName}
+          <br/>インフルエンサー名：${roomData?.influencerName}
+          <br/>URL ：https://localhost:3000/chatting/${id}
+          <br/>
+          <br/>-----------------------------------------------------
+          <br/> 不明点がございましたらお問い合わせフォームよりご連絡ください。
+          </div> https://influencer-meguri.jp/ask
           `,
       });
     }

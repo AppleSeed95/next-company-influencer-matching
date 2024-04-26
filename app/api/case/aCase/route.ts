@@ -30,17 +30,22 @@ export async function PUT(request: NextRequest) {
   try {
     const { update, reason, approveMode, resumeMode, companyId } =
       await request.json();
-    const preQuery = `SELECT * FROM company where id=${companyId}`;
-    const rows = await executeQuery(preQuery).catch((e) => {
-      return NextResponse.json({ type: "error" });
-    });
-    const companyStatus = rows[0].status;
-    if (companyStatus !== "稼働中" && companyStatus !== "稼動中") {
-      return NextResponse.json({
-        type: "error",
-        msg: "承認されていないため、募集をうまくできません。",
+    if (!approveMode) {
+      const preQuery = `SELECT company.status FROM cases
+      LEFT JOIN  company ON company.id = cases.companyId
+      where cases.id=${id}`;
+      const rows = await executeQuery(preQuery).catch((e) => {
+        return NextResponse.json({ type: "error" });
       });
+      const companyStatus = rows[0].status;
+      if (companyStatus !== "稼働中" && companyStatus !== "稼動中") {
+        return NextResponse.json({
+          type: "error",
+          msg: "承認されていないため、募集を開始できません。",
+        });
+      }
     }
+
     const query = approveMode
       ? `UPDATE cases
     SET status = '${update}',reason = '${reason}'

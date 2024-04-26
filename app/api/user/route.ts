@@ -81,15 +81,30 @@ export async function PUT(request: NextRequest) {
         type: "error",
       });
     });
-
+    const today = new Date();
+    const todayString = today.toString();
     if (rows.length !== 0) {
+      if (rows[0]?.name === null) {
+        const query4 = `
+          update users set applyTime = '${todayString}' where id = '${rows[0].id}'
+        `;
+        await executeQuery(query4).catch((e) => {
+          return NextResponse.json({
+            type: "error",
+          });
+        });
+        return NextResponse.json({
+          type: "success",
+          data: { email, password: rows[0].plainPassword, id: rows[0].id },
+        });
+      }
+
       return NextResponse.json({
         type: "error",
         msg: "メールアドレスが既に登録されている",
       });
     }
-    const today = new Date();
-    const todayString = today.toString();
+
     const randomString = generateRandomString();
     const saltRounds = 10;
     const salt = bcrypt.genSaltSync(saltRounds);

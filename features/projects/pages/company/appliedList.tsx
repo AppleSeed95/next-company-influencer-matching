@@ -330,7 +330,7 @@ export default function AppliedList() {
                         {dateString(aData.collectionEnd)}
                       </td>
                       <td className="py-[25px]  border border-[#D3D3D3]">
-                        <Link href={`/caseDetail/${aData.id}`} target="_blank">
+                        <Link href={`/caseDetail/${aData.id}`}>
                           <img
                             src="/img/detail.svg"
                             alt="detail"
@@ -385,7 +385,7 @@ export default function AppliedList() {
               <div className="flex justify-between px-[30px] py-[20px] w-full">
                 <div className="flex">
                   <span className="text-[#3F8DEB] underline hover:cursor-pointer underline-offset-3 sp:text-sp">
-                    <Link href={`/caseDetail/${aData.id}`} target="_blank">
+                    <Link href={`/caseDetail/${aData.id}`}>
                       {aData.caseName}
                     </Link>
                   </span>

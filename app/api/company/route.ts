@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
       today.getMonth() + 1
     }/${today.getDate()}`;
     const defaultValues = {
-      status: "停止中",
+      status: "稼動中",
       date: todayString,
       payment: "",
       paymentFailed: "",

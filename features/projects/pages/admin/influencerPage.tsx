@@ -76,30 +76,30 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
           subject = "【インフルエンサーめぐり】申請ありがとうございました";
         }
         if (status === "稼働中" || status === "稼動中") {
-          content = `
+          content = `<div>
         ${data?.influencerName}様
-        \nインフルエンサーめぐりに申請いただきありがとうございました。
-        \n登録が完了しましたのでログインしてサービスをご利用ください。
-        \n
-        \n-----------------------------------------------------
-        \n▼アカウント情報
-        \nログインURL：
-        \nhttps://influencer-meguri.jp/login
-        \n
-        \nID:
-        \n${data?.emailAddress}
-        \nパスワード：
-        \n${result.data?.password}
-        \n-----------------------------------------------------
-        \n不明点がございましたらお問い合わせフォームよりご連絡ください。
-        \nhttps://influencer-meguri.jp/ask
+        <br/>インフルエンサーめぐりに申請いただきありがとうございました。
+        <br/>登録が完了しましたのでログインしてサービスをご利用ください。
+        <br/>
+        <br/>-----------------------------------------------------
+        <br/>▼アカウント情報
+        <br/>ログインURL：
+        <br/>https://influencer-meguri.jp/login
+        <br/>
+        <br/>ID:
+        <br/>${data?.emailAddress}
+        <br/>パスワード：
+        <br/>${result.data?.password}
+        <br/>-----------------------------------------------------
+        <br/>不明点がございましたらお問い合わせフォームよりご連絡ください。
+        </div>https://influencer-meguri.jp/ask
         `;
           subject = "【インフルエンサーめぐり】登録が完了しました";
         }
         await axios.post("/api/sendEmail", {
           to: data?.emailAddress,
           subject: subject,
-          content: content,
+          html: content,
         });
       }
       if (result.data.type === 'error') {

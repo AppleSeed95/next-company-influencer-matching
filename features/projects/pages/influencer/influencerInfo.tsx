@@ -132,6 +132,9 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
         }
       }
     }
+    if (applyMode) {
+      document.title = 'インフルエンサー登録フォーム';
+    }
     if (!applyMode && authUser) {
       fetchData()
       document.title = 'インフルエンサー情報変更';
@@ -209,23 +212,24 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
         await axios.post("/api/sendEmail", {
           from: data?.emailAddress,
           subject: "【インフルエンサーめぐり】登録申請がありました",
-          content: `インフルエンサーめぐりに登録申請がありました。
-            \n インフルエンサーめぐりに申請いただきありがとうございます。
-            \nログインして確認してください。
+          html: `<div>インフルエンサーめぐりに登録申請がありました。
+            <br/> インフルエンサーめぐりに申請いただきありがとうございます。
+            <br/>ログインして確認してください。
+            </div>
             `,
         });
         await axios.post("/api/sendEmail", {
           to: data.emailAddress,
           subject: "【インフルエンサーめぐり】申請ありがとうございます",
-          content: `${data?.influencerName?.length ? data?.influencerName : data?.nickName} 様。
-            \n
-            \n インフルエンサーめぐりに申請いただきありがとうございます。
-            \n申請内容を確認しますのでしばらくお待ちください。
-            \n確認後にご登録いただいたメールアドレスにご連絡します。
-            \n
-            \n-----------------------------------------------------
-            \n不明点がございましたらお問い合わせフォームよりご連絡ください。
-            \nhttps://influencer-meguri.jp/ask
+          html: `<div>${data?.influencerName?.length ? data?.influencerName : data?.nickName} 様。
+            <br/>
+            <br/> インフルエンサーめぐりに申請いただきありがとうございます。
+            <br/>申請内容を確認しますのでしばらくお待ちください。
+            <br/>確認後にご登録いただいたメールアドレスにご連絡します。
+            <br/>
+            <br/>-----------------------------------------------------
+            <br/>不明点がございましたらお問い合わせフォームよりご連絡ください。
+            </div>https://influencer-meguri.jp/ask
             `,
         });
         router.replace("/applyComplete");
@@ -313,7 +317,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
           <option value={"男性"}>男性</option>
           <option value={"女性"}>女性</option>
           <option value={"その他"}>その他</option>
-        </Select>{" "}
+        </Select>
       </div>
       <div className="flex  py-[15px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
         <span className="mt-[5px] w-[35%] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">

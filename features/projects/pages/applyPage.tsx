@@ -6,6 +6,7 @@ import RadioBtn from "@/components/atoms/radio";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { text } from "stream/consumers";
 
 export default function ApplyPage() {
   const [type, setType] = useState("企業");
@@ -34,15 +35,16 @@ export default function ApplyPage() {
       await axios.post("/api/sendEmail", {
         to: email,
         subject: "【インフルエンサーめぐり】仮申請ありがとうございます",
-        content: `インフルエンサーめぐりに仮申請いただきありがとうございます。
-          \n 以下のURLから登録申請をお願いします。
-          \n※メール本文中のURLを60分以内にクリックしてください。
-          \nhttps://influencer-meguri.jp/${type === "企業" ? "applyCompany" : "applyInfluencer"
+        html: `
+        <div>インフルエンサーめぐりに仮申請いただきありがとうございます。
+        <br/> 以下のURLから登録申請をお願いします。
+        <br/>※メール本文中のURLを60分以内にクリックしてください。
+        <br/>https://influencer-meguri.jp/${type === "企業" ? "applyCompany" : "applyInfluencer"
           }?id=${result.data.data.id}
-          \n-----------------------------------------------------
-          \n 不明点がございましたらお問い合わせフォームよりご連絡ください。
-          \n https://influencer-meguri.jp/ask
-          `,
+        <br/>-----------------------------------------------------
+        <br/> 不明点がございましたらお問い合わせフォームよりご連絡ください。
+        </div>
+        https://influencer-meguri.jp/ask'`,
       });
       if (typeof window !== "undefined") {
         router.push("/applyConfirm");

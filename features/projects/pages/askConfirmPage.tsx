@@ -16,14 +16,15 @@ export default function AskConfirmPage() {
                     src="/img/logo(red).svg"
                     className="blcok m-auto w-[265px] sp:hidden mb-[50px]"
                 />
-                <div className="flex text-center justify-center w-full items-center mb-[20px] sp:mt-[50px] text-title">
-                    <span>管理部にメールを送信しました。</span>
+                <div className=" text-center justify-center w-full items-center mb-[20px] sp:mt-[50px] text-title">
+                    <div>お問い合わせありがとうございます。</div>
+                    <div>内容を確認してご連絡いたします。</div>
                 </div>
-                <div className="text-center mb-[10px]">
+                {/* <div className="text-center mb-[10px]">
                     <Link href={"/login"}>
                         <Button buttonType={ButtonType.PRIMARY}>ログインページへ</Button>
                     </Link>
-                </div>
+                </div> */}
             </div>
         </div>
     );

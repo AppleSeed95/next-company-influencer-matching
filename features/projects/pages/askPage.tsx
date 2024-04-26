@@ -2,6 +2,7 @@
 import Input from "@/components/atoms/input";
 import Checkbox from "@/components/atoms/checkbox";
 import Button from "@/components/atoms/button";
+import Select from "@/components/atoms/select";
 import { ButtonType } from "@/components/atoms/buttonType";
 import TextArea from "@/components/atoms/textarea";
 import { useEffect, useState } from "react";
@@ -37,6 +38,14 @@ export default function AskPage() {
     if (data.email !== data.emailConfirm) {
       errorList.push('メールアドレスが一致しません');
     }
+    console.log(data.type);
+
+    if (!data.type || data.type === "") {
+      errorList.push('お問い合わせの種類を選択してください。');
+    }
+    if (!data.content || data.content === "") {
+      errorList.push('お問い合わせ内容を入力してください。');
+    }
     if (!agree) {
       errorList.push('個人情報の取り扱いに同意する必要があります。');
     }
@@ -49,34 +58,39 @@ export default function AskPage() {
     await axios.post("/api/sendEmail", {
       to: data.email,
       subject: "【インフルエンサーめぐり】お問い合わせを受け付けました",
-      content: `${data.name} 様
-          \n
-          \n お問い合わせいただき誠にありがとうございます。
-          \n下記の内容でお問い合わせを受け付けました。
-          \n
-          \n内容を確認の上、担当者よりご連絡させていただきます。
-          \n-----------------------------------------------------
-          \nお問い合わせ内容
-          \n
-          \nお名前          ：${data.name}
-          \nメールアドレス  ：${data.email}
-          \nお問い合わせ種別：${data.type ? data.type : ""}
-          \nお問い合わせ内容：${data.content ? data.content : ""}
-          \n-----------------------------------------------------
+      html: `
+        <div>${data.name} 様
+          <br/>
+          <br/> お問い合わせいただき誠にありがとうございます。
+          <br/>下記の内容でお問い合わせを受け付けました。
+          <br/>
+          <br/>内容を確認の上、担当者よりご連絡させていただきます。
+          <br/>-----------------------------------------------------
+          <br/>お問い合わせ内容
+          <br/>
+          <br/>お名前          ：${data.name}
+          <br/>メールアドレス  ：${data.email}
+          <br/>お問い合わせ種別：${data.type ? data.type : ""}
+          <br/>お問い合わせ内容：${data.content ? data.content : ""}
+          <br/>-----------------------------------------------------
+        </div>
           `,
     });
     await axios.post("/api/sendEmail", {
       from: data.email,
       subject: "【インフルエンサーめぐり】お問い合わせがありました",
-      content: `インフルエンサーめぐりにお問い合わせがありました。
-          \n-----------------------------------------------------
-          \nお問い合わせ内容
-          \n
-          \nお名前          ：${data.name}
-          \nメールアドレス  ：${data.email}
-          \nお問い合わせ種別：${data.type ? data.type : ""}
-          \nお問い合わせ内容：${data.content ? data.content : ""}s
-          \n-----------------------------------------------------
+      html: `
+          <div>
+          インフルエンサーめぐりにお問い合わせがありました。
+          <br/>-----------------------------------------------------
+          <br/>お問い合わせ内容
+          <br/>
+          <br/>お名前          ：${data.name}
+          <br/>メールアドレス  ：${data.email}
+          <br/>お問い合わせ種別：${data.type ? data.type : ""}
+          <br/>お問い合わせ内容：${data.content ? data.content : ""}
+          <br/>-----------------------------------------------------
+          </div>
           `,
     });
     setIsLoading(false);
@@ -95,17 +109,22 @@ export default function AskPage() {
           inputClassName="max-w-[250px] grow border-[#D3D3D3]"
         />
       </div>
-      <div className="flex py-[20px] w-[40%] sp:w-[90%] m-auto border-b-[1px] border-[#DDDDDD]">
+      <div className="flex pt-[20px] w-[40%] sp:w-[90%] m-auto ">
         <span className="w-[40%] flex justify-end mr-[67px]">
           <span>メールアドレス</span>
           <span className="ml-[10px] text-[#EE5736] text-[11px]">必須</span>
         </span>
+        <div>
+        </div>
         <Input
           format="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
           formatMsg="メールアドレス形式ではありません"
           handleChange={(val) => setData({ ...data, email: val })}
           inputClassName="max-w-[250px] grow border-[#D3D3D3]"
         />
+      </div>
+      <div className="mt-[25px] pb-[20px] w-[40%] m-auto sp:w-[90%] border-b-[1px] border-[#DDDDDD]">
+        ※本システムをご利用の方は、登録しているEmailを入力してください。
       </div>
       <div className="flex py-[20px] w-[40%] sp:w-[90%] m-auto border-b-[1px] border-[#DDDDDD]">
         <span className="w-[40%] flex justify-end mr-[67px]">
@@ -119,10 +138,10 @@ export default function AskPage() {
           inputClassName="max-w-[250px] grow border-[#D3D3D3]"
         />
       </div>
-      <div className="flex py-[20px] w-[40%] sp:w-[90%] m-auto border-b-[1px] border-[#DDDDDD]">
+      {/* <div className="flex py-[20px] w-[40%] sp:w-[90%] m-auto border-b-[1px] border-[#DDDDDD]">
         <span className="w-[40%] flex justify-end mr-[67px]">
           <span>お問い合わせ種別</span>
-          <span className="ml-[10px] text-[#EE5736] text-[11px] invisible">
+          <span className="ml-[10px] text-[#EE5736] text-[11px]">
             必須
           </span>
         </span>
@@ -130,11 +149,30 @@ export default function AskPage() {
           handleChange={(val) => setData({ ...data, type: val })}
           inputClassName="max-w-[250px] grow border border-[#D3D3D3] h-[33px]"
         ></Input>
+      </div> */}
+      <div className="flex py-[20px] w-[40%] sp:w-[90%] m-auto border-b-[1px] border-[#DDDDDD]">
+        <span className="w-[40%] flex justify-end mr-[67px]">
+          <span>お問い合わせ種別</span>
+          <span className="ml-[10px] text-[#EE5736] text-[11px]">
+            必須
+          </span>
+        </span>
+        <Select
+          handleChange={(val) => setData({ ...data, type: val })}
+          selectClassName="w-[250px] border-[#D3D3D3]"
+        >
+          <option value={""}></option>
+          <option value={"サービスについて"}>サービスについて</option>
+          <option value={"申し込みについて"}>申し込みについて</option>
+          <option value={"利用中の不明点など"}>利用中の不明点など</option>
+          <option value={"システムの不具合など"}>システムの不具合など</option>
+          <option value={"その他"}>その他</option>
+        </Select>
       </div>
       <div className="flex py-[20px] w-[40%] sp:w-[90%] m-auto border-b-[1px] border-[#DDDDDD]">
         <span className="w-[40%] flex justify-end  mt-[7px] mr-[67px]">
           <span>お問い合わせ内容</span>
-          <span className="ml-[10px] text-[#EE5736] text-[11px] invisible">
+          <span className="ml-[10px] text-[#EE5736] text-[11px]">
             必須
           </span>
         </span>
@@ -146,9 +184,7 @@ export default function AskPage() {
         />
       </div>
 
-      <div className="mt-[25px]">
-        ※本システムをご利用の方は、Emailを入力してください。
-      </div>
+      {/* 管理部にメールを送信しました。 */}
       <div className="flex justify-center">
         <Checkbox
           prefix={""}

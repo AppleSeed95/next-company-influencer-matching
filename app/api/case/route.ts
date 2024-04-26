@@ -142,6 +142,7 @@ export async function PUT(request: NextRequest) {
         msg: "稼働中ではないので申請できません。",
       });
     });
+
     const companyStatus = rows[0].status;
     if (companyStatus !== "稼働中" && companyStatus !== "稼動中") {
       return NextResponse.json({ type: "error", msg: "応募できません" });

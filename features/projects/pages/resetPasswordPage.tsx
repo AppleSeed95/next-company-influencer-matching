@@ -22,17 +22,19 @@ export default function ResetPasswordPage() {
       await axios.post("/api/sendEmail", {
         to: result.data.data.email,
         subject: "【インフルエンサーめぐり】パスワード再発行",
-        content: `
-          \n いつもインフルエンサーめぐりをご利用いただきありがとうございます。
-          \nパスワードを再発行しましたのでご確認をお願いします。
-          \n
-          \n-----------------------------------------------------
-          \n▼アカウント情報
-          \nパスワード：
-          \n${result.data.data.password}
-          \n----------------------------------------------------- 
-          \n不明点がございましたらお問い合わせフォームよりご連絡ください。
-          \n https://influencer-meguri.jp/ask。
+        html: `
+          <div>
+          <br/> いつもインフルエンサーめぐりをご利用いただきありがとうございます。
+          <br/>パスワードを再発行しましたのでご確認をお願いします。
+          <br/>
+          <br/>-----------------------------------------------------
+          <br/>▼アカウント情報
+          <br/>パスワード：
+          <br/>${result.data.data.password}
+          <br/>----------------------------------------------------- 
+          <br/>不明点がございましたらお問い合わせフォームよりご連絡ください。
+          </div?
+          https://influencer-meguri.jp/ask
           `,
       });
       setIsLoading(false);

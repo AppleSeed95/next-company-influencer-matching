@@ -67,17 +67,17 @@ export default function AppledCase() {
       await axios.post("/api/sendEmail", {
         to: result.data.emailAddress,
         subject: "【インフルエンサーめぐり】案件の完了報告が届きました",
-        content: `${result.data.representativeName} 様
-          \n いつもインフルエンサーめぐりをご利用いただきありがとうございます。
-          \n以下の案件で完了報告が届いてます。
-          \nログインしてご確認をお願いします。
-          \n
-          \n案件名  ：${result.data.caseName}
-          \nインフルエンサー名：${result.data.influencerName}
-          \nURL   ：http://localhost:3000/caseDetail/${result.data.caseID}
-          \n-----------------------------------------------------
-          \n 不明点がございましたらお問い合わせフォームよりご連絡ください。
-          \n https://influencer-meguri.jp/ask。
+        html: `<div>${result.data.representativeName} 様
+          <br/> いつもインフルエンサーめぐりをご利用いただきありがとうございます。
+          <br/>以下の案件で完了報告が届いてます。
+          <br/>ログインしてご確認をお願いします。
+          <br/>
+          <br/>案件名  ：${result.data.caseName}
+          <br/>インフルエンサー名：${result.data.influencerName}
+          <br/>URL   ：http://localhost:3000/caseDetail/${result.data.caseID}
+          <br/>-----------------------------------------------------
+          <br/> 不明点がございましたらお問い合わせフォームよりご連絡ください。
+          </div> https://influencer-meguri.jp/ask。
           `,
       });
       setReload(!reload);

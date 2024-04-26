@@ -20,7 +20,7 @@ export default function AppyExpired() {
                 </div>
                 <div className="text-center mb-[10px]">
                     <Link href={"/apply"}>
-                        <Button buttonType={ButtonType.PRIMARY}>申請ペジエロ</Button>
+                        <Button buttonType={ButtonType.PRIMARY}>申し込みはこちら</Button>
                     </Link>
                 </div>
             </div>

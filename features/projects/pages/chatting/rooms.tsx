@@ -15,18 +15,18 @@ const ChattingRooms: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await axios.get(
+        const { data } = await axios.get(
           `/api/chatting/room?id=${user.user?.targetId}&type=${user.user.role === "企業" ? "company" : "influencer"
           }`
         );
-        if (result.data.length) {
-          setData(result.data);
+        if (data.length) {
+          setData(data);
           if (!id) {
             if (typeof window !== "undefined") {
-              router.push(`/chattingInf/${result.data[0].applyId}`);
+              router.push(`/chattingInf/${data[0].applyId}`);
             }
           }
-          result.data.map((a, key) => {
+          data.map((a, key) => {
             if (a.applyId == id) {
               setActive(key);
             }

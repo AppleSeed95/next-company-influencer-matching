@@ -14,6 +14,8 @@ import { useRecoilValue } from "recoil";
 import { authUserState } from "@/recoil/atom/auth/authUserAtom";
 import { useRouter } from "next/navigation";
 import ReactPaginate from "react-paginate";
+import Link from "next/link";
+
 
 export interface caseData {
   caseProps: {
@@ -166,28 +168,28 @@ export default function CaseDetailPage({ caseProps }: caseData) {
         await axios.post("/api/sendEmail", {
           to: influencerData?.emailAddress,
           subject: "【インフルエンサーめぐり】応募案件で否認されました",
-          content: `${influencerData?.influencerName} 様
-          \n いつもインフルエンサーめぐりをご利用いただきありがとうございます。
-          \nご応募いただいた「 ${caseData?.caseName} 」で否認されました。
-          \nご期待に沿えない結果となってしまい、申し訳ございません。
-          \nまたの機会がございましたら、よろしくお願いいたします。
+          html: `<div>${influencerData?.influencerName} 様
+          <br/> いつもインフルエンサーめぐりをご利用いただきありがとうございます。
+          <br/>ご応募いただいた「 ${caseData?.caseName} 」で否認されました。
+          <br/>ご期待に沿えない結果となってしまい、申し訳ございません。
+          <br/>またの機会がございましたら、よろしくお願いいたします。
           
-          \n-----------------------------------------------------
-          \n 不明点がございましたらお問い合わせフォームよりご連絡ください。
-          \n https://influencer-meguri.jp/ask。
+          <br/>-----------------------------------------------------
+          <br/> 不明点がございましたらお問い合わせフォームよりご連絡ください。
+          </div> https://influencer-meguri.jp/ask
           `,
         });
       if (val === "承認")
         await axios.post("/api/sendEmail", {
           to: influencerData?.emailAddress,
           subject: "【インフルエンサーめぐり】応募案件で承認されました",
-          content: `${influencerData?.influencerName} 様
-          \n いつもインフルエンサーめぐりをご利用いただきありがとうございます。
-          \nご応募いただいた「 ${caseData?.caseName} 」で承認されましたのでログインしてご確認ください。
-          \n
-          \n-----------------------------------------------------
-          \n 不明点がございましたらお問い合わせフォームよりご連絡ください。
-          \n https://influencer-meguri.jp/ask。
+          html: `<div>${influencerData?.influencerName} 様
+          <br/> いつもインフルエンサーめぐりをご利用いただきありがとうございます。
+          <br/>ご応募いただいた「 ${caseData?.caseName} 」で承認されましたのでログインしてご確認ください。
+          <br/>
+          <br/>-----------------------------------------------------
+          <br/> 不明点がございましたらお問い合わせフォームよりご連絡ください。
+          </div> https://influencer-meguri.jp/ask。
           `,
         });
       setShowInfluencer(false);
@@ -302,7 +304,20 @@ export default function CaseDetailPage({ caseProps }: caseData) {
         />
       </div>
       <div className="flex flex-col h-full px-[30px] sp:px-[12px] pt-[110px] pb-[30px]">
-        <div className="text-title sp:hidden">募集案件詳細</div>
+        <div className="flex items-center justify-between">
+          <div className="text-title sp:hidden">募集案件詳細</div>
+          <Link href={"/appliedList"}>
+            <Button
+              buttonType={ButtonType.PRIMARY}
+              buttonClassName="mt-[15px] sp:my-[15px] sp:text-small rounded-[0px]"
+            >
+              <div className="flex">
+                戻る
+              </div>
+            </Button>
+          </Link>
+        </div>
+
         <SearchBar
           data={data}
           setVisibleData={handleSearch}
