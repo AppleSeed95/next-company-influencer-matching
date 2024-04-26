@@ -4,6 +4,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { RecoilRoot } from "recoil";
+import Analytics from "@/components/analytics";
 // import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -20,7 +21,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+
       <body className={inter.className}>
+        <Analytics />
         <RecoilRoot>
           {/* <Suspense fallback={<div>loading...</div>}>{children}</Suspense> */}
           {children}
