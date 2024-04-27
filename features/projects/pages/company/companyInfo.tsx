@@ -368,7 +368,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
       >
         <Modal
           noFooter
-          body={<CheckoutPage priceID={data?.priceID} />}
+          body={<CheckoutPage priceID={data?.priceID} paymentCnt={data?.paymentCnt} />}
           onOk={() => setShowPayment(false)}
           onCancel={() => setShowPayment(false)}
         />

@@ -19,6 +19,7 @@ export async function POST(request: NextRequest) {
       console.log(body);
 
       const email = body.data.object.receipt_email;
+      const paymentId = body.data.object.payment_method;
       const query = `SELECT company.payment, company.paymentCnt
                             FROM company
                             LEFT JOIN users ON company.emailAddress = users.email

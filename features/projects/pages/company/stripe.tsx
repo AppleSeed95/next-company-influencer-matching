@@ -5,19 +5,21 @@ const stripePromise = loadStripe('pk_test_51OV8DpHeC7VfJv8UJXLcBhECs81qBUSwD7ZJQ
 
 interface priceProps {
     priceID: string;
+    paymentCnt: number;
 }
 
-const CheckoutPage = ({ priceID }: priceProps) => {
+const CheckoutPage = ({ priceID, paymentCnt }: priceProps) => {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         const handleClick = async () => {
+            console.log(paymentCnt);
             setIsLoading(true);
             const stripe = await stripePromise;
             const { error } = await stripe.redirectToCheckout({
                 lineItems: [{ price: priceID.trim(), quantity: 1 }],
                 mode: 'payment',
-                successUrl: `${window.location.origin}/companyInfo?type=success`,
+                successUrl: `${window.location.origin}/${paymentCnt === 0 ? 'paymentConfirm' : 'companyInfo?type=success'}`,
                 cancelUrl: `${window.location.origin}/companyInfo?type=fail`,
             });
             if (error) {
