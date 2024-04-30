@@ -64,26 +64,25 @@ export default function AppledCase() {
       id,
     });
     if (result.data.type === "success") {
-      console.log('email sening');
-      console.log(result.data);
+      const { data } = result.data;
 
       await axios.post("/api/sendEmail", {
         to: result.data.emailAddress,
         subject: "【インフルエンサーめぐり】案件の完了報告が届きました",
-        html: `<div>${result.data.representativeName} 様
+        html: `<div>${data.representativeName} 様
           <br/> いつもインフルエンサーめぐりをご利用いただきありがとうございます。
           <br/>以下の案件で完了報告が届いてます。
           <br/>ログインしてご確認をお願いします。
           <br/>
-          <br/>案件名  ：${result.data.caseName}
-          <br/>インフルエンサー名：${result.data.influencerName}
-          <br/>URL   ：http://localhost:3000/caseDetail/${result.data.caseID}
+          <br/>案件名  ：${data.caseName}
+          <br/>インフルエンサー名：${data.influencerName}
+          <br/>URL   ：http://localhost:3000/caseDetail/${data.caseID}
           <br/>-----------------------------------------------------
           <br/> 不明点がございましたらお問い合わせフォームよりご連絡ください。
           </div> https://influencer-meguri.jp/ask
           `,
       });
-      // setReload(!reload);
+      setReload(!reload);
     }
   };
   const makeOptioinedData = (visibleData, result, result1) => {
