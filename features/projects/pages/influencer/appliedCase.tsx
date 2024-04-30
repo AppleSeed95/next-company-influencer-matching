@@ -82,7 +82,7 @@ export default function AppledCase() {
           </div> https://influencer-meguri.jp/ask
           `,
       });
-      setReload(!reload);
+      // setReload(!reload);
     }
   };
   const makeOptioinedData = (visibleData, result, result1) => {
