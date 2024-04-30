@@ -67,7 +67,7 @@ export default function AppledCase() {
       const { data } = result.data;
 
       await axios.post("/api/sendEmail", {
-        to: result.data.emailAddress,
+        to: data.emailAddress,
         subject: "【インフルエンサーめぐり】案件の完了報告が届きました",
         html: `<div>${data.representativeName} 様
           <br/> いつもインフルエンサーめぐりをご利用いただきありがとうございます。
@@ -82,7 +82,7 @@ export default function AppledCase() {
           </div> https://influencer-meguri.jp/ask
           `,
       });
-      // setReload(!reload);
+      setReload(!reload);
     }
   };
   const makeOptioinedData = (visibleData, result, result1) => {
