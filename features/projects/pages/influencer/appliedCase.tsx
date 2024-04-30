@@ -64,6 +64,8 @@ export default function AppledCase() {
       id,
     });
     if (result.data.type === "success") {
+      console.log('email sening');
+
       await axios.post("/api/sendEmail", {
         to: result.data.emailAddress,
         subject: "【インフルエンサーめぐり】案件の完了報告が届きました",
