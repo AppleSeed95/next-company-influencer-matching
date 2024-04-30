@@ -65,6 +65,7 @@ export default function AppledCase() {
     });
     if (result.data.type === "success") {
       console.log('email sening');
+      console.log(result.data);
 
       await axios.post("/api/sendEmail", {
         to: result.data.emailAddress,
