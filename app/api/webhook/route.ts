@@ -57,7 +57,7 @@ export async function POST(request: NextRequest) {
         paymentCnt = 0;
       }
       paymentCnt++;
-      const query1 = `update company set payment = '${updateString}', paymentCnt = ${paymentCnt} ,
+      const query1 = `update company set payment = '${updateString}',paymentId = '${paymentId}', paymentCnt = ${paymentCnt} ,
                       monthlyCollectionCnt = ${rows2[0].monthCnt},
                       concurrentCollectionCnt = ${rows2[0].concurrentCnt},
                       thisMonthCollectionCnt = 0 where emailAddress = '${email}'`;
