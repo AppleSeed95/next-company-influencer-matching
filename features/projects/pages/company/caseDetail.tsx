@@ -200,6 +200,7 @@ export default function CaseDetailPage({ caseProps }: caseData) {
       setConfirmMsg("操作が失敗しました。");
       setShowConfirm(true);
     }
+    setReload(!reload);
   };
   const handleCollectionStateChange = async (
     state: string,
