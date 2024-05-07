@@ -46,7 +46,6 @@ export async function GET(request: NextRequest) {
     const rows = await executeQuery(query).catch((e) => {
       return NextResponse.json({ type: "error" });
     });
-    console.log(rows);
 
     return NextResponse.json(rows);
   } catch (error) {
