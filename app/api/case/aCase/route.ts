@@ -45,7 +45,6 @@ export async function PUT(request: NextRequest) {
         });
       }
     }
-
     const query = approveMode
       ? `UPDATE cases
     SET status = '${update}',reason = '${reason}'

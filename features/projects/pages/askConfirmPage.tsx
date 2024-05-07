@@ -16,7 +16,7 @@ export default function AskConfirmPage() {
                     src="/img/logo(red).svg"
                     className="blcok m-auto w-[265px] sp:hidden mb-[50px]"
                 />
-                <div className=" text-center justify-center w-full items-center mb-[20px] sp:mt-[50px] text-title">
+                <div className=" text-center justify-center w-full items-center mb-[20px] sp:mt-[50px]  ">
                     <div>お問い合わせありがとうございます。</div>
                     <div>内容を確認してご連絡いたします。</div>
                 </div>

@@ -145,7 +145,10 @@ export async function PUT(request: NextRequest) {
 
     const companyStatus = rows[0].status;
     if (companyStatus !== "稼働中" && companyStatus !== "稼動中") {
-      return NextResponse.json({ type: "error", msg: "応募できません" });
+      return NextResponse.json({
+        type: "error",
+        msg: "承認されていないため、募集をうまくできません。",
+      });
     }
     const body = { ...requestBody, edited: true };
     let query = "UPDATE cases SET ";

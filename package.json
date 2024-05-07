@@ -11,6 +11,7 @@
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^41.2.1",
     "@ckeditor/ckeditor5-react": "^6.2.0",
+    "@next/third-parties": "^14.2.3",
     "@sendgrid/mail": "^8.1.0",
     "@stripe/stripe-js": "^3.0.10",
     "@types/micro": "^10.0.0",
@@ -22,7 +23,7 @@
     "install": "^0.13.0",
     "micro": "^10.0.1",
     "mysql": "^2.18.1",
-    "next": "14.0.4",
+    "next": "^14.2.3",
     "npm": "^10.4.0",
     "pm2": "^5.3.1",
     "raw-body": "^2.5.2",

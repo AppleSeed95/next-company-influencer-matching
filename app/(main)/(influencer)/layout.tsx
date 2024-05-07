@@ -16,10 +16,10 @@ export default function LoginLayout({
   const authUser = useRecoilValue(authUserState);
   const router = useRouter();
   useEffect(() => {
-    if (authUser.user.role === '企業') {
+    if (authUser.user?.role === '企業') {
       router.push('/top');
     }
-    if (authUser.user.role === 'admin') {
+    if (authUser.user?.role === 'admin') {
       router.push('/companyList');
     }
   }, [authUser])

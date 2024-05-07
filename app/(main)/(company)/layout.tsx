@@ -15,10 +15,10 @@ export default function LoginLayout({
   const authUser = useRecoilValue(authUserState);
   const router = useRouter();
   useEffect(() => {
-    if (authUser.user.role === 'インフルエンサー') {
+    if (authUser.user?.role === 'インフルエンサー') {
       router.push('/influencerTop');
     }
-    if (authUser.user.role === 'admin') {
+    if (authUser.user?.role === 'admin') {
       router.push('/companyList');
     }
   }, [authUser])

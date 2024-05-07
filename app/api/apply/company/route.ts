@@ -7,6 +7,43 @@ export async function POST() {
 export async function GET(request: NextRequest) {
   const id = request.nextUrl.searchParams.get("id") || "";
   try {
+    const updateQuery = `UPDATE cases
+      SET collectionStatus = '募集中'  
+      WHERE id = ${id}
+      AND status = '承認'
+      AND collectionStatus != '停止中'
+      AND collectionStatus != '募集終了'
+      AND TIME(collectionStart) < TIME(CURTIME())
+      AND collectionStart IS NOT NULL
+      AND collectionStart <> ''
+      `;
+    await executeQuery(updateQuery).catch((e) => {
+      return NextResponse.json({ type: "error" });
+    });
+
+    const updateQuery1 = `UPDATE cases
+      SET collectionStatus = '募集終了'  
+      WHERE id = ${id}
+      AND status = '承認'
+      AND TIME(collectionEnd) < TIME(CURTIME())
+      AND collectionEnd IS NOT NULL
+      AND collectionEnd <> ''
+      `;
+
+    await executeQuery(updateQuery1).catch((e) => {
+      return NextResponse.json({ type: "error" });
+    });
+    const updateQuery2 = `UPDATE cases
+      SET collectionStatus = '完了'  
+      WHERE id = ${id}
+      AND TIME(caseEnd) < TIME(CURTIME())
+      AND collectionEnd IS NOT NULL
+      AND collectionEnd <> ''
+      `;
+
+    await executeQuery(updateQuery2).catch((e) => {
+      return NextResponse.json({ type: "error" });
+    });
     const query = `SELECT apply.*,influencer.nickName, influencer.instagram,influencer.x,influencer.tiktok,influencer.youtube, influencer.facebook
       FROM apply
       LEFT JOIN influencer ON apply.influencerId = influencer.id

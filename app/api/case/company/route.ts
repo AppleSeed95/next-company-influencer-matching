@@ -9,11 +9,12 @@ export async function GET(request: NextRequest) {
       WHERE companyId = ${id}
       AND status = '承認'
       AND collectionStatus != '停止中'
+      AND collectionStatus != '募集終了'
       AND TIME(collectionStart) < TIME(CURTIME())
       AND collectionStart IS NOT NULL
       AND collectionStart <> ''
       `;
-    const r = await executeQuery(updateQuery).catch((e) => {
+    await executeQuery(updateQuery).catch((e) => {
       return NextResponse.json({ type: "error" });
     });
 
@@ -21,11 +22,23 @@ export async function GET(request: NextRequest) {
       SET collectionStatus = '募集終了'  
       WHERE companyId = ${id}
       AND status = '承認'
-      AND TIME(collectionEnd) > TIME(CURTIME())
+      AND TIME(collectionEnd) < TIME(CURTIME())
       AND collectionEnd IS NOT NULL
       AND collectionEnd <> ''
       `;
+
     await executeQuery(updateQuery1).catch((e) => {
+      return NextResponse.json({ type: "error" });
+    });
+    const updateQuery2 = `UPDATE cases
+      SET collectionStatus = '完了'  
+      WHERE companyId = ${id}
+      AND TIME(caseEnd) < TIME(CURTIME())
+      AND collectionEnd IS NOT NULL
+      AND collectionEnd <> ''
+      `;
+
+    await executeQuery(updateQuery2).catch((e) => {
       return NextResponse.json({ type: "error" });
     });
 

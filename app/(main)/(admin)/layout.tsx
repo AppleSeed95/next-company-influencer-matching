@@ -13,11 +13,12 @@ export default function LoginLayout({
 }) {
   const authUser = useRecoilValue(authUserState);
   const router = useRouter();
+
   useEffect(() => {
-    if (authUser.user.role === 'インフルエンサー') {
+    if (authUser.user?.role === 'インフルエンサー') {
       router.push('/influencerTop');
     }
-    if (authUser.user.role === '企業') {
+    if (authUser.user?.role === '企業') {
       router.push('/top');
     }
   }, [authUser])
