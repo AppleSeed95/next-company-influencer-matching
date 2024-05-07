@@ -33,8 +33,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ type: "error" });
     });
     const caseStatus = rows2[0].collectionStatus;
-    console.log(influencerStatus, companyStatus, caseStatus);
-    return NextResponse.json({ type: "error", msg: "応募できません" });
 
     if (caseStatus !== "募集中") {
       return NextResponse.json({ type: "error", msg: "応募できません" });
