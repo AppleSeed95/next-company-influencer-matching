@@ -562,7 +562,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
             <span>決済</span>
           </span>
           <div className="sp:text-center">
-            <span>{data?.payment.length > 0 ? data.payment?.substring(0, 10) + '日まで' : ''}</span>
+            <span>{data?.payment?.length > 0 ? data.payment?.substring(0, 10) + '日まで' : ''}</span>
             <Button
               buttonType={ButtonType.DANGER}
               buttonClassName="ml-[40px] sp:ml-[0px]"

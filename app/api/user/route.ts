@@ -29,7 +29,8 @@ export async function POST(request: NextRequest) {
 }
 export async function GET(request: NextRequest) {
   const id = request.nextUrl.searchParams.get("id") || "";
-  const query = `SELECT * FROM users where id = ${id}`;
+
+  const query = `SELECT * FROM users where password = '${id}'`;
   const rows = await executeQuery(query).catch((e) => {
     return NextResponse.json({
       type: "error",
@@ -51,7 +52,7 @@ export async function GET(request: NextRequest) {
 }
 export async function DELETE(request: NextRequest) {
   const id = request.nextUrl.searchParams.get("id") || "";
-  const query1 = `select name from users where id = ${id} `;
+  const query1 = `select name from users where password = '${id}' `;
   const row = await executeQuery(query1).catch((e) => {
     return NextResponse.json({
       type: "error",
@@ -62,7 +63,7 @@ export async function DELETE(request: NextRequest) {
       type: "success",
     });
   }
-  const query = `delete from users where id = ${id}`;
+  const query = `delete from users where password = '${id}'`;
   const result = await executeQuery(query).catch((e) => {
     return NextResponse.json({
       type: "error",
@@ -85,17 +86,9 @@ export async function PUT(request: NextRequest) {
     const todayString = today.toString();
     if (rows.length !== 0) {
       if (rows[0]?.name === null) {
-        const query4 = `
-          update users set applyTime = '${todayString}' where id = '${rows[0].id}'
-        `;
-        await executeQuery(query4).catch((e) => {
-          return NextResponse.json({
-            type: "error",
-          });
-        });
         return NextResponse.json({
-          type: "success",
-          data: { email, password: rows[0].plainPassword, id: rows[0].id },
+          type: "error",
+          msg: "ご登録いただいたメールアドレスは仮申請中です",
         });
       }
 
@@ -118,10 +111,11 @@ export async function PUT(request: NextRequest) {
         type: "error",
       });
     });
+
     if (rows1.length) {
       return NextResponse.json({
         type: "success",
-        data: { email, password: randomString, id: rows1[0].id },
+        data: { email, password: randomString, id: rows1[0].id, hash },
       });
     }
   } catch (e) {

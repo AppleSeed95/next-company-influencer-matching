@@ -6,7 +6,6 @@ import RadioBtn from "@/components/atoms/radio";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { text } from "stream/consumers";
 
 export default function ApplyPage() {
   const [type, setType] = useState("企業");
@@ -40,7 +39,7 @@ export default function ApplyPage() {
         <br/> 以下のURLから登録申請をお願いします。
         <br/>※メール本文中のURLを60分以内にクリックしてください。
         <br/>https://influencer-meguri.jp/${type === "企業" ? "applyCompany" : "applyInfluencer"
-          }?id=${result.data.data.id}
+          }?id=${result.data.data.hash}
         <br/>-----------------------------------------------------
         <br/> 不明点がございましたらお問い合わせフォームよりご連絡ください。
         </div>

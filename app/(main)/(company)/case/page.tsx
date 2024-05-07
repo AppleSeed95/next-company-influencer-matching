@@ -14,7 +14,7 @@ function Case() {
   useEffect(() => {
     const fetchPaymentInfo = async () => {
       const { data } = await axios.get(`/api/company/aCompany/getPayment?id=${id}`)
-      if (data && (data.data.freeAccount === 0 || data.data.freeAccount === false)) {
+      if (data && (data.data?.freeAccount === 0 || data.data?.freeAccount === false)) {
         const paymentInfo = new Date(data.data?.payment);
         const today = new Date(data.todayString);
         const payed = paymentInfo > today;

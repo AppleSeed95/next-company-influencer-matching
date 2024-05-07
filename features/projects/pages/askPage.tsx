@@ -104,6 +104,7 @@ export default function AskPage() {
           <span>お名前</span>
           <span className="ml-[10px] text-[#EE5736] text-[11px]">必須</span>
         </span>
+
         <Input
           handleChange={(val) => setData({ ...data, name: val })}
           inputClassName="max-w-[250px] grow border-[#D3D3D3]"
@@ -123,9 +124,12 @@ export default function AskPage() {
           inputClassName="max-w-[250px] grow border-[#D3D3D3]"
         />
       </div>
-      <div className="mt-[25px] pb-[20px] w-[40%] m-auto sp:w-[90%] border-b-[1px] border-[#DDDDDD]">
-        ※本システムをご利用の方は、登録しているEmailを入力してください。
+      <div className="flex pt-[20px] w-[40%] sp:w-[90%] m-auto ">
+        <div className="w-[40%] flex justify-end mr-[67px]">
+        </div>
+        <div className="text-[12px]">※本システムをご利用の方は、登録しているEmailを入力してください。</div>
       </div>
+
       <div className="flex py-[20px] w-[40%] sp:w-[90%] m-auto border-b-[1px] border-[#DDDDDD]">
         <span className="w-[40%] flex justify-end mr-[67px]">
           <span>メールアドレス確認</span>

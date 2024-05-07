@@ -17,11 +17,9 @@ export default function Analytics() {
 
     return (
         <>
-            <noscript>
-                <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5RW3QBMN"
-                    height="0" width="0" style={{ display: 'none', visibility: 'hidden' }}>
-                </iframe>
-            </noscript>
+            <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5RW3QBMN"
+                height="0" width="0" style={{ display: 'none', visibility: 'hidden' }}>
+            </iframe>
             <Script
                 id="gtm-script"
                 strategy="afterInteractive"

@@ -124,7 +124,7 @@ export default function ApplicationListPage() {
         <SearchBar
           data={data.map((aData) => {
             if (aData.caseEnd) aData.caseEnd = dateString(aData.caseEnd);
-            if (aData.collectionEnd) aData.collectionEnd = `${dateString(aData.collectionStart)} ~ ${dateString(aData.collectionEnd)}`;
+            aData.duration = `${dateString(aData.collectionStart)} ~ ${dateString(aData.collectionEnd)}`
             return aData;
           })}
           setVisibleData={handleSearch}
@@ -228,7 +228,7 @@ export default function ApplicationListPage() {
                         {aData.status}
                       </td>
                       <td className="px-[35px] py-[25px]  border border-[#D3D3D3]">
-                        {`${dateString(aData.collectionStart)} ~ ${dateString(aData.collectionEnd)}` !== ' ~ ' ? `${dateString(aData.collectionStart)} ~ ${dateString(aData.collectionEnd)}` : ''}
+                        {`${dateString(aData.collectionStart)} ~ ${dateString(aData.collectionEnd)}`}
                       </td>
                       <td className="px-[35px] py-[25px]  border border-[#D3D3D3] ">
                         {aData.date}
