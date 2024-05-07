@@ -26,6 +26,8 @@ export async function POST(request: NextRequest) {
     if (companyStatus !== "稼働中" && companyStatus !== "稼動中") {
       return NextResponse.json({ type: "error", msg: "応募できません" });
     }
+    console.log(influencerStatus, companyStatus, caseStatus);
+
     const preQuery2 = `SELECT * FROM cases
      where id=${caseId}`;
     const rows2 = await executeQuery(preQuery2).catch((e) => {
