@@ -5,7 +5,9 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { RecoilRoot } from "recoil";
 import Analytics from "@/components/analytics";
-import { GoogleTagManager } from '@next/third-parties/google'
+// import { GoogleTagManager } from '@next/third-parties/google'
+import { Suspense } from "react";
+
 
 // import { Suspense } from "react";
 
@@ -25,12 +27,14 @@ export default function RootLayout({
     <html lang="en">
 
       <body className={inter.className}>
-        <Analytics />
         {/* <GoogleTagManager gtmId="GTM-5RW3QBMN" /> */}
 
         <RecoilRoot>
+          <Suspense>
+            <Analytics />
+            {children}
+          </Suspense>
           {/* <Suspense fallback={<div>loading...</div>}>{children}</Suspense> */}
-          {children}
         </RecoilRoot>
       </body>
     </html>
