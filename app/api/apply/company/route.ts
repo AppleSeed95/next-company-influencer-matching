@@ -57,7 +57,13 @@ export async function GET(request: NextRequest) {
     console.log(approved, completed);
 
     if (approved.length === completed.length) {
-      console.log("set complete");
+      const updateQuery1 = `UPDATE cases
+      SET collectionStatus = '募集終了'  
+      WHERE id = ${id}
+      `;
+      await executeQuery(updateQuery1).catch((e) => {
+        return NextResponse.json({ type: "error" });
+      });
     }
     return NextResponse.json(rows);
   } catch (error) {
