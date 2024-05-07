@@ -26,6 +26,7 @@ export async function GET(request: NextRequest) {
       AND collectionEnd IS NOT NULL
       AND collectionEnd <> ''
       `;
+    console.log(updateQuery, updateQuery1);
 
     await executeQuery(updateQuery1).catch((e) => {
       return NextResponse.json({ type: "error" });
