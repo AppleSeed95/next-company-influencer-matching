@@ -54,7 +54,6 @@ export async function GET(request: NextRequest) {
     });
     const approved = rows.filter((a) => a.status !== "否決");
     const completed = rows.filter((a) => a.status === "完了");
-    console.log(approved, completed);
 
     if (approved.length === completed.length) {
       const updateQuery1 = `UPDATE cases
