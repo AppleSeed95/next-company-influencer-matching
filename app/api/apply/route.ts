@@ -26,19 +26,17 @@ export async function POST(request: NextRequest) {
     if (companyStatus !== "稼働中" && companyStatus !== "稼動中") {
       return NextResponse.json({ type: "error", msg: "応募できません" });
     }
-    console.log(influencerStatus, companyStatus, caseStatus);
 
     const preQuery2 = `SELECT * FROM cases
-     where id=${caseId}`;
+    where id=${caseId}`;
     const rows2 = await executeQuery(preQuery2).catch((e) => {
       return NextResponse.json({ type: "error" });
     });
     const caseStatus = rows2[0].collectionStatus;
-    if (caseStatus !== "募集中") {
-      return NextResponse.json({ type: "error", msg: "応募できません" });
-    }
+    console.log(influencerStatus, companyStatus, caseStatus);
+    return NextResponse.json({ type: "error", msg: "応募できません" });
 
-    if (companyStatus !== "稼働中" && companyStatus !== "稼動中") {
+    if (caseStatus !== "募集中") {
       return NextResponse.json({ type: "error", msg: "応募できません" });
     }
     const today = new Date();
