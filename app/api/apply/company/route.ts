@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
       AND status = '承認'
       AND collectionStatus != '停止中'
       AND collectionStatus != '募集終了'
-      AND TIME(collectionStart) < TIME(CURTIME())
+      AND collectionStart < NOW()
       AND collectionStart IS NOT NULL
       AND collectionStart <> ''
       `;
@@ -25,7 +25,7 @@ export async function GET(request: NextRequest) {
       SET collectionStatus = '募集終了'
       WHERE id = ${id}
       AND collectionStatus = '募集中'
-      AND TIME(collectionEnd) < TIME(CURTIME())
+      AND collectionEnd < NOW()
       AND collectionEnd IS NOT NULL
       AND collectionEnd <> ''
       `;
@@ -36,7 +36,7 @@ export async function GET(request: NextRequest) {
     const updateQuery2 = `UPDATE cases
       SET collectionStatus = '完了'
       WHERE id = ${id}
-      AND TIME(caseEnd) < TIME(CURTIME())
+      AND caseEnd < NOW()
       AND caseEnd IS NOT NULL
       AND caseEnd <> ''
       `;
