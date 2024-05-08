@@ -19,9 +19,9 @@ export async function GET(request: NextRequest) {
     });
 
     const updateQuery1 = `UPDATE cases
-      SET collectionStatus = '募集終了'  
+      SET collectionStatus = '募集終了'
       WHERE companyId = ${id}
-      AND status = '承認'
+      AND collectionStatus = '募集中'
       AND TIME(collectionEnd) < TIME(CURTIME())
       AND collectionEnd IS NOT NULL
       AND collectionEnd <> ''
@@ -31,11 +31,11 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ type: "error" });
     });
     const updateQuery2 = `UPDATE cases
-      SET collectionStatus = '完了'  
+      SET collectionStatus = '完了'
       WHERE companyId = ${id}
       AND TIME(caseEnd) < TIME(CURTIME())
-      AND collectionEnd IS NOT NULL
-      AND collectionEnd <> ''
+      AND caseEnd IS NOT NULL
+      AND caseEnd <> ''
       `;
 
     await executeQuery(updateQuery2).catch((e) => {
