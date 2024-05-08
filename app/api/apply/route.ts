@@ -24,7 +24,10 @@ export async function POST(request: NextRequest) {
     const companyStatus = rows1[0].status;
 
     if (companyStatus !== "稼働中" && companyStatus !== "稼動中") {
-      return NextResponse.json({ type: "error", msg: "応募できません" });
+      return NextResponse.json({
+        type: "error",
+        msg: "募集が停止されたため、応募できません",
+      });
     }
 
     const preQuery2 = `SELECT * FROM cases
@@ -34,8 +37,17 @@ export async function POST(request: NextRequest) {
     });
     const caseStatus = rows2[0].collectionStatus;
 
-    if (caseStatus !== "募集中") {
-      return NextResponse.json({ type: "error", msg: "応募できません" });
+    if (caseStatus === "停止中") {
+      return NextResponse.json({
+        type: "error",
+        msg: "募集が停止されたため、応募できません",
+      });
+    }
+    if (caseStatus === "募集終了") {
+      return NextResponse.json({
+        type: "error",
+        msg: "募集が終了したため、応募できません",
+      });
     }
     const today = new Date();
     const todayString = `${today.getFullYear()}/${

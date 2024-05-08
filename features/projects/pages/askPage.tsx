@@ -124,7 +124,7 @@ export default function AskPage() {
           inputClassName="max-w-[250px] grow border-[#D3D3D3]"
         />
       </div>
-      <div className="flex pt-[20px] w-[40%] sp:w-[90%] m-auto ">
+      <div className="flex w-[40%] sp:w-[90%] m-auto ">
         <div className="w-[40%] flex justify-end mr-[67px]">
         </div>
         <div className="text-[12px]">※本システムをご利用の方は、登録しているEmailを入力してください。</div>

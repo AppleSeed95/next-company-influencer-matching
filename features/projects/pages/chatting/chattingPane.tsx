@@ -77,7 +77,7 @@ export default function ChattingPane() {
           <br/>
           <br/>企業名：${roomData?.companyName}
           <br/>案件名：${roomData?.caseName}
-          <br/>URL ：https://localhost:3000/chattingInf/${id}
+          <br/>URL ：//https://influencer-meguri.jp/chattingInf/${id}
           <br/>
           <br/>-----------------------------------------------------
           <br/> 不明点がございましたらお問い合わせフォームよりご連絡ください。
@@ -98,7 +98,7 @@ export default function ChattingPane() {
           <br/>
           <br/>案件名：${roomData?.caseName}
           <br/>インフルエンサー名：${roomData?.influencerName}
-          <br/>URL ：https://localhost:3000/chatting/${id}
+          <br/>URL ：https://influencer-meguri.jp/chatting/${id}
           <br/>
           <br/>-----------------------------------------------------
           <br/> 不明点がございましたらお問い合わせフォームよりご連絡ください。

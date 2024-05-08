@@ -156,6 +156,7 @@ const CasePage: React.FC = () => {
         if (result.data.type === 'error') {
           setConfirmMsg(result.data.msg);
           setShowConfirm(true);
+          setIsLoading(false);
           return;
         }
         setError([]);
@@ -171,6 +172,7 @@ const CasePage: React.FC = () => {
         if (result.data.type === 'error') {
           setConfirmMsg(result.data.msg);
           setShowConfirm(true);
+          setIsLoading(false);
           return;
         }
       }
@@ -219,7 +221,6 @@ const CasePage: React.FC = () => {
         data.status === "申請前" ||
         (data.status === "否認" && data.collectionStatus === "停止");
     }
-    console.log(startable);
 
     return startable;
   };

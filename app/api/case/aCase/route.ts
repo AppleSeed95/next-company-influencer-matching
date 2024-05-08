@@ -45,9 +45,18 @@ export async function PUT(request: NextRequest) {
         });
       }
     }
+    const caseQeury = `select collectionStart from cases where id=${id}`;
+    const caseRow = await executeQuery(caseQeury).catch((e) => {
+      return NextResponse.json({ type: "error" });
+    });
+    const collectionStart = new Date(caseRow[0].collectionStart);
+    const today = new Date();
+    const autoStart = collectionStart > today;
     const query = approveMode
       ? `UPDATE cases
-    SET status = '${update}',reason = '${reason}'
+    SET status = '${update}',reason = '${reason}', autoStart = ${
+          autoStart ? 1 : 0
+        }
     WHERE id = ${id}`
       : `UPDATE cases
     SET collectionStatus = '${update}'
@@ -107,7 +116,6 @@ export async function PUT(request: NextRequest) {
       if (result1) return NextResponse.json({ type: "success" });
       else return NextResponse.json({ type: "error" });
     }
-
     const result = await executeQuery(query);
     if (result) return NextResponse.json({ type: "success" });
     else return NextResponse.json({ type: "error" });

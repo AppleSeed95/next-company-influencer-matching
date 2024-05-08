@@ -92,7 +92,7 @@ const Input: React.FC<InputProps> = ({
           <div
             className={
               isValid
-                ? "text-left text-[#EE5736] text-[11px] opacity-0  duration-700"
+                ? "text-left text-[#EE5736] text-[11px] hidden  duration-700"
                 : "text-left text-[#EE5736] text-[11px] duration-700"
             }
           >

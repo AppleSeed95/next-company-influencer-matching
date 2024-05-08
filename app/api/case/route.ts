@@ -86,6 +86,7 @@ export async function POST(request: NextRequest) {
       previous int,
       next int,
       edited BOOLEAN  DEFAULT FALSE,
+      autoStart BOOLEAN  DEFAULT FALSE,
       FOREIGN KEY (companyId) REFERENCES company(id)
     )
   `);
@@ -163,7 +164,7 @@ export async function PUT(request: NextRequest) {
         aKey !== "representativeName"
       ) {
         query +=
-          aKey === "edited"
+          aKey === "edited" || aKey === "autoStart"
             ? `${aKey} = ${body[aKey]}, `
             : `${aKey} = '${body[aKey]}', `;
       }

@@ -13,6 +13,8 @@ export async function GET(request: NextRequest) {
       AND status = '承認'
       AND collectionStatus != '停止中'
       AND collectionStatus != '募集終了'
+      AND collectionStatus != '完了'
+      AND autoStart = 1
       AND collectionStart < NOW()
       AND collectionStart IS NOT NULL
       AND collectionStart <> ''
@@ -52,14 +54,17 @@ export async function GET(request: NextRequest) {
     const rows = await executeQuery(query).catch((e) => {
       return NextResponse.json({ type: "error" });
     });
+
     const approved = rows.filter((a) => a.status !== "否決");
     const completed = rows.filter((a) => a.status === "完了");
 
     if (approved.length === completed.length) {
       const updateQuery1 = `UPDATE cases
-      SET collectionStatus = '募集終了'  
+      SET collectionStatus = '完了'  
       WHERE id = ${id}
       `;
+      console.log(updateQuery1);
+
       await executeQuery(updateQuery1).catch((e) => {
         return NextResponse.json({ type: "error" });
       });
