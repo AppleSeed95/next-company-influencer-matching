@@ -55,7 +55,9 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ type: "error" });
     });
 
-    const approved = rows.filter((a) => a.status !== "否決");
+    const approved = rows.filter(
+      (a) => a.status !== "否決" && a.status !== "申請中"
+    );
     const completed = rows.filter((a) => a.status === "完了");
 
     if (approved.length === completed.length) {
