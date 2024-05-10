@@ -52,6 +52,7 @@ export async function PUT(request: NextRequest) {
     const collectionStart = new Date(caseRow[0].collectionStart);
     const today = new Date();
     const autoStart = collectionStart > today;
+
     const query = approveMode
       ? `UPDATE cases
     SET status = '${update}',reason = '${reason}', autoStart = ${
