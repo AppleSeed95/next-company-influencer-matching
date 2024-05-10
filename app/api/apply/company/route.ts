@@ -60,12 +60,11 @@ export async function GET(request: NextRequest) {
     );
     const completed = rows.filter((a) => a.status === "完了");
 
-    if (approved.length === completed.length) {
+    if (approved.length !== 0 && approved.length === completed.length) {
       const updateQuery1 = `UPDATE cases
       SET collectionStatus = '完了'  
       WHERE id = ${id}
       `;
-      console.log(updateQuery1);
 
       await executeQuery(updateQuery1).catch((e) => {
         return NextResponse.json({ type: "error" });
