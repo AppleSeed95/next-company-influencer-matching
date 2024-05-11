@@ -112,7 +112,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
           setGenre(result.data.genre);
         }
       } catch (e) {
-        router.push('logout')
+        router.push('/logout')
       }
     };
     const getAppliedUserData = async () => {

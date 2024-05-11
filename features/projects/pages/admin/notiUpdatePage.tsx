@@ -20,7 +20,7 @@ const NotiPage: React.FC = () => {
         const result = await axios.get("/api/auth/noti");
         if (result.data) setData(result.data.data);
       } catch (e) {
-        router.push('logout')
+        router.push('/logout')
 
       }
 

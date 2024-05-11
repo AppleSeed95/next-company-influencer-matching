@@ -3,6 +3,7 @@ import { executeQuery } from "../../util/db";
 
 export async function GET(request: NextRequest) {
   const id = request.nextUrl.searchParams.get("id") || "";
+
   try {
     const query = `SELECT cases.*, company.companyName, company.emailAddress, company.representativeName
       FROM cases
@@ -10,6 +11,7 @@ export async function GET(request: NextRequest) {
       where cases.id = ${id}
       ORDER BY cases.id DESC
       `;
+
     const rows = await executeQuery(query).catch((e) => {
       return NextResponse.json({ type: "error" });
     });

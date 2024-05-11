@@ -44,7 +44,7 @@ export default function ApplicationListPage() {
         }
         setIsLoading(false);
       } catch (e) {
-        router.push('logout')
+        router.push('/logout')
 
       }
 

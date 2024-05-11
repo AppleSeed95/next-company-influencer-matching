@@ -27,7 +27,7 @@ const PlanManagePage: React.FC = () => {
                 const { data } = await axios.get('/api/auth/plan');
                 setPlanData(data.data);
             } catch (e) {
-                router.push('logout')
+                router.push('/logout')
 
             }
 

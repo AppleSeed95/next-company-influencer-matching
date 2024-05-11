@@ -23,7 +23,7 @@ export async function middleware(request: NextRequest) {
     // const email = userInfo[1];
     const isMatch = token;
     if (!isMatch) {
-      return new Response(null, { status: 401 });
+      return NextResponse.json({ type: "error" });
     }
   } else {
     const response = NextResponse.next();

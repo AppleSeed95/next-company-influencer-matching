@@ -51,7 +51,7 @@ export default function CollectedCase() {
         const result = await axios.get(`/api/apply?id=${user.user?.targetId}`);
         if (result.data) setAppliedCase(result.data);
       } catch (e) {
-        router.push('logout')
+        router.push('/logout')
       }
 
     };

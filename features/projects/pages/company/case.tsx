@@ -48,7 +48,7 @@ const CasePage: React.FC = () => {
         if (result.data) setData(result.data.data);
         setWantedSNS(JSON.parse(result.data?.data.wantedSNS));
       } catch (e) {
-        router.push('logout')
+        router.push('/logout')
       }
     };
     if (id) fetchData();

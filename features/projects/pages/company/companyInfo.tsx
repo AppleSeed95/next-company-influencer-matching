@@ -79,7 +79,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
         setActive(result.data.active);
       };
     } catch (e) {
-      router.push('logout')
+      router.push('/logout')
     }
 
   };

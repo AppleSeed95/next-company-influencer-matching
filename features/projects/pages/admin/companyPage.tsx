@@ -30,7 +30,7 @@ const CompanyPage: React.FC<CompanyProps> = ({ companyData }: CompanyProps) => {
         const { data } = await axios.get('/api/auth/plan');
         setPlans(data.data);
       } catch (e) {
-        router.push('logout')
+        router.push('/logout')
       }
 
     }

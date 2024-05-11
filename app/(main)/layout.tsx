@@ -7,6 +7,7 @@ import axios from "axios";
 const Auth = ({ children }: { children: React.ReactNode }) => {
   const authUser = useRecoilValue(authUserState);
   const router = useRouter();
+
   const [_, setAuthUser] = useRecoilState(authUserState);
   let savedUser = null;
   if (typeof window !== "undefined") {
@@ -22,10 +23,13 @@ const Auth = ({ children }: { children: React.ReactNode }) => {
       parsedUser = null;
     }
   }
-  if (!parsedUser) {
+
+  if (!parsedUser || parsedUser === undefined) {
+
     if (typeof window !== "undefined") {
-      router.push("/logout");
+      // router.push("/logout");
     }
+
   }
   if (savedUser && !authUser.user) {
     if (savedUser) {

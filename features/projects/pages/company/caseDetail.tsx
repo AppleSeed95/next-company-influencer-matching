@@ -70,7 +70,7 @@ export default function CaseDetailPage({ caseProps }: caseData) {
           setInfluencerData(result.data[0].influencerId);
         }
       } catch (e) {
-        router.push('logout')
+        router.push('/logout')
       }
 
     };

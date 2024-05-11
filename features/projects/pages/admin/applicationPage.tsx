@@ -64,7 +64,7 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
           }
         }
       } catch (e) {
-        router.push('logout')
+        router.push('/logout')
       }
     };
 

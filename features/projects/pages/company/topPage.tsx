@@ -23,7 +23,7 @@ export default function TopPage({ influencerMode }: topProps) {
         const result = await axios.get("/api/auth/noti");
         setData(result.data?.data);
       } catch (e) {
-        router.push('logout')
+        router.push('/logout')
 
       }
 

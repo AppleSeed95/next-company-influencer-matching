@@ -52,7 +52,7 @@ export default function AppledCase() {
         }
         setIsLoading(false);
       } catch (e) {
-        router.push('logout')
+        router.push('/logout')
       }
     };
     if (user) fetchData();

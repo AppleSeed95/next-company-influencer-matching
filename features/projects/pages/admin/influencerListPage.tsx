@@ -52,7 +52,7 @@ export default function InfluencerListPage() {
         }
         setIsLoading(false);
       } catch (e) {
-        router.push('logout')
+        router.push('/logout')
       }
     };
     fetchData();

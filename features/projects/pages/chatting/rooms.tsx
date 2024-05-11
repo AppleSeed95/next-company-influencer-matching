@@ -33,7 +33,7 @@ const ChattingRooms: React.FC = () => {
           });
         }
       } catch (e) {
-        router.push('logout')
+        router.push('/logout')
       }
     };
     fetchData();

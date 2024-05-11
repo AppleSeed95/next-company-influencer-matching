@@ -45,14 +45,28 @@ export async function POST(request: NextRequest) {
 }
 export async function GET(request: NextRequest) {
   const id = request.nextUrl.searchParams.get("id") || "";
+  const target = request.nextUrl.searchParams.get("target") || "";
+  const role = request.nextUrl.searchParams.get("role") || "";
+
   try {
+    const preQuery = `SELECT * from chatroom where applyId = ${id}`;
+    const room = await executeQuery(preQuery).catch((e) => {
+      return NextResponse.json({ type: "error", msg: "no table exists" });
+    });
+    const isValid =
+      role === "インフルエンサー"
+        ? room[0].influencerId == target
+        : room[0].companyId == target;
+
     const query = `SELECT message.*,users.name FROM message
     LEFT JOIN users ON message.userId = users.id 
     where roomId = ${id}`;
     const rows = await executeQuery(query).catch((e) => {
       return NextResponse.json({ type: "error", msg: "no table exists" });
     });
-    return NextResponse.json(rows);
+    console.log(query, rows);
+
+    return NextResponse.json({ messages: rows, valid: isValid });
   } catch (error) {
     console.error("Error fetching data:", error);
     return NextResponse.json({ type: "error", msg: "no table exists" });

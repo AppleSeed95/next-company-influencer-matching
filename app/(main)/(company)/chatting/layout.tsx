@@ -15,7 +15,7 @@ export default function ChatLayout({
           <div className="w-[30%] sp:w-[0] sp:hidden">
             <ChattingRooms />
           </div>
-          <div className="h-full border-[1px] border-[#DDDDDD] w-[70%] box-border w-full flex flex-col">
+          <div className="h-full border-[1px] border-[#DDDDDD] justify-center w-[70%] box-border w-full flex  flex-col">
             {children}
           </div>
         </div>
