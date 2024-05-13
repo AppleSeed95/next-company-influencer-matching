@@ -33,7 +33,7 @@ export async function PUT(request: NextRequest) {
     const { update, reason, approveMode, resumeMode, companyId } =
       await request.json();
     if (!approveMode) {
-      const preQuery = `SELECT company.status FROM cases
+      const preQuery = `SELECT company.status,cases.collectionEnd FROM cases
       LEFT JOIN  company ON company.id = cases.companyId
       where cases.id=${id}`;
       const rows = await executeQuery(preQuery).catch((e) => {
@@ -46,8 +46,17 @@ export async function PUT(request: NextRequest) {
           msg: "承認されていないため、募集を開始できません。",
         });
       }
+      if (resumeMode) {
+        const today = new Date();
+        if (today > new Date(rows[0].collectionEnd)) {
+          return NextResponse.json({
+            type: "error",
+            msg: "募集終了日時を過ぎています",
+          });
+        }
+      }
     }
-    const caseQeury = `select collectionStart from cases where id=${id}`;
+    const caseQeury = `select collectionStart,collectionEnd from cases where id=${id}`;
     const caseRow = await executeQuery(caseQeury).catch((e) => {
       return NextResponse.json({ type: "error" });
     });
@@ -90,6 +99,13 @@ export async function PUT(request: NextRequest) {
         return NextResponse.json({
           type: "error",
           msg: "入力に誤りがあります。",
+        });
+      }
+      const today = new Date();
+      if (today > new Date(caseRow[0].collectionEnd)) {
+        return NextResponse.json({
+          type: "error",
+          msg: "募集終了日時を過ぎています。募集終了日時を変更して再申請してください。",
         });
       }
       const company = result[0];

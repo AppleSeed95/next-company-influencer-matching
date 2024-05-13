@@ -124,9 +124,20 @@ const CasePage: React.FC = () => {
       errorList.push(casePlace);
       isValid = false;
     }
+    const today = new Date();
     const collectionStart = body.collectionStart ? new Date(body.collectionStart) : "";
     const collectionEndDate = new Date(body.collectionEnd);
     const caseEndDate = new Date(body.caseEnd);
+    const isCollectionEedCorrect = collectionEndDate > today;
+    const isCaseEedCorrect = caseEndDate > today;
+    if (!isCollectionEedCorrect) {
+      errorList.push("募集終了日時は過去にすることはできません。")
+      isValid = false;
+    }
+    if (!isCaseEedCorrect) {
+      errorList.push("案件終了日時は過去にすることはできません。")
+      isValid = false;
+    }
     if (collectionStart !== '' && body.caseEnd !== '' && body.collectionEnd !== '' && !(collectionEndDate > collectionStart)) {
       errorList.push("募集開始時間と募集終了時間を正しく選択してください")
       isValid = false;
