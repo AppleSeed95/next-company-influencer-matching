@@ -6,6 +6,7 @@ import { useRecoilValue } from "recoil";
 import Link from "next/link";
 import { authUserState } from "@/recoil/atom/auth/authUserAtom";
 import axios from "axios";
+import Script from "next/script";
 
 export default function PaymentConfirmPage() {
     const authUser = useRecoilValue(authUserState);
@@ -15,7 +16,7 @@ export default function PaymentConfirmPage() {
         document.title = 'お支払いが成功しました';
         const fetchPaymentInfo = async () => {
             const { data: { data } } = await axios.get(`/api/company/aCompany/getPayment?id=${authUser.user.id}`)
-            setPaymentData(data.paymentId)
+            setPaymentData(data.paymentId);
         }
         fetchPaymentInfo();
     }, [])
@@ -26,9 +27,22 @@ export default function PaymentConfirmPage() {
                     src="/img/logo(red).svg"
                     className="blcok m-auto w-[265px] sp:hidden mb-[50px]"
                 />
-                <div className="hidden">
-                    {paymentData}
-                </div>
+                {paymentData !== '' && <div>
+                    <div className="hidden" id='order-number'>
+                        {paymentData}
+                    </div>
+                    <span id="a8sales"></span>
+                    <Script
+                        id="order-number-script"
+                        strategy="afterInteractive"
+                        dangerouslySetInnerHTML={{
+                            __html: `
+                                var orderNumber = document.getElementById('order-number');
+                                a8sales({ "pid": "XXXXXXXXXXXX", "order_number": orderNumber.innerText, }); 
+                                `,
+                        }}
+                    />
+                </div>}
                 <div className="text-center justify-center w-full items-center mb-[20px] sp:mt-[50px] ">
                     <div className="mb-[20px]">インフルエンサーめぐりをご利用いただきありがとうございます。
                     </div>

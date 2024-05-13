@@ -1,19 +1,9 @@
 "use client"
 
-// import { pageview } from "lib/gtm"
-import { usePathname, useSearchParams } from "next/navigation"
 import Script from "next/script"
-// import { useEffect } from "react"
 
 export default function Analytics() {
-    const pathname = usePathname()
-    const searchParams = useSearchParams()
 
-    // useEffect(() => {
-    //     if (pathname) {
-    //         pageview(pathname)
-    //     }
-    // }, [pathname, searchParams])
 
     return (
         <>
@@ -22,7 +12,17 @@ export default function Analytics() {
                     height="0" width="0" style={{ display: 'none', visibility: 'hidden' }}>
                 </iframe>
             </noscript>
-
+            <Script src="//statics.a8.net/a8sales/a8sales.js" />
+            {/* <Script
+                id="order-number-script"
+                strategy="afterInteractive"
+                dangerouslySetInnerHTML={{
+                    __html: `
+                    var orderNumber = document.getElementById('order-number');
+                    console.log(orderNumber);
+                    `,
+                }}
+            /> */}
             <Script
                 id="gtm-script"
                 strategy="afterInteractive"
