@@ -7,8 +7,9 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-export default function ApplyPage() {
-  const type = '企業'
+
+export default function InfluencerApplyPage() {
+  const type = 'インフルエンサー';
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -38,7 +39,7 @@ export default function ApplyPage() {
         <div>インフルエンサーめぐりに仮申請いただきありがとうございます。
         <br/> 以下のURLから登録申請をお願いします。
         <br/>※メール本文中のURLを60分以内にクリックしてください。
-        <br/>https://influencer-meguri.jp/applyCompany
+        <br/>https://influencer-meguri.jp/applyInfluencer
           }?id=${result.data.data.hash}
         <br/>-----------------------------------------------------
         <br/> 不明点がございましたらお問い合わせフォームよりご連絡ください。
@@ -61,14 +62,14 @@ export default function ApplyPage() {
           className="blcok m-auto w-[265px] sp:hidden mb-[50px]"
         />
         <div className="text-title text-center">
-          企業登録フォーム
+          インフルエンサー登録フォーム
         </div>
         <div className="m-[50px] text-center">
           <div className="py-[10px]">
             インフルエンサーめぐりをご覧いただきありがとうございます。
           </div>
           <div className="py-[10px]">
-            企業登録をご希望の方は以下から仮申請をしてください。
+            インフルエンサー登録をご希望の方は以下から仮申請をしてください。
           </div>
           <div className="py-[10px]">
             ご入力いただいたメールアドレス宛に申請フォームをお送りします。
@@ -104,7 +105,8 @@ export default function ApplyPage() {
         )}
         <div className="mt-[30px] flex justify-center">
           <span className="text-[#3F8DEB]">
-            <Link href={"/influencerApply"}>インフルエンサー登録はこちら</Link>
+            <Link href={"/apply"}>企業登録はこちら
+            </Link>
           </span>
           <img src="/img/triangle-right.svg" className="w-[11px] ml-[5px]" />
         </div>
