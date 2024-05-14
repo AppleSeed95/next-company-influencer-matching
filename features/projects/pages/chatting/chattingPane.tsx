@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Button from "@/components/atoms/button";
 import { ButtonType } from "@/components/atoms/buttonType";
 import TextArea from "@/components/atoms/textarea";
@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 const socket = io("https://influencer-meguri.jp");
 import Image from "next/image";
 import ChattingRooms from "./rooms";
+// const socket = io("http://localhost:5000");
 
 export default function ChattingPane() {
   const user = useRecoilValue(authUserState);
@@ -25,42 +26,55 @@ export default function ChattingPane() {
   const [msg, setMsg] = useState("");
   const { id } = useParams();
   const router = useRouter();
+  const lastChecked = useRef<Number>(0)
 
+  const fetchData = async (requireOther: boolean) => {
+    if (document.title !== 'チャット') return;
+
+    try {
+      const { data: { messages, valid } } = await axios.get(`/api/chatting?id=${id}&&target=${user.user.targetId}&&user=${user.user.id}&&role=${user.user.role}`);
+      if (messages.length) {
+        setData(messages);
+        lastChecked.current = messages[messages.length - 1].checked;
+      }
+      if (requireOther) {
+
+        socket.emit("requireReload", { roomId: id, userId: user.user.id });
+      }
+      setIsValid(valid);
+    }
+    catch (e) {
+      setIsValid(false)
+    }
+  };
   useEffect(() => {
 
     socket.on("message", () => {
       setReload(!reload);
     });
+    socket.on("requireReload", ({ data }) => {
+
+      if (user.user.id !== data.userId && data.roomId === id) {
+        fetchData(false);
+      }
+    });
 
     socket.emit("info", { roomId: id });
-    const fetchData = async () => {
 
-      try {
-        const result = await axios.get(`/api/chatting?id=${id}&&target=${user.user.targetId}&&role=${user.user.role}`);
-        console.log(result.data);
-        if (result.data?.messages.length) {
-          setData(result.data.messages);
-        }
-        setIsValid(result.data.valid);
-      } catch (e) {
-        setIsValid(false)
-      }
-    };
     const fetchRoomData = async () => {
       try {
         const result = await axios.get(`/api/chatting/chattingRoom?id=${id}`);
         if (result.data) {
           setRoomData(result.data);
         }
-      } catch (e) {
-        console.log(e);
 
+      } catch (e) {
         router.push('/logout')
       }
     };
-    fetchData();
-    fetchRoomData();
     document.title = 'チャット'
+    fetchData(true);
+    fetchRoomData();
   }, [reload]);
   useEffect(() => {
     const pane = document.getElementById("pane");
@@ -69,54 +83,64 @@ export default function ChattingPane() {
     }
 
   }, [data]);
+  useEffect(() => {
+    return () => {
+      socket.emit("leave", { roomId: id });
+    }
+  }, [])
   const handleSendMsg = async () => {
     if (msg === "") {
       return;
     }
     setMsg("");
-    if (user.user.role === "企業") {
-      await axios.post("/api/sendEmail", {
-        to: roomData?.infEmail,
-        subject: "【【インフルエンサーめぐり】チャットが届きました",
-        html: `
-          <div>
-          ${roomData?.influencerName} 様。
-          <br/> いつもインフルエンサーめぐりをご利用いただきありがとうございます。
-          <br/>以下の案件からチャットが届いてます。
-          <br/>ログインしてご確認をお願いします。
-          <br/>
-          <br/>企業名：${roomData?.companyName}
-          <br/>案件名：${roomData?.caseName}
-          <br/>URL ：//https://influencer-meguri.jp/chattingInf/${id}
-          <br/>
-          <br/>-----------------------------------------------------
-          <br/> 不明点がございましたらお問い合わせフォームよりご連絡ください。
-          </div> https://influencer-meguri.jp/ask
-          `,
-      });
-    }
-    if (user.user.role !== "企業") {
-      await axios.post("/api/sendEmail", {
-        to: roomData?.companyEmail,
-        subject: "【インフルエンサーめぐり】チャットが届きました",
-        html: `
-          <div>
-          ${roomData?.representativeName} 様。
-          <br/> いつもインフルエンサーめぐりをご利用いただきありがとうございます。
-          <br/>以下の案件でチャットが届いてます。
-          <br/>ログインしてご確認をお願いします。
-          <br/>
-          <br/>案件名：${roomData?.caseName}
-          <br/>インフルエンサー名：${roomData?.influencerName}
-          <br/>URL ：https://influencer-meguri.jp/chatting/${id}
-          <br/>
-          <br/>-----------------------------------------------------
-          <br/> 不明点がございましたらお問い合わせフォームよりご連絡ください。
-          </div> https://influencer-meguri.jp/ask
-          `,
-      });
-    }
     socket.emit("message", { roomId: id, userId: user.user.id, msg });
+    setTimeout(async () => {
+      if (lastChecked.current === 0) {
+        if (user.user.role === "企業") {
+          await axios.post("/api/sendEmail", {
+            to: roomData?.infEmail,
+            subject: "【【インフルエンサーめぐり】チャットが届きました",
+            html: `
+                <div>
+                ${roomData?.influencerName} 様。
+                <br/> いつもインフルエンサーめぐりをご利用いただきありがとうございます。
+                <br/>以下の案件からチャットが届いてます。
+                <br/>ログインしてご確認をお願いします。
+                <br/>
+                <br/>企業名：${roomData?.companyName}
+                <br/>案件名：${roomData?.caseName}
+                <br/>URL ：//https://influencer-meguri.jp/chattingInf/${id}
+                <br/>
+                <br/>-----------------------------------------------------
+                <br/> 不明点がございましたらお問い合わせフォームよりご連絡ください。
+                </div> https://influencer-meguri.jp/ask
+                `,
+          });
+        }
+        if (user.user.role !== "企業") {
+          await axios.post("/api/sendEmail", {
+            to: roomData?.companyEmail,
+            subject: "【インフルエンサーめぐり】チャットが届きました",
+            html: `
+                <div>
+                ${roomData?.representativeName} 様。
+                <br/> いつもインフルエンサーめぐりをご利用いただきありがとうございます。
+                <br/>以下の案件でチャットが届いてます。
+                <br/>ログインしてご確認をお願いします。
+                <br/>
+                <br/>案件名：${roomData?.caseName}
+                <br/>インフルエンサー名：${roomData?.influencerName}
+                <br/>URL ：https://influencer-meguri.jp/chatting/${id}
+                <br/>
+                <br/>-----------------------------------------------------
+                <br/> 不明点がございましたらお問い合わせフォームよりご連絡ください。
+                </div> https://influencer-meguri.jp/ask
+                `,
+          });
+        }
+
+      }
+    }, 1000);
     setReset(!reset);
   };
   let day = "";
@@ -170,6 +194,8 @@ export default function ChattingPane() {
                       {aData.msg.split("\n")?.map((a, key) => (
                         <div key={key}>{a}</div>
                       ))}
+                      <img src="/img/check.svg" className="w-[10px] absolute right-[3px]" />
+                      {aData.checked === 1 && <img src="/img/check.svg" className="w-[10px] absolute right-[7px]" />}
                       <div className="absolute bottom-[-30px] right-0 text-[#A8A8A8]">
                         {aData.time}
                       </div>

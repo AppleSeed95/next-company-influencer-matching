@@ -25,6 +25,7 @@ export async function POST(request: NextRequest) {
         day VARCHAR(255),
         msg VARCHAR(255),
         time VARCHAR(255), 
+        checked BOOLEAN NOT NULL DEFAULT FALSE,
         FOREIGN KEY (roomId) REFERENCES apply(id),
         FOREIGN KEY (userId) REFERENCES users(id)
       )
@@ -46,6 +47,7 @@ export async function POST(request: NextRequest) {
 export async function GET(request: NextRequest) {
   const id = request.nextUrl.searchParams.get("id") || "";
   const target = request.nextUrl.searchParams.get("target") || "";
+  const user = request.nextUrl.searchParams.get("user") || "";
   const role = request.nextUrl.searchParams.get("role") || "";
 
   try {
@@ -58,13 +60,18 @@ export async function GET(request: NextRequest) {
         ? room[0].influencerId == target
         : room[0].companyId == target;
 
+    const checkQuery = `
+      UPDATE message SET checked = 1 WHERE userId != ${user} and roomId = ${id}
+    `;
+    await executeQuery(checkQuery).catch((e) => {
+      return NextResponse.json({ type: "error", msg: "no table exists" });
+    });
     const query = `SELECT message.*,users.name FROM message
     LEFT JOIN users ON message.userId = users.id 
     where roomId = ${id}`;
     const rows = await executeQuery(query).catch((e) => {
       return NextResponse.json({ type: "error", msg: "no table exists" });
     });
-    console.log(query, rows);
 
     return NextResponse.json({ messages: rows, valid: isValid });
   } catch (error) {

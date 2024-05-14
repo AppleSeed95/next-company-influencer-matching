@@ -19,7 +19,6 @@ const CaseDetail: React.FC = () => {
   }
   useEffect(() => {
     const fetchData = async () => {
-      console.log(`/api/case/aCase?id=${id}`);
 
       const result = await axios.get(`/api/case/aCase?id=${id}&&companyId=${user.user.targetId}`);
       if (result.data.type === 'error') {
