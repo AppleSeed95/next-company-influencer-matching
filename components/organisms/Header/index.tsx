@@ -50,7 +50,7 @@ const Header: React.FC<Headerprops> = ({ mode }: Headerprops) => {
       className="flex h-[64px] w-full absolute sp:flex-col shadow-lg"
     >
       <div className="bg-[#FF2929] h-[full] px-[15px] flex items-center sp:w-[100%] sp:py-[7px]">
-        <img src="/img/logo.svg" className="sp:hidden" />
+        <img src="/img/logo(white).svg" className="sp:hidden" />
         <img src="/img/Vector.svg" className="lg:hidden mx-auto" />
       </div>
       <div className="flex justify-between items-center w-full bg-[#494D53] sp:py-[14px]">

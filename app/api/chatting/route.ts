@@ -55,6 +55,7 @@ export async function GET(request: NextRequest) {
     const room = await executeQuery(preQuery).catch((e) => {
       return NextResponse.json({ type: "error", msg: "no table exists" });
     });
+
     const isValid =
       role === "インフルエンサー"
         ? room[0].influencerId == target
