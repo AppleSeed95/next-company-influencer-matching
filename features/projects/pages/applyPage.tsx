@@ -38,8 +38,7 @@ export default function ApplyPage() {
         <div>インフルエンサーめぐりに仮申請いただきありがとうございます。
         <br/> 以下のURLから登録申請をお願いします。
         <br/>※メール本文中のURLを60分以内にクリックしてください。
-        <br/>https://influencer-meguri.jp/applyCompany
-          }?id=${result.data.data.hash}
+        <br/>https://influencer-meguri.jp/applyCompany?id=${result.data.data.hash}
         <br/>-----------------------------------------------------
         <br/> 不明点がございましたらお問い合わせフォームよりご連絡ください。
         </div>

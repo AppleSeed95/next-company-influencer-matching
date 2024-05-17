@@ -46,6 +46,12 @@ export async function POST(request: NextRequest) {
     );
     const userId = user.id;
 
+    const query4 = `SELECT * FROM plan`;
+    const rows4 = await executeQuery(query4).catch((e) => {
+      return NextResponse.json({ type: "error" });
+    });
+
+    const firstPlan = rows4[0];
     const today = new Date();
     const todayString = `${today.getFullYear()}/${
       today.getMonth() + 1
@@ -59,8 +65,8 @@ export async function POST(request: NextRequest) {
       plan: 1,
       thisMonthCollectionCnt: 0,
       conCurrentCnt: 0,
-      monthlyCollectionCnt: 1,
-      concurrentCollectionCnt: 1,
+      monthlyCollectionCnt: firstPlan.monthCnt,
+      concurrentCollectionCnt: firstPlan.concurrentCnt,
       userId: userId,
     };
     body = { ...body, ...defaultValues };

@@ -45,10 +45,14 @@ const CasePage: React.FC = () => {
     const fetchData = async () => {
       try {
         const result = await axios.get(`/api/case/aCase?id=${id}`);
+        if (result.data.type === 'error') {
+          router.push('/appliedList');
+          return;
+        }
         if (result.data) setData(result.data.data);
         setWantedSNS(JSON.parse(result.data?.data.wantedSNS));
       } catch (e) {
-        router.push('/logout')
+        router.push('/appliedList')
       }
     };
     if (id) fetchData();
