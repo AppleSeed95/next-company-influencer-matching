@@ -19,6 +19,7 @@ export async function GET(request: NextRequest) {
       company.monthlyCollectionCnt - company.thisMonthCollectionCnt,
       company.concurrentCollectionCnt - company.conCurrentCnt
     );
+    console.log(possibleAutoCollectionCnt);
 
     const countQuery = `
       SELECT COUNT(*) AS cnt
@@ -45,6 +46,7 @@ export async function GET(request: NextRequest) {
       AND collectionStatus != '停止中'
       AND collectionStatus != '募集終了'
       AND collectionStatus != '完了'
+      AND collectionStatus != '募集中'
       AND autoStart = 1
       AND collectionStart < NOW()
       AND collectionStart IS NOT NULL
@@ -78,14 +80,14 @@ export async function GET(request: NextRequest) {
     await executeQuery(updateQuery1).catch((e) => {
       return NextResponse.json({ type: "error" });
     });
-    const autoStartendCnt = Math.min(count[0].cnt, possibleAutoCollectionCnt);
+    const autoStartedCnt = company.freeAccount
+      ? count[0].cnt
+      : possibleAutoCollectionCnt;
     const autoEndedCnt = count1[0].cnt;
-    const concurrentDiffuse = autoEndedCnt - autoEndedCnt;
+    const concurrentDiffuse = autoStartedCnt - autoEndedCnt;
     const updateCompanyQuery = `
     UPDATE company
-    SET thisMonthCollectionCnt = thisMonthCollectionCnt + ${
-      autoStartendCnt + 1
-    },
+    SET thisMonthCollectionCnt = thisMonthCollectionCnt + ${autoStartedCnt},
     conCurrentCnt = conCurrentCnt + ${concurrentDiffuse}
     WHERE id = ${id}
     `;
