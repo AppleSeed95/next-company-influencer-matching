@@ -19,7 +19,6 @@ export async function GET(request: NextRequest) {
       company.monthlyCollectionCnt - company.thisMonthCollectionCnt,
       company.concurrentCollectionCnt - company.conCurrentCnt
     );
-    console.log(possibleAutoCollectionCnt);
 
     const countQuery = `
       SELECT COUNT(*) AS cnt

@@ -223,7 +223,7 @@ const CasePage: React.FC = () => {
     if (data.collectionStatus === "") {
       return true;
     }
-    if (data.collectionStatus === '停止中') {
+    if (data.collectionStatus === '停止中' || data.collectionStatus === '完了') {
       return false;
     }
     if (data.collectionStatus === '募集前') {
