@@ -69,7 +69,7 @@ export default function AppledCase() {
         to: data.emailAddress,
         subject: "【インフルエンサーめぐり】案件の完了報告が届きました",
         html: `<div>${data.representativeName} 様
-          <br/> いつもインフルエンサーめぐりをご利用いただきありがとうございます。
+          <br/>いつもインフルエンサーめぐりをご利用いただきありがとうございます。
           <br/>以下の案件で完了報告が届いてます。
           <br/>ログインしてご確認をお願いします。
           <br/>
@@ -77,7 +77,7 @@ export default function AppledCase() {
           <br/>インフルエンサー名：${data.influencerName}
           <br/>URL   ：https://influencer-meguri.jp/caseDetail/${data.caseId}
           <br/>-----------------------------------------------------
-          <br/> 不明点がございましたらお問い合わせフォームよりご連絡ください。
+          <br/>不明点がございましたらお問い合わせフォームよりご連絡ください。
           </div> https://influencer-meguri.jp/ask
           `,
       });

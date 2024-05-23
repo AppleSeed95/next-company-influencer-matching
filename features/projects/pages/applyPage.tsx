@@ -42,7 +42,7 @@ export default function ApplyPage() {
         <br/>https://influencer-meguri.jp/applyCompany?id=${result.data.data.hash}
         <br/>
         <br/>-----------------------------------------------------
-        <br/> 不明点がございましたらお問い合わせフォームよりご連絡ください。
+        <br/>不明点がございましたらお問い合わせフォームよりご連絡ください。
         </div>
         https://influencer-meguri.jp/ask`,
       });

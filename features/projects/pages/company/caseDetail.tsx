@@ -167,28 +167,29 @@ export default function CaseDetailPage({ caseProps }: caseData) {
       if (val === "否決")
         await axios.post("/api/sendEmail", {
           to: influencerData?.emailAddress,
-          subject: "【インフルエンサーめぐり】応募案件で否認されました",
-          html: `<div>${influencerData?.influencerName} 様
-          <br/> いつもインフルエンサーめぐりをご利用いただきありがとうございます。
-          <br/>ご応募いただいた「 ${caseData?.caseName} 」で否認されました。
+          subject: "【インフルエンサーめぐり】応募案件の返答がありました",
+          html: `<div>${influencerData?.influencerName?.length > 0 ? influencerData?.influencerName : influencerData.nickName} 様<br/>
+          <br/>いつもインフルエンサーめぐりをご利用いただきありがとうございます。<br/>
+          <br/>「 ${caseData?.caseName} 」に応募いただきありがとうございます。
+          <br/>応募内容をとに慎重に検討しました結果、
+          <br/>今回は登録を見送らせていただくこととなりました。
           <br/>ご期待に沿えない結果となってしまい、申し訳ございません。
-          <br/>またの機会がございましたら、よろしくお願いいたします。
-          
+          <br/>またの機会がございましたら、よろしくお願いいたします。 <br/>
           <br/>-----------------------------------------------------
-          <br/> 不明点がございましたらお問い合わせフォームよりご連絡ください。
+          <br/>不明点がございましたらお問い合わせフォームよりご連絡ください。
           </div> https://influencer-meguri.jp/ask
           `,
         });
       if (val === "承認")
         await axios.post("/api/sendEmail", {
           to: influencerData?.emailAddress,
-          subject: "【インフルエンサーめぐり】応募案件で承認されました",
-          html: `<div>${influencerData?.influencerName} 様
-          <br/> いつもインフルエンサーめぐりをご利用いただきありがとうございます。
-          <br/>ご応募いただいた「 ${caseData?.caseName} 」で承認されましたのでログインしてご確認ください。
-          <br/>
+          subject: "【インフルエンサーめぐり】応募案件が承認されました",
+          html: `<div>${influencerData?.influencerName?.length > 0 ? influencerData?.influencerName : influencerData.nickName} 様<br/>
+          <br/>いつもインフルエンサーめぐりをご利用いただきありがとうございます。<br/>
+          <br/>「 ${caseData?.caseName} 」に応募いただきありがとうございます。
+          <br/>承認されましたのでログインしてご確認をお願いします。<br/>
           <br/>-----------------------------------------------------
-          <br/> 不明点がございましたらお問い合わせフォームよりご連絡ください。
+          <br/>不明点がございましたらお問い合わせフォームよりご連絡ください。
           </div> https://influencer-meguri.jp/ask
           `,
         });

@@ -156,6 +156,7 @@ const CasePage: React.FC = () => {
     }
     if (isValid) {
       setError([]);
+      let result;
       if (data.id) {
         const currentSavedResult = await axios.get(`/api/case/aCase?id=${id}`);
         if (currentSavedResult.data.data.collectionStatus === "募集中") {
@@ -163,7 +164,7 @@ const CasePage: React.FC = () => {
           setShowConfirm(true);
           return;
         }
-        const result = await axios.post("/api/case", {
+        result = await axios.post("/api/case", {
           ...body,
           previous: data.id,
           status: data.status === '承認' || data.status === '承認 / 否認' ? "承認 / 申請中" : "申請中",
@@ -180,7 +181,7 @@ const CasePage: React.FC = () => {
       } else {
         if (isLoading) return;
         setIsLoading(true);
-        const result = await axios.post("/api/case", {
+        result = await axios.post("/api/case", {
           ...body,
           status: "申請中",
         });
@@ -194,13 +195,13 @@ const CasePage: React.FC = () => {
       await axios.post("/api/sendEmail", {
         to: user.user?.email,
         subject: "【インフルエンサーめぐり】募集案件の登録申請をしました",
-        html: `<div>${user.user?.name} 様
-        <br/>いつもインフルエンサーめぐりをご利用いただきありがとうございます。
+        html: `<div>${user.user?.name} 様<br/>
+        <br/>いつもインフルエンサーめぐりをご利用いただきありがとうございます。<br/>
         <br/>
-        <br/>募集案件の登録申請を受け付けました。
-        <br/>申請確認を確認しますのでしばらくお待ちください。
+        <br/>募集案件の登録申請を受け付けました。 
+        <br/>申請内容を確認しますのでしばらくお待ちください。<br/>
         <br/>-----------------------------------------------------
-        <br/> 不明点がございましたらお問い合わせフォームよりご連絡ください。
+        <br/>不明点がございましたらお問い合わせフォームよりご連絡ください。
         </div> https://influencer-meguri.jp/ask。
         `,
       });
@@ -209,7 +210,7 @@ const CasePage: React.FC = () => {
         subject: "【インフルエンサーめぐり】募集案件の登録申請がありました",
         html: `<div>募集案件の登録申請がありました。
         <br/>ログインして確認してください。
-        <br/>
+        </div>https://influencer-meguri.jp/application/${result.data.id}
         </div>
         `,
       });

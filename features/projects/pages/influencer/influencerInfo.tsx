@@ -223,8 +223,8 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
           subject: "【インフルエンサーめぐり】申請ありがとうございます",
           html: `<div>${data?.influencerName?.length ? data?.influencerName : data?.nickName} 様
             <br/>
-            <br/> インフルエンサーめぐりに申請いただきありがとうございます。
-            <br/> 
+            <br/>インフルエンサーめぐりに申請いただきありがとうございます。
+            <br/>
             <br/>申請内容を確認しますのでしばらくお待ちください。
             <br/>確認後にご登録いただいたメールアドレスにご連絡します。
             <br/>

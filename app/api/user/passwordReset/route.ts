@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
     if (rows.length === 0 || !rows.length) {
       return NextResponse.json({
         type: "error",
-        msg: "未登録のメールアドレスです。",
+        msg: "入力に誤りがあります",
       });
     }
     const randomString = generateRandomString();

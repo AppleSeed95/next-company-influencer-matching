@@ -15,6 +15,11 @@ export default function ResetPasswordPage() {
     document.title = 'パスワードを再設定する';
   }, [])
   const handlePasswordChange = async () => {
+    let mailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!mailPattern.test(email.trim())) {
+      setError("メールアドレス形式ではありません");
+      return;
+    }
     setIsLoading(true);
     const result = await axios.post("/api/user/passwordReset", { email });
     if (result.data.type === "success") {
@@ -24,7 +29,7 @@ export default function ResetPasswordPage() {
         subject: "【インフルエンサーめぐり】パスワード再発行",
         html: `
           <div>
-          <br/> いつもインフルエンサーめぐりをご利用いただきありがとうございます。
+          <br/>いつもインフルエンサーめぐりをご利用いただきありがとうございます。
           <br/>パスワードを再発行しましたのでご確認をお願いします。
           <br/>
           <br/>-----------------------------------------------------
@@ -33,8 +38,8 @@ export default function ResetPasswordPage() {
           <br/>${result.data.data.password}
           <br/>----------------------------------------------------- 
           <br/>不明点がございましたらお問い合わせフォームよりご連絡ください。
-          </div?
-          https://influencer-meguri.jp/ask
+          <br/>https://influencer-meguri.jp/ask
+          </div>
           `,
       });
       setIsLoading(false);

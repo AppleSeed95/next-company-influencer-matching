@@ -99,6 +99,7 @@ export async function POST(request: NextRequest) {
     const result = await executeQuery(query).catch((e) => {
       return NextResponse.json({ type: "error", msg: "error" });
     });
+    let id = result.insertId;
     if (isReApply) {
       const query1 = `select * from cases where previous = ${body.previous}`;
       const row = await executeQuery(query1).catch((e) => {
@@ -108,8 +109,9 @@ export async function POST(request: NextRequest) {
       const result = await executeQuery(query2).catch((e) => {
         return NextResponse.json({ type: "error" });
       });
+      id = row[0].id;
     }
-    return NextResponse.json({ type: "success" });
+    return NextResponse.json({ type: "success", id });
   } catch (error) {
     console.error("Error creating table or inserting record:", error);
     return NextResponse.json({ type: "error", msg: "error" });

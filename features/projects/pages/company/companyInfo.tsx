@@ -174,7 +174,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
             html: `<div>インフルエンサーめぐりに登録がありました。
               <br/>
               <br/>---------------------------------------------
-              <br/> ▼登録情報
+              <br/>▼登録情報
               <br/>企業名          ：${data.companyName}
               <br/>企業名カナ      ：${data.companyNameGana}
               <br/>代表者名        ：${data.representativeName}
@@ -196,9 +196,9 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
             subject: "【インフルエンサーめぐり】ご登録ありがとうございます",
             html: `<div>${data.responsibleName} 様
               <br/><br/>
-              <br/> インフルエンサーめぐりにご登録いただきありがとうございます。 
+              <br/>インフルエンサーめぐりにご登録いただきありがとうございます。 
               <br/>ログインしてお支払い情報をご登録いただくとサービスをご利用いただけます。
-              <br/> <br/>
+              <br/><br/>
               <br/>---------------------------------------------
               <br/>▼アカウント情報 
               <br/>ログインURL：
@@ -264,7 +264,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
           html: `<div>${data.companyName} ${data.representativeName} 様
             <br/>
             <br/>いつもインフルエンサーめぐりをご利用いただきありがとうございます。
-            <br/> 解約を受け付けました。
+            <br/>解約を受け付けました。
             <br/>利用期限は${dateString(data.payment)}までです。
             <br/>
             <br/>期限後はお客様データが削除されますのでご了承ください。
@@ -320,7 +320,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
                 html: `<div>${data?.representativeName} 様
                   <br/>
                   <br/>いつもインフルエンサーめぐりをご利用いただきありがとうございます。
-                  <br/> 正常に決済が完了しました。
+                  <br/>正常に決済が完了しました。
                   <br/>引き続き、サービスをご利用ください。
                   <br/>
                   <br/>-----------------------------------------------------

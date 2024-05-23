@@ -77,8 +77,8 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
         if (status === "稼働中" || status === "稼動中") {
           content = `<div>
           ${data?.influencerName?.length ? data?.influencerName : data?.nickName} 様<br/>
-        <br/>インフルエンサーめぐりに申請いただきありがとうございました。
-        <br/>登録が完了しましたのでログインしてサービスをご利用ください。
+        <br/>インフルエンサーめぐりに申請いただきありがとうございました。 
+        <br/>登録が完了しましたのでログインしてサービスをご利用ください。 
         <br/>
         <br/>-----------------------------------------------------
         <br/>▼アカウント情報
@@ -86,9 +86,9 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
         <br/>https://influencer-meguri.jp/login
         <br/>
         <br/>ID:
-        <br/>${data?.emailAddress}
+        <br/>${data?.emailAddress}<br/>
         <br/>パスワード：
-        <br/>${result.data?.password}
+        <br/>${result.data?.password}<br/>
         <br/>-----------------------------------------------------
         <br/>不明点がございましたらお問い合わせフォームよりご連絡ください。
         </div>https://influencer-meguri.jp/ask

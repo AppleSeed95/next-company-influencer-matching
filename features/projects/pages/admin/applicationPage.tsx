@@ -88,15 +88,15 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
         if (update === reject)
           await axios.post("/api/sendEmail", {
             to: data?.emailAddress,
-            subject: "【インフルエンサーめぐり】募集案件を否認しました",
+            subject: "【インフルエンサーめぐり】募集案件の内容修正をお願いします",
             html: `
             <div>
-            ${data?.representativeName}様
-          <br/> いつもインフルエンサーめぐりをご利用いただきありがとうございます。
-          <br/>募集案件「 ${data.caseName} 」を否認しました。
-          <br/>否認理由をご確認の上、再申請をお願いします。
+            ${data?.representativeName}様<br/>
+          <br/>いつもインフルエンサーめぐりをご利用いただきありがとうございます。<br/>
+          <br/>募集案件「 ${data.caseName} 」が否認されました。
+          <br/>否認理由をご確認の上、修正いただき再申請をお願いします。<br/>
           <br/>-----------------------------------------------------
-          <br/> 不明点がございましたらお問い合わせフォームよりご連絡ください。
+          <br/>不明点がございましたらお問い合わせフォームよりご連絡ください。
           </div> 
           https://influencer-meguri.jp/ask
           `,
@@ -107,11 +107,11 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
             subject: "【インフルエンサーめぐり】募集案件を承認しました",
             html: `
             <div>
-            ${data?.representativeName}様
-          <br/> いつもインフルエンサーめぐりをご利用いただきありがとうございます。
-          <br/>募集案件「 ${data?.caseName} 」を承認しましたのでログインしてご確認ください。
+            ${data?.representativeName}様<br/>
+          <br/>いつもインフルエンサーめぐりをご利用いただきありがとうございます。<br/>
+          <br/>募集案件「 ${data?.caseName} 」を承認しましたのでログインしてご確認ください。<br/>
           <br/>-----------------------------------------------------
-          <br/> 不明点がございましたらお問い合わせフォームよりご連絡ください。
+          <br/>不明点がございましたらお問い合わせフォームよりご連絡ください。
           </div>https://influencer-meguri.jp/ask
           `,
           });
