@@ -76,7 +76,7 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
         }
         if (status === "稼働中" || status === "稼動中") {
           content = `<div>
-        ${data?.influencerName}様
+          ${data?.influencerName?.length ? data?.influencerName : data?.nickName} 様<br/>
         <br/>インフルエンサーめぐりに申請いただきありがとうございました。
         <br/>登録が完了しましたのでログインしてサービスをご利用ください。
         <br/>
