@@ -8,6 +8,7 @@ import TextArea from "@/components/atoms/textarea";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function AskPage() {
   const [data, setData] = useState(null);
@@ -196,9 +197,9 @@ export default function AskPage() {
           checkBoxClassName="mt-[36px]"
           title={
             <span>
-              <span className="underline decoration-[#353A40] underline-offset-[5px]">
+              <Link href={'https://influencer-meguri.jp/privacypolicy.html'} className="underline decoration-[#353A40] underline-offset-[5px]">
                 個人情報の取り扱い
-              </span>
+              </Link>
               に同意します
             </span>
           }
@@ -225,12 +226,14 @@ export default function AskPage() {
           ))
         }
       </div>
-      <div className="mt-[154px] mb-[27px] flex justify-between w-[334px] m-auto text-[#AAAAAA]">
-        <span className="underline underline-offset-[5px]">
-          個人情報保護方針
-        </span>
-        <span className="underline underline-offset-[5px]">特定商取引法</span>
-        <span className="underline underline-offset-[5px]">利用規約</span>
+      <div className="mt-[154px] mb-[27px] flex justify-center gap-[20px] w-[full] m-auto text-[#AAAAAA]">
+        <Link href={'https://influencer-meguri.jp/company-overview.html'} className="underline underline-offset-[5px]">
+          会社概要
+        </Link>
+        <Link href={'https://influencer-meguri.jp/company-overview.html#tokusyo'} className="underline underline-offset-[5px]">特定商取引法に基づく表記</Link>
+        <Link href={'https://influencer-meguri.jp/privacypolicy.html'} className="underline underline-offset-[5px]">プライバシーポリシー</Link>
+        <Link href={'https://influencer-meguri.jp/terms-of-service.html'} className="underline underline-offset-[5px]">運営会社</Link>
+        <Link href={'https://influencer-meguri.jp/ask'} className="underline underline-offset-[5px]">お問い合わせ</Link>
       </div>
     </div>
   );

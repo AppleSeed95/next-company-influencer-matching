@@ -11,6 +11,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Modal from "../../utils/modal";
 import CheckoutPage from "./stripe";
 import AppyExpired from "./applyExpired";
+import Link from "next/link";
 
 export interface CompanyInfoProps {
   applyMode?: boolean;
@@ -194,24 +195,19 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
             to: data.emailAddress,
             subject: "【インフルエンサーめぐり】ご登録ありがとうございます",
             html: `<div>${data.responsibleName} 様
-              <br/>
-              <br/> インフルエンサーめぐりにご登録いただきありがとうございます。
-              <br/>ログインしてサービスをご利用ください。
-              <br/>
+              <br/><br/>
+              <br/> インフルエンサーめぐりにご登録いただきありがとうございます。 
+              <br/>ログインしてお支払い情報をご登録いただくとサービスをご利用いただけます。
+              <br/> <br/>
               <br/>---------------------------------------------
-              <br/>▼アカウント情報
+              <br/>▼アカウント情報 
               <br/>ログインURL：
-              <br/>https://influencer-meguri.jp
+              <br/>https://influencer-meguri.jp<br/>
               <br/>ID：
-              <br/>${data.emailAddress}
+              <br/>${data.emailAddress}<br/>
               <br/>パスワード：
-              <br/>${res.data.password}
-              <br/>
+              <br/>${res.data.password}<br/>
               <br/>---------------------------------------------
-              <br/>ログイン後に決済手続きをお願いします。
-              <br/>決済完了後にサービスのご利用ができます。
-              <br/>
-              <br/>-----------------------------------------------------
               <br/>不明点がございましたらお問い合わせフォームよりご連絡ください。
               </div>https://influencer-meguri.jp/ask
               `,
@@ -600,9 +596,15 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
           checkBoxClassName="mt-[36px]"
           title={
             <span>
-              <span className="underline decoration-[#353A40] underline-offset-[5px]">
-                個人情報の取り扱い
+              <Link href={'https://influencer-meguri.jp/terms-of-service.html'} className="underline decoration-[#353A40] underline-offset-[5px]">
+                利用規約
+              </Link>
+              <span className="decoration-[#353A40] underline-offset-[5px]">
+                、
               </span>
+              <Link href={'https://influencer-meguri.jp/privacypolicy.html'} className="mx-[5px] underline decoration-[#353A40] underline-offset-[5px]">
+                個人情報の取り扱い
+              </Link>
               に同意します
             </span>
           }

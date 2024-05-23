@@ -76,7 +76,11 @@ export async function POST(request: NextRequest) {
     await executeQuery(query).catch((e) => {
       return NextResponse.json({ type: "error", msg: "error" });
     });
-    return NextResponse.json({ type: "success", password: user.plainPassword });
+    return NextResponse.json({
+      type: "success",
+      password: user.plainPassword,
+      id: user.id,
+    });
   } catch (error) {
     console.error("Error creating table or inserting record:", error);
     return NextResponse.json({ type: "error", msg: "error" });

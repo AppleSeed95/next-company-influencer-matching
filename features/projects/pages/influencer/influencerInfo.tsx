@@ -213,17 +213,18 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
           from: data?.emailAddress,
           subject: "【インフルエンサーめぐり】登録申請がありました",
           html: `<div>インフルエンサーめぐりに登録申請がありました。
-            <br/> インフルエンサーめぐりに申請いただきありがとうございます。
             <br/>ログインして確認してください。
             </div>
+            https://influencer-meguri.jp/influencer/${result.data.id}
             `,
         });
         await axios.post("/api/sendEmail", {
           to: data.emailAddress,
           subject: "【インフルエンサーめぐり】申請ありがとうございます",
-          html: `<div>${data?.influencerName?.length ? data?.influencerName : data?.nickName} 様。
+          html: `<div>${data?.influencerName?.length ? data?.influencerName : data?.nickName} 様
             <br/>
             <br/> インフルエンサーめぐりに申請いただきありがとうございます。
+            <br/> 
             <br/>申請内容を確認しますのでしばらくお待ちください。
             <br/>確認後にご登録いただいたメールアドレスにご連絡します。
             <br/>
@@ -232,7 +233,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
             </div>https://influencer-meguri.jp/ask
             `,
         });
-        router.replace("/applyComplete");
+        router.push("/applyInfluencerComplete");
       } else {
         setError(["メールアドレスが登録されていません。"])
       }

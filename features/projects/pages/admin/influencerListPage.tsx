@@ -285,7 +285,7 @@ export default function InfluencerListPage() {
                         </Link>
                       </td>
                       <td className="px-[35px] py-[25px]  border border-[#D3D3D3] ">
-                        {aData.influencerName}
+                        {aData.influencerName !== 'null' ? aData.influencerName : ''}
                       </td>
                       <td className="px-[35px] py-[25px]  border border-[#D3D3D3]">
                         <div className="flex flex-wrap items-center gap-[15px]">
@@ -390,7 +390,7 @@ export default function InfluencerListPage() {
                         お名前
                       </div>
                       <span className="mb-[7px] sp:text-spsmall">
-                        {aData.influencerName}
+                        {aData.influencerName !== 'null' ? aData.influencerName : ''}
                       </span>
                     </div>
                     <div className="flex">

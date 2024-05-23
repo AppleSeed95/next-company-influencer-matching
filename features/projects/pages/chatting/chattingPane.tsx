@@ -102,7 +102,7 @@ export default function ChattingPane() {
             subject: "【【インフルエンサーめぐり】チャットが届きました",
             html: `
                 <div>
-                ${roomData?.influencerName} 様。
+                ${roomData?.influencerName} 様
                 <br/> いつもインフルエンサーめぐりをご利用いただきありがとうございます。
                 <br/>以下の案件からチャットが届いてます。
                 <br/>ログインしてご確認をお願いします。
@@ -123,7 +123,7 @@ export default function ChattingPane() {
             subject: "【インフルエンサーめぐり】チャットが届きました",
             html: `
                 <div>
-                ${roomData?.representativeName} 様。
+                ${roomData?.representativeName} 様
                 <br/> いつもインフルエンサーめぐりをご利用いただきありがとうございます。
                 <br/>以下の案件でチャットが届いてます。
                 <br/>ログインしてご確認をお願いします。

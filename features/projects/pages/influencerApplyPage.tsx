@@ -37,14 +37,15 @@ export default function InfluencerApplyPage() {
         subject: "【インフルエンサーめぐり】仮申請ありがとうございます",
         html: `
         <div>インフルエンサーめぐりに仮申請いただきありがとうございます。
-        <br/> 以下のURLから登録申請をお願いします。
-        <br/>※メール本文中のURLを60分以内にクリックしてください。
-        <br/>https://influencer-meguri.jp/applyInfluencer
-          }?id=${result.data.data.hash}
+        <br/>
+        <br/>60分以内に以下のURLから登録申請をお願いします。 
+        <br/>※60分以上経過した場合は再度、仮申請をしてください。
+        <br/>https://influencer-meguri.jp/applyInfluencer?id=${result.data.data.hash}
+        <br/>
         <br/>-----------------------------------------------------
         <br/> 不明点がございましたらお問い合わせフォームよりご連絡ください。
         </div>
-        https://influencer-meguri.jp/ask'`,
+        https://influencer-meguri.jp/ask`,
       });
       if (typeof window !== "undefined") {
         router.push("/applyConfirm");
