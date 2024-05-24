@@ -90,6 +90,7 @@ export async function GET(request: NextRequest) {
     conCurrentCnt = conCurrentCnt + ${concurrentDiffuse}
     WHERE id = ${id}
     `;
+    console.log(possibleAutoCollectionCnt, autoStartedCnt, concurrentDiffuse);
 
     await executeQuery(updateCompanyQuery).catch((e) => {
       return NextResponse.json({ type: "error" });
