@@ -4,7 +4,7 @@ import { executeQuery } from "../../util/db";
 export async function GET(request: NextRequest) {
   const id = request.nextUrl.searchParams.get("id") || "";
   try {
-    const query = `SELECT chatroom.*,company.emailAddress as companyEmail,influencer.emailAddress as infEmail, company.representativeName
+    const query = `SELECT chatroom.*,company.emailAddress as companyEmail,influencer.emailAddress as infEmail, company.representativeName,company.responsibleName
      FROM chatroom
      LEFT JOIN influencer ON chatroom.influencerId = influencer.id
      LEFT JOIN company ON chatroom.companyId = company.id

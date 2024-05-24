@@ -384,10 +384,10 @@ export default function AppliedList() {
             >
               <div className="flex justify-between px-[30px] py-[20px] w-full">
                 <div className="flex">
-                  <span className="text-[#3F8DEB] underline hover:cursor-pointer underline-offset-3 sp:text-sp">
-                    <Link href={`/caseDetail/${aData.id}`}>
+                  <span className="sp:text-sp">
+                    <span >
                       {aData.caseName}
-                    </Link>
+                    </span>
                   </span>
                 </div>
 

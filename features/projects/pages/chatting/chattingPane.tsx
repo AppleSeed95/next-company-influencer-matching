@@ -99,7 +99,7 @@ export default function ChattingPane() {
         if (user.user.role === "企業") {
           await axios.post("/api/sendEmail", {
             to: roomData?.infEmail,
-            subject: "【【インフルエンサーめぐり】チャットが届きました",
+            subject: "【インフルエンサーめぐり】チャットが届きました",
             html: `
                 <div>
                 ${roomData?.influencerName} 様<br/>
@@ -107,7 +107,7 @@ export default function ChattingPane() {
                 <br/>
                 <br/>企業名：${roomData?.companyName}
                 <br/>案件名：${roomData?.caseName}
-                <br/>URL ：//https://influencer-meguri.jp/chattingInf/${id}
+                <br/>URL ：https://influencer-meguri.jp/chattingInf/${id}
                 <br/>
                 <br/>-----------------------------------------------------
                 <br/>不明点がございましたらお問い合わせフォームよりご連絡ください。
@@ -121,7 +121,7 @@ export default function ChattingPane() {
             subject: "【インフルエンサーめぐり】チャットが届きました",
             html: `
                 <div>
-                ${roomData?.representativeName} 様<br/>
+                ${roomData?.responsibleName} 様<br/>
                 <br/>以下の案件からチャットが届いてますのでログインしてご確認ください。<br/>
                 <br/>
                 <br/>インフルエンサー名：${roomData?.influencerName}
@@ -160,7 +160,7 @@ export default function ChattingPane() {
           width={70}
           height={70}
           src="/img/hamburger.svg"
-          className="h-[14px]  mt-[-3px]"
+          className="h-[14px]  mt-[20px]"
           onClick={() => {
             setShowRooms(!showRooms);
           }}

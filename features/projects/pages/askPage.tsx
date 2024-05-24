@@ -107,6 +107,7 @@ export default function AskPage() {
         </span>
 
         <Input
+          placeholder="山田 太郎"
           handleChange={(val) => setData({ ...data, name: val })}
           inputClassName="max-w-[250px] grow border-[#D3D3D3]"
         />
@@ -119,6 +120,7 @@ export default function AskPage() {
         <div>
         </div>
         <Input
+          placeholder="abcd@efgh.com"
           format="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
           formatMsg="メールアドレス形式ではありません"
           handleChange={(val) => setData({ ...data, email: val })}
@@ -137,6 +139,7 @@ export default function AskPage() {
           <span className="ml-[10px] text-[#EE5736] text-[11px]">必須</span>
         </span>
         <Input
+          placeholder="abcd@efgh.com"
           format="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
           formatMsg="メールアドレス形式ではありません"
           handleChange={(val) => setData({ ...data, emailConfirm: val })}

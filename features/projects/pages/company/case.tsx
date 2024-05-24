@@ -279,7 +279,7 @@ const CasePage: React.FC = () => {
         <Input
           value={data.caseName}
           inputClassName="max-w-[250px] grow border-[#D3D3D3] w-[100%]"
-          placeholder="案件名を入力してください"
+          placeholder="例：日本初のイタリアンスイーツ店のPR"
           requirMsg="案件概要を入力してください"
           handleChange={(val) => setData({ ...data, caseName: val })}
         />
@@ -293,7 +293,7 @@ const CasePage: React.FC = () => {
           value={data.caseContent}
           handleChange={(val) => setData({ ...data, caseContent: val })}
           textAreaClassName="max-w-[300px] h-[95px] grow "
-          placeholder="カフェPR"
+          placeholder="例：イタリアで話題のスイーツが日本に初上陸！バリスタがいれるエスプレッソと新感覚スイーツをご提供しますのでSNSでPRをお願いします。"
           requirMsg="案件内容を入力してください"
         />
       </div>
@@ -306,6 +306,7 @@ const CasePage: React.FC = () => {
         </span>
         <Input
           notRequired
+          placeholder="例：#〇〇 #△△"
           value={data.wantedHashTag}
           handleChange={(val) => setData({ ...data, wantedHashTag: val })}
           inputClassName="max-w-[250px] grow border-[#D3D3D3] w-[100%]"
@@ -389,6 +390,7 @@ const CasePage: React.FC = () => {
           </span>
         </span>
         <Input
+          placeholder="例：東京都浅草橋"
           value={data.casePlace}
           notRequired
           handleChange={(val) => setData({ ...data, casePlace: val })}
@@ -446,6 +448,7 @@ const CasePage: React.FC = () => {
         </span>
         <Input
           value={data.collectionCnt}
+          placeholder="例：〇人程度"
           notRequired
           handleChange={(val) => setData({ ...data, collectionCnt: val })}
           inputClassName="max-w-[250px] grow border-[#D3D3D3] w-[100%]"
@@ -462,7 +465,7 @@ const CasePage: React.FC = () => {
           value={data.addition}
           handleChange={(val) => setData({ ...data, addition: val })}
           textAreaClassName="max-w-[300px] h-[95px] grow border-[#D3D3D3] "
-          placeholder="注意事項を入力してください"
+          placeholder="例：※店内での利用のみとなります。※ご同行者1名は無償提供させていただきます。"
         />
       </div>
       {data.id && [

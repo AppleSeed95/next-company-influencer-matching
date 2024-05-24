@@ -382,21 +382,18 @@ export default function CollectedCase() {
         <div className="lg:hidden grow">
           {currentItems?.map((aData, idx) => (
             <div key={idx} className=" bg-[#F8F9FA] border border-[#D3D3D3]">
-              <div className="flex justify-between px-[30px] py-[20px] w-full">
+              <div className="flex justify-between px-[30px] py-[20px] w-full"
+                onClick={() => onItemClick({ idx })}
+              >
                 <div className="flex">
                   <span
-                    className="text-[#3F8DEB] underline hover:cursor-pointer underline-offset-3 sp:text-sp"
-                    onClick={() => {
-                      setCaseId(aData.id);
-                      setShowModal(true);
-                    }}
+                    className="sp:text-sp"
                   >
                     {aData.caseName}
                   </span>
                 </div>
 
                 <img
-                  onClick={() => onItemClick({ idx })}
                   src={idx === active ? "/img/up.svg" : "/img/down.svg "}
                   className="inline h-[8px]"
                 />
@@ -444,6 +441,16 @@ export default function CollectedCase() {
                     </span>
                   </div>
                   <div className="flex">
+                    <div className="w-[80px] mr-[36px] text-right text-[#3F8DEB] underline hover:cursor-pointer underline-offset-3 sp:text-spsmall ">
+                      <span
+                        onClick={() => {
+                          setCaseId(aData.id);
+                          setShowModal(true);
+                        }}
+                      >詳細</span>
+                    </div>
+                  </div>
+                  <div className="flex mt-[20px]">
                     <span className="mb-[7px] ml-[30px] sp:text-spsmall">
                       {!alreadyAppliedOrNot(aData.id) ? (
                         <Button

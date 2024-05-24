@@ -374,13 +374,14 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
           <span className="text-title sp:text-sptitle">企業情報変更</span>
         </div>
       )}
-      <div className="flex  pt-[15px] pb-[5px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+      <div className="flex flex-wrap pt-[15px] pb-[5px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
         <span className="w-[35%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
           <span>企業名</span>
           {<span className="ml-[10px] text-[#EE5736] text-[11px]">必須</span>}
         </span>
         <Input
           requirMsg={msgs.companyName}
+          placeholder="めぐり株式会社"
           inputClassName="max-w-[250px] grow border-[#D3D3D3] w-[100%]"
           value={data?.companyName}
           handleChange={(val) => {
@@ -388,7 +389,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
           }}
         />
       </div>
-      <div className="flex  pt-[15px] pb-[5px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+      <div className="flex flex-wrap pt-[15px] pb-[5px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
         <span className="w-[35%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
           <span>企業名カナ</span>
           {<span className="ml-[10px] text-[#EE5736] text-[11px]">必須</span>}
@@ -396,18 +397,20 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
         <Input
           inputClassName="max-w-[250px] grow border-[#D3D3D3] w-[100%]"
           value={data?.companyNameGana}
+          placeholder="メグリカブシキガイシャ"
           requirMsg={msgs.companyNameGana}
           handleChange={(val) => {
             setData({ ...data, companyNameGana: val });
           }}
         />
       </div>
-      <div className="flex  pt-[15px] pb-[5px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+      <div className="flex flex-wrap  pt-[15px] pb-[5px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
         <span className="w-[35%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
           <span>代表者名</span>
           {<span className="ml-[10px] text-[#EE5736] text-[11px]">必須</span>}
         </span>
         <Input
+          placeholder="代表 太郎"
           inputClassName="max-w-[250px] grow border-[#D3D3D3] w-[100%]"
           value={data?.representativeName}
           requirMsg={msgs.representativeName}
@@ -416,12 +419,13 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
           }}
         />
       </div>
-      <div className="flex  pt-[15px] pb-[5px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+      <div className="flex flex-wrap pt-[15px] pb-[5px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
         <span className="w-[35%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
           <span>代表者名カナ</span>
           {<span className="ml-[10px] text-[#EE5736] text-[11px]">必須</span>}
         </span>
         <Input
+          placeholder="ヤマダ タロウ"
           inputClassName="max-w-[250px] grow border-[#D3D3D3] w-[100%]"
           value={data?.representativeNameGana}
           requirMsg={msgs.representativeNameGana}
@@ -430,12 +434,13 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
           }}
         />
       </div>
-      <div className="flex  pt-[15px] pb-[5px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+      <div className="flex flex-wrap pt-[15px] pb-[5px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
         <span className="w-[35%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
           <span>担当者名</span>
           {<span className="ml-[10px] text-[#EE5736] text-[11px]">必須</span>}
         </span>
         <Input
+          placeholder="担当 次郎"
           inputClassName="max-w-[250px] grow border-[#D3D3D3] w-[100%]"
           value={data?.responsibleName}
           requirMsg={msgs.responsibleName}
@@ -444,13 +449,14 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
           }}
         />
       </div>
-      <div className="flex  pt-[15px] pb-[5px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+      <div className="flex flex-wrap  pt-[15px] pb-[5px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
         <span className="w-[35%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
           <span>担当者名カナ</span>
           {<span className="ml-[10px] text-[#EE5736] text-[11px]">必須</span>}
         </span>
         <Input
           requirMsg={msgs.responsibleNameGana}
+          placeholder="タントウ ジロウ"
           inputClassName="max-w-[250px] grow border-[#D3D3D3] w-[100%]"
           value={data?.responsibleNameGana}
           handleChange={(val) => {
@@ -458,13 +464,14 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
           }}
         />
       </div>
-      <div className="flex  pt-[15px] pb-[5px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+      <div className="flex flex-wrap  pt-[15px] pb-[5px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
         <span className="w-[35%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
           <span>WEBサイト</span>
           {<span className="ml-[10px] text-[#EE5736] text-[11px]">必須</span>}
         </span>
         <Input
           requirMsg={msgs.webSite}
+          placeholder="https://〇〇〇〇.com"
           inputClassName="max-w-[250px] grow border-[#D3D3D3] w-[100%]"
           value={data?.webSite}
           handleChange={(val) => {
@@ -472,12 +479,13 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
           }}
         />
       </div>
-      <div className="flex  pt-[15px] pb-[5px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+      <div className="flex flex-wrap  pt-[15px] pb-[5px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
         <span className="w-[35%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
           <span>電話番号</span>
           {<span className="ml-[10px] text-[#EE5736] text-[11px]">必須</span>}
         </span>
         <Input
+          placeholder="03-1234-5678"
           inputClassName="max-w-[250px] grow border-[#D3D3D3] w-[100%]"
           value={data?.phoneNumber}
           requirMsg={msgs.phoneNumber}
@@ -488,7 +496,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
           }}
         />
       </div>
-      {!applyMode && <div className="flex  pt-[15px] pb-[5px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+      {!applyMode && <div className="flex flex-wrap  pt-[15px] pb-[5px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
         <span className="w-[35%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
           <span>メールアドレス</span>
           {<span className="ml-[10px] text-[#EE5736] text-[11px]">必須</span>}
@@ -504,12 +512,13 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
           }}
         />
       </div>}
-      <div className="flex  pt-[15px] pb-[5px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+      <div className="flex flex-wrap  pt-[15px] pb-[5px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
         <span className="w-[35%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
           <span>郵便番号</span>
           {<span className="ml-[10px] text-[#EE5736] text-[11px]">必須</span>}
         </span>
         <Input
+          placeholder="123-4567"
           inputClassName="max-w-[250px] grow border-[#D3D3D3] w-[100%]"
           value={data?.postalCode}
           requirMsg={msgs.postalCode}
@@ -520,12 +529,13 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
           }}
         />
       </div>
-      <div className="flex  pt-[15px] pb-[5px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+      <div className="flex flex-wrap  pt-[15px] pb-[5px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
         <span className="w-[35%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
           <span>住所</span>
           {<span className="ml-[10px] text-[#EE5736] text-[11px]">必須</span>}
         </span>
         <Input
+          placeholder="東京都台東区浅草橋〇〇〇"
           inputClassName="max-w-[250px] grow border-[#D3D3D3] w-[100%]"
           value={data?.address}
           requirMsg={msgs.address}
@@ -534,7 +544,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
           }}
         />
       </div>
-      <div className="flex  py-[15px]  w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+      <div className="flex flex-wrap  py-[15px]  w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
         <span className="w-[35%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
           <span>建物</span>
           {
@@ -544,6 +554,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
           }
         </span>
         <Input
+          placeholder="〇〇〇ビル 2階"
           notRequired
           inputClassName="max-w-[250px] grow border-[#D3D3D3] w-[100%]"
           value={data?.building}
@@ -553,7 +564,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
         />
       </div>
       {!applyMode && (
-        <div className="flex  py-[15px]  w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+        <div className="flex flex-wrap  py-[15px]  w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
           <span className="w-[35%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
             <span>決済</span>
           </span>
@@ -570,7 +581,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
         </div>
       )}
       {!applyMode && (
-        <div className="flex items-center py-[15px]  w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+        <div className="flex flex-wrap items-center py-[15px]  w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
           <span className="w-[35%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
             <span>登録日</span>
           </span>
@@ -580,7 +591,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
         </div>
       )}
       {!applyMode && (
-        <div className="flex  items-center py-[15px]  w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+        <div className="flex flex-wrap  items-center py-[15px]  w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
           <span className="w-[35%]  sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
             <span>状態</span>
           </span>

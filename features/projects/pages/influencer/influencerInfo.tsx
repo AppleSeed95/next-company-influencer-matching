@@ -291,6 +291,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
           <span>お名前</span>
         </span>
         <Input
+          placeholder="山田 太郎"
           handleChange={(val) => setData({ ...data, influencerName: val })}
           inputClassName="max-w-[250px] grow border-[#D3D3D3] w-[100%]"
           value={data?.influencerName?.length > 0 && data?.influencerName !== 'null' ? data.influencerName : ""}
@@ -301,6 +302,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
           <span>お名前カナ</span>
         </span>
         <Input
+          placeholder="ヤマダ タロウ"
           handleChange={(val) => setData({ ...data, influencerNameGana: val })}
           inputClassName="max-w-[250px] grow border-[#D3D3D3] w-[100%]"
           value={data?.influencerNameGana?.length > 0 && data?.influencerNameGana !== 'null' ? data.influencerNameGana : ""}
@@ -327,6 +329,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
         </span>
         <Input
           requirMsg="ニックネームを入力してください"
+          placeholder="ヤマタロウ"
           handleChange={(val) => setData({ ...data, nickName: val })}
           inputClassName="max-w-[250px] grow border-[#D3D3D3] w-[100%]"
           value={data ? data.nickName : ""}
@@ -338,6 +341,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
           {<span className="ml-[10px] text-[#EE5736] text-[11px]">必須</span>}
         </span>
         <Input
+          placeholder="03-1234-5678"
           requirMsg="電話番号を入力してください"
           formatMsg="電話番号形式ではありません"
           format="^0\d{1,4}-\d{1,4}-\d{4}$"
