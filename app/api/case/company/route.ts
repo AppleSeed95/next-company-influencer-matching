@@ -80,8 +80,8 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ type: "error" });
     });
     const autoStartedCnt = company.freeAccount
-      ? count[0].cnt
-      : possibleAutoCollectionCnt;
+      ? possibleAutoCollectionCnt
+      : Math.min(possibleAutoCollectionCnt, count[0].cnt);
     const autoEndedCnt = count1[0].cnt;
     const concurrentDiffuse = autoStartedCnt - autoEndedCnt;
     const updateCompanyQuery = `
