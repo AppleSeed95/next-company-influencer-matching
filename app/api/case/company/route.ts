@@ -80,7 +80,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ type: "error" });
     });
     const autoStartedCnt = company.freeAccount
-      ? possibleAutoCollectionCnt
+      ? count[0].cnt
       : Math.min(possibleAutoCollectionCnt, count[0].cnt);
     const autoEndedCnt = count1[0].cnt;
     const concurrentDiffuse = autoStartedCnt - autoEndedCnt;
@@ -90,7 +90,6 @@ export async function GET(request: NextRequest) {
     conCurrentCnt = conCurrentCnt + ${concurrentDiffuse}
     WHERE id = ${id}
     `;
-    console.log(possibleAutoCollectionCnt, autoStartedCnt, concurrentDiffuse);
 
     await executeQuery(updateCompanyQuery).catch((e) => {
       return NextResponse.json({ type: "error" });
