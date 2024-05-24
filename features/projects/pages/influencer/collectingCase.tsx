@@ -357,7 +357,7 @@ export default function CollectedCase() {
               </table>
             ) : (
               <div className="text-center pt-[200px] text-title text-[#757575]">
-                表示する資料がありません。
+                該当する案件がありません。
               </div>
             )}
           </div>

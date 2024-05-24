@@ -277,7 +277,7 @@ export default function CaseDetailPage({ caseProps }: caseData) {
             : "bg-black bg-opacity-25 w-full h-full fixed left-0 overflow-auto opacity-0 pointer-events-none duration-500"
         }
       >
-        <div>
+        <div className="flex items-center h-full">
           <InfluencerPage
             handleApprove={handleApprove}
             modalMode
@@ -541,7 +541,7 @@ export default function CaseDetailPage({ caseProps }: caseData) {
             </table>
           ) : (
             <div className="text-center pt-[200px] text-title text-[#757575]">
-              表示する資料がありません。
+              該当する案件がありません。
             </div>
           )}
         </div>

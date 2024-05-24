@@ -440,6 +440,11 @@ export default function AppliedList() {
                   </div>
                   <div className="flex my-[10px]">
                     <div className="w-[80px] mr-[36px] text-right text-[#3F8DEB] underline hover:cursor-pointer underline-offset-3 sp:text-spsmall ">
+                      <Link href={`/caseDetail/${aData.id}`}>詳細</Link>
+                    </div>
+                  </div>
+                  <div className="flex my-[10px]">
+                    <div className="w-[80px] mr-[36px] text-right text-[#3F8DEB] underline hover:cursor-pointer underline-offset-3 sp:text-spsmall ">
                       <Link href={`/case/${aData.id}`}>編集</Link>
                     </div>
                   </div>

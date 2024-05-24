@@ -17,10 +17,10 @@ const config: Config = {
       fontSize: {
         title: "22px",
         header: "20px",
-        small: "12px",
-        sp: "11px",
-        spsmall: "10px",
-        sptitle: "15px",
+        small: "14px",
+        sp: "14px",
+        spsmall: "15px",
+        sptitle: "17px",
       },
       screens: {
         sp: {

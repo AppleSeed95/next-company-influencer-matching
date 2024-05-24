@@ -115,8 +115,8 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
     <div
       className={
         modalMode
-          ? "text-center bg-[white]  px-[35px] sp:px-[12px] sp:text-small w-[40%] sp:w-[90%] m-auto relative shadow-lg "
-          : "text-center bg-[white] px-[35px] sp:px-[12px] sp:text-small "
+          ? "text-center bg-[white]  px-[35px] p-[10px] sp:px-[12px] sp:text-small w-[40%] sp:w-[90%] m-auto relative shadow-lg "
+          : "text-center bg-[white] px-[35px] p-[10px] sp:px-[12px] sp:text-small "
       }
     >
       <div
@@ -151,8 +151,8 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
           x
         </button>
       )}
-      <div
-        className={`flex items-center py-[20px] sp:w-full m-auto border-b-[1px] border-[#DDDDDD] mt-[90px] sp:mt-[30px] sp:px-[18px] ${className}`}
+      {!modalMode && <div
+        className={`flex items-center py-[20px] sp:w-full m-auto border-b-[1px] border-[#DDDDDD] mt-[190px] sp:mt-[30px] sp:px-[18px] ${className}`}
       >
         <span
           className={
@@ -164,15 +164,15 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
           <span className="text-[#6F6F6F]">お名前</span>
         </span>
         <span>{data?.influencerName?.length > 0 && data?.influencerName !== 'null' ? data.influencerName : ""}</span>
-      </div>
-      <div
+      </div>}
+      {!modalMode && <div
         className={`flex items-center py-[15px] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px] ${className}`}
       >
         <span className="w-[35%] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
           <span className="text-[#6F6F6F]">名前ガーナ</span>
         </span>
         <span>{data?.influencerNameGana?.length > 0 && data?.influencerNameGana !== 'null' ? data.influencerNameGana : ""}</span>
-      </div>
+      </div>}
       <div
         className={`flex items-center py-[15px] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px] ${className}`}
       >
@@ -181,22 +181,22 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
         </span>
         {data?.gender}
       </div>
-      <div
+      {!modalMode && <div
         className={`flex items-center py-[15px] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px] ${className}`}
       >
         <span className="w-[35%] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
           <span className="text-[#6F6F6F]">ニックネーム</span>
         </span>
         <span>{data?.nickName}</span>
-      </div>
-      <div
+      </div>}
+      {!modalMode && <div
         className={`flex items-center py-[15px] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px] ${className}`}
       >
         <span className="w-[35%] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
           <span className="text-[#6F6F6F]">電話番号</span>
         </span>
         <span>{data?.phoneNumber}</span>
-      </div>
+      </div>}
       <div
         className={`flex py-[15px] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px] ${className}`}
       >

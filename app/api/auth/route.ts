@@ -89,9 +89,11 @@ export async function POST(request: NextRequest) {
       });
     } else {
       if (user.role === "企業" && user.active === 0) {
-        const payment = result[0].payment;
+        const payment = result1[0].payment;
         const paymentInfo = new Date(payment);
         const today = new Date();
+        console.log(payment, paymentInfo, today);
+
         const allowed = paymentInfo > today;
         if (!allowed) {
           return NextResponse.json({

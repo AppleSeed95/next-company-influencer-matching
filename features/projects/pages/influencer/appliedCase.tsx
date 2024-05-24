@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import Image from "next/image";
 import ReactPaginate from "react-paginate";
+import Link from "next/link";
 export default function AppledCase() {
   const user = useRecoilValue(authUserState);
   const router = useRouter();
@@ -344,7 +345,7 @@ export default function AppledCase() {
               </table>
             ) : (
               <div className="text-center pt-[200px] text-title text-[#757575]">
-                表示する資料がありません。
+                該当する案件がありません。
               </div>
             )}
           </div>
@@ -369,21 +370,22 @@ export default function AppledCase() {
         <div className="lg:hidden grow">
           {currentItems?.map((aData, idx) => (
             <div key={idx} className=" bg-[#F8F9FA] border border-[#D3D3D3]">
-              <div className="flex justify-between px-[30px] py-[20px] w-full">
+              <div className="flex justify-between px-[30px] py-[20px] w-full"
+                onClick={() => onItemClick({ idx })}
+              >
                 <div className="flex">
                   <span
-                    className="text-[#3F8DEB] underline hover:cursor-pointer underline-offset-3 sp:text-sp"
-                    onClick={() => {
-                      setCaseId(aData.id);
-                      setShowModal(true);
-                    }}
+                    className="sp:text-sp"
+                  // onClick={() => {
+                  //   setCaseId(aData.id);
+                  //   setShowModal(true);
+                  // }}
                   >
-                    {aData.companyName}
+                    {aData.caseName}
                   </span>
                 </div>
 
                 <img
-                  onClick={() => onItemClick({ idx })}
                   src={idx === active ? "/img/up.svg" : "/img/down.svg "}
                   className="inline h-[8px]"
                 />
@@ -392,10 +394,10 @@ export default function AppledCase() {
                 <div className="p-[25px]">
                   <div className="flex">
                     <div className="w-[80px] mr-[36px] text-right text-[#A9A9A9] sp:text-spsmall">
-                      案件名
+                      会社名
                     </div>
                     <span className="mb-[7px] sp:text-spsmall">
-                      {aData.caseName}
+                      {aData.companyName}
                     </span>
                   </div>
                   <div className="flex">
@@ -421,6 +423,16 @@ export default function AppledCase() {
                     <span className="mb-[7px] sp:text-spsmall">
                       {aData.status}
                     </span>
+                  </div>
+                  <div className="flex">
+                    <div className="w-[80px] mr-[36px] text-right text-[#3F8DEB] underline hover:cursor-pointer underline-offset-3 sp:text-spsmall ">
+                      <span
+                        onClick={() => {
+                          setCaseId(aData.caseId);
+                          setShowModal(true);
+                        }}
+                      >詳細</span>
+                    </div>
                   </div>
                   <div className="flex">
                     <div className="w-[80px] mr-[36px] text-right text-[#A9A9A9] sp:text-spsmall">
