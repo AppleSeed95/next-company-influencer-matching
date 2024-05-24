@@ -28,6 +28,7 @@ export async function GET(request: NextRequest) {
       AND collectionStatus != '停止中'
       AND collectionStatus != '募集終了'
       AND collectionStatus != '完了'
+      AND collectionStatus != '募集中'
       AND autoStart = 1
       AND collectionStart < NOW()
       AND collectionStart IS NOT NULL
