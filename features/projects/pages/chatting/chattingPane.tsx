@@ -161,7 +161,7 @@ export default function ChattingPane() {
   return (
     <>
       <div>
-        <div className="lg:hidden flex flex-reverse justify-between items-center pt-[12vh] h-[6vh] px-[10px]">
+        {isValid && <div className="lg:hidden flex flex-reverse justify-between items-center pt-[12vh] h-[6vh] px-[10px]">
           <div className="flex gap-[5px] items-end w-full">
             <div className="font-bold pb-[0px] text-[16px] leading-none	">
               {roomData?.caseName}
@@ -180,7 +180,7 @@ export default function ChattingPane() {
             }}
           />
 
-        </div>
+        </div>}
       </div>
       <div
         className={
