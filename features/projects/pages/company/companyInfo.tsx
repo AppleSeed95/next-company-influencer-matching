@@ -202,7 +202,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
               <br/>---------------------------------------------
               <br/>▼アカウント情報 
               <br/>ログインURL：
-              <br/>https://influencer-meguri.jp<br/>
+              <br/>https://influencer-meguri.jp/login<br/>
               <br/>ID：
               <br/>${data.emailAddress}<br/>
               <br/>パスワード：
