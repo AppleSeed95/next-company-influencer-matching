@@ -1,5 +1,4 @@
 import ChattingRooms from "@/features/projects/pages/chatting/rooms";
-
 export default function ChatLayout({
   children,
 }: {
@@ -10,12 +9,12 @@ export default function ChatLayout({
       <div className="flex items-center py-[20px]  w-[full] border-b-[1px] border-[#DDDDDD] h-[7vh] mt-[7vh] sp:mt-[96px]">
         <span className="text-title sp:text-sptitle">チャット</span>
       </div>
-      <div className="h-full pt-[6vh]">
-        <div className="sp:w-[100%] px-[40px] sp:px-[10px] pb-[7vh] flex h-full max-h-[80vh]">
+      <div className="h-full">
+        <div className="sp:w-[100%] lg:mt-[6vh] px-[40px] sp:px-[10px] pb-[7vh] flex h-full max-h-[80vh]">
           <div className="w-[30%] sp:w-[0] sp:hidden">
             <ChattingRooms />
           </div>
-          <div className="h-full border-[1px] border-[#DDDDDD] justify-center w-[70%] box-border w-full  flex flex-col">
+          <div className="h-full justify-center w-[70%]  w-full  flex flex-col">
             {children}
           </div>
         </div>

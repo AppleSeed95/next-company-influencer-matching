@@ -100,8 +100,8 @@ export default function AskPage() {
   return (
     <div className="text-center">
       <div className="text-title mt-[200px] sp:mt-[150px]">お問い合わせ</div>
-      <div className="flex py-[20px] w-[40%] sp:w-[90%] m-auto border-b-[1px] border-[#DDDDDD] sp:mt-[50px] mt-[90px]">
-        <span className="w-[40%] flex justify-end  mt-[7px] mr-[67px]">
+      <div className="flex mobile:flex-wrap py-[20px] w-[40%] sp:w-[90%] m-auto border-b-[1px] border-[#DDDDDD] sp:mt-[50px] mt-[90px]">
+        <span className="w-[40%] mobile:w-full flex mobile:justify-start justify-end  mt-[7px] mr-[67px]">
           <span>お名前</span>
           <span className="ml-[10px] text-[#EE5736] text-[11px]">必須</span>
         </span>
@@ -112,8 +112,8 @@ export default function AskPage() {
           inputClassName="max-w-[250px] grow border-[#D3D3D3]"
         />
       </div>
-      <div className="flex pt-[20px] w-[40%] sp:w-[90%] m-auto ">
-        <span className="w-[40%] flex justify-end mr-[67px]">
+      <div className="flex mobile:flex-wrap py-[20px] w-[40%] sp:w-[90%] m-auto ">
+        <span className="w-[40%] mobile:w-full flex mobile:justify-start justify-end mr-[67px]">
           <span>メールアドレス</span>
           <span className="ml-[10px] text-[#EE5736] text-[11px]">必須</span>
         </span>
@@ -128,13 +128,13 @@ export default function AskPage() {
         />
       </div>
       <div className="flex w-[40%] sp:w-[90%] m-auto ">
-        <div className="w-[40%] flex justify-end mr-[67px]">
+        <div className="w-[40%] flex mobile:hidden justify-end mr-[67px]">
         </div>
         <div className="text-[12px]">※本システムをご利用の方は、登録しているEmailを入力してください。</div>
       </div>
 
-      <div className="flex py-[20px] w-[40%] sp:w-[90%] m-auto border-b-[1px] border-[#DDDDDD]">
-        <span className="w-[40%] flex justify-end mr-[67px]">
+      <div className="flex mobile:flex-wrap py-[20px] w-[40%] sp:w-[90%] m-auto border-b-[1px] border-t-[1px] border-[#DDDDDD]">
+        <span className="w-[40%] mobile:w-full flex mobile:justify-start justify-end mr-[67px]">
           <span>メールアドレス確認</span>
           <span className="ml-[10px] text-[#EE5736] text-[11px]">必須</span>
         </span>
@@ -146,8 +146,8 @@ export default function AskPage() {
           inputClassName="max-w-[250px] grow border-[#D3D3D3]"
         />
       </div>
-      {/* <div className="flex py-[20px] w-[40%] sp:w-[90%] m-auto border-b-[1px] border-[#DDDDDD]">
-        <span className="w-[40%] flex justify-end mr-[67px]">
+      {/* <div className="flex mobile:flex-wrap py-[20px] w-[40%] sp:w-[90%] m-auto border-b-[1px] border-[#DDDDDD]">
+        <span className="w-[40%] mobile:w-full flex mobile:justify-start justify-end mr-[67px]">
           <span>お問い合わせ種別</span>
           <span className="ml-[10px] text-[#EE5736] text-[11px]">
             必須
@@ -158,8 +158,8 @@ export default function AskPage() {
           inputClassName="max-w-[250px] grow border border-[#D3D3D3] h-[33px]"
         ></Input>
       </div> */}
-      <div className="flex py-[20px] w-[40%] sp:w-[90%] m-auto border-b-[1px] border-[#DDDDDD]">
-        <span className="w-[40%] flex justify-end mr-[67px]">
+      <div className="flex mobile:flex-wrap py-[20px] w-[40%] sp:w-[90%] m-auto border-b-[1px] border-[#DDDDDD]">
+        <span className="w-[40%] mobile:w-full flex mobile:justify-start justify-end mr-[67px]">
           <span>お問い合わせ種別</span>
           <span className="ml-[10px] text-[#EE5736] text-[11px]">
             必須
@@ -177,8 +177,8 @@ export default function AskPage() {
           <option value={"その他"}>その他</option>
         </Select>
       </div>
-      <div className="flex py-[20px] w-[40%] sp:w-[90%] m-auto border-b-[1px] border-[#DDDDDD]">
-        <span className="w-[40%] flex justify-end  mt-[7px] mr-[67px]">
+      <div className="flex mobile:flex-wrap py-[20px] w-[40%] sp:w-[90%] m-auto border-b-[1px] border-[#DDDDDD]">
+        <span className="w-[40%] mobile:w-full flex mobile:justify-start justify-end  mt-[7px] mr-[67px]">
           <span>お問い合わせ内容</span>
           <span className="ml-[10px] text-[#EE5736] text-[11px]">
             必須
@@ -229,7 +229,7 @@ export default function AskPage() {
           ))
         }
       </div>
-      <div className="mt-[154px] mb-[27px] flex justify-center gap-[20px] w-[full] m-auto text-[#AAAAAA]">
+      <div className="mt-[154px] flex mobile:flex-wrap mb-[27px] flex justify-center gap-[20px] w-[full] m-auto text-[#AAAAAA]">
         <Link href={'https://influencer-meguri.jp/company-overview.html'} className="underline underline-offset-[5px]">
           会社概要
         </Link>

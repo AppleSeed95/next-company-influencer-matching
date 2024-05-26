@@ -33,7 +33,7 @@ const Checkbox: React.FC<CheckboxProps> = ({
       <input
         checked={checked}
         type="checkbox"
-        className="w-[18px]  sp:text-sp mr-[10px] h-[18px] border border-[#D3D3D3]"
+        className="min-w-[18px]  sp:text-sp mr-[10px] min-h-[18px] border border-[#D3D3D3]"
         onChange={(e) => {
           setChecked(e.target.checked);
           handleChange(e.target.checked);

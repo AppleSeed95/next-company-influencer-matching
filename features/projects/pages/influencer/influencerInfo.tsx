@@ -253,7 +253,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
   };
   if (applyMode && (!applyId || expired)) {
     return (
-      <div className="flex grow min-h-full">
+      <div className="flex mobile:flex-wrap grow min-h-full">
         <AppyExpired />
       </div>
     )
@@ -280,14 +280,14 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
         />
       </div>
       {!applyMode && (
-        <div className="flex items-center py-[20px]  w-[full] border-b-[1px] border-[#DDDDDD] mt-[70px] mb-[50px] sp:mt-[96px]">
+        <div className="flex mobile:flex-wrap items-center py-[20px]  w-[full] border-b-[1px] border-[#DDDDDD] mt-[70px] mb-[50px] sp:mt-[96px]">
           <span className="text-title sp:text-sptitle">
             インフルエンサー情報変更
           </span>
         </div>
       )}
-      <div className="flex items-center py-[15px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
-        <span className="w-[35%] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
+      <div className="flex mobile:flex-wrap mobile:flex  items-center py-[15px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+        <span className="w-[35%] mobile:w-full sp:w-[150px] flex mobile:flex-wrap justify-end sp:justify-start  mr-[67px]">
           <span>お名前</span>
         </span>
         <Input
@@ -297,8 +297,8 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
           value={data?.influencerName?.length > 0 && data?.influencerName !== 'null' ? data.influencerName : ""}
         />
       </div>
-      <div className="flex items-center py-[15px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
-        <span className="w-[35%] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
+      <div className="flex mobile:flex-wrap items-center py-[15px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+        <span className="w-[35%] mobile:w-full sp:w-[150px] flex mobile:flex-wrap justify-end sp:justify-start  mr-[67px]">
           <span>お名前カナ</span>
         </span>
         <Input
@@ -308,22 +308,22 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
           value={data?.influencerNameGana?.length > 0 && data?.influencerNameGana !== 'null' ? data.influencerNameGana : ""}
         />
       </div>
-      <div className="flex items-center py-[15px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
-        <span className="w-[35%] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
+      <div className="flex mobile:flex-wrap items-center py-[15px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+        <span className="w-[35%] mobile:w-full sp:w-[150px] flex mobile:flex-wrap justify-end sp:justify-start  mr-[67px]">
           <span>性別</span>
         </span>
         <Select
           handleChange={(val) => setData({ ...data, gender: val })}
           value={data ? data.gender : "男性"}
-          selectClassName="w-[138px] border-[#D3D3D3]"
+          selectClassName="min-w-[250px] w-[138px] border-[#D3D3D3]"
         >
           <option value={"男性"}>男性</option>
           <option value={"女性"}>女性</option>
           <option value={"その他"}>その他</option>
         </Select>
       </div>
-      <div className="flex  py-[15px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
-        <span className="mt-[5px] w-[35%] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
+      <div className="flex mobile:flex-wrap  py-[15px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+        <span className="mt-[5px] w-[35%] mobile:w-full sp:w-[150px] flex mobile:flex-wrap justify-end sp:justify-start  mr-[67px]">
           <span>ニックネーム</span>
           {<span className="ml-[10px] text-[#EE5736] text-[11px]">必須</span>}
         </span>
@@ -335,8 +335,8 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
           value={data ? data.nickName : ""}
         />
       </div>
-      <div className="flex  py-[15px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
-        <span className="mt-[5px] w-[35%] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
+      <div className="flex mobile:flex-wrap  py-[15px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+        <span className="mt-[5px] w-[35%] mobile:w-full sp:w-[150px] flex mobile:flex-wrap justify-end sp:justify-start  mr-[67px]">
           <span>電話番号</span>
           {<span className="ml-[10px] text-[#EE5736] text-[11px]">必須</span>}
         </span>
@@ -350,8 +350,8 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
           value={data ? data.phoneNumber : ""}
         />
       </div>
-      {!applyMode && <div className="flex  py-[15px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
-        <span className="mt-[5px] w-[35%] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
+      {!applyMode && <div className="flex mobile:flex-wrap  py-[15px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+        <span className="mt-[5px] w-[35%] mobile:w-full sp:w-[150px] flex mobile:flex-wrap justify-end sp:justify-start  mr-[67px]">
           <span>メールアドレス</span>
           {<span className="ml-[10px] text-[#EE5736] text-[11px]">必須</span>}
 
@@ -366,8 +366,8 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
         />
       </div>}
 
-      <div className="flex items-center py-[15px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
-        <span className="w-[35%] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
+      <div className="flex mobile:flex-wrap items-center py-[15px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+        <span className="w-[35%] mobile:w-full sp:w-[150px] flex mobile:flex-wrap justify-end sp:justify-start  mr-[67px]">
           <span>都道府県</span>
           {<span className="ml-[10px] text-[#EE5736] text-[11px]">必須</span>}
 
@@ -385,14 +385,14 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
           ))}
         </Select>
       </div>
-      <div className="flex  py-[15px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
-        <span className="w-[35%] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
+      <div className="flex mobile:flex-wrap  py-[15px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+        <span className="w-[35%] mobile:w-full sp:w-[150px] flex mobile:flex-wrap justify-end sp:justify-start  mr-[67px]">
           <span>ジャンル</span>
           {<span className="ml-[10px] text-[#EE5736] text-[11px]">必須</span>}
 
         </span>
-        <div>
-          <div className="flex py-[5px]">
+        <div className="min-w-[250px]">
+          <div className="flex mobile:flex-wrap py-[5px]">
             <Checkbox
               value={
                 data?.genre
@@ -400,6 +400,8 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
                   : false
               }
               title="美容・コスメ系"
+              checkBoxClassName="mr-[25px]"
+
               handleChange={(val) => handleGenreChange("美容・コスメ系")}
             />
             <Checkbox
@@ -408,14 +410,13 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
                   ? JSON.parse(data?.genre).includes("アパレル・ファッション系")
                   : false
               }
-              checkBoxClassName="ml-[25px]"
               handleChange={(val) =>
                 handleGenreChange("アパレル・ファッション系")
               }
               title="アパレル・ファッション系"
             />
           </div>
-          <div className="flex py-[5px]">
+          <div className="flex mobile:flex-wrap py-[5px]">
             <Checkbox
               value={
                 data?.genre
@@ -424,6 +425,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
               }
               handleChange={(val) => handleGenreChange("スイーツ・グルメ系")}
               title="スイーツ・グルメ系"
+              checkBoxClassName="mr-[25px]"
             />
             <Checkbox
               value={
@@ -432,11 +434,10 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
                   : false
               }
               handleChange={(val) => handleGenreChange("旅行・レジャー系")}
-              checkBoxClassName="ml-[25px]"
               title="旅行・レジャー系"
             />
           </div>
-          <div className="flex py-[5px]">
+          <div className="flex mobile:flex-wrap py-[5px]">
             <Checkbox
               value={
                 data?.genre
@@ -449,17 +450,17 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
               handleChange={(val) =>
                 handleGenreChange("育児・ファミリー系（ママ、キッズ等）")
               }
+              checkBoxClassName="mr-[25px]"
             />
             <Checkbox
               value={
                 data?.genre ? JSON.parse(data?.genre).includes("教育系") : false
               }
-              checkBoxClassName="ml-[25px]"
               handleChange={(val) => handleGenreChange("教育系")}
               title="教育系"
             />
           </div>
-          <div className="flex py-[5px]">
+          <div className="flex mobile:flex-wrap py-[5px]">
             <Checkbox
               value={
                 data?.genre
@@ -474,7 +475,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
               title="スポーツ・フィットネス・ボディメイク系"
             />
           </div>
-          <div className="flex py-[5px]">
+          <div className="flex mobile:flex-wrap py-[5px]">
             <Checkbox
               value={
                 data?.genre
@@ -483,6 +484,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
               }
               title="ダイエット系"
               handleChange={(val) => handleGenreChange("ダイエット系")}
+              checkBoxClassName="mr-[25px]"
             />
             <Checkbox
               value={
@@ -490,9 +492,9 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
                   ? JSON.parse(data?.genre).includes("エンタメ系")
                   : false
               }
-              checkBoxClassName="ml-[25px]"
               title="エンタメ系"
               handleChange={(val) => handleGenreChange("エンタメ系")}
+              checkBoxClassName="mr-[25px]"
             />
             <Checkbox
               value={
@@ -501,11 +503,10 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
                   : false
               }
               handleChange={(val) => handleGenreChange("ビジネス系")}
-              checkBoxClassName="ml-[25px]"
               title="ビジネス系"
             />
           </div>
-          <div className="flex py-[5px]">
+          <div className="flex mobile:flex-wrap py-[5px]">
             <Checkbox
               value={
                 data?.genre
@@ -514,6 +515,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
               }
               title="漫画・イラスト系"
               handleChange={(val) => handleGenreChange("漫画・イラスト系")}
+              checkBoxClassName="mr-[25px]"
             />
             <Checkbox
               value={
@@ -521,12 +523,11 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
                   ? JSON.parse(data?.genre).includes("お金・投資系")
                   : false
               }
-              checkBoxClassName="ml-[25px]"
               handleChange={(val) => handleGenreChange("お金・投資系")}
               title="お金・投資系"
             />
           </div>
-          <div className="flex py-[5px]">
+          <div className="flex mobile:flex-wrap py-[5px]">
             <Checkbox
               title="アート系"
               value={
@@ -535,6 +536,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
                   : false
               }
               handleChange={(val) => handleGenreChange("アート系")}
+              checkBoxClassName="mr-[25px]"
             />
             <Checkbox
               value={
@@ -543,11 +545,10 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
                   : false
               }
               handleChange={(val) => handleGenreChange("ペット・動物系")}
-              checkBoxClassName="ml-[25px]"
               title="ペット・動物系"
             />
           </div>
-          <div className="flex py-[5px]">
+          <div className="flex mobile:flex-wrap py-[5px]">
             <Checkbox
               value={
                 data?.genre
@@ -558,6 +559,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
               handleChange={(val) =>
                 handleGenreChange("記事執筆・ライティング系")
               }
+              checkBoxClassName="mr-[25px]"
             />
             <Checkbox
               value={
@@ -566,11 +568,10 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
                   : false
               }
               handleChange={(val) => handleGenreChange("ライフスタイル系")}
-              checkBoxClassName="ml-[25px]"
               title="ライフスタイル系"
             />
           </div>
-          <div className="flex py-[5px]">
+          <div className="flex mobile:flex-wrap py-[5px]">
             <Checkbox
               value={
                 data?.genre
@@ -583,6 +584,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
                 handleGenreChange("花・フラワーアレンジメント系")
               }
               title="花・フラワーアレンジメント系"
+              checkBoxClassName="mr-[25px]"
             />
             <Checkbox
               value={
@@ -591,11 +593,10 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
                   : false
               }
               handleChange={(val) => handleGenreChange("医師・医療系")}
-              checkBoxClassName="ml-[25px]"
               title="医師・医療系"
             />
           </div>
-          <div className="flex py-[5px]">
+          <div className="flex mobile:flex-wrap py-[5px]">
             <Checkbox
               value={
                 data?.genre
@@ -604,6 +605,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
               }
               handleChange={(val) => handleGenreChange("バーチャル系")}
               title="バーチャル系"
+              checkBoxClassName="mr-[25px]"
             />
             <Checkbox
               value={
@@ -613,14 +615,13 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
                   )
                   : false
               }
-              checkBoxClassName="ml-[25px]"
               handleChange={(val) =>
                 handleGenreChange("写真家・フォトグラファー系")
               }
               title="写真家・フォトグラファー系"
             />
           </div>
-          <div className="flex py-[5px]">
+          <div className="flex mobile:flex-wrap py-[5px]">
             <Checkbox
               value={
                 data?.genre ? JSON.parse(data?.genre).includes("その他") : false
@@ -631,12 +632,12 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
           </div>
         </div>
       </div>
-      <div className="flex py-[15px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
-        <span className="w-[35%] sp:w-[100px] flex justify-end sp:justify-start  mt-[10px] mr-[67px]">
+      <div className="flex mobile:flex-wrap py-[15px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+        <span className="w-[35%] mobile:w-full sp:w-[150px] flex mobile:flex-wrap justify-end sp:justify-start  mt-[10px] mr-[67px]">
           <span>Instagram</span>
         </span>
         <div className="grow">
-          <div className="flex items-center max-w-[350px] grow py-[5px]">
+          <div className="flex mobile:flex-wrap items-center max-w-[350px] grow py-[5px]">
             <span className="w-[100px] text-left sp:hidden">アカウント</span>
             <Input
               handleChange={(val) =>
@@ -657,7 +658,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
               value={data?.instagram ? JSON.parse(data?.instagram).account : ""}
             ></Input>
           </div>
-          <div className="flex items-center grow py-[5px]">
+          <div className="flex mobile:flex-wrap items-center grow py-[5px]">
             <span className="w-[100px] text-left sp:hidden">フォロワー数</span>
             <Select
               disabled={!data?.instagram}
@@ -686,12 +687,12 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
           </div>
         </div>
       </div>
-      <div className="flex py-[15px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
-        <span className="w-[35%] sp:w-[100px] flex justify-end sp:justify-start  mt-[10px] mr-[67px]">
-          <span className="w-[66px] text-right">x</span>
+      <div className="flex mobile:flex-wrap py-[15px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+        <span className="w-[35%] mobile:w-full sp:w-[150px] flex mobile:flex-wrap justify-end sp:justify-start  mt-[10px] mr-[67px]">
+          <span className="w-[66px] text-right mobile:text-left">x</span>
         </span>
         <div className="grow">
-          <div className="flex items-center max-w-[350px] grow py-[5px]">
+          <div className="flex mobile:flex-wrap items-center max-w-[350px] grow py-[5px]">
             <span className="w-[100px] text-left sp:hidden">アカウント</span>
             <Input
               value={data?.x ? JSON.parse(data?.x).account : ""}
@@ -712,7 +713,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
               inputClassName="ml-[30px] sp:ml-[0px] grow max-w-[250px]"
             ></Input>
           </div>
-          <div className="flex items-center grow py-[5px]">
+          <div className="flex mobile:flex-wrap items-center grow py-[5px]">
             <span className="w-[100px] text-left sp:hidden">フォロワー数</span>
             <Select
               value={
@@ -739,12 +740,12 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
           </div>
         </div>
       </div>
-      <div className="flex py-[15px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
-        <span className="w-[35%] sp:w-[100px] flex justify-end sp:justify-start  mt-[10px] mr-[67px]">
+      <div className="flex mobile:flex-wrap py-[15px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+        <span className="w-[35%] mobile:w-full sp:w-[150px] flex mobile:flex-wrap justify-end sp:justify-start  mt-[10px] mr-[67px]">
           <span className="w-[66px] text-right">facebook</span>
         </span>
         <div className="grow">
-          <div className="flex items-center  grow py-[5px]">
+          <div className="flex mobile:flex-wrap items-center  grow py-[5px]">
             <span className="w-[100px] text-left sp:hidden">アカウント</span>
             <Input
               handleChange={(val) =>
@@ -765,7 +766,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
               value={data?.facebook ? JSON.parse(data.facebook).account : ""}
             ></Input>
           </div>
-          <div className="flex items-center  grow py-[5px]">
+          <div className="flex mobile:flex-wrap items-center  grow py-[5px]">
             <span className="w-[100px] text-left sp:hidden">フォロワー数</span>
             <Select
               disabled={!data?.facebook}
@@ -794,12 +795,12 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
           </div>
         </div>
       </div>
-      <div className="flex py-[15px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
-        <span className="w-[35%] sp:w-[100px] flex justify-end sp:justify-start  mt-[10px] mr-[67px]">
-          <span className="w-[66px] text-right">tiktok</span>
+      <div className="flex mobile:flex-wrap py-[15px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+        <span className="w-[35%] mobile:w-full sp:w-[150px] flex mobile:flex-wrap justify-end sp:justify-start  mt-[10px] mr-[67px]">
+          <span className="w-[66px] text-right mobile:text-left">tiktok</span>
         </span>
         <div className="grow">
-          <div className="flex items-center max-w-[350px] grow py-[5px]">
+          <div className="flex mobile:flex-wrap items-center max-w-[350px] grow py-[5px]">
             <span className="w-[100px] text-left sp:hidden">アカウント</span>
             <Input
               handleChange={(val) =>
@@ -820,7 +821,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
               value={data?.tiktok ? JSON.parse(data.tiktok).account : ""}
             ></Input>
           </div>
-          <div className="flex items-center  grow py-[5px]">
+          <div className="flex mobile:flex-wrap items-center  grow py-[5px]">
             <span className="w-[100px] text-left sp:hidden">フォロワー数</span>
             <Select
               disabled={!data?.tiktok}
@@ -849,12 +850,12 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
           </div>
         </div>
       </div>
-      <div className="flex py-[15px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
-        <span className="w-[35%] sp:w-[100px] flex justify-end sp:justify-start  mt-[10px] mr-[67px]">
+      <div className="flex mobile:flex-wrap py-[15px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+        <span className="w-[35%] mobile:w-full sp:w-[150px] flex mobile:flex-wrap justify-end sp:justify-start  mt-[10px] mr-[67px]">
           <span className="w-[66px] text-right">youtube</span>
         </span>
         <div className="grow">
-          <div className="flex items-center max-w-[350px] grow py-[5px]">
+          <div className="flex mobile:flex-wrap items-center max-w-[350px] grow py-[5px]">
             <span className="w-[100px] text-left sp:hidden">アカウント</span>
             <Input
               handleChange={(val) =>
@@ -875,7 +876,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
               value={data?.youtube ? JSON.parse(data.youtube).account : ""}
             ></Input>
           </div>
-          <div className="flex items-center  grow py-[5px]">
+          <div className="flex mobile:flex-wrap items-center  grow py-[5px]">
             <span className="w-[100px] text-left sp:hidden">フォロワー数</span>
             <Select
               disabled={!data?.youtube}
@@ -905,8 +906,8 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
         </div>
       </div>
 
-      <div className="flex py-[15px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
-        <span className="w-[35%] sp:w-[100px] flex justify-end sp:justify-start  mt-[10px] mr-[67px]">
+      <div className="flex mobile:flex-wrap py-[15px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+        <span className="w-[35%] mobile:w-full sp:w-[150px] flex mobile:flex-wrap justify-end sp:justify-start  mt-[10px] mr-[67px]">
           <span>その他のSNS </span>
         </span>
         <TextArea
@@ -915,7 +916,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
           textAreaClassName="max-w-[380px] grow"
         ></TextArea>
       </div>
-      <div className="flex justify-center">
+      <div className="flex mobile:flex-wrap justify-center">
         {applyMode && <Checkbox
           prefix={""}
           value={agree}
@@ -938,14 +939,14 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
           <div key={idx} className="text-center m-[10px] text-[#EE5736]">{aError}</div>
         )
       )}
-      <div className="flex justify-center mt-[36px] mb-[160px] sp:mb-[60px]">
+      <div className="flex mobile:flex-wrap justify-center mt-[36px] mb-[160px] sp:mb-[60px]">
         {!applyMode && (
           <Button
             buttonType={ButtonType.PRIMARY}
             buttonClassName="mr-[30px]"
             handleClick={() => handleSend(false)}
           >
-            <span className="flex items-center">
+            <span className="flex mobile:flex-wrap items-center">
               <span>更新</span>
               <img
                 className={
@@ -963,7 +964,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
             buttonClassName="ml-[40px]"
             handleClick={() => handleSend(true)}
           >
-            <div className="flex items-center">
+            <div className="flex mobile:flex-wrap items-center">
               {isLoading ? (
                 <img
                   src="/img/refresh.svg"

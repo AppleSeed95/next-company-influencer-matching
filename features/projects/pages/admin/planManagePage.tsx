@@ -268,7 +268,7 @@ const PlanManagePage: React.FC = () => {
                             {idx === active && (
                                 <div className="px-[25px] py-[10px]">
                                     <div className="flex my-[10px]">
-                                        <div className="w-[80px] mr-[36px] text-right text-[#A9A9A9] sp:text-spsmall">
+                                        <div className="min-w-[80px] mr-[36px] text-right text-[#A9A9A9] sp:text-spsmall">
                                             プラン名
                                         </div>
                                         <span className="mb-[7px] sp:text-spsmall">
@@ -276,15 +276,17 @@ const PlanManagePage: React.FC = () => {
                                         </span>
                                     </div>
                                     <div className="flex my-[10px]">
-                                        <div className="w-[80px] mr-[36px] text-right text-[#A9A9A9] sp:text-spsmall">
+                                        <div className="min-w-[80px] mr-[36px] text-right text-[#A9A9A9] sp:text-spsmall">
                                             価格ID
                                         </div>
                                         <span className="mb-[7px] sp:text-spsmall">
-                                            {aData.priceID}
+                                            <div className="flex flex-wrap">
+                                                {aData.priceID.split('').map((a, idx) => <span key={idx}>{a}</span>)}
+                                            </div>
                                         </span>
                                     </div>
                                     <div className="flex my-[10px]">
-                                        <div className="w-[80px] mr-[36px] text-right text-[#A9A9A9] sp:text-spsmall">
+                                        <div className="min-w-[80px] mr-[36px] text-right text-[#A9A9A9] sp:text-spsmall">
                                             月の募集数
                                         </div>
                                         <span className="mb-[7px] sp:text-spsmall">
@@ -294,7 +296,7 @@ const PlanManagePage: React.FC = () => {
                                     </div>
 
                                     <div className="flex my-[10px]">
-                                        <div className="w-[80px] mr-[36px] text-right text-[#A9A9A9] sp:text-spsmall">
+                                        <div className="min-w-[80px] mr-[36px] text-right text-[#A9A9A9] sp:text-spsmall">
                                             同時募集数
                                         </div>
                                         <span className="mb-[7px] sp:text-spsmall">

@@ -155,9 +155,9 @@ export default function CompanyListPage() {
                 条件を絞り込みできます。
               </div>
               <div className="flex items-center sp:block mt-[8px] gap-x-9 flex-wrap">
-                <div className="flex my-[8px]">
+                <div className="flex my-[8px] flex-wrap">
+                  <span className="mr-[11px] sp:text-sp text-[#A8A8A8]">状態 ： </span>
                   <Checkbox
-                    prefix="状態 ： "
                     title={"稼動中"}
                     handleChange={(val) => handleOptionChange("稼動中")}
                     checkBoxClassName="mr-[20px]"
@@ -167,9 +167,9 @@ export default function CompanyListPage() {
                     handleChange={(val) => handleOptionChange("停止中")}
                   />
                 </div>
-                <div className="flex my-[8px]">
+                <div className="flex my-[8px] flex-wrap">
+                  <span className="mr-[11px] sp:text-sp text-[#A8A8A8]">決済 ： </span>
                   <Checkbox
-                    prefix="決済 ： "
                     title={"未登録"}
                     handleChange={(val) => handleOptionChange1("未登録")}
                     checkBoxClassName="mr-[20px]"
@@ -179,9 +179,9 @@ export default function CompanyListPage() {
                     handleChange={(val) => handleOptionChange1("失敗")}
                   />
                 </div>
-                <div className="flex my-[8px]">
+                <div className="flex my-[8px] flex-wrap">
+                  <span className="mr-[11px] sp:text-sp text-[#A8A8A8]">無料アカウント： </span>
                   <Checkbox
-                    prefix="無料アカウント："
                     handleChange={(val) =>
                       handleOptionChange1("無料アカウント")
                     }

@@ -3,7 +3,7 @@ import ChattingPage from "@/features/projects/pages/chatting/chatting";
 
 const Chatting: React.FC = () => {
   return (
-      <ChattingPage />
+    <ChattingPage />
   );
 };
 export default Chatting;

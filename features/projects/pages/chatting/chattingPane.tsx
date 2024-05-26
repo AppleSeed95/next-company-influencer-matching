@@ -27,6 +27,7 @@ export default function ChattingPane() {
   const { id } = useParams();
   const router = useRouter();
   const lastChecked = useRef<Number>(0)
+  const containerRef = useRef(null);
 
   const fetchData = async (requireOther: boolean) => {
     if (document.title !== 'チャット') return;
@@ -48,7 +49,23 @@ export default function ChattingPane() {
     }
   };
   useEffect(() => {
+    const fitTextInDiv = () => {
+      const container = containerRef.current;
+      if (!container) return;
 
+      let containerWidth = container.clientWidth;
+      let length = containerRef.current.innerHTML.length;
+      let newFontSize = containerWidth / length;
+
+      if (containerWidth < 500) {
+        container.style.fontSize = `${newFontSize < 16 ? newFontSize : 16}px`;
+      } else {
+        container.style.fontSize = `16px`;
+      }
+    };
+
+    fitTextInDiv();
+    window.addEventListener('resize', fitTextInDiv); // Adjust on window resize
     socket.on("message", () => {
       setReload(!reload);
     });
@@ -66,6 +83,7 @@ export default function ChattingPane() {
         const result = await axios.get(`/api/chatting/chattingRoom?id=${id}`);
         if (result.data) {
           setRoomData(result.data);
+
         }
 
       } catch (e) {
@@ -143,7 +161,26 @@ export default function ChattingPane() {
   return (
     <>
       <div>
+        <div className="lg:hidden flex flex-reverse justify-between items-center pt-[12vh] h-[6vh] px-[10px]">
+          <div className="flex gap-[5px] items-end w-full">
+            <div className="font-bold pb-[0px] text-[16px] leading-none	">
+              {roomData?.caseName}
+            </div>
+            <div className="italic h-full pb-[0px] leading-none	 flex w-full" ref={containerRef}>
+              {user?.user?.role === "インフルエンサー" ? roomData?.companyName : roomData?.influencerName}
+            </div>
+          </div>
 
+          <img
+            alt="hamburger"
+            src="/img/hamburger.svg"
+            className="h-[20px] w-[20px] min-w-[14px] cursor-pointer"
+            onClick={() => {
+              setShowRooms(!showRooms);
+            }}
+          />
+
+        </div>
       </div>
       <div
         className={
@@ -154,19 +191,7 @@ export default function ChattingPane() {
       >
         <ChattingRooms />
       </div>
-      <div className="absolute lg:hidden right-[20px] top-[150px]">
-        <Image
-          alt="hamburger"
-          width={70}
-          height={70}
-          src="/img/hamburger.svg"
-          className="h-[14px]  mt-[20px]"
-          onClick={() => {
-            setShowRooms(!showRooms);
-          }}
-        />
-      </div>
-      {isValid ? <div className="h-full flex flex-col">
+      {isValid ? <div className="border-[1px] sp:mt-[3vh] border-[#DDDDDD] box-border flex flex-col">
         <div
           className="bg-[#F8F9FA] border-[1px] h-[63vh] pt-[100px] overflow-y-auto scroll-smooth"
           id="pane"
@@ -190,8 +215,8 @@ export default function ChattingPane() {
                       {aData.msg.split("\n")?.map((a, key) => (
                         <div key={key}>{a}</div>
                       ))}
-                      <img src="/img/check.svg" className="w-[10px] absolute right-[3px]" />
-                      {aData.checked === 1 && <img src="/img/check.svg" className="w-[10px] absolute right-[7px]" />}
+                      {/* <img src="/img/check.svg" className="w-[10px] absolute right-[3px]" />
+                      {aData.checked === 1 && <img src="/img/check.svg" className="w-[10px] absolute right-[7px]" />} */}
                       <div className="absolute bottom-[-30px] right-0 text-[#A8A8A8]">
                         {aData.time}
                       </div>
@@ -201,7 +226,7 @@ export default function ChattingPane() {
               ) : (
                 <div key={idx}>
                   <div className="chat-you relative ml-[65px] my-[30px] sp:mx-[10px] inline-block bg-[white] px-[20px] py-[15px] rounded-[15px] shadow-sm">
-                    <div className="absolute top-[-30px]">{aData.name}</div>
+                    {/* <div className="absolute top-[-30px]">{aData.name}</div> */}
                     {aData.msg.split("\n")?.map((a, key) => (
                       <div key={key}>{a}</div>
                     ))}
@@ -231,11 +256,12 @@ export default function ChattingPane() {
             <img src="/img/apply.svg" alt="apply" />
           </Button>
         </div>
-      </div>
+      </div >
         :
         <div className="flex items-center justify-center">
           チャット履歴はありません。
-        </div>}
+        </div>
+      }
     </>
 
   );

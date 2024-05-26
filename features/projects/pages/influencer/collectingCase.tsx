@@ -236,9 +236,10 @@ export default function CollectedCase() {
                 条件を絞り込みできます。
               </div>
               <div className="flex sp:block mt-[8px] flex-wrap gap-x-10">
-                <div className="flex">
+                <div className="flex flex-wrap">
+                  <span className="mr-[11px] sp:text-sp text-[#A8A8A8]">案件種別 ： </span>
+
                   <Checkbox
-                    prefix="案件種別 ： "
                     title={"来店"}
                     handleChange={(v) => handleOptionChange("来店")}
                     checkBoxClassName="mr-[20px]"

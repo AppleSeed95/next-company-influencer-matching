@@ -44,7 +44,7 @@ export default function ResetPasswordPage() {
       });
       setIsLoading(false);
       if (typeof window !== "undefined") {
-        router.push("/login");
+        router.push("/resetPasswordComplete");
       }
     } else if (result.data.type === "error") {
       setError(result.data.msg);

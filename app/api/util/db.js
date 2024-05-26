@@ -3,11 +3,9 @@ import mysql from "mysql";
 const connection = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "kAZ5dB4*/x2.|mC2-4Rp",
-  // password: "password",
+  password: process.env.DB_PASSWORD,
   database: "project",
 });
-
 // Connect to the MySQL database
 connection.connect(async (error) => {
   if (error) {

@@ -258,8 +258,8 @@ const CasePage: React.FC = () => {
       <div className="flex  pt-[20px] pb-[8px]  w-[full] border-b-[1px] border-[#DDDDDD] mt-[70px] sp:mt-[96px]">
         <span className="text-title sp:text-sptitle">募集案件登録・編集</span>
       </div>
-      <div className="flex  pt-[20px] pb-[8px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD] mt-[90px] sp:mt-[30px]   sp:px-[18px]">
-        <span className="w-[30%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
+      <div className="flex mobile:flex-wrap pt-[20px] pb-[8px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD] mt-[90px] sp:mt-[30px]   sp:px-[18px]">
+        <span className="w-[30%] mobile:w-full mt-[5px] mobile:w-full flex justify-end sp:justify-start  mr-[67px]">
           <span className="text-[#6F6F6F]">案件種別</span>
         </span>
         <div className="flex">
@@ -271,8 +271,8 @@ const CasePage: React.FC = () => {
           />
         </div>
       </div>
-      <div className="flex  pt-[20px] pb-[8px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
-        <span className="w-[30%] mt-[5px] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
+      <div className="flex mobile:flex-wrap  pt-[20px] pb-[8px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+        <span className="w-[30%] mobile:w-full mt-[5px] mt-[5px] mobile:w-full flex justify-end sp:justify-start  mr-[67px]">
           <span>案件名</span>
           <span className="ml-[10px] text-[#EE5736] text-[11px]">必須</span>
         </span>
@@ -284,21 +284,21 @@ const CasePage: React.FC = () => {
           handleChange={(val) => setData({ ...data, caseName: val })}
         />
       </div>
-      <div className="flex pt-[20px] pb-[30px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
-        <span className="w-[30%] mt-[5px] sp:w-[100px] mt-[5px] flex justify-end sp:justify-start  mr-[67px]">
+      <div className="flex mobile:flex-wrap pt-[20px] pb-[30px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+        <span className="w-[30%] mobile:w-full mt-[5px] mobile:w-full mt-[5px] flex justify-end sp:justify-start  mr-[67px]">
           <span>案件内容</span>
           <span className="ml-[10px] text-[#EE5736] text-[11px]">必須</span>
         </span>
         <TextArea
           value={data.caseContent}
           handleChange={(val) => setData({ ...data, caseContent: val })}
-          textAreaClassName="max-w-[300px] h-[95px] grow "
+          textAreaClassName="max-w-[300px] min-w-[250px] h-[95px] grow "
           placeholder="例：イタリアで話題のスイーツが日本に初上陸！バリスタがいれるエスプレッソと新感覚スイーツをご提供しますのでSNSでPRをお願いします。"
           requirMsg="案件内容を入力してください"
         />
       </div>
-      <div className="flex  pt-[20px] pb-[8px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
-        <span className="w-[30%] mt-[5px] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
+      <div className="flex mobile:flex-wrap  pt-[20px] pb-[8px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+        <span className="w-[30%] mobile:w-full mt-[5px] mt-[5px] mobile:w-full flex justify-end sp:justify-start  mr-[67px]">
           <span>希望のハッシュタグ</span>
           <span className="ml-[10px] text-[#EE5736] text-[11px] invisible">
             必須
@@ -312,14 +312,14 @@ const CasePage: React.FC = () => {
           inputClassName="max-w-[250px] grow border-[#D3D3D3] w-[100%]"
         />
       </div>
-      <div className="flex  py-[20px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
-        <span className="w-[30%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
+      <div className="flex mobile:flex-wrap py-[20px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+        <span className="w-[30%] mobile:w-full mt-[5px] mobile:w-full flex justify-end sp:justify-start  mr-[67px]">
           <span>希望のSNS</span>
           <span className="ml-[10px] text-[#EE5736] text-[11px] invisible">
             必須
           </span>
         </span>
-        <div className="flex flex-wrap">
+        <div className="flex flex-wrap max-w-[250px]">
           <Checkbox
             value={wantedSNS.includes("instagram")}
             handleChange={(val) => handleSNSChange("instagram")}
@@ -382,8 +382,8 @@ const CasePage: React.FC = () => {
           />
         </div>
       </div>
-      <div className="flex  pt-[20px] pb-[8px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
-        <span className="w-[30%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
+      <div className="flex mobile:flex-wrap  pt-[20px] pb-[8px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+        <span className="w-[30%] mobile:w-full mt-[5px] mobile:w-full flex justify-end sp:justify-start  mr-[67px]">
           <span>来店場所</span>
           <span className="ml-[10px] text-[#EE5736] text-[11px] invisible">
             必須
@@ -397,8 +397,8 @@ const CasePage: React.FC = () => {
           inputClassName="max-w-[250px] grow border-[#D3D3D3] w-[100%]"
         />
       </div>
-      <div className="flex  pt-[20px] pb-[8px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
-        <span className="w-[30%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
+      <div className="flex mobile:flex-wrap  pt-[20px] pb-[8px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+        <span className="w-[30%] mobile:w-full mt-[5px] mobile:w-full flex justify-end sp:justify-start  mr-[67px]">
           <span>募集開始</span>
           <span className="ml-[10px] text-[#EE5736] text-[11px] invisible">
             必須
@@ -413,8 +413,8 @@ const CasePage: React.FC = () => {
           placeholder="yyyy/mm/dd hh:mm"
         />
       </div>
-      <div className="flex  pt-[20px] pb-[8px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
-        <span className="w-[30%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
+      <div className="flex mobile:flex-wrap  pt-[20px] pb-[8px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+        <span className="w-[30%] mobile:w-full mt-[5px] mobile:w-full flex justify-end sp:justify-start  mr-[67px]">
           <span>募集終了</span>
           <span className="ml-[10px] text-[#EE5736] text-[11px]">必須</span>
         </span>
@@ -426,8 +426,8 @@ const CasePage: React.FC = () => {
           placeholder="yyyy/mm/dd hh:mm"
         />
       </div>
-      <div className="flex  pt-[20px] pb-[8px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
-        <span className="w-[30%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
+      <div className="flex mobile:flex-wrap  pt-[20px] pb-[8px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+        <span className="w-[30%] mobile:w-full mt-[5px] mobile:w-full flex justify-end sp:justify-start  mr-[67px]">
           <span>案件終了</span>
           <span className="ml-[10px] text-[#EE5736] text-[11px]">必須</span>
         </span>
@@ -439,8 +439,8 @@ const CasePage: React.FC = () => {
           placeholder="yyyy/mm/dd hh:mm"
         />
       </div>
-      <div className="flex  pt-[20px] pb-[8px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
-        <span className="w-[30%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
+      <div className="flex mobile:flex-wrap  pt-[20px] pb-[8px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+        <span className="w-[30%] mobile:w-full mt-[5px] mobile:w-full flex justify-end sp:justify-start  mr-[67px]">
           <span>募集人数</span>
           <span className="ml-[10px] text-[#EE5736] text-[11px] invisible">
             必須
@@ -454,8 +454,8 @@ const CasePage: React.FC = () => {
           inputClassName="max-w-[250px] grow border-[#D3D3D3] w-[100%]"
         />
       </div>
-      <div className="flex pt-[20px] pb-[8px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
-        <span className="w-[30%] mt-[5px] sp:w-[100px] mt-[5px] flex justify-end sp:justify-start  mr-[67px]">
+      <div className="flex mobile:flex-wrap pt-[20px] pb-[8px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+        <span className="w-[30%] mobile:w-full mt-[5px] mobile:w-full mt-[5px] flex justify-end sp:justify-start  mr-[67px]">
           <span>補足・注意事項</span>
           <span className="ml-[10px] text-[#EE5736] text-[11px] invisible">
             必須
@@ -464,7 +464,7 @@ const CasePage: React.FC = () => {
         <TextArea
           value={data.addition}
           handleChange={(val) => setData({ ...data, addition: val })}
-          textAreaClassName="max-w-[300px] h-[95px] grow border-[#D3D3D3] "
+          textAreaClassName="max-w-[300px] min-w-[250px] h-[95px] grow border-[#D3D3D3] "
           placeholder="例：※店内での利用のみとなります。※ご同行者1名は無償提供させていただきます。"
         />
       </div>
@@ -473,7 +473,7 @@ const CasePage: React.FC = () => {
           key={"1"}
           className="flex items-center  pt-[20px] pb-[8px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]"
         >
-          <span className="w-[30%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
+          <span className="w-[30%] mobile:w-full mt-[5px] mobile:w-full flex justify-end sp:justify-start  mr-[67px]">
             <span>申請状態</span>
             <span className="ml-[10px] text-[#EE5736] text-[11px] invisible">
               必須
@@ -485,7 +485,7 @@ const CasePage: React.FC = () => {
           key={"2"}
           className="flex items-center pt-[20px] pb-[8px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]"
         >
-          <span className="w-[30%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
+          <span className="w-[30%] mobile:w-full mt-[5px] mobile:w-full flex justify-end sp:justify-start  mr-[67px]">
             <span>募集状況</span>
             <span className="ml-[10px] text-[#EE5736] text-[11px] invisible">
               必須
@@ -496,9 +496,9 @@ const CasePage: React.FC = () => {
         data.status === "否認" ? (
           <div
             key={"3"}
-            className="flex  pt-[20px] pb-[8px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]"
+            className="flex mobile:flex-wrap  pt-[20px] pb-[8px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]"
           >
-            <span className="w-[30%] mt-[5px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
+            <span className="w-[30%] mobile:w-full mt-[5px] mobile:w-full flex justify-end sp:justify-start  mr-[67px]">
               <span>否認理由</span>
               <span className="ml-[10px] text-[#EE5736] text-[11px] invisible">
                 必須

@@ -161,82 +161,92 @@ export default function InfluencerListPage() {
                 条件を絞り込みできます。
               </div>
               <div className="flex sp:block mt-[8px] gap-x-9 flex-wrap">
-                <div className="flex my-[8px]">
-                  <Checkbox
-                    prefix="状態 ： "
-                    title={"承認待ち"}
-                    handleChange={(val) => handleOptionChange("承認待ち")}
-                    checkBoxClassName="mr-[20px]"
-                  />
-                  <Checkbox
-                    title={"稼働中"}
-                    checkBoxClassName="mr-[20px]"
-                    handleChange={(val) => handleOptionChange("稼働中")}
-                  />
-                  <Checkbox
-                    title={"停止中"}
-                    handleChange={(val) => handleOptionChange("停止中")}
-                  />
+                <div className="flex flex-wrap my-[8px]">
+                  <div className="flex flex-wrap">
+                    <span className="mr-[11px] sp:text-sp text-[#A8A8A8]">状態 ： </span>
+                    <div className="flex flex-wrap">
+                      <Checkbox
+                        title={"承認待ち"}
+                        handleChange={(val) => handleOptionChange("承認待ち")}
+                        checkBoxClassName="mr-[20px]"
+                      />
+                      <Checkbox
+                        title={"稼働中"}
+                        checkBoxClassName="mr-[20px]"
+                        handleChange={(val) => handleOptionChange("稼働中")}
+                      />
+                      <Checkbox
+                        title={"停止中"}
+                        handleChange={(val) => handleOptionChange("停止中")}
+                      />
+                    </div>
+
+                  </div>
+
                 </div>
                 <div className="flex my-[8px]">
-                  <Checkbox
-                    // prefix="決算 : "
-                    prefix="SNS ： "
-                    handleChange={(val) => handleOptionChange1("instagram")}
-                    title={
-                      <img
-                        className="w-[35px]"
-                        src="/img/sns/Instagram.svg"
-                        alt="instagram"
+                  <div className="flex flex-wrap">
+                    <span className="mr-[11px] sp:text-sp text-[#A8A8A8]">SNS ： </span>
+                    <div className="flex flex-wrap">
+                      <Checkbox
+                        handleChange={(val) => handleOptionChange1("instagram")}
+                        title={
+                          <img
+                            className="w-[35px]"
+                            src="/img/sns/Instagram.svg"
+                            alt="instagram"
+                          />
+                        }
+                        checkBoxClassName="mr-[20px]"
                       />
-                    }
-                    checkBoxClassName="mr-[20px]"
-                  />
-                  <Checkbox
-                    handleChange={(val) => handleOptionChange1("tiktok")}
-                    title={
-                      <img
-                        className="w-[35px]"
-                        src="/img/sns/tiktok.svg"
-                        alt="tiktok"
+                      <Checkbox
+                        handleChange={(val) => handleOptionChange1("tiktok")}
+                        title={
+                          <img
+                            className="w-[35px]"
+                            src="/img/sns/tiktok.svg"
+                            alt="tiktok"
+                          />
+                        }
+                        checkBoxClassName="mr-[20px]"
                       />
-                    }
-                    checkBoxClassName="mr-[20px]"
-                  />
-                  <Checkbox
-                    handleChange={(val) => handleOptionChange1("x")}
-                    title={
-                      <img className="w-[35px]" src="/img/sns/x.svg" alt="x" />
-                    }
-                    checkBoxClassName="mr-[20px]"
-                  />
-                  <Checkbox
-                    handleChange={(val) => handleOptionChange1("youtube")}
-                    title={
-                      <img
-                        className="w-[35px]"
-                        src="/img/sns/youtube.svg"
-                        alt="youtube"
+                      <Checkbox
+                        handleChange={(val) => handleOptionChange1("x")}
+                        title={
+                          <img className="w-[35px]" src="/img/sns/x.svg" alt="x" />
+                        }
+                        checkBoxClassName="mr-[20px]"
                       />
-                    }
-                    checkBoxClassName="mr-[20px]"
-                  />
-                  <Checkbox
-                    handleChange={(val) => handleOptionChange1("facebook")}
-                    title={
-                      <img
-                        className="w-[35px]"
-                        src="/img/sns/facebook.svg"
-                        alt="youtube"
+                      <Checkbox
+                        handleChange={(val) => handleOptionChange1("youtube")}
+                        title={
+                          <img
+                            className="w-[35px]"
+                            src="/img/sns/youtube.svg"
+                            alt="youtube"
+                          />
+                        }
+                        checkBoxClassName="mr-[20px]"
                       />
-                    }
-                    checkBoxClassName="mr-[20px]"
-                  />
-                  <Checkbox
-                    title={"etc"}
-                    handleChange={(val) => handleOptionChange1("etc")}
-                    checkBoxClassName="mr-[20px]"
-                  />
+                      <Checkbox
+                        handleChange={(val) => handleOptionChange1("facebook")}
+                        title={
+                          <img
+                            className="w-[35px]"
+                            src="/img/sns/facebook.svg"
+                            alt="youtube"
+                          />
+                        }
+                        checkBoxClassName="mr-[20px]"
+                      />
+                      <Checkbox
+                        title={"etc"}
+                        handleChange={(val) => handleOptionChange1("etc")}
+                        checkBoxClassName="mr-[20px]"
+                      />
+                    </div>
+                  </div>
+
                 </div>
               </div>
             </div>

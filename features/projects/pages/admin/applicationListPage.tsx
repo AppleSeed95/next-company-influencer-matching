@@ -142,31 +142,36 @@ export default function ApplicationListPage() {
                 条件を絞り込みできます。
               </div>
               <div className="flex mt-[8px] flex-wrap">
-                <Checkbox
-                  prefix="状態 ： "
-                  title={"申請中"}
-                  handleChange={(val) => handleOptionChange("申請中")}
-                  checkBoxClassName="mr-[20px]"
-                />
-                <Checkbox
-                  title={"承認"}
-                  handleChange={(val) => handleOptionChange("承認")}
-                  checkBoxClassName="mr-[20px]"
-                />
-                <Checkbox
-                  title={"承認 / 申請中"}
-                  checkBoxClassName="mr-[20px]"
-                  handleChange={(v) => handleOptionChange("承認 / 申請中")}
-                />
-                <Checkbox
-                  title={"承認 / 否認	"}
-                  checkBoxClassName="mr-[20px]"
-                  handleChange={(v) => handleOptionChange("承認 / 否認")}
-                />
-                <Checkbox
-                  title={"否認"}
-                  handleChange={(val) => handleOptionChange("否認")}
-                />
+                <div className="flex flex-wrap">
+                  <span className="mr-[11px] sp:text-sp text-[#A8A8A8]">状態 ： </span>
+                  <div className="flex flex-wrap">
+                    <Checkbox
+                      title={"申請中"}
+                      handleChange={(val) => handleOptionChange("申請中")}
+                      checkBoxClassName="mr-[20px]"
+                    />
+                    <Checkbox
+                      title={"承認"}
+                      handleChange={(val) => handleOptionChange("承認")}
+                      checkBoxClassName="mr-[20px]"
+                    />
+                    <Checkbox
+                      title={"承認 / 申請中"}
+                      checkBoxClassName="mr-[20px]"
+                      handleChange={(v) => handleOptionChange("承認 / 申請中")}
+                    />
+                    <Checkbox
+                      title={"承認 / 否認	"}
+                      checkBoxClassName="mr-[20px]"
+                      handleChange={(v) => handleOptionChange("承認 / 否認")}
+                    />
+                    <Checkbox
+                      title={"否認"}
+                      handleChange={(val) => handleOptionChange("否認")}
+                    />
+                  </div>
+                </div>
+
               </div>
             </div>
           }

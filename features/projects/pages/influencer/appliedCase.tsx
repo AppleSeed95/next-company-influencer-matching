@@ -214,22 +214,24 @@ export default function AppledCase() {
                 条件を絞り込みできます。
               </div>
               <div className="flex sp:block mt-[8px] flex-wrap gap-x-10">
-                <div className="flex">
-                  <Checkbox
-                    prefix="案件種別 ： "
-                    title={"来店"}
-                    checkBoxClassName="mr-[20px]"
-                    handleChange={(v) => handleOptionChange("来店")}
-                  />
-                  <Checkbox
-                    title={"通販"}
-                    checkBoxClassName="mr-[20px]"
-                    handleChange={(v) => handleOptionChange("通販")}
-                  />
+                <div className="flex flex-wrap">
+                  <span className="mr-[11px] sp:text-sp text-[#A8A8A8]">案件種別 ： </span>
+                  <div className="flex flex-wrap">
+                    <Checkbox
+                      title={"来店"}
+                      checkBoxClassName="mr-[20px]"
+                      handleChange={(v) => handleOptionChange("来店")}
+                    />
+                    <Checkbox
+                      title={"通販"}
+                      checkBoxClassName="mr-[20px]"
+                      handleChange={(v) => handleOptionChange("通販")}
+                    />
+                  </div>
                 </div>
-                <div className="flex">
+                <div className="flex flex-wrap">
+                  <span className="mr-[11px] sp:text-sp text-[#A8A8A8]">状態 ： </span>
                   <Checkbox
-                    prefix="状態 ： "
                     title={"申請中"}
                     handleChange={(v) => handleOptionChange1("申請中")}
                     checkBoxClassName="mr-[20px]"

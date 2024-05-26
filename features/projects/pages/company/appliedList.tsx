@@ -207,9 +207,9 @@ export default function AppliedList() {
                 条件を絞り込みできます。
               </div>
               <div className="flex sp:block mt-[8px] flex-wrap gap-x-10">
-                <div className="flex">
+                <div className="flex flex-wrap">
+                  <span className="mr-[11px] sp:text-sp text-[#A8A8A8]">申請状態 ：  </span>
                   <Checkbox
-                    prefix="申請状態 ： "
                     title={"申請前"}
                     handleChange={(v) => handleOptionChange("申請前")}
                     checkBoxClassName="mr-[20px]"
@@ -239,9 +239,9 @@ export default function AppliedList() {
                     handleChange={(v) => handleOptionChange("否認")}
                   />
                 </div>
-                <div className="flex">
+                <div className="flex flex-wrap">
+                  <span className="mr-[11px] sp:text-sp text-[#A8A8A8]">募集状態 ： </span>
                   <Checkbox
-                    prefix="募集状態 ： "
                     title={"募集中"}
                     handleChange={(v) => handleOptionChange1("募集中")}
                     checkBoxClassName="mr-[20px]"

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRecoilValue, useRecoilState } from "recoil";
 import { authUserState } from "@/recoil/atom/auth/authUserAtom";
@@ -11,10 +11,29 @@ export interface Headerprops {
 const Header: React.FC<Headerprops> = ({ mode }: Headerprops) => {
   const [showMenu, setShowMenu] = useState(false);
   const [isClient, setIsClient] = useState(false);
-
+  const containerRef = useRef(null);
   useEffect(() => {
     setIsClient(true);
-  }, []);
+    const fitTextInDiv = () => {
+      const container = containerRef.current;
+      if (!container) return;
+
+      let containerWidth = container.clientWidth;
+      let length = containerRef.current.innerHTML.length;
+      let newFontSize = containerWidth / length;
+
+      // Adjust font size to fit the content
+      if (containerWidth < 500) {
+        container.style.fontSize = `${newFontSize < 20 ? newFontSize : 20}px`;
+      } else {
+        container.style.fontSize = `20px`;
+      }
+    };
+
+    fitTextInDiv();
+    window.addEventListener('resize', fitTextInDiv); // Adjust on window resize
+    return () => window.removeEventListener('resize', fitTextInDiv);
+  }, []); // Re-run effect when fontSize or children change
   const authUser = useRecoilValue(authUserState);
   const router = useRouter();
   return mode === "auth" ? (
@@ -57,18 +76,20 @@ const Header: React.FC<Headerprops> = ({ mode }: Headerprops) => {
         <img
           alt="img"
           src="/img/hamburger.svg"
-          className="lg:hidden h-[14px] mx-[22px]"
+          className="lg:hidden h-[14px] ml-[22px]"
           onClick={() => {
             setShowMenu(!showMenu);
           }}
         />
-        <div className=" text-[white] h-[full] flex items-center px-[32px] text-header">
+        <div
+          ref={containerRef}
+          className="text-[white] w-[70%] mx-[20px] sp:mx-[0px] sp:text-center h-[full] text-[16px]">
           {isClient && authUser.user?.targetName}
         </div>
         <img
           alt="img"
           src="/img/logout.svg"
-          className="lg:hidden h-[14px] mx-[22px]"
+          className="lg:hidden h-[14px] mr-[22px]"
           onClick={() => {
             if (typeof window !== "undefined") {
               router.push("/logout");
@@ -76,7 +97,7 @@ const Header: React.FC<Headerprops> = ({ mode }: Headerprops) => {
           }}
         />
         <div
-          className="text-[white] h-[full] flex items-center px-[32px] sp:hidden cursor-pointer"
+          className="text-[white] h-[full] flex items-center mr-[32px] sp:hidden cursor-pointer"
           onClick={() => {
             if (typeof window !== "undefined") {
               router.push("/logout");

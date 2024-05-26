@@ -23,11 +23,14 @@ const config: Config = {
         sptitle: "17px",
       },
       screens: {
+        mobile: {
+          max: "500px",
+        },
         sp: {
-          max: "768px",
+          max: "1200px",
         },
         lg: {
-          min: "769px",
+          min: "1201px",
         },
       },
     },
