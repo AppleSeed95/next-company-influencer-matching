@@ -10,10 +10,9 @@ import { useParams } from "next/navigation";
 import axios from "@/node_modules/axios/index";
 import { useRouter } from "next/navigation";
 
-// const socket = io("https://influencer-meguri.jp");
-import Image from "next/image";
+const socket = io("https://influencer-meguri.jp");
 import ChattingRooms from "./rooms";
-const socket = io("http://localhost:5000");
+// const socket = io("http://localhost:5000");
 
 export default function ChattingPane() {
   const user = useRecoilValue(authUserState);
