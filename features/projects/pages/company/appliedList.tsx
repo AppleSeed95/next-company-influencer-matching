@@ -186,10 +186,10 @@ export default function AppliedList() {
             buttonType={ButtonType.PRIMARY}
             buttonClassName="mt-[15px] sp:my-[15px] sp:text-small rounded-[0px]"
           >
-            <div className="flex">
+            <span className="flex">
               <img src="/img/plus.svg" alt="plus" className="mr-[5px]" />
               新規登録
-            </div>
+            </span>
           </Button>
         </Link>
         <SearchBar
