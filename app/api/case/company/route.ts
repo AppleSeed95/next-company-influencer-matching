@@ -94,7 +94,6 @@ export async function GET(request: NextRequest) {
       : Math.min(possibleAutoCollectionCnt, count[0].cnt);
     const autoEndedCnt = count1[0].cnt;
     let concurrentDiffuse = autoStartedCnt - autoEndedCnt;
-    if (concurrentDiffuse < 0) concurrentDiffuse = 0;
     const updateCompanyQuery = `
     UPDATE company
     SET thisMonthCollectionCnt = thisMonthCollectionCnt + ${autoStartedCnt},
