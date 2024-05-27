@@ -90,7 +90,7 @@ export async function GET(request: NextRequest) {
     //     await executeQuery(caseUpdateQuery);
     //   }
     const updateQuery2 = `UPDATE cases SET status = '完了'
-        WHERE id = ${id} and (SELECT COUNT(*) FROM apply WHERE caseId = ${id} and status = '承認') = 0`;
+        WHERE id = ${id} and collectionStatus = 募集終了 and (SELECT COUNT(*) FROM apply WHERE caseId = ${id} and status = '承認') = 0`;
     console.log(updateQuery2);
     await executeQuery(updateQuery2).catch((e) => {
       return NextResponse.json({ type: "error" });
