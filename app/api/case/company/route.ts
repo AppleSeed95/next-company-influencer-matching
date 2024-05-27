@@ -85,7 +85,7 @@ export async function GET(request: NextRequest) {
     // await executeQuery(updateQuery2).catch((e) => {
     //   return NextResponse.json({ type: "error" });
     // });
-    const collectionEndedCasesQuery = `SELECT * from cases WHERE collectionStatus = 募集終了 and companyId = ${id}`;
+    const collectionEndedCasesQuery = `SELECT * from cases WHERE collectionStatus = '募集終了' and companyId = ${id}`;
     const collectionEndedCases = await executeQuery(collectionEndedCasesQuery);
     console.log(collectionEndedCases);
 
