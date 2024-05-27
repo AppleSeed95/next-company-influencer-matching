@@ -12,17 +12,14 @@ export default function ResetPasswordCompletePage() {
           className="blcok m-auto w-[265px] sp:hidden mb-[50px]"
         />
         <div className="m-[50px] text-left">
-          パスワードが変更されました。
-          <br />
-          <br /><br />
-          不明点がございましたらお問い合わせフォームからご連絡ください。
+          登録メールアドレスにメールを送信しました。
           <br />
         </div>
 
-        <Link href={"/ask"}>
+        <Link href={"/login"}>
           <div className="text-center mb-[10px]">
             <Button buttonType={ButtonType.PRIMARY}>
-              お問い合わせはこちら
+              ログインページに戻る
             </Button>
           </div>
         </Link>
