@@ -86,7 +86,9 @@ export async function GET(request: NextRequest) {
     collectionEndedCases.forEach(async (element) => {
       const updateQuery2 = `UPDATE cases SET collectionStatus = '完了'
           WHERE id = ${element.id} and collectionStatus = 募集終了 and (SELECT COUNT(*) FROM apply WHERE caseId = ${element.id} and status = '承認') = 0`;
-      await executeQuery(updateQuery2).catch((e) => {});
+
+      const test = await executeQuery(updateQuery2).catch((e) => {});
+      console.log(test, updateQuery2);
     });
     const autoStartedCnt = company.freeAccount
       ? count[0].cnt
