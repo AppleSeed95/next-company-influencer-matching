@@ -92,7 +92,7 @@ export async function PUT(request: NextRequest) {
         }
       );
       await executeQuery(queryWhenQuit);
-      if (count && count[0].cnt === 0) {
+      if (!count || count[0].cnt === 0) {
         const caseUpdateQuery = `UPDATE cases SET collectionStatus = '完了'
         WHERE id = ${id}`;
         const result = await executeQuery(caseUpdateQuery);
