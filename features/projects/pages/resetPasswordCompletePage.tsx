@@ -11,7 +11,7 @@ export default function ResetPasswordCompletePage() {
           src="/img/logo(red).svg"
           className="blcok m-auto w-[265px] sp:hidden mb-[50px]"
         />
-        <div className="m-[50px] text-left">
+        <div className="m-[50px] text-center">
           登録メールアドレスにメールを送信しました。
           <br />
         </div>
