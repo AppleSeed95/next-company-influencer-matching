@@ -230,7 +230,7 @@ export default function CaseDetailPage({ caseProps }: caseData) {
       };
     const result = await axios.put(`/api/case/aCase/?id=${id}`, body);
     if (result.data.type === "success") {
-      if (result.data.updated) {
+      if (result.data?.updated) {
         setCollectionStatusTemp(result.data.updated);
       }
       else {

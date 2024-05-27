@@ -95,8 +95,7 @@ export async function PUT(request: NextRequest) {
       const result = await executeQuery(queryWhenQuit);
       if (result) {
         const result1 = await executeQuery(query);
-        if (result1)
-          return NextResponse.json({ type: "success", updated: "完了" });
+        if (result1) return NextResponse.json({ type: "success" });
         else return NextResponse.json({ type: "error" });
       }
     }
