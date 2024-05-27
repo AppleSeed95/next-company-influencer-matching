@@ -86,9 +86,13 @@ export async function PUT(request: NextRequest) {
       const approvedInfluencerCtnQuery = ` 
       SELECT COUNT(*) AS cnt FROM apply WHERE caseId = ${id} and status = '承認'
       `;
-      const count = await executeQuery(approvedInfluencerCtnQuery);
+      const count = await executeQuery(approvedInfluencerCtnQuery).catch(
+        (e) => {
+          console.log(e);
+        }
+      );
       await executeQuery(queryWhenQuit);
-      if (count[0].cnt === 0) {
+      if (count && count[0].cnt === 0) {
         const caseUpdateQuery = `UPDATE cases SET collectionStatus = '完了'
         WHERE id = ${id}`;
         const result = await executeQuery(caseUpdateQuery);
