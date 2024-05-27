@@ -80,11 +80,11 @@ export async function GET(request: NextRequest) {
     await executeQuery(updateQuery1).catch((e) => {
       return NextResponse.json({ type: "error" });
     });
-    const updateQuery2 = `UPDATE cases SET collectionStatus = '完了'
-        WHERE id = ${id} and collectionStatus = 募集終了 and (SELECT COUNT(*) FROM apply WHERE caseId = ${id} and status = '承認') = 0`;
-    await executeQuery(updateQuery2).catch((e) => {
-      return NextResponse.json({ type: "error" });
-    });
+    // const updateQuery2 = `UPDATE cases SET collectionStatus = '完了'
+    //     WHERE companyId = ${id} and collectionStatus = 募集終了 and (SELECT COUNT(*) FROM apply WHERE caseId = ${id} and status = '承認') = 0`;
+    // await executeQuery(updateQuery2).catch((e) => {
+    //   return NextResponse.json({ type: "error" });
+    // });
     const autoStartedCnt = company.freeAccount
       ? count[0].cnt
       : Math.min(possibleAutoCollectionCnt, count[0].cnt);

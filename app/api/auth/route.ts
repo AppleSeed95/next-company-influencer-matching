@@ -92,8 +92,6 @@ export async function POST(request: NextRequest) {
         const payment = result1[0].payment;
         const paymentInfo = new Date(payment);
         const today = new Date();
-        console.log(payment, paymentInfo, today);
-
         const allowed = paymentInfo > today;
         if (!allowed) {
           return NextResponse.json({
