@@ -87,19 +87,18 @@ export async function PUT(request: NextRequest) {
       SELECT COUNT(*) AS cnt FROM apply WHERE caseId = ${id} and status = '承認'
       `;
       const count = await executeQuery(approvedInfluencerCtnQuery);
-      console.log(count[0].cnt);
-
+      await executeQuery(queryWhenQuit);
       if (count[0].cnt === 0) {
-        console.log("here");
         const caseUpdateQuery = `UPDATE cases SET collectionStatus = '完了'
         WHERE id = ${id}`;
         const result = await executeQuery(caseUpdateQuery);
-        console.log(result);
-      }
-      const result = await executeQuery(queryWhenQuit);
-      if (result) {
+        if (result) {
+          return NextResponse.json({ type: "success", updated: "完了" });
+        }
+      } else {
         const result1 = await executeQuery(query);
-        if (result1) return NextResponse.json({ type: "success" });
+        if (result1)
+          return NextResponse.json({ type: "success", updated: "募集終了" });
         else return NextResponse.json({ type: "error" });
       }
     }
