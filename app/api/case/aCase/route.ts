@@ -88,14 +88,15 @@ export async function PUT(request: NextRequest) {
       `;
       const count = await executeQuery(approvedInfluencerCtnQuery);
       if (count[0].cnt === 0) {
-        const caseUpdateQuery = `UPDATE cases SET status = '完了'
+        const caseUpdateQuery = `UPDATE cases SET collectionStatus = '完了'
         WHERE id = ${id}`;
         await executeQuery(caseUpdateQuery);
       }
       const result = await executeQuery(queryWhenQuit);
       if (result) {
         const result1 = await executeQuery(query);
-        if (result1) return NextResponse.json({ type: "success" });
+        if (result1)
+          return NextResponse.json({ type: "success", updated: "完了" });
         else return NextResponse.json({ type: "error" });
       }
     }

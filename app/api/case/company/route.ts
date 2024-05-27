@@ -37,7 +37,6 @@ export async function GET(request: NextRequest) {
     const count = await executeQuery(countQuery).catch((e) => {
       return NextResponse.json({ type: "error" });
     });
-    console.log(count);
 
     const updateQuery = `
     UPDATE cases
@@ -81,7 +80,7 @@ export async function GET(request: NextRequest) {
     await executeQuery(updateQuery1).catch((e) => {
       return NextResponse.json({ type: "error" });
     });
-    const updateQuery2 = `UPDATE cases SET status = '完了'
+    const updateQuery2 = `UPDATE cases SET collectionStatus = '完了'
         WHERE id = ${id} and collectionStatus = 募集終了 and (SELECT COUNT(*) FROM apply WHERE caseId = ${id} and status = '承認') = 0`;
     console.log(updateQuery2);
     await executeQuery(updateQuery2).catch((e) => {
