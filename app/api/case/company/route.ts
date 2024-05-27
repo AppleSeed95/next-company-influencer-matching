@@ -37,6 +37,7 @@ export async function GET(request: NextRequest) {
     const count = await executeQuery(countQuery).catch((e) => {
       return NextResponse.json({ type: "error" });
     });
+    console.log(count);
 
     const updateQuery = `
     UPDATE cases
@@ -80,22 +81,12 @@ export async function GET(request: NextRequest) {
     await executeQuery(updateQuery1).catch((e) => {
       return NextResponse.json({ type: "error" });
     });
-    // const approvedInfluencerCtnQuery = `
-    //   SELECT COUNT(*) AS cnt FROM apply WHERE caseId = ${id} and status = '承認'
-    //   `;
-    //   const count = await executeQuery(approvedInfluencerCtnQuery);
-    //   if (count[0].cnt === 0) {
-    //     const caseUpdateQuery = `UPDATE cases SET status = '完了'
-    //     WHERE id = ${id}`;
-    //     await executeQuery(caseUpdateQuery);
-    //   }
     const updateQuery2 = `UPDATE cases SET status = '完了'
         WHERE id = ${id} and collectionStatus = 募集終了 and (SELECT COUNT(*) FROM apply WHERE caseId = ${id} and status = '承認') = 0`;
     console.log(updateQuery2);
     await executeQuery(updateQuery2).catch((e) => {
       return NextResponse.json({ type: "error" });
     });
-
     const autoStartedCnt = company.freeAccount
       ? count[0].cnt
       : Math.min(possibleAutoCollectionCnt, count[0].cnt);
