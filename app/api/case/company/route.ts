@@ -87,8 +87,9 @@ export async function GET(request: NextRequest) {
     // });
     const collectionEndedCasesQuery = `SELECT * from cases WHERE collectionStatus = '募集終了' and companyId = ${id}`;
     const collectionEndedCases = await executeQuery(collectionEndedCasesQuery);
-    console.log(collectionEndedCases);
-
+    collectionEndedCases.forEach((element) => {
+      console.log(element);
+    });
     const autoStartedCnt = company.freeAccount
       ? count[0].cnt
       : Math.min(possibleAutoCollectionCnt, count[0].cnt);
