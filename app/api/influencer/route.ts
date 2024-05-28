@@ -72,7 +72,7 @@ export async function POST(request: NextRequest) {
       0,
       -1
     )}) VALUES(${query2.slice(0, -1)})`;
-    const influencerIdQuery = `SELECT id from influencer WHERE userID = ${user.id}`;
+    const influencerIdQuery = `SELECT id FROM influencer WHERE userID = ${user.id}`;
     const influencer = await executeQuery(influencerIdQuery);
     console.log(influencer[0].id);
     await executeQuery(query).catch((e) => {
