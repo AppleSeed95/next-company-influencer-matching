@@ -112,7 +112,7 @@ export default function AskPage() {
           inputClassName="max-w-[250px] grow border-[#D3D3D3]"
         />
       </div>
-      <div className="flex mobile:flex-wrap py-[20px] w-[40%] sp:w-[90%] m-auto ">
+      <div className="flex mobile:flex-wrap pt-[20px] pb-[10px] w-[40%] sp:w-[90%] m-auto ">
         <span className="w-[40%] mobile:w-full flex mobile:justify-start justify-end mr-[67px]">
           <span>メールアドレス</span>
           <span className="ml-[10px] text-[#EE5736] text-[11px]">必須</span>
@@ -235,7 +235,8 @@ export default function AskPage() {
         </Link>
         <Link href={'https://influencer-meguri.jp/company-overview.html#tokusyo'} className="underline underline-offset-[5px]">特定商取引法に基づく表記</Link>
         <Link href={'https://influencer-meguri.jp/privacypolicy.html'} className="underline underline-offset-[5px]">プライバシーポリシー</Link>
-        <Link href={'https://influencer-meguri.jp/terms-of-service.html'} className="underline underline-offset-[5px]">運営会社</Link>
+        <Link href={'https://influencer-meguri.jp/terms-of-service.html'} className="underline underline-offset-[5px]">利用規約</Link>
+        <Link href={'https://influencer-meguri.jp/company.html'} className="underline underline-offset-[5px]">運営会社</Link>
         <Link href={'https://influencer-meguri.jp/ask'} className="underline underline-offset-[5px]">お問い合わせ</Link>
       </div>
     </div>
