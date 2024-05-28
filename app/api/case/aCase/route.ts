@@ -100,6 +100,12 @@ export async function PUT(request: NextRequest) {
         }
       );
       await executeQuery(queryWhenQuit);
+      console.log(
+        count1,
+        count1 || count1[0] === 0,
+        !count || count[0].cnt === 0
+      );
+
       if ((count1 || count1[0] === 0) && (!count || count[0].cnt === 0)) {
         const caseUpdateQuery = `UPDATE cases SET collectionStatus = '完了'
         WHERE id = ${id}`;
