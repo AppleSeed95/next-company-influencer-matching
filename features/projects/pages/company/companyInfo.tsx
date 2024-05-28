@@ -622,13 +622,13 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
           checkBoxClassName="mt-[36px]"
           title={
             <span>
-              <Link href={'https://influencer-meguri.jp/terms-of-service.html'} className="underline decoration-[#353A40] underline-offset-[5px]">
+              <Link href={'https://influencer-meguri.jp/terms-of-service.html'} target="_blank" className="underline decoration-[#353A40] underline-offset-[5px]">
                 利用規約
               </Link>
               <span className="decoration-[#353A40] underline-offset-[5px]">
                 、
               </span>
-              <Link href={'https://influencer-meguri.jp/privacypolicy.html'} className="mx-[5px] underline decoration-[#353A40] underline-offset-[5px]">
+              <Link href={'https://influencer-meguri.jp/privacypolicy.html'} target="_blank" className="mx-[5px] underline decoration-[#353A40] underline-offset-[5px]">
                 個人情報の取り扱い
               </Link>
               に同意します
