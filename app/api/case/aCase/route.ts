@@ -83,7 +83,7 @@ export async function PUT(request: NextRequest) {
     if (update === "募集終了") {
       const queryWhenQuit = `UPDATE company SET conCurrentCnt = conCurrentCnt - 1
       WHERE id = ${companyId}`;
-      const approvedInfluencerCtnQuery = ` 
+      const approvedInfluencerCtnQuery = `
       SELECT COUNT(*) AS cnt FROM apply WHERE caseId = ${id} and status = '承認'
       `;
       const count = await executeQuery(approvedInfluencerCtnQuery).catch(
@@ -91,8 +91,16 @@ export async function PUT(request: NextRequest) {
           console.log(e);
         }
       );
+      const appliedInfluencerCtnQuery = `
+      SELECT COUNT(*) AS cnt FROM apply WHERE caseId = ${id} and status = '申請中'
+      `;
+      const count1 = await executeQuery(appliedInfluencerCtnQuery).catch(
+        (e) => {
+          console.log(e);
+        }
+      );
       await executeQuery(queryWhenQuit);
-      if (!count || count[0].cnt === 0) {
+      if (count1 || (count1[0] === 0 && (!count || count[0].cnt === 0))) {
         const caseUpdateQuery = `UPDATE cases SET collectionStatus = '完了'
         WHERE id = ${id}`;
         const result = await executeQuery(caseUpdateQuery);
