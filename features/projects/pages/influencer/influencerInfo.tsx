@@ -12,6 +12,7 @@ import { authUserState } from "@/recoil/atom/auth/authUserAtom";
 import { useRouter, useSearchParams } from "next/navigation";
 import Modal from "../../utils/modal";
 import AppyExpired from "../company/applyExpired";
+import Link from "next/link";
 export interface InfluencerInfoProps {
   applyMode?: boolean;
 }
@@ -923,9 +924,15 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
           checkBoxClassName="mt-[36px]"
           title={
             <span>
-              <span className="underline decoration-[#353A40] underline-offset-[5px]">
-                個人情報の取り扱い
+              <Link href={'https://influencer-meguri.jp/terms-of-service.html'} target="_blank" className="underline decoration-[#353A40] underline-offset-[5px]">
+                利用規約
+              </Link>
+              <span className="decoration-[#353A40] underline-offset-[5px]">
+                、
               </span>
+              <Link href={'https://influencer-meguri.jp/privacypolicy.html'} target="_blank" className="mx-[5px] underline decoration-[#353A40] underline-offset-[5px]">
+                個人情報の取り扱い
+              </Link>
               に同意します
             </span>
           }
