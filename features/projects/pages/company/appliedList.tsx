@@ -206,60 +206,64 @@ export default function AppliedList() {
               <div className="mt-[20px] sp:mt-[10px] text-small text-[#3F8DEB] font-bold">
                 条件を絞り込みできます。
               </div>
-              <div className="flex sp:block mt-[8px] flex-wrap gap-x-10">
+              <div className="flex sp:flex:column mt-[8px] flex-wrap gap-x-10 gap-y-3">
                 <div className="flex flex-wrap">
                   <span className="mr-[11px] sp:text-sp text-[#A8A8A8]">申請状態 ：  </span>
-                  <Checkbox
-                    title={"申請前"}
-                    handleChange={(v) => handleOptionChange("申請前")}
-                    checkBoxClassName="mr-[20px]"
-                  />
-                  <Checkbox
-                    title={"申請中"}
-                    checkBoxClassName="mr-[20px]"
-                    handleChange={(v) => handleOptionChange("申請中")}
-                  />
-                  <Checkbox
-                    title={"承認"}
-                    checkBoxClassName="mr-[20px]"
-                    handleChange={(v) => handleOptionChange("承認")}
-                  />
-                  <Checkbox
-                    title={"承認 / 申請中"}
-                    checkBoxClassName="mr-[20px]"
-                    handleChange={(v) => handleOptionChange("承認 / 申請中")}
-                  />
-                  <Checkbox
-                    title={"承認 / 否認	"}
-                    checkBoxClassName="mr-[20px]"
-                    handleChange={(v) => handleOptionChange("承認 / 否認")}
-                  />
-                  <Checkbox
-                    title={"否認"}
-                    handleChange={(v) => handleOptionChange("否認")}
-                  />
+                  <div className="flex flex-wrap">
+                    <Checkbox
+                      title={"申請前"}
+                      handleChange={(v) => handleOptionChange("申請前")}
+                      checkBoxClassName="mr-[20px]"
+                    />
+                    <Checkbox
+                      title={"申請中"}
+                      checkBoxClassName="mr-[20px]"
+                      handleChange={(v) => handleOptionChange("申請中")}
+                    />
+                    <Checkbox
+                      title={"承認"}
+                      checkBoxClassName="mr-[20px]"
+                      handleChange={(v) => handleOptionChange("承認")}
+                    />
+                    <Checkbox
+                      title={"承認 / 申請中"}
+                      checkBoxClassName="mr-[20px]"
+                      handleChange={(v) => handleOptionChange("承認 / 申請中")}
+                    />
+                    <Checkbox
+                      title={"承認 / 否認	"}
+                      checkBoxClassName="mr-[20px]"
+                      handleChange={(v) => handleOptionChange("承認 / 否認")}
+                    />
+                    <Checkbox
+                      title={"否認"}
+                      handleChange={(v) => handleOptionChange("否認")}
+                    />
+                  </div>
                 </div>
                 <div className="flex flex-wrap">
                   <span className="mr-[11px] sp:text-sp text-[#A8A8A8]">募集状態 ： </span>
-                  <Checkbox
-                    title={"募集中"}
-                    handleChange={(v) => handleOptionChange1("募集中")}
-                    checkBoxClassName="mr-[20px]"
-                  />
-                  <Checkbox
-                    title={"募集終了"}
-                    checkBoxClassName="mr-[20px]"
-                    handleChange={(v) => handleOptionChange1("募集終了")}
-                  />
-                  <Checkbox
-                    title={"停止"}
-                    checkBoxClassName="mr-[20px]"
-                    handleChange={(v) => handleOptionChange1("停止")}
-                  />
-                  <Checkbox
-                    title={"完了"}
-                    handleChange={(v) => handleOptionChange1("完了")}
-                  />
+                  <div className="flex flex-wrap">
+                    <Checkbox
+                      title={"募集中"}
+                      handleChange={(v) => handleOptionChange1("募集中")}
+                      checkBoxClassName="mr-[20px]"
+                    />
+                    <Checkbox
+                      title={"募集終了"}
+                      checkBoxClassName="mr-[20px]"
+                      handleChange={(v) => handleOptionChange1("募集終了")}
+                    />
+                    <Checkbox
+                      title={"停止"}
+                      checkBoxClassName="mr-[20px]"
+                      handleChange={(v) => handleOptionChange1("停止")}
+                    />
+                    <Checkbox
+                      title={"完了"}
+                      handleChange={(v) => handleOptionChange1("完了")}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -353,7 +357,7 @@ export default function AppliedList() {
               </table>
             ) : (
               <div className="text-center pt-[200px] text-title text-[#757575]">
-                表示する資料がありません。
+                該当する案件がありません。
               </div>
             )}
           </div>

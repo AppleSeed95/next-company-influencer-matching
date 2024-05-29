@@ -144,7 +144,7 @@ export default function ApplicationListPage() {
               <div className="flex mt-[8px] flex-wrap">
                 <div className="flex flex-wrap">
                   <span className="mr-[11px] sp:text-sp text-[#A8A8A8]">状態 ： </span>
-                  <div className="flex flex-wrap">
+                  <div className="flex flex-wrap gap-y-[5px]">
                     <Checkbox
                       title={"申請中"}
                       handleChange={(val) => handleOptionChange("申請中")}
@@ -244,7 +244,7 @@ export default function ApplicationListPage() {
               </table>
             ) : (
               <div className="text-center pt-[200px] text-title text-[#757575]">
-                表示する資料がありません。
+                該当する案件がありません。
               </div>
             )}
           </div>

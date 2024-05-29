@@ -8,7 +8,7 @@ export async function POST(request: NextRequest) {
     // LEFT JOIN company ON cases.companyId=company.id
     // ORDER BY cases.id DESC`;
     const preQuery = `SELECT apply.*, company.companyName,company.id AS companyId,
-    influencer.nickName,influencer.id AS incluencerId,cases.caseName
+    influencer.nickName, influencer.influencerName,cases.caseName
     FROM apply  
     LEFT JOIN influencer ON apply.influencerId = influencer.id  
     LEFT JOIN cases ON apply.caseId = cases.id  
@@ -18,6 +18,8 @@ export async function POST(request: NextRequest) {
     const rows = await executeQuery(preQuery).catch((e) => {
       return NextResponse.json({ type: "error", msg: "no table exists" });
     });
+    console.log(rows);
+
     const queryAfter = `select * from chatroom where applyId = ${id}`;
     const rowsAfter = await executeQuery(queryAfter).catch((e) => {
       return NextResponse.json({ type: "error", msg: "no table exists" });
@@ -28,12 +30,17 @@ export async function POST(request: NextRequest) {
         msg: "record already exists.",
       });
     }
+    console.log(rows[0].influencerName?.length);
+
+    const influencerName = rows[0].influencerName?.length
+      ? rows[0].influencerName
+      : rows[0].nickName;
     const body = {
       applyId: rows[0].id,
       companyName: rows[0].companyName,
       companyId: rows[0].companyId,
       influencerId: rows[0].influencerId,
-      influencerName: rows[0].nickName,
+      influencerName: influencerName,
       caseName: rows[0].caseName,
     };
     const keys = Object.keys(body);

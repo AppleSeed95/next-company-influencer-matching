@@ -158,7 +158,7 @@ const PlanManagePage: React.FC = () => {
             <div className="flex sp:hidden items-center py-[20px]  w-[full] border-b-[1px] border-[#DDDDDD] mt-[70px] sp:mt-[96px]">
                 <span className="text-title sp:text-sptitle">プラン管理</span>
             </div>
-            <div className="p-[30px] sp:pt-[100px]">
+            <div className="p-[30px] mobile:p-[0px] sp:pt-[100px]">
                 <Button
                     handleClick={() => {
                         setOneMode(false);
@@ -243,7 +243,7 @@ const PlanManagePage: React.FC = () => {
                     </table>
                 ) : (
                     <div className="sp:hidden text-center pt-[200px] text-title text-[#757575]">
-                        表示する資料がありません。
+                        該当する案件がありません。
                     </div>
                 )}
                 <div className="lg:hidden grow">

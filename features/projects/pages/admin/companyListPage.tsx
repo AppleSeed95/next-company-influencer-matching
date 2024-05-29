@@ -154,30 +154,35 @@ export default function CompanyListPage() {
               <div className="mt-[30px] sp:mt-[10px] text-small text-[#3F8DEB] font-bold">
                 条件を絞り込みできます。
               </div>
-              <div className="flex items-center sp:block mt-[8px] gap-x-9 flex-wrap">
+              <div className="flex items-center sp:block mt-[8px] gap-x-9 gap-y-[5px] flex-wrap">
                 <div className="flex my-[8px] flex-wrap">
                   <span className="mr-[11px] sp:text-sp text-[#A8A8A8]">状態 ： </span>
-                  <Checkbox
-                    title={"稼動中"}
-                    handleChange={(val) => handleOptionChange("稼動中")}
-                    checkBoxClassName="mr-[20px]"
-                  />
-                  <Checkbox
-                    title={"停止中"}
-                    handleChange={(val) => handleOptionChange("停止中")}
-                  />
+                  <div className="flex flex-wrap">
+                    <Checkbox
+                      title={"稼動中"}
+                      handleChange={(val) => handleOptionChange("稼動中")}
+                      checkBoxClassName="mr-[20px]"
+                    />
+                    <Checkbox
+                      title={"停止中"}
+                      handleChange={(val) => handleOptionChange("停止中")}
+                    />
+                  </div>
+
                 </div>
                 <div className="flex my-[8px] flex-wrap">
                   <span className="mr-[11px] sp:text-sp text-[#A8A8A8]">決済 ： </span>
-                  <Checkbox
-                    title={"未登録"}
-                    handleChange={(val) => handleOptionChange1("未登録")}
-                    checkBoxClassName="mr-[20px]"
-                  />
-                  <Checkbox
-                    title={"失敗"}
-                    handleChange={(val) => handleOptionChange1("失敗")}
-                  />
+                  <div className="flex flex-wrap">
+                    <Checkbox
+                      title={"未登録"}
+                      handleChange={(val) => handleOptionChange1("未登録")}
+                      checkBoxClassName="mr-[20px]"
+                    />
+                    <Checkbox
+                      title={"失敗"}
+                      handleChange={(val) => handleOptionChange1("失敗")}
+                    />
+                  </div>
                 </div>
                 <div className="flex my-[8px] flex-wrap">
                   <span className="mr-[11px] sp:text-sp text-[#A8A8A8]">無料アカウント： </span>
@@ -258,7 +263,7 @@ export default function CompanyListPage() {
               </table>
             ) : (
               <div className="text-center pt-[200px] text-title text-[#757575]">
-                表示する資料がありません。
+                該当する案件がありません。
               </div>
             )}
           </div>

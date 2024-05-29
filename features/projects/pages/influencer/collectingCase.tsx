@@ -238,17 +238,19 @@ export default function CollectedCase() {
               <div className="flex sp:block mt-[8px] flex-wrap gap-x-10">
                 <div className="flex flex-wrap">
                   <span className="mr-[11px] sp:text-sp text-[#A8A8A8]">案件種別 ： </span>
+                  <div className="flex flex-wrap">
+                    <Checkbox
+                      title={"来店"}
+                      handleChange={(v) => handleOptionChange("来店")}
+                      checkBoxClassName="mr-[20px]"
+                    />
+                    <Checkbox
+                      title={"通販"}
+                      checkBoxClassName="mr-[20px]"
+                      handleChange={(v) => handleOptionChange("通販")}
+                    />
+                  </div>
 
-                  <Checkbox
-                    title={"来店"}
-                    handleChange={(v) => handleOptionChange("来店")}
-                    checkBoxClassName="mr-[20px]"
-                  />
-                  <Checkbox
-                    title={"通販"}
-                    checkBoxClassName="mr-[20px]"
-                    handleChange={(v) => handleOptionChange("通販")}
-                  />
                 </div>
                 {/* <div className="flex">
                   <Checkbox

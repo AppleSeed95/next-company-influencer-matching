@@ -109,10 +109,10 @@ export default function AskPage() {
         <Input
           placeholder="山田 太郎"
           handleChange={(val) => setData({ ...data, name: val })}
-          inputClassName="max-w-[250px] grow border-[#D3D3D3]"
+          inputClassName="max-w-[250px] mobile:max-w-full grow border-[#D3D3D3]"
         />
       </div>
-      <div className="flex mobile:flex-wrap pt-[20px] pb-[10px] w-[40%] sp:w-[90%] m-auto ">
+      <div className="flex mobile:flex-wrap pt-[20px] w-[40%] sp:w-[90%] m-auto ">
         <span className="w-[40%] mobile:w-full flex mobile:justify-start justify-end mr-[67px]">
           <span>メールアドレス</span>
           <span className="ml-[10px] text-[#EE5736] text-[11px]">必須</span>
@@ -124,14 +124,17 @@ export default function AskPage() {
           format="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
           formatMsg="メールアドレス形式ではありません"
           handleChange={(val) => setData({ ...data, email: val })}
-          inputClassName="max-w-[250px] grow border-[#D3D3D3]"
+          inputClassName="max-w-[250px] mobile:max-w-full grow border-[#D3D3D3]"
         />
       </div>
-      <div className="flex w-[40%] pb-[5px] sp:w-[90%] m-auto ">
-        <div className="w-[40%] flex mobile:hidden justify-end mr-[67px]">
-        </div>
-        <div className="text-[12px]">※本システムをご利用の方は、登録しているEmailを入力してください。</div>
+      <div className="flex mobile:flex-wrap pb-[10px] w-[40%] sp:w-[90%] m-auto ">
+        <div className="ml-[40%] mobile:ml-0 mobile:pl-0 pl-[67px] text-[12px] text-left grow border-[#D3D3D3]">※本システムをご利用の方は、登録しているEmailを入力してください。</div>
       </div>
+      {/* <div className="flex w-[40%] pb-[5px] sp:w-[90%] m-auto ">
+        <div className="w-[40%] flex invisible justify-end mr-[67px]">
+        </div>
+        <div className="max-w-[250px] mobile:max-w-full text-[12px] text-left">※本システムをご利用の方は、登録しているEmailを入力してください。</div>
+      </div> */}
 
       <div className="flex mobile:flex-wrap py-[20px] w-[40%] sp:w-[90%] m-auto border-b-[1px] border-t-[1px] border-[#DDDDDD]">
         <span className="w-[40%] mobile:w-full flex mobile:justify-start justify-end mr-[67px]">
@@ -143,7 +146,7 @@ export default function AskPage() {
           format="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
           formatMsg="メールアドレス形式ではありません"
           handleChange={(val) => setData({ ...data, emailConfirm: val })}
-          inputClassName="max-w-[250px] grow border-[#D3D3D3]"
+          inputClassName="max-w-[250px] mobile:max-w-full grow border-[#D3D3D3]"
         />
       </div>
       {/* <div className="flex mobile:flex-wrap py-[20px] w-[40%] sp:w-[90%] m-auto border-b-[1px] border-[#DDDDDD]">
@@ -155,7 +158,7 @@ export default function AskPage() {
         </span>
         <Input
           handleChange={(val) => setData({ ...data, type: val })}
-          inputClassName="max-w-[250px] grow border border-[#D3D3D3] h-[33px]"
+          inputClassName="max-w-[250px] mobile:max-w-full grow border border-[#D3D3D3] h-[33px]"
         ></Input>
       </div> */}
       <div className="flex mobile:flex-wrap py-[20px] w-[40%] sp:w-[90%] m-auto border-b-[1px] border-[#DDDDDD]">
@@ -167,7 +170,7 @@ export default function AskPage() {
         </span>
         <Select
           handleChange={(val) => setData({ ...data, type: val })}
-          selectClassName="w-[250px] border-[#D3D3D3]"
+          selectClassName="max-w-[250px] mobile:max-w-full  grow border-[#D3D3D3]"
         >
           <option value={""}></option>
           <option value={"サービスについて"}>サービスについて</option>
@@ -184,11 +187,11 @@ export default function AskPage() {
             必須
           </span>
         </span>
-        {/* <Input inputClassName="max-w-[250px] grow border border-[#D3D3D3] h-[33px]"></Input> */}
+        {/* <Input inputClassName="max-w-[250px] mobile:max-w-full grow border border-[#D3D3D3] h-[33px]"></Input> */}
 
         <TextArea
           handleChange={(val) => setData({ ...data, content: val })}
-          textAreaClassName="max-w-[390px] grow h-[95px]"
+          textAreaClassName="max-w-[300px] mobile:max-w-full grow h-[95px]"
         />
       </div>
 
@@ -200,7 +203,7 @@ export default function AskPage() {
           checkBoxClassName="mt-[36px]"
           title={
             <span>
-              <Link href={'https://influencer-meguri.jp/privacypolicy.html'} className="underline decoration-[#353A40] underline-offset-[5px]">
+              <Link href={'https://influencer-meguri.jp/privacypolicy.html'} target="_blank" className="underline decoration-[#353A40] underline-offset-[5px]">
                 個人情報の取り扱い
               </Link>
               に同意します

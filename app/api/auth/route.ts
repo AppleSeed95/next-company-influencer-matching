@@ -94,6 +94,8 @@ export async function POST(request: NextRequest) {
         const today = new Date();
         const allowed = paymentInfo > today;
         if (!allowed) {
+          console.log(result1[0]);
+
           return NextResponse.json({
             type: "error",
             msg: "使用期間が切れました。",

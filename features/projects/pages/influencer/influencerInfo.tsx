@@ -190,7 +190,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
       isValid = false;
     }
     if (!agree && applyMode) {
-      ErrorList.push("個人情報の取り扱いに同意する必要があります。");
+      ErrorList.push("利用規約、個人情報の取り扱いに同意する必要があります。");
       isValid = false;
     }
     if (!isValid) {
@@ -294,7 +294,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
         <Input
           placeholder="山田 太郎"
           handleChange={(val) => setData({ ...data, influencerName: val })}
-          inputClassName="max-w-[250px] grow border-[#D3D3D3] w-[100%]"
+          inputClassName="max-w-[250px] mobile:max-w-full grow border-[#D3D3D3] w-[100%]"
           value={data?.influencerName?.length > 0 && data?.influencerName !== 'null' ? data.influencerName : ""}
         />
       </div>
@@ -305,7 +305,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
         <Input
           placeholder="ヤマダ タロウ"
           handleChange={(val) => setData({ ...data, influencerNameGana: val })}
-          inputClassName="max-w-[250px] grow border-[#D3D3D3] w-[100%]"
+          inputClassName="max-w-[250px] mobile:max-w-full grow border-[#D3D3D3] w-[100%]"
           value={data?.influencerNameGana?.length > 0 && data?.influencerNameGana !== 'null' ? data.influencerNameGana : ""}
         />
       </div>
@@ -316,7 +316,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
         <Select
           handleChange={(val) => setData({ ...data, gender: val })}
           value={data ? data.gender : "男性"}
-          selectClassName="min-w-[250px] w-[138px] border-[#D3D3D3]"
+          selectClassName="max-w-[250px] mobile:max-w-full grow border-[#D3D3D3] w-[100%]"
         >
           <option value={"男性"}>男性</option>
           <option value={"女性"}>女性</option>
@@ -332,7 +332,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
           requirMsg="ニックネームを入力してください"
           placeholder="ヤマタロウ"
           handleChange={(val) => setData({ ...data, nickName: val })}
-          inputClassName="max-w-[250px] grow border-[#D3D3D3] w-[100%]"
+          inputClassName="max-w-[250px] mobile:max-w-full grow border-[#D3D3D3] w-[100%]"
           value={data ? data.nickName : ""}
         />
       </div>
@@ -347,7 +347,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
           formatMsg="電話番号形式ではありません"
           format="^0\d{1,4}-\d{1,4}-\d{4}$"
           handleChange={(val) => setData({ ...data, phoneNumber: val })}
-          inputClassName="max-w-[250px] grow border-[#D3D3D3] w-[100%]"
+          inputClassName="max-w-[250px] mobile:max-w-full grow border-[#D3D3D3] w-[100%]"
           value={data ? data.phoneNumber : ""}
         />
       </div>
@@ -362,7 +362,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
           format="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
           requirMsg="メールアドレスを入力してください"
           handleChange={(val) => setData({ ...data, emailAddress: val })}
-          inputClassName="max-w-[250px] grow border-[#D3D3D3] w-[100%]"
+          inputClassName="max-w-[250px] mobile:max-w-full grow border-[#D3D3D3] w-[100%]"
           value={data ? data.emailAddress : ""}
         />
       </div>}
@@ -377,7 +377,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
         <Select
           value={data ? data.prefecture : prefectures[0]}
           handleChange={(val) => setData({ ...data, prefecture: val })}
-          selectClassName="max-w-[250px] grow border-[#D3D3D3] w-[100%]"
+          selectClassName="max-w-[250px] mobile:max-w-full grow border-[#D3D3D3] w-[100%]"
         >
           {prefectures?.map((aPrefecture, key) => (
             <option key={key} value={aPrefecture}>
@@ -638,7 +638,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
           <span>Instagram</span>
         </span>
         <div className="grow">
-          <div className="flex mobile:flex-wrap items-center max-w-[350px] grow py-[5px]">
+          <div className="flex mobile:flex-wrap mobile:max-w-full items-center max-w-[350px] grow py-[5px]">
             <span className="w-[100px] text-left sp:hidden">アカウント</span>
             <Input
               handleChange={(val) =>
@@ -655,7 +655,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
                     }),
                 })
               }
-              inputClassName="ml-[30px] sp:ml-[0px] grow max-w-[250px]"
+              inputClassName="ml-[30px] sp:ml-[0px] grow max-w-[250px] mobile:max-w-full"
               value={data?.instagram ? JSON.parse(data?.instagram).account : ""}
             ></Input>
           </div>
@@ -677,7 +677,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
                   }),
                 })
               }
-              selectClassName="ml-[30px] sp:ml-[0px] grow max-w-[150px]"
+              selectClassName="mobile:max-w-full ml-[30px] sp:ml-[0px] grow max-w-[150px]"
             >
               {followersOptions?.map((aOption, key) => (
                 <option key={key} value={aOption}>
@@ -693,7 +693,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
           <span className="w-[66px] text-right mobile:text-left">x</span>
         </span>
         <div className="grow">
-          <div className="flex mobile:flex-wrap items-center max-w-[350px] grow py-[5px]">
+          <div className="flex mobile:flex-wrap mobile:max-w-full items-center max-w-[350px] grow py-[5px]">
             <span className="w-[100px] text-left sp:hidden">アカウント</span>
             <Input
               value={data?.x ? JSON.parse(data?.x).account : ""}
@@ -711,7 +711,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
                     }),
                 })
               }
-              inputClassName="ml-[30px] sp:ml-[0px] grow max-w-[250px]"
+              inputClassName="ml-[30px] sp:ml-[0px] grow max-w-[250px] mobile:max-w-full"
             ></Input>
           </div>
           <div className="flex mobile:flex-wrap items-center grow py-[5px]">
@@ -730,7 +730,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
                   }),
                 })
               }
-              selectClassName="ml-[30px] sp:ml-[0px] grow max-w-[150px]"
+              selectClassName="mobile:max-w-full ml-[30px] sp:ml-[0px] grow max-w-[150px]"
             >
               {followersOptions?.map((aOption, key) => (
                 <option key={key} value={aOption}>
@@ -743,7 +743,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
       </div>
       <div className="flex mobile:flex-wrap py-[15px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
         <span className="w-[35%] mobile:w-full sp:w-[150px] flex mobile:flex-wrap justify-end sp:justify-start  mt-[10px] mr-[67px]">
-          <span className="w-[66px] text-right">facebook</span>
+          <span className="w-[66px] text-right mobile:text-left">facebook</span>
         </span>
         <div className="grow">
           <div className="flex mobile:flex-wrap items-center  grow py-[5px]">
@@ -763,7 +763,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
                     }),
                 })
               }
-              inputClassName="ml-[30px] sp:ml-[0px] grow max-w-[250px]"
+              inputClassName="ml-[30px] sp:ml-[0px] grow max-w-[250px] mobile:max-w-full"
               value={data?.facebook ? JSON.parse(data.facebook).account : ""}
             ></Input>
           </div>
@@ -785,7 +785,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
                   }),
                 })
               }
-              selectClassName="ml-[30px] sp:ml-[0px] grow max-w-[150px]"
+              selectClassName="mobile:max-w-full ml-[30px] sp:ml-[0px] grow max-w-[150px]"
             >
               {followersOptions?.map((aOption, key) => (
                 <option key={key} value={aOption}>
@@ -796,12 +796,12 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
           </div>
         </div>
       </div>
-      <div className="flex mobile:flex-wrap py-[15px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+      <div className="flex mobile:flex-wrap py-[15px] mobile:w-full w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
         <span className="w-[35%] mobile:w-full sp:w-[150px] flex mobile:flex-wrap justify-end sp:justify-start  mt-[10px] mr-[67px]">
           <span className="w-[66px] text-right mobile:text-left">tiktok</span>
         </span>
         <div className="grow">
-          <div className="flex mobile:flex-wrap items-center max-w-[350px] grow py-[5px]">
+          <div className="flex mobile:flex-wrap items-center mobile:max-w-full max-w-[350px] grow py-[5px]">
             <span className="w-[100px] text-left sp:hidden">アカウント</span>
             <Input
               handleChange={(val) =>
@@ -818,7 +818,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
                     }),
                 })
               }
-              inputClassName="ml-[30px] sp:ml-[0px] grow max-w-[250px]"
+              inputClassName="ml-[30px] sp:ml-[0px] grow max-w-[250px] mobile:max-w-full"
               value={data?.tiktok ? JSON.parse(data.tiktok).account : ""}
             ></Input>
           </div>
@@ -840,7 +840,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
                   }),
                 })
               }
-              selectClassName="ml-[30px] sp:ml-[0px] grow max-w-[150px]"
+              selectClassName="mobile:max-w-full ml-[30px] sp:ml-[0px] grow max-w-[150px]"
             >
               {followersOptions?.map((aOption, key) => (
                 <option key={key} value={aOption}>
@@ -853,10 +853,10 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
       </div>
       <div className="flex mobile:flex-wrap py-[15px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
         <span className="w-[35%] mobile:w-full sp:w-[150px] flex mobile:flex-wrap justify-end sp:justify-start  mt-[10px] mr-[67px]">
-          <span className="w-[66px] text-right">youtube</span>
+          <span className="w-[66px] text-right mobile:text-left">youtube</span>
         </span>
         <div className="grow">
-          <div className="flex mobile:flex-wrap items-center max-w-[350px] grow py-[5px]">
+          <div className="flex mobile:flex-wrap mobile:max-w-full items-center max-w-[350px] mobile:w-full grow py-[5px]">
             <span className="w-[100px] text-left sp:hidden">アカウント</span>
             <Input
               handleChange={(val) =>
@@ -873,7 +873,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
                     }),
                 })
               }
-              inputClassName="ml-[30px] sp:ml-[0px] grow max-w-[250px]"
+              inputClassName="ml-[30px] sp:ml-[0px] grow max-w-[250px] mobile:max-w-full"
               value={data?.youtube ? JSON.parse(data.youtube).account : ""}
             ></Input>
           </div>
@@ -895,7 +895,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
                   }),
                 })
               }
-              selectClassName="ml-[30px] sp:ml-[0px] grow max-w-[150px]"
+              selectClassName="mobile:max-w-full ml-[30px] sp:ml-[0px] grow max-w-[150px]"
             >
               {followersOptions?.map((aOption, key) => (
                 <option key={key} value={aOption}>
@@ -907,14 +907,14 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
         </div>
       </div>
 
-      <div className="flex mobile:flex-wrap py-[15px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
+      <div className="flex mobile:flex-col py-[15px] w-[40%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
         <span className="w-[35%] mobile:w-full sp:w-[150px] flex mobile:flex-wrap justify-end sp:justify-start  mt-[10px] mr-[67px]">
           <span>その他のSNS </span>
         </span>
         <TextArea
           value={data ? data.otherSNS === 'null' ? "" : data.otherSNS : ""}
           handleChange={(val) => setData({ ...data, otherSNS: val })}
-          textAreaClassName="max-w-[380px] grow"
+          textAreaClassName="max-w-[380px] mobile:max-w-full grow h-[200px]"
         ></TextArea>
       </div>
       <div className="flex mobile:flex-wrap justify-center">
@@ -946,11 +946,10 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
           <div key={idx} className="text-center m-[10px] text-[#EE5736]">{aError}</div>
         )
       )}
-      <div className="flex mobile:flex-wrap justify-center mt-[36px] mb-[160px] sp:mb-[60px]">
+      <div className="flex gap-[20px] mobile:gap-[10px] mobile:flex-wrap justify-center mt-[36px] mb-[160px] sp:mb-[60px]">
         {!applyMode && (
           <Button
             buttonType={ButtonType.PRIMARY}
-            buttonClassName="mr-[30px]"
             handleClick={() => handleSend(false)}
           >
             <span className="flex mobile:flex-wrap items-center">
@@ -968,7 +967,6 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
         {applyMode && (
           <Button
             buttonType={ButtonType.PRIMARY}
-            buttonClassName="ml-[40px]"
             handleClick={() => handleSend(true)}
           >
             <div className="flex mobile:flex-wrap items-center">

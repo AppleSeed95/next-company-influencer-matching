@@ -53,9 +53,9 @@ export default function TopPage({ influencerMode }: topProps) {
       <div className="flex items-center py-[20px]  w-[full] border-b-[1px] border-[#DDDDDD] mt-[70px] sp:mt-[96px]">
         <span className="text-title sp:text-sptitle">管理画面TOP</span>
       </div>
-      <div className="sp:w-[100%] mt-[55px] px-[30px] sp:px-[0px]">
+      <div className="sp:w-[100%] mt-[55px] px-[30px] mobile:px-[0px] sp:px-[0px]">
         {!influencerMode && (
-          <div className="border-b-[1px] border-[#DDDDDD] mx-[30px]">
+          <div className="border-b-[1px] border-[#DDDDDD] mx-[30px] mobile:mx-[10px]">
             {companyData?.active === 0 && <div className="p-[10px] mb-[10px] border-[1px] shadow-lg bg-[#ffdbd9] border-[#ffb0ab]">
               <div>
                 利用期限：{dateString(companyData?.payment)}
@@ -78,7 +78,7 @@ export default function TopPage({ influencerMode }: topProps) {
             </div>
           </div>
         )}
-        <div className="mx-[30px] mt-[40px]">
+        <div className="mx-[30px] mobile:mx-[10px] mt-[40px]">
           <span className="text-header ">運営からのお知らせ</span>
           <div className="py-[30px]">
             {influencerMode

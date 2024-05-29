@@ -60,7 +60,7 @@ const NotiPage: React.FC = () => {
       <div className="w-[45%] sp:pt-[80px] sp:w-[100%] m-auto mt-[55px]">
         <div className="border-b-[1px] border-[#DDDDDD]">
           <span className="text-[18px] sp:text-sm">企業</span>
-          <div className="px-[26px] sp:py-[10px] py-[30px]">
+          <div className="px-[26px] mobile:px-[5px] sp:py-[10px] py-[30px]">
             <span className="text-[#6F6F6F]">重要なお知らせ</span>
             <TextArea
               value={data?.mainNoti}
@@ -92,7 +92,7 @@ const NotiPage: React.FC = () => {
               </Button>
             </div>
           </div>
-          <div className="px-[26px]">
+          <div className="px-[26px] mobile:px-[5px]">
             <span className="text-[#6F6F6F]">お知らせ</span>
             <TextArea
               value={data?.companyNoti}
@@ -127,7 +127,7 @@ const NotiPage: React.FC = () => {
         </div>
         <div className="mt-[70px] sp:mt-[30px] mb-[150px]">
           <span className="text-[18px] sp:text-sm">インフルエンサー</span>
-          <div className="px-[26px] py-[30px]">
+          <div className="px-[26px] mobile:px-[5px] py-[30px]">
             <span className="text-[#6F6F6F]">お知らせ</span>
             <TextArea
               value={data?.influencerNoti}

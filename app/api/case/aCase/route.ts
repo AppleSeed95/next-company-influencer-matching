@@ -126,13 +126,6 @@ export async function PUT(request: NextRequest) {
           msg: "入力に誤りがあります。",
         });
       }
-      const today = new Date();
-      if (today > new Date(caseRow[0].collectionEnd)) {
-        return NextResponse.json({
-          type: "error",
-          msg: "募集終了日時を過ぎています。募集終了日時を変更して再申請してください。",
-        });
-      }
       const company = result[0];
       if (!company.freeAccount) {
         if (company.conCurrentCnt === company.concurrentCollectionCnt) {
@@ -144,9 +137,16 @@ export async function PUT(request: NextRequest) {
         if (company.thisMonthCollectionCnt === company.monthlyCollectionCnt) {
           return NextResponse.json({
             type: "fail",
-            msg: "月募集限界なので募集を開始できません。",
+            msg: "今月の募集は上限になりました。次回の決済後に開始してください。",
           });
         }
+      }
+      const today = new Date();
+      if (today > new Date(caseRow[0].collectionEnd)) {
+        return NextResponse.json({
+          type: "error",
+          msg: "募集終了日時を過ぎています。募集終了日時を変更して再申請してください。",
+        });
       }
       const queryForCompany1 = `UPDATE company SET thisMonthCollectionCnt = ${
         company.thisMonthCollectionCnt + 1

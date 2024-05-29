@@ -229,27 +229,29 @@ export default function AppledCase() {
                     />
                   </div>
                 </div>
-                <div className="flex flex-wrap">
+                <div className="flex flex-wrap sp:mt-[10px] mobile:mt-[10px]">
                   <span className="mr-[11px] sp:text-sp text-[#A8A8A8]">状態 ： </span>
-                  <Checkbox
-                    title={"申請中"}
-                    handleChange={(v) => handleOptionChange1("申請中")}
-                    checkBoxClassName="mr-[20px]"
-                  />
-                  <Checkbox
-                    title={"承認"}
-                    checkBoxClassName="mr-[20px]"
-                    handleChange={(v) => handleOptionChange1("承認")}
-                  />
-                  <Checkbox
-                    title={"否認"}
-                    checkBoxClassName="mr-[20px]"
-                    handleChange={(v) => handleOptionChange1("否決")}
-                  />
-                  <Checkbox
-                    title={"完了"}
-                    handleChange={(v) => handleOptionChange1("完了")}
-                  />
+                  <div className="flex flex-wrap">
+                    <Checkbox
+                      title={"申請中"}
+                      handleChange={(v) => handleOptionChange1("申請中")}
+                      checkBoxClassName="mr-[20px]"
+                    />
+                    <Checkbox
+                      title={"承認"}
+                      checkBoxClassName="mr-[20px]"
+                      handleChange={(v) => handleOptionChange1("承認")}
+                    />
+                    <Checkbox
+                      title={"否認"}
+                      checkBoxClassName="mr-[20px]"
+                      handleChange={(v) => handleOptionChange1("否決")}
+                    />
+                    <Checkbox
+                      title={"完了"}
+                      handleChange={(v) => handleOptionChange1("完了")}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -337,7 +339,7 @@ export default function AppledCase() {
                             handleClick={() => handleEndReport(aData.id)}
                             buttonType={ButtonType.PRIMARY}
                           >
-                            <span className="text-small">完了報告</span>
+                            <span className="text-[12px]">完了報告</span>
                           </Button>
                         ) : ''}
                       </td>

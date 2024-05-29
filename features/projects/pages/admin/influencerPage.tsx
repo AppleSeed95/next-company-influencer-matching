@@ -62,11 +62,10 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
           content = `<div>
         ${data?.influencerName?.length ? data?.influencerName : data?.nickName} 様<br/>
         <br/>インフルエンサーめぐりに申請いただきありがとうございました。<br/>
-        <br/>申請内容をとに慎重に検討しました結果、
+        <br/>申請内容をもとに慎重に検討しました結果、
         <br/>今回は登録を見送らせていただくこととなりました。
         <br/>ご期待に沿えない結果となってしまい、申し訳ございません。
         <br/>またの機会がございましたら、よろしくお願いいたします。<br/>
-        <br/>
         <br/>-----------------------------------------------------
         <br/>不明点がございましたらお問い合わせフォームよりご連絡ください。
         <br/>https://influencer-meguri.jp/ask
@@ -197,25 +196,23 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
         </span>
         <span>{data?.phoneNumber}</span>
       </div>}
-      <div
+      {!modalMode && <div
         className={`flex py-[15px] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px] ${className}`}
       >
         <span className="w-[35%] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
           <span>メールアドレス</span>
         </span>
-        {modalMode || data?.status === "承認待ち" ? (
-          <span>{data?.emailAddress}</span>
-        ) : (
-          <Input
-            format="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-            formatMsg="メールアドレス形式ではありません"
-            requirMsg="メールアドレスを入力してください。"
-            handleChange={(val) => setData({ ...data, emailAddress: val })}
-            inputClassName="max-w-[250px] grow border-[#D3D3D3] w-[100%]"
-            value={data?.emailAddress}
-          />
-        )}
-      </div>
+
+        <Input
+          format="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+          formatMsg="メールアドレス形式ではありません"
+          requirMsg="メールアドレスを入力してください。"
+          handleChange={(val) => setData({ ...data, emailAddress: val })}
+          inputClassName="max-w-[250px] grow border-[#D3D3D3] w-[100%]"
+          value={data?.emailAddress}
+        />
+
+      </div>}
       <div
         className={`flex items-center py-[15px] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px] ${className}`}
       >

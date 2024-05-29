@@ -156,7 +156,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
       isValid = false;
     }
     if (!agree && applyMode) {
-      ErrorList.push('個人情報の取り扱いに同意する必要があります。');
+      ErrorList.push('利用規約、個人情報の取り扱いに同意する必要があります。');
       isValid = false;
     }
     if (!isValid) {
@@ -425,7 +425,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
           {<span className="ml-[10px] text-[#EE5736] text-[11px]">必須</span>}
         </span>
         <Input
-          placeholder="ヤマダ タロウ"
+          placeholder="ダイヒョウ タロウ"
           inputClassName="max-w-[250px] grow border-[#D3D3D3] w-[100%]"
           value={data?.representativeNameGana}
           requirMsg={msgs.representativeNameGana}
@@ -666,10 +666,9 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
           </Button>
         </div>
       ) : (
-        <div className="flex justify-center mt-[36px] mb-[160px] sp:mb-[60px]">
+        <div className="flex gap-[20px] mobile:gap-[10px] justify-center mt-[36px] mb-[160px] sp:mb-[60px]">
           <Button
             buttonType={ButtonType.PRIMARY}
-            buttonClassName="mr-[30px]"
             handleClick={() => handleApply(false)}
           >
             <span className="flex ">
@@ -683,14 +682,14 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
               />
             </span>
           </Button>
-          {(data?.paymentCnt >= 6 && active === 1) && < Button buttonType={ButtonType.PRIMARY} buttonClassName="mr-[30px]"
+          {(data?.paymentCnt >= 6 && active === 1) && < Button buttonType={ButtonType.PRIMARY}
             handleClick={() => handleUpdateAccount(false)}
           >
             <span className="flex ">
               <span>解約</span>
             </span>
           </Button>}
-          {active === 0 && < Button buttonType={ButtonType.PRIMARY} buttonClassName="mr-[30px]"
+          {active === 0 && < Button buttonType={ButtonType.PRIMARY}
             handleClick={() => handleUpdateAccount(true)}
           >
             <span className="flex ">

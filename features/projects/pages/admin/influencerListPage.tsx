@@ -164,7 +164,7 @@ export default function InfluencerListPage() {
                 <div className="flex flex-wrap my-[8px]">
                   <div className="flex flex-wrap">
                     <span className="mr-[11px] sp:text-sp text-[#A8A8A8]">状態 ： </span>
-                    <div className="flex flex-wrap">
+                    <div className="flex flex-wrap gap-y-[5px]">
                       <Checkbox
                         title={"承認待ち"}
                         handleChange={(val) => handleOptionChange("承認待ち")}
@@ -187,7 +187,7 @@ export default function InfluencerListPage() {
                 <div className="flex my-[8px]">
                   <div className="flex flex-wrap">
                     <span className="mr-[11px] sp:text-sp text-[#A8A8A8]">SNS ： </span>
-                    <div className="flex flex-wrap">
+                    <div className="flex flex-wrap gap-y-[10px]">
                       <Checkbox
                         handleChange={(val) => handleOptionChange1("instagram")}
                         title={
@@ -351,7 +351,7 @@ export default function InfluencerListPage() {
               </table>
             ) : (
               <div className="text-center pt-[200px] text-title text-[#757575]">
-                表示する資料がありません。
+                該当する案件がありません。
               </div>
             )}
           </div>

@@ -77,16 +77,16 @@ export default function LoginPage() {
           src="/img/logo(red).svg"
           className="blcok m-auto w-[265px] sp:hidden mb-[50px]"
         />
-        <div className="flex justify-center w-full  mb-[20px] pr-[70px] sp:pr-[30px] sp:mt-[50px]">
-          <span className="mr-[20px] mt-[5px] w-[70px] text-right">Email</span>
+        <div className="flex justify-center w-full mobile:gap-[5px] gap-[20px] mobile:flex-wrap mb-[20px] pr-[70px] sp:pr-[30px] sp:mt-[50px]">
+          <span className="mobile:w-[250px] mobile:text-left mt-[5px] w-[70px] text-right">Email</span>
           <Input
             handleChange={(val) => setId(val)}
             inputClassName={"max-w-[250px] grow"}
             handleKeyPress={handleKeyPress}
           />
         </div>
-        <div className="flex justify-center w-full  mb-[20px] pr-[70px] sp:pr-[30px] sp:mb-[30px]">
-          <span className="mr-[20px] mt-[5px] w-[70px] text-right">
+        <div className="flex justify-center w-full mobile:gap-[5px] gap-[20px] mobile:flex-wrap  mb-[20px] pr-[70px] sp:pr-[30px] sp:mb-[30px]">
+          <span className="mobile:w-[250px] mobile:text-left mt-[5px] w-[70px] text-right">
             パスワード
           </span>
           <Input

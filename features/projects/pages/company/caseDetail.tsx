@@ -171,10 +171,10 @@ export default function CaseDetailPage({ caseProps }: caseData) {
           html: `<div>${influencerData?.influencerName?.length > 0 ? influencerData?.influencerName : influencerData.nickName} 様<br/>
           <br/>いつもインフルエンサーめぐりをご利用いただきありがとうございます。<br/>
           <br/>「 ${caseData?.caseName} 」に応募いただきありがとうございます。
-          <br/>応募内容をとに慎重に検討しました結果、
+          <br/>応募内容をもとに慎重に検討しました結果、
           <br/>今回は登録を見送らせていただくこととなりました。
           <br/>ご期待に沿えない結果となってしまい、申し訳ございません。
-          <br/>またの機会がございましたら、よろしくお願いいたします。 <br/>
+          <br/>またの機会がございましたら、よろしくお願いいたします。<br/>
           <br/>-----------------------------------------------------
           <br/>不明点がございましたらお問い合わせフォームよりご連絡ください。
           </div> https://influencer-meguri.jp/ask
@@ -325,7 +325,7 @@ export default function CaseDetailPage({ caseProps }: caseData) {
           setVisibleData={handleSearch}
           keys={["nickName", "date"]}
           title={
-            <div className="flex flex-wrap items-center gap-x-[20px]">
+            <div className="flex flex-wrap items-center gap-x-[20px] gap-y-[10px]">
               <span
                 className="text-[#3F8DEB] underline hover:cursor-pointer underline-offset-3"
                 onClick={() => setShowModal(true)}
@@ -335,10 +335,13 @@ export default function CaseDetailPage({ caseProps }: caseData) {
               <span className="w-[100px]">{`状態: ${collectionStatusTemp ? collectionStatusTemp : ""
                 }`}</span>
               <span className="flex flex-wrap">
-                <span>{`募集期間：${dateString(caseData?.collectionStart)} ～`}</span>
-                <span>
-                  {dateString(caseData?.collectionEnd)}
-                </span>
+                <span>募集期間：</span>
+                <div className="flex flex-wrap">
+                  <span>{`${dateString(caseData?.collectionStart)} ～`}</span>
+                  <span>
+                    {dateString(caseData?.collectionEnd)}
+                  </span>
+                </div>
               </span>
 
               {collectionStatusTemp === "募集前" && (
@@ -398,33 +401,35 @@ export default function CaseDetailPage({ caseProps }: caseData) {
               <div className="mt-[30px] sp:mt-[10px] text-small text-[#3F8DEB] font-bold">
                 条件を絞り込みできます。
               </div>
-              <div className="flex sp:block mt-[8px] flex-wrap gap-x-10">
+              <div className="flex sp:block mt-[8px] flex-wrap gap-x-10 ">
                 <div className="flex flex-wrap">
-                  <Checkbox
-                    prefix="状態 ： "
-                    title={"申請中"}
-                    handleChange={(v) => handleOptionChange("申請中")}
-                    checkBoxClassName="mr-[20px]"
-                  />
-                  <Checkbox
-                    title={"承認"}
-                    checkBoxClassName="mr-[20px]"
-                    handleChange={(v) => handleOptionChange("承認")}
-                  />
-                  <Checkbox
-                    title={"否認"}
-                    checkBoxClassName="mr-[20px]"
-                    handleChange={(v) => handleOptionChange("否決")}
-                  />
-                  <Checkbox
-                    title={"完了報告"}
-                    checkBoxClassName="mr-[20px]"
-                    handleChange={(v) => handleOptionChange("完了報告")}
-                  />
-                  <Checkbox
-                    title={"完了"}
-                    handleChange={(v) => handleOptionChange("完了")}
-                  />
+                  <span className="mr-[11px] sp:text-sp text-[#A8A8A8]">状態 ：  </span>
+                  <div className="flex flex-wrap">
+                    <Checkbox
+                      title={"申請中"}
+                      handleChange={(v) => handleOptionChange("申請中")}
+                      checkBoxClassName="mr-[20px]"
+                    />
+                    <Checkbox
+                      title={"承認"}
+                      checkBoxClassName="mr-[20px]"
+                      handleChange={(v) => handleOptionChange("承認")}
+                    />
+                    <Checkbox
+                      title={"否認"}
+                      checkBoxClassName="mr-[20px]"
+                      handleChange={(v) => handleOptionChange("否決")}
+                    />
+                    <Checkbox
+                      title={"完了報告"}
+                      checkBoxClassName="mr-[20px]"
+                      handleChange={(v) => handleOptionChange("完了報告")}
+                    />
+                    <Checkbox
+                      title={"完了"}
+                      handleChange={(v) => handleOptionChange("完了")}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -546,7 +551,7 @@ export default function CaseDetailPage({ caseProps }: caseData) {
             </table>
           ) : (
             <div className="text-center pt-[200px] text-title text-[#757575]">
-              該当する案件がありません。
+              該当するインフルエンサーがいません
             </div>
           )}
         </div>

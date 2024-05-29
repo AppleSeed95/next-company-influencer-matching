@@ -120,7 +120,7 @@ export default function ChattingPane() {
             html: `
                 <div>
                 ${roomData?.influencerName} 様<br/>
-                <br/>以下の案件からチャットが届いてますのでログインしてご確認ください。<br/>
+                <br/>以下の案件からチャットが届いてますのでログインしてご確認ください。
                 <br/>
                 <br/>企業名：${roomData?.companyName}
                 <br/>案件名：${roomData?.caseName}
@@ -139,7 +139,7 @@ export default function ChattingPane() {
             html: `
                 <div>
                 ${roomData?.responsibleName} 様<br/>
-                <br/>以下の案件からチャットが届いてますのでログインしてご確認ください。<br/>
+                <br/>以下の案件からチャットが届いてますのでログインしてご確認ください。
                 <br/>
                 <br/>インフルエンサー名：${roomData?.influencerName}
                 <br/>案件名：${roomData?.caseName}
@@ -161,7 +161,7 @@ export default function ChattingPane() {
     <>
       <div>
         {isValid && <div className="lg:hidden flex flex-reverse justify-between items-center pt-[12vh] h-[6vh] px-[10px]">
-          <div className="flex gap-[5px] items-end w-full">
+          <div className="flex flex-col gap-[5px] w-full">
             <div className="font-bold pb-[0px] text-[16px] leading-none	">
               {roomData?.caseName}
             </div>

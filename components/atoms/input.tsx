@@ -89,14 +89,16 @@ const Input: React.FC<InputProps> = ({
       ></input>
       {
         (requirMsg || formatMsg) && (
-          <div
+          !isValid ? <div
             className={
               isValid
-                ? "text-left text-[#EE5736] text-[11px] hidden  duration-700"
-                : "text-left text-[#EE5736] text-[11px] duration-700"
+                ? "text-left text-[#EE5736] text-[11px] hidden "
+                : "text-left text-[#EE5736] text-[11px] "
             }
           >
             {error}
+          </div> : <div className="h-[10px]">
+
           </div>
         )
       }

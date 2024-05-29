@@ -64,7 +64,7 @@ export default function ApplyPage() {
         <div className="text-title text-center">
           企業登録フォーム
         </div>
-        <div className="m-[50px] text-center">
+        <div className="m-[50px] mobile:m-[20px] text-center">
           <div className="py-[10px]">
             インフルエンサーめぐりをご覧いただきありがとうございます。
           </div>
@@ -75,8 +75,8 @@ export default function ApplyPage() {
             ご入力いただいたメールアドレス宛に申請フォームをお送りします。
           </div>
         </div>
-        <div className="flex justify-center w-full mt-[30px] mb-[20px] pr-[70px] sp:pr-[30px] sp:mb-[30px]">
-          <span className="mr-[20px] mt-[5px] w-[100px] text-right">
+        <div className="flex mobile:gap-[5px] gap-[20px] mobile:flex-wrap justify-center w-full mt-[30px] mb-[20px] pr-[70px] sp:pr-[30px] sp:mb-[30px]">
+          <span className="mobile:w-[250px] mobile:text-left mt-[5px] w-[100px] text-right">
             メールアドレス
           </span>
           <Input

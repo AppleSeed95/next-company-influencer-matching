@@ -176,80 +176,78 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
       )}
       <div
         className={
-          "flex items-center py-[20px] sp:w-full m-auto border-b-[1px] border-[#DDDDDD] mt-[90px] sp:mt-[30px] sp:px-[18px] " +
+          "flex items-center gap-x-[67px] mobile:flex-col mobile:justify-start text-left  py-[20px] sp:w-full m-auto border-b-[1px] border-[#DDDDDD] mt-[90px] sp:mt-[30px] sp:px-[18px] " +
           widthClass +
           topClass
         }
       >
-        <span className="w-[35%] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
-          <span className="text-[#6F6F6F]">企業名</span>
+        <span className="w-[35%] mobile:w-full flex justify-end sp:justify-start">
+          <span className="mobile:w-full text-[#6F6F6F]">企業名</span>
         </span>
         {!modalMode && (
-          <Link href={`/company/${data?.companyId}`}>
-            <span className="text-[#3F8DEB] underline underline-[#3F8DEB] underline-offset-[3px]">
-              {data?.companyName}
-            </span>
+          <Link href={`/company/${data?.companyId}`} className="mobile:w-full text-left">
+            <span className="text-[#3F8DEB] underline underline-[#3F8DEB] underline-offset-[3px] mobile:w-full text-left">{data?.companyName}</span>
           </Link>
         )}
-        {modalMode && <span>{data?.companyName}</span>}
+        {modalMode && <span className="mobile:w-full text-left">{data?.companyName}</span>}
       </div>
       <div
         className={
-          "flex items-center py-[15px]   sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px] " +
+          "flex items-center gap-x-[67px] mobile:flex-col mobile:justify-start text-left py-[15px] mobile:flex-column  sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px] " +
           widthClass
         }
       >
-        <span className="w-[35%] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
-          <span className="text-[#6F6F6F]">案件種別</span>
+        <span className="w-[35%] mobile:w-full flex justify-end sp:justify-start">
+          <span className="mobile:w-full text-[#6F6F6F]">案件種別</span>
         </span>
-        <span>{data?.caseType}</span>
+        <span className="mobile:w-full text-left">{data?.caseType}</span>
       </div>
       <div
         className={
-          "flex items-center py-[20px]   sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px] " +
+          "flex items-center gap-x-[67px] mobile:flex-col mobile:justify-start text-left py-[20px]   sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px] " +
           widthClass
         }
       >
-        <span className="w-[35%] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
+        <span className="w-[35%] mobile:w-full flex justify-end sp:justify-start">
           <span className="text-[#6F6F6F]">案件名</span>
         </span>
-        <span>{data?.caseName}</span>
+        <span className="mobile:w-full text-left">{data?.caseName}</span>
       </div>
       <div
         className={
-          "flex  py-[20px]   sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px] " +
+          "flex gap-x-[67px] mobile:flex-col mobile:justify-start text-left  py-[20px]   sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px] " +
           widthClass
         }
       >
-        <span className="w-[35%] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
+        <span className="w-[35%] mobile:w-full flex justify-end sp:justify-start">
           <span className="text-[#6F6F6F]">案件内容</span>
         </span>
         <div className="text-left">
-          <span>{data?.caseContent}</span>
+          <span className="mobile:w-full text-left">{data?.caseContent}</span>
         </div>
       </div>
 
       <div
         className={
-          "flex items-center py-[20px]   sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px] " +
+          "flex gap-x-[67px] mobile:flex-col mobile:justify-start text-left items-center py-[20px]   sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px] " +
           widthClass
         }
       >
-        <span className="w-[35%] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
+        <span className="w-[35%] mobile:w-full flex justify-end sp:justify-start">
           <span className="text-[#6F6F6F]">希望のハッシュタグ</span>
         </span>
-        <span>{data?.wantedHashTag}</span>
+        <span className="mobile:w-full text-left">{data?.wantedHashTag}</span>
       </div>
       <div
         className={
-          "flex items-center py-[20px]   sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px] " +
+          "flex gap-x-[67px] gap-y-[10px] mobile:flex-col mobile:justify-start text-left items-center py-[20px]   sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px] " +
           widthClass
         }
       >
-        <span className="w-[35%] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
+        <span className="w-[35%] mobile:w-full  flex justify-end sp:justify-start">
           <span className="text-[#6F6F6F]">希望のSNS</span>
         </span>
-        <div className="flex flex-wrap gap-[10px] items-center">
+        <div className="flex mobile:w-full  flex-wrap gap-[10px] items-center">
           {wantedSNS.includes("instagram") && (
             <img
               className="w-[35px]"
@@ -282,70 +280,70 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
       </div>
       <div
         className={
-          "flex items-center py-[20px]   sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px] " +
+          "flex gap-x-[67px] mobile:flex-col mobile:justify-start text-left items-center py-[20px]   sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px] " +
           widthClass
         }
       >
-        <span className="w-[35%] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
+        <span className="w-[35%]  flex justify-end sp:justify-start mobile:w-full">
           <span className="text-[#6F6F6F]">来店場所 </span>
         </span>
-        <span>{data?.casePlace}</span>
+        <span className="mobile:w-full text-left">{data?.casePlace}</span>
       </div>
       <div
         className={
-          "flex items-center py-[20px]   sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px] " +
+          "flex gap-x-[67px] mobile:flex-col mobile:justify-start text-left items-center py-[20px]   sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px] " +
           widthClass
         }
       >
-        <span className="w-[35%] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
+        <span className="w-[35%]  flex justify-end sp:justify-start mobile:w-full">
           <span className="text-[#6F6F6F]">募集期間 </span>
         </span>
-        <span>
+        <span className="mobile:w-full text-left">
           {`${dateString(data?.collectionStart)} ~ ${dateString(data?.collectionEnd)}`}
         </span>
       </div>
       <div
         className={
-          "flex items-center py-[20px]   sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px] " +
+          "flex gap-x-[67px] mobile:flex-col mobile:justify-start text-left items-center py-[20px]   sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px] " +
           widthClass
         }
       >
-        <span className="w-[35%] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
+        <span className="w-[35%]  flex justify-end sp:justify-start mobile:w-full">
           <span className="text-[#6F6F6F]">案件終了日時 </span>
         </span>
-        <span>{dateString(data?.caseEnd)}</span>
+        <span className="mobile:w-full text-left">{dateString(data?.caseEnd)}</span>
       </div>
       <div
         className={
-          "flex items-center py-[20px]   sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px] " +
+          "flex gap-x-[67px] mobile:flex-col mobile:justify-start text-left items-center py-[20px]   sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px] " +
           widthClass
         }
       >
-        <span className="w-[35%] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
+        <span className="w-[35%]   flex justify-end sp:justify-start mobile:w-full">
           <span className="text-[#6F6F6F]">募集人数 </span>
         </span>
-        <span>{data?.collectionCnt}</span>
+        <span className="mobile:w-full text-left">{data?.collectionCnt}</span>
       </div>
       <div
         className={
-          "flex  py-[20px]  sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px] " +
+          "flex gap-x-[67px] mobile:flex-col mobile:justify-start text-left py-[20px]  sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px] " +
           widthClass
         }
       >
-        <span className="w-[35%] mb-[10px] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
+        <span className="w-[35%]   flex justify-end sp:justify-start mobile:w-full">
           <span className="text-[#6F6F6F]">補足・注意事項 </span>
         </span>
-        <div className="text-left">{data?.addition}</div>
+        <div className="text-left ">{data?.addition}</div>
       </div>
       {!modalMode && (
         <div
           className={
-            "flex  py-[20px]  sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px] " +
+            "flex gap-x-[67px] mobile:flex-col mobile:justify-start text-left  py-[20px]  sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px] " +
             widthClass
           }
         >
-          <span className="w-[35%] sp:w-[100px] flex justify-end sp:justify-start  mr-[67px]">
-            <span className="text-[#6F6F6F]">否認理由 </span>
+          <span className="w-[35%]  flex justify-end sp:justify-start mobile:w-full">
+            <span className="text-[#6F6F6F] mb-[5px]">否認理由 </span>
           </span>
           <TextArea
             value={data?.reason}

@@ -72,16 +72,15 @@ export async function POST(request: NextRequest) {
       0,
       -1
     )}) VALUES(${query2.slice(0, -1)})`;
-    const influencerIdQuery = `SELECT id FROM influencer WHERE userID = ${user.id}`;
-    const influencer = await executeQuery(influencerIdQuery);
-    console.log(influencer[0].id);
     await executeQuery(query).catch((e) => {
       return NextResponse.json({ type: "error", msg: "error" });
     });
+    const influencerIdQuery = `SELECT id FROM influencer WHERE userId = ${user.id}`;
+    const influencer = await executeQuery(influencerIdQuery);
     return NextResponse.json({
       type: "success",
       password: user.plainPassword,
-      id: user.id,
+      id: influencer[0].id,
     });
   } catch (error) {
     console.error("Error creating table or inserting record:", error);
@@ -108,6 +107,7 @@ export async function PUT(request: NextRequest) {
     const rows1 = await executeQuery(query1).catch((e) => {
       return NextResponse.json({ type: "error" });
     });
+
     if (rows1.length > 0 && rows1[0].id !== body.userId) {
       return NextResponse.json({
         type: "error",
@@ -137,6 +137,12 @@ export async function PUT(request: NextRequest) {
     await executeQuery(userQuery).catch((e) => {
       return NextResponse.json({ type: "error" });
     });
+    if (body["status"] && body["status"] === "否認") {
+      const deleteQuery = `DELETE FROM influencer WHERE emailAddress = '${userEmail}'`;
+      const deleteUserQuery = `DELETE FROM users WHERE email = '${userEmail}'`;
+      await executeQuery(deleteQuery);
+      await executeQuery(deleteUserQuery);
+    }
     return NextResponse.json({
       type: "success",
       password: rows2[0].plainPassword,
