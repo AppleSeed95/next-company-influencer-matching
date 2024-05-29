@@ -5,7 +5,7 @@ import Button from "@/components/atoms/button";
 import Select from "@/components/atoms/select";
 import { ButtonType } from "@/components/atoms/buttonType";
 import TextArea from "@/components/atoms/textarea";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -31,103 +31,105 @@ export default function AskPageContent() {
   const { executeRecaptcha } = useReCaptcha();
 
 
-  const handleAsk = async () => {
-    setIsLoading(true);
-    const errorList = [];
+  const handleAsk = useCallback(
+    async () => {
+      setIsLoading(true);
+      const errorList = [];
 
-    if (!data.name || data.name === "") {
-      errorList.push('名前を入力してください。');
-    }
-    if (!data.email || data.email === "") {
-      errorList.push('メールアドレスを入力してください。');
-    }
-    if (!data.emailConfirm || data.emailConfirm === "") {
-      errorList.push('メールアドレスの確認を入力してください。');
-    }
-    let mailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (data.email?.length > 0 && !mailPattern.test(data.email?.trim())) {
-      errorList.push('メールアドレス形式ではありません');
-    }
-    if (data.email !== data.emailConfirm) {
-      errorList.push('メールアドレスが一致しません');
-    }
+      if (!data.name || data.name === "") {
+        errorList.push('名前を入力してください。');
+      }
+      if (!data.email || data.email === "") {
+        errorList.push('メールアドレスを入力してください。');
+      }
+      if (!data.emailConfirm || data.emailConfirm === "") {
+        errorList.push('メールアドレスの確認を入力してください。');
+      }
+      let mailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (data.email?.length > 0 && !mailPattern.test(data.email?.trim())) {
+        errorList.push('メールアドレス形式ではありません');
+      }
+      if (data.email !== data.emailConfirm) {
+        errorList.push('メールアドレスが一致しません');
+      }
 
-    if (!data.type || data.type === "") {
-      errorList.push('お問い合わせの種類を選択してください。');
-    }
-    if (!data.content || data.content === "") {
-      errorList.push('お問い合わせ内容を入力してください。');
-    }
-    if (!agree) {
-      errorList.push('個人情報の取り扱いに同意する必要があります。');
-    }
-    if (errorList.length > 0) {
-      setError(errorList);
-      setIsLoading(false);
-      return;
-    }
-    setError([]);
-    const token = await executeRecaptcha("form_submit");
-    console.log(token);
+      if (!data.type || data.type === "") {
+        errorList.push('お問い合わせの種類を選択してください。');
+      }
+      if (!data.content || data.content === "") {
+        errorList.push('お問い合わせ内容を入力してください。');
+      }
+      if (!agree) {
+        errorList.push('個人情報の取り扱いに同意する必要があります。');
+      }
+      if (errorList.length > 0) {
+        setError(errorList);
+        setIsLoading(false);
+        return;
+      }
+      setError([]);
+      const token = await executeRecaptcha("form_submit");
+      console.log(token);
 
-    const response = await axios({
-      method: "post",
-      url: "/api/captcha",
-      data: {
-        token
-      },
-      headers: {
-        Accept: "application/json, text/plain, */*",
-        "Content-Type": "application/json",
-      },
-    });
-
-    if (response?.data?.success === true) {
-      await axios.post("/api/sendEmail", {
-        to: data.email,
-        subject: "【インフルエンサーめぐり】お問い合わせを受け付けました",
-        html: `
-              <div>${data.name} 様
-                <br/>
-                <br/>お問い合わせいただき誠にありがとうございます。
-                <br/>下記の内容でお問い合わせを受け付けました。
-                <br/>
-                <br/>内容を確認の上、担当者よりご連絡させていただきます。
-                <br/>-----------------------------------------------------
-                <br/>お問い合わせ内容
-                <br/>
-                <br/>お名前          ：${data.name}
-                <br/>メールアドレス  ：${data.email}
-                <br/>お問い合わせ種別：${data.type ? data.type : ""}
-                <br/>お問い合わせ内容：${data.content ? data.content : ""}
-                <br/>-----------------------------------------------------
-              </div>
-                `,
+      const response = await axios({
+        method: "post",
+        url: "/api/captcha",
+        data: {
+          token
+        },
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+        },
       });
-      await axios.post("/api/sendEmail", {
-        from: data.email,
-        subject: "【インフルエンサーめぐり】お問い合わせがありました",
-        html: `
-                <div>
-                インフルエンサーめぐりにお問い合わせがありました。
-                <br/>-----------------------------------------------------
-                <br/>お問い合わせ内容
-                <br/>
-                <br/>お名前          ：${data.name}
-                <br/>メールアドレス  ：${data.email}
-                <br/>お問い合わせ種別：${data.type ? data.type : ""}
-                <br/>お問い合わせ内容：${data.content ? data.content : ""}
-                <br/>-----------------------------------------------------
+
+      if (response?.data?.success === true) {
+        await axios.post("/api/sendEmail", {
+          to: data.email,
+          subject: "【インフルエンサーめぐり】お問い合わせを受け付けました",
+          html: `
+                <div>${data.name} 様
+                  <br/>
+                  <br/>お問い合わせいただき誠にありがとうございます。
+                  <br/>下記の内容でお問い合わせを受け付けました。
+                  <br/>
+                  <br/>内容を確認の上、担当者よりご連絡させていただきます。
+                  <br/>-----------------------------------------------------
+                  <br/>お問い合わせ内容
+                  <br/>
+                  <br/>お名前          ：${data.name}
+                  <br/>メールアドレス  ：${data.email}
+                  <br/>お問い合わせ種別：${data.type ? data.type : ""}
+                  <br/>お問い合わせ内容：${data.content ? data.content : ""}
+                  <br/>-----------------------------------------------------
                 </div>
-                `,
-      });
-      setIsLoading(false);
-      router.push('askConfirm');
-    } else {
-      setError([`Captcha failed: ${response?.data?.score}`]);
-      setIsLoading(false);
-    }
-  };
+                  `,
+        });
+        await axios.post("/api/sendEmail", {
+          from: data.email,
+          subject: "【インフルエンサーめぐり】お問い合わせがありました",
+          html: `
+                  <div>
+                  インフルエンサーめぐりにお問い合わせがありました。
+                  <br/>-----------------------------------------------------
+                  <br/>お問い合わせ内容
+                  <br/>
+                  <br/>お名前          ：${data.name}
+                  <br/>メールアドレス  ：${data.email}
+                  <br/>お問い合わせ種別：${data.type ? data.type : ""}
+                  <br/>お問い合わせ内容：${data.content ? data.content : ""}
+                  <br/>-----------------------------------------------------
+                  </div>
+                  `,
+        });
+        setIsLoading(false);
+        router.push('askConfirm');
+      } else {
+        setError([`Captcha failed: ${response?.data?.score}`]);
+        setIsLoading(false);
+      }
+    }, [executeRecaptcha]
+  );
   return (
     <GoogleCaptchaWrapper>
 
