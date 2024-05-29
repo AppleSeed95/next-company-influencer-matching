@@ -35,7 +35,7 @@ function AskPageContent() {
     document.title = 'お問い合わせ';
   }, [])
 
-  const { executeRecaptcha } = useGoogleReCaptcha();
+  const executeRecaptcha = useGoogleReCaptcha();
   console.log(useGoogleReCaptcha, executeRecaptcha);
 
 
@@ -82,67 +82,67 @@ function AskPageContent() {
       setIsLoading(false);
       return;
     }
-    executeRecaptcha("enquiryFormSubmit").then(async (gReCaptchaToken) => {
-      console.log(gReCaptchaToken);
-      const response = await axios({
-        method: "post",
-        url: "/api/captcha",
-        data: {
-          gRecaptchaToken: gReCaptchaToken,
-        },
-        headers: {
-          Accept: "application/json, text/plain, */*",
-          "Content-Type": "application/json",
-        },
-      });
+    // executeRecaptcha("enquiryFormSubmit").then(async (gReCaptchaToken) => {
+    //   console.log(gReCaptchaToken);
+    //   const response = await axios({
+    //     method: "post",
+    //     url: "/api/captcha",
+    //     data: {
+    //       gRecaptchaToken: gReCaptchaToken,
+    //     },
+    //     headers: {
+    //       Accept: "application/json, text/plain, */*",
+    //       "Content-Type": "application/json",
+    //     },
+    //   });
 
 
-      if (response?.data?.success === true) {
-        await axios.post("/api/sendEmail", {
-          to: data.email,
-          subject: "【インフルエンサーめぐり】お問い合わせを受け付けました",
-          html: `
-              <div>${data.name} 様
-                <br/>
-                <br/>お問い合わせいただき誠にありがとうございます。
-                <br/>下記の内容でお問い合わせを受け付けました。
-                <br/>
-                <br/>内容を確認の上、担当者よりご連絡させていただきます。
-                <br/>-----------------------------------------------------
-                <br/>お問い合わせ内容
-                <br/>
-                <br/>お名前          ：${data.name}
-                <br/>メールアドレス  ：${data.email}
-                <br/>お問い合わせ種別：${data.type ? data.type : ""}
-                <br/>お問い合わせ内容：${data.content ? data.content : ""}
-                <br/>-----------------------------------------------------
-              </div>
-                `,
-        });
-        await axios.post("/api/sendEmail", {
-          from: data.email,
-          subject: "【インフルエンサーめぐり】お問い合わせがありました",
-          html: `
-                <div>
-                インフルエンサーめぐりにお問い合わせがありました。
-                <br/>-----------------------------------------------------
-                <br/>お問い合わせ内容
-                <br/>
-                <br/>お名前          ：${data.name}
-                <br/>メールアドレス  ：${data.email}
-                <br/>お問い合わせ種別：${data.type ? data.type : ""}
-                <br/>お問い合わせ内容：${data.content ? data.content : ""}
-                <br/>-----------------------------------------------------
-                </div>
-                `,
-        });
-        setIsLoading(false);
-        router.push('askConfirm');
-      } else {
-        setError([`Captcha failed: ${response?.data?.score}`]);
-        setIsLoading(false);
-      }
-    });
+    //   if (response?.data?.success === true) {
+    //     await axios.post("/api/sendEmail", {
+    //       to: data.email,
+    //       subject: "【インフルエンサーめぐり】お問い合わせを受け付けました",
+    //       html: `
+    //           <div>${data.name} 様
+    //             <br/>
+    //             <br/>お問い合わせいただき誠にありがとうございます。
+    //             <br/>下記の内容でお問い合わせを受け付けました。
+    //             <br/>
+    //             <br/>内容を確認の上、担当者よりご連絡させていただきます。
+    //             <br/>-----------------------------------------------------
+    //             <br/>お問い合わせ内容
+    //             <br/>
+    //             <br/>お名前          ：${data.name}
+    //             <br/>メールアドレス  ：${data.email}
+    //             <br/>お問い合わせ種別：${data.type ? data.type : ""}
+    //             <br/>お問い合わせ内容：${data.content ? data.content : ""}
+    //             <br/>-----------------------------------------------------
+    //           </div>
+    //             `,
+    //     });
+    //     await axios.post("/api/sendEmail", {
+    //       from: data.email,
+    //       subject: "【インフルエンサーめぐり】お問い合わせがありました",
+    //       html: `
+    //             <div>
+    //             インフルエンサーめぐりにお問い合わせがありました。
+    //             <br/>-----------------------------------------------------
+    //             <br/>お問い合わせ内容
+    //             <br/>
+    //             <br/>お名前          ：${data.name}
+    //             <br/>メールアドレス  ：${data.email}
+    //             <br/>お問い合わせ種別：${data.type ? data.type : ""}
+    //             <br/>お問い合わせ内容：${data.content ? data.content : ""}
+    //             <br/>-----------------------------------------------------
+    //             </div>
+    //             `,
+    //     });
+    //     setIsLoading(false);
+    //     router.push('askConfirm');
+    //   } else {
+    //     setError([`Captcha failed: ${response?.data?.score}`]);
+    //     setIsLoading(false);
+    //   }
+    // });
   };
   return (
     <GoogleCaptchaWrapper>
