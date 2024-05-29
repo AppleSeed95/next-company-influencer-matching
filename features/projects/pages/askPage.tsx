@@ -36,7 +36,7 @@ function AskPageContent() {
   }, [])
 
   const { executeRecaptcha } = useGoogleReCaptcha();
-  console.log(executeRecaptcha);
+  console.log(useGoogleReCaptcha, executeRecaptcha);
 
 
   const handleAsk = async () => {
