@@ -128,7 +128,7 @@ export default function AskPageContent() {
         setError([`Captcha failed: ${response?.data?.score}`]);
         setIsLoading(false);
       }
-    }, [executeRecaptcha]
+    }, [executeRecaptcha, data, agree, error]
   );
   return (
     <GoogleCaptchaWrapper>
