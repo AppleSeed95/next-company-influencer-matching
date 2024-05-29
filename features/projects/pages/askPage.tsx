@@ -82,6 +82,8 @@ function AskPageContent() {
       setIsLoading(false);
       return;
     }
+    console.log('fsd');
+
     // executeRecaptcha("enquiryFormSubmit").then(async (gReCaptchaToken) => {
     //   console.log(gReCaptchaToken);
     //   const response = await axios({
