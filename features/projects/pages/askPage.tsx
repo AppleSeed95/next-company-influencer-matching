@@ -36,6 +36,7 @@ function AskPageContent() {
   }, [])
 
   const { executeRecaptcha } = useGoogleReCaptcha();
+  console.log(executeRecaptcha);
 
 
   const handleAsk = async () => {
@@ -78,6 +79,7 @@ function AskPageContent() {
       setError(
         ["Execute recaptcha not available yet likely meaning key not recaptcha key not set"]
       );
+      setIsLoading(false);
       return;
     }
     executeRecaptcha("enquiryFormSubmit").then(async (gReCaptchaToken) => {
@@ -137,7 +139,8 @@ function AskPageContent() {
         setIsLoading(false);
         router.push('askConfirm');
       } else {
-        setError([`Failure with score: ${response?.data?.score}`]);
+        setError([`Captcha failed: ${response?.data?.score}`]);
+        setIsLoading(false);
       }
     });
   };
