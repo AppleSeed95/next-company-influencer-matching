@@ -23,12 +23,33 @@ export default function AskPageContent() {
   const [agree, setAgree] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-
+  const [token, setToken] = useState('');
   useEffect(() => {
     document.title = 'お問い合わせ';
   }, [])
 
-  const { executeRecaptcha } = useReCaptcha();
+  const { executeRecaptcha, loaded } = useReCaptcha();
+  useEffect(() => {
+    let time: NodeJS.Timeout | null = null;
+    const loadToken = async () => {
+      console.log(loaded, 'run');
+      const token = await executeRecaptcha("form_submit");
+      console.log(token);
+
+      setToken(token)
+    };
+
+    time = setInterval(() => {
+      console.log('run');
+      // loadToken();
+    }, 120000);
+    if (loaded) loadToken();
+    return () => {
+      if (time) clearInterval(time);
+    };
+  }, [executeRecaptcha, loaded])
+
+
 
 
   const handleAsk = useCallback(
@@ -68,7 +89,7 @@ export default function AskPageContent() {
         return;
       }
       setError([]);
-      const token = await executeRecaptcha("form_submit");
+      const token = executeRecaptcha ? await executeRecaptcha("form_submit") : '';
       console.log(token);
 
       const response = await axios({

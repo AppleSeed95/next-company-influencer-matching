@@ -12,6 +12,7 @@ export interface InputProps {
   value?: string;
   format?: string;
   dateTime?: boolean;
+  searchBar?: boolean;
   formatMsg?: string;
   type?: string;
   handleChange: (val: string) => void;
@@ -30,6 +31,7 @@ const Input: React.FC<InputProps> = ({
   formatMsg,
   dateTime,
   type,
+  searchBar,
   handleKeyPress,
 }: InputProps) => {
   const [error, setError] = useState("errorMsg");
@@ -88,19 +90,20 @@ const Input: React.FC<InputProps> = ({
         onKeyPress={handleKeyPress}
       ></input>
       {
-        (requirMsg || formatMsg) && (
-          !isValid ? <div
+        (requirMsg || formatMsg) ? (
+          <div
             className={
               isValid
-                ? "text-left text-[#EE5736] text-[11px] hidden "
-                : "text-left text-[#EE5736] text-[11px] "
+                ? "text-left text-[#EE5736] text-[11px] opacity-0 duration-700"
+                : "text-left text-[#EE5736] text-[11px] duration-700 "
             }
           >
             {error}
-          </div> : <div className="h-[10px]">
-
           </div>
-        )
+        ) : !searchBar && <div className='text-left text-[#EE5736] text-[11px] opacity-0 duration-700'
+        >
+          test
+        </div>
       }
     </div >
   );

@@ -66,16 +66,18 @@ const TextArea: React.FC<TextAreaProps> = ({
         }
         placeholder={placeholder}
       ></textarea>
-      <div
+      {(requirMsg && requirMsg !== '') ? (<div
         className={
           isValid
-            ? "text-left text-[#EE5736] text-[11px] opacity-0  duration-700"
-            : "text-left text-[#EE5736] text-[11px] duration-700"
+            ? "text-left text-[#EE5736] text-[11px] opacity-0 mt-[-4px] duration-700"
+            : "text-left text-[#EE5736] text-[11px] mt-[-4px] duration-700"
         }
       >
         {error}
-      </div>
-    </div>
+      </div>) : <div className='text-left text-[#EE5736] text-[11px] opacity-0'>
+        test
+      </div>}
+    </div >
   );
 };
 

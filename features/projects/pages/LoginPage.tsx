@@ -75,7 +75,7 @@ export default function LoginPage() {
       <div className="bg-[white] px-[20px] w-[614px] sp:w-[90%] rounded-[40px] block m-auto py-[70px] sp:py-[20px] shadow-lg">
         <img
           src="/img/logo(red).svg"
-          className="blcok m-auto w-[265px] sp:hidden mb-[50px]"
+          className="blcok m-auto w-[265px] sp:w-[200px] mobile:w-[200px] sp:pt-[20px] mobile:pt-[20px] mb-[50px]"
         />
         <div className="flex justify-center w-full mobile:gap-[5px] gap-[20px] mobile:flex-wrap mb-[20px] pr-[70px] sp:pr-[30px] sp:mt-[50px]">
           <span className="mobile:w-[250px] mobile:text-left mt-[5px] w-[70px] text-right">Email</span>

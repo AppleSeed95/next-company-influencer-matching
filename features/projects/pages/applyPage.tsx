@@ -56,7 +56,7 @@ export default function ApplyPage() {
   };
   return (
     <div className="bg-[#F5F5F5] pt-[90px]  flex  grow sp:text-[black]">
-      <div className="bg-[white] text-center px-[20px] w-[614px] sp:w-[90%] rounded-[40px] block m-auto py-[70px] sp:py-[20px] shadow-lg">
+      <div className="bg-[white] text-center px-[20px] mobile:px-[40px] w-[614px] sp:w-[90%] rounded-[40px] block m-auto py-[70px] sp:py-[20px] shadow-lg">
         <img
           src="/img/logo(red).svg"
           className="blcok m-auto w-[265px] sp:hidden mb-[50px]"
@@ -64,7 +64,7 @@ export default function ApplyPage() {
         <div className="text-title text-center">
           企業登録フォーム
         </div>
-        <div className="m-[50px] mobile:m-[20px] text-center">
+        <div className="m-[50px] mobile:m-[0px] text-center">
           <div className="py-[10px]">
             インフルエンサーめぐりをご覧いただきありがとうございます。
           </div>
@@ -75,13 +75,13 @@ export default function ApplyPage() {
             ご入力いただいたメールアドレス宛に申請フォームをお送りします。
           </div>
         </div>
-        <div className="flex mobile:gap-[5px] gap-[20px] mobile:flex-wrap justify-center w-full mt-[30px] mb-[20px] pr-[70px] sp:pr-[30px] sp:mb-[30px]">
-          <span className="mobile:w-[250px] mobile:text-left mt-[5px] w-[100px] text-right">
+        <div className="flex mobile:gap-[5px] gap-[20px] mobile:flex-wrap justify-center w-full mt-[30px] mb-[20px] pr-[70px] mobile:pr-[0px] sp:mb-[30px]">
+          <span className="mobile:w-full mobile:text-left mt-[5px] w-[100px] text-right">
             メールアドレス
           </span>
           <Input
             handleChange={(val) => setEmail(val)}
-            inputClassName={"max-w-[250px] grow"}
+            inputClassName={"max-w-[250px] mobile:max-w-full grow"}
           />
         </div>
         <div className="text-center mb-[10px]">

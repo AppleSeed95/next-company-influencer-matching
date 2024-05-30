@@ -45,6 +45,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
       <div className="flex gap-x-[20px] sp:gap-x-[12px] py-[12px] items-center  ">
         {!title && (
           <Input
+            searchBar
             handleChange={(v) => {
               setKeyword(v?.trim())
             }}
@@ -58,7 +59,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
           <Button
             handleClick={handleSearch}
             buttonType={ButtonType.DEFAULT}
-            buttonClassName="sp:text-small sp:px-[12px]"
+            buttonClassName="sp:text-small min-w-[60px] sp:px-[12px]"
           >
             検索
           </Button>
