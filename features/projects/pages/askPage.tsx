@@ -30,19 +30,21 @@ export default function AskPageContent() {
 
   const { executeRecaptcha, loaded } = useReCaptcha();
   useEffect(() => {
+
     let time: NodeJS.Timeout | null = null;
     const loadToken = async () => {
       console.log(loaded, 'run');
-      const token = await executeRecaptcha("form_submit");
-      console.log(token);
+      if (loaded) {
+        const token = await executeRecaptcha("form_submit");
+        console.log(token);
 
-      setToken(token)
+        setToken(token)
+      }
     };
 
     time = setInterval(() => {
-      console.log('run');
-      // loadToken();
-    }, 120000);
+      loadToken();
+    }, 1000);
     if (loaded) loadToken();
     return () => {
       if (time) clearInterval(time);
@@ -90,7 +92,7 @@ export default function AskPageContent() {
       }
       setError([]);
       const token = executeRecaptcha ? await executeRecaptcha("form_submit") : '';
-      console.log(token);
+      console.log("this is token", token);
 
       const response = await axios({
         method: "post",
