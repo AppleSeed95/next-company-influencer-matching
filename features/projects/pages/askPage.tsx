@@ -29,30 +29,6 @@ export default function AskPageContent() {
   }, [])
 
   const { executeRecaptcha, loaded } = useReCaptcha();
-  useEffect(() => {
-
-    let time: NodeJS.Timeout | null = null;
-    const loadToken = async () => {
-      console.log(loaded, 'run');
-      if (loaded) {
-        const token = await executeRecaptcha("form_submit");
-        console.log(token);
-
-        setToken(token)
-      }
-    };
-
-    time = setInterval(() => {
-      loadToken();
-    }, 1000);
-    if (loaded) loadToken();
-    return () => {
-      if (time) clearInterval(time);
-    };
-  }, [executeRecaptcha, loaded])
-
-
-
 
   const handleAsk = useCallback(
     async () => {
@@ -91,26 +67,26 @@ export default function AskPageContent() {
         return;
       }
       setError([]);
-      const token = executeRecaptcha ? await executeRecaptcha("form_submit") : '';
-      console.log("this is token", token);
+      if (loaded) {
+        const token = executeRecaptcha ? await executeRecaptcha("form_submit") : '';
+        const response = await axios({
+          method: "post",
+          url: "/api/captcha",
+          data: {
+            token
+          },
+          headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json",
+          },
+        });
+      }
 
-      const response = await axios({
-        method: "post",
-        url: "/api/captcha",
-        data: {
-          token
-        },
-        headers: {
-          Accept: "application/json, text/plain, */*",
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (response?.data?.success === true) {
-        await axios.post("/api/sendEmail", {
-          to: data.email,
-          subject: "【インフルエンサーめぐり】お問い合わせを受け付けました",
-          html: `
+      // if (response?.data?.success === true) {
+      await axios.post("/api/sendEmail", {
+        to: data.email,
+        subject: "【インフルエンサーめぐり】お問い合わせを受け付けました",
+        html: `
                 <div>${data.name} 様
                   <br/>
                   <br/>お問い合わせいただき誠にありがとうございます。
@@ -127,11 +103,11 @@ export default function AskPageContent() {
                   <br/>-----------------------------------------------------
                 </div>
                   `,
-        });
-        await axios.post("/api/sendEmail", {
-          from: data.email,
-          subject: "【インフルエンサーめぐり】お問い合わせがありました",
-          html: `
+      });
+      await axios.post("/api/sendEmail", {
+        from: data.email,
+        subject: "【インフルエンサーめぐり】お問い合わせがありました",
+        html: `
                   <div>
                   インフルエンサーめぐりにお問い合わせがありました。
                   <br/>-----------------------------------------------------
@@ -144,13 +120,13 @@ export default function AskPageContent() {
                   <br/>-----------------------------------------------------
                   </div>
                   `,
-        });
-        setIsLoading(false);
-        router.push('askConfirm');
-      } else {
-        setError([`Captcha failed: ${response?.data?.score}`]);
-        setIsLoading(false);
-      }
+      });
+      setIsLoading(false);
+      router.push('askConfirm');
+      // } else {
+      //   setError([`Captcha failed: ${response?.data?.score}`]);
+      //   setIsLoading(false);
+      // }
     }, [executeRecaptcha, data, agree, error]
   );
   return (
