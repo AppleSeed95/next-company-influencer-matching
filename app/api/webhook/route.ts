@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
   const body = await request.json();
   try {
     console.log("type", body.type);
-    console.log("data", body.data);
+    // console.log("data", body.data);
 
     switch (body.type) {
       case "checkout.session.completed":
