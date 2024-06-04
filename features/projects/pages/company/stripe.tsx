@@ -13,15 +13,18 @@ const CheckoutPage = ({ priceID, paymentCnt }: priceProps) => {
 
     useEffect(() => {
         const handleClick = async () => {
-            console.log(paymentCnt);
             setIsLoading(true);
             const stripe = await stripePromise;
             const { error } = await stripe.redirectToCheckout({
-                lineItems: [{ price: priceID.trim(), quantity: 1 }],
-                mode: 'payment',
-                successUrl: `${window.location.origin}/${paymentCnt === 0 ? 'paymentConfirm' : 'companyInfo?type=success'}`,
+                lineItems: [{
+                    price: 'price_1PNVNXHeC7VfJv8UvM1qCdsO', // replace with your price ID
+                    quantity: 1,
+                }],
+                mode: 'subscription',
+                successUrl: `${window.location.origin}/companyInfo?type=success`,
                 cancelUrl: `${window.location.origin}/companyInfo?type=fail`,
-            });
+            }
+            );
             if (error) {
                 console.error('Error:', error);
             }

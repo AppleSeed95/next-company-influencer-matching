@@ -18,7 +18,6 @@ export async function POST(request: NextRequest) {
     const rows = await executeQuery(preQuery).catch((e) => {
       return NextResponse.json({ type: "error", msg: "no table exists" });
     });
-    console.log(rows);
 
     const queryAfter = `select * from chatroom where applyId = ${id}`;
     const rowsAfter = await executeQuery(queryAfter).catch((e) => {

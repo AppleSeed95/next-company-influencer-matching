@@ -14,9 +14,9 @@ export default function ApplyInfluencerCompletePage() {
         <div className="bg-[white] text-center px-[20px] w-[614px] sp:w-[90%] rounded-[40px] block m-auto py-[70px] sp:py-[20px] shadow-lg">
           <img
             src="/img/logo(red).svg"
-            className="blcok m-auto w-[265px] sp:hidden mb-[50px]"
+            className="blcok m-auto w-[265px] sp:w-[200px] mobile:w-[200px] sp:pt-[20px] mobile:pt-[20px] mb-[50px]"
           />
-          <div className="m-[50px] text-left">
+          <div className="m-[50px] mobile:mx-[20px] text-left">
             ご申請ありがとうございます。
             <br /> <br />
             ご申請いただいた内容を確認しますのでしばらくお待ちください。

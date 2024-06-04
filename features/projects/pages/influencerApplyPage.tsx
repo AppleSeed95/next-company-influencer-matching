@@ -70,8 +70,8 @@ export default function InfluencerApplyPage() {
         <div className="text-title text-center lg:hidden">
           登録フォーム
         </div>
-        <div className="m-[50px] mobile:m-[0px] text-center mobile:text-left">
-          <div className="pt-[50px] pb-[10px]">
+        <div className="ml-[70px] mobile:ml-[0px] text-left">
+          <div className="pt-[40px] pb-[10px]">
             インフルエンサーめぐりをご覧いただきありがとうございます。
           </div>
           <div className="py-[10px]">

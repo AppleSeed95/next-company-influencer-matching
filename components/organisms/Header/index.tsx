@@ -12,6 +12,7 @@ const Header: React.FC<Headerprops> = ({ mode }: Headerprops) => {
   const [showMenu, setShowMenu] = useState(false);
   const [isClient, setIsClient] = useState(false);
   const containerRef = useRef(null);
+  const authUser = useRecoilValue(authUserState);
   useEffect(() => {
     setIsClient(true);
     const fitTextInDiv = () => {
@@ -19,7 +20,7 @@ const Header: React.FC<Headerprops> = ({ mode }: Headerprops) => {
       if (!container) return;
 
       let containerWidth = container.clientWidth;
-      let length = containerRef.current.innerHTML.length;
+      let length = authUser.user?.targetName.length;
       let newFontSize = containerWidth / length;
 
       // Adjust font size to fit the content
@@ -33,8 +34,7 @@ const Header: React.FC<Headerprops> = ({ mode }: Headerprops) => {
     fitTextInDiv();
     window.addEventListener('resize', fitTextInDiv); // Adjust on window resize
     return () => window.removeEventListener('resize', fitTextInDiv);
-  }, []); // Re-run effect when fontSize or children change
-  const authUser = useRecoilValue(authUserState);
+  }, [authUser]); // Re-run effect when fontSize or children change
   const router = useRouter();
   return mode === "auth" ? (
     <div

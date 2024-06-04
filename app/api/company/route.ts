@@ -136,6 +136,21 @@ export async function GET() {
     const rows = await executeQuery(query).catch((e) => {
       return NextResponse.json({ type: "error", msg: "no table exists" });
     });
+    const deletingCompanyQuery = `DELETE message, chatroom, apply, cases, users
+    FROM company
+    LEFT JOIN users ON users.id = company.userId
+    LEFT JOIN cases ON cases.companyId = company.id
+    LEFT JOIN apply ON apply.caseId = cases.id
+    LEFT JOIN chatroom ON chatroom.companyId = company.id
+    LEFT JOIN message ON message.roomId = chatroom.id
+    WHERE company.payment < NOW() AND users.active = 0`;
+
+    const rows1 = await executeQuery(deletingCompanyQuery);
+
+    // const deleteQuery = `DELETE FROM influencer WHERE emailAddress = '${userEmail}'`;
+    //   const deleteUserQuery = `DELETE FROM users WHERE email = '${userEmail}'`;
+    //   await executeQuery(deleteQuery);
+    //   await executeQuery(deleteUserQuery);
     return NextResponse.json(rows);
   } catch (error) {
     console.error("Error fetching data:", error);

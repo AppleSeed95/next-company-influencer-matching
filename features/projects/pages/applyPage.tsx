@@ -69,8 +69,8 @@ export default function ApplyPage() {
           <div className="text-title text-center">
             企業登録フォーム
           </div>
-          <div className="m-[50px] mobile:m-[0px] text-center mobile:text-left">
-            <div className="pt-[50px] pb-[10px]">
+          <div className="ml-[70px] text-left mobile:ml-[0px] mobile:text-left">
+            <div className="pt-[40px] pb-[10px]">
               インフルエンサーめぐりをご覧いただきありがとうございます。
             </div>
             <div className="py-[10px]">

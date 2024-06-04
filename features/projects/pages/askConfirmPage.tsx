@@ -1,12 +1,9 @@
 "use client";
-import Button from "@/components/atoms/button";
-import { ButtonType } from "@/components/atoms/buttonType";
-import Link from "next/link";
 import { useEffect } from "react";
 
 export default function AskConfirmPage() {
     useEffect(() => {
-        document.title = 'ログアウト';
+        document.title = 'お問い合わせ完了';
         localStorage.removeItem("user");
     }, []);
     return (
@@ -14,7 +11,7 @@ export default function AskConfirmPage() {
             <div className="bg-[white] px-[20px] w-[614px] sp:w-[90%] rounded-[40px] block m-auto py-[70px] sp:py-[20px] shadow-lg">
                 <img
                     src="/img/logo(red).svg"
-                    className="blcok m-auto w-[265px] sp:hidden mb-[50px]"
+                    className="blcok m-auto w-[265px] sp:w-[200px] mobile:w-[200px] sp:pt-[20px] mobile:pt-[20px] mb-[50px]"
                 />
                 <div className=" text-center justify-center w-full items-center mb-[20px] sp:mt-[50px]  ">
                     <div>お問い合わせありがとうございます。</div>

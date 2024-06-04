@@ -13,7 +13,7 @@ export default function PaymentRequirePage() {
             <div className="bg-[white] px-[20px] w-[614px] sp:w-[90%] rounded-[40px] block m-auto py-[70px] sp:py-[20px] shadow-lg">
                 <img
                     src="/img/logo(red).svg"
-                    className="blcok m-auto w-[265px] sp:hidden mb-[50px]"
+                    className="blcok m-auto w-[265px] sp:w-[200px] mobile:w-[200px] sp:pt-[20px] mobile:pt-[20px] mb-[50px]"
                 />
                 <div className="flex text-center justify-center w-full items-center mb-[20px] sp:mt-[50px] text-title">
                     <span>支払いが必要です。</span>

@@ -15,7 +15,7 @@ export default function PaymentConfirmPage() {
     useEffect(() => {
         document.title = 'お支払いが成功しました';
         const fetchPaymentInfo = async () => {
-            const { data: { data } } = await axios.get(`/api/company/aCompany/getPayment?id=${authUser.user.id}`)
+            const { data: { data } } = await axios.get(`/api/company/aCompany/getPayment?id=${authUser.user?.id}`)
             setPaymentData(data.paymentId);
         }
         fetchPaymentInfo();
@@ -25,7 +25,7 @@ export default function PaymentConfirmPage() {
             <div className="bg-[white] px-[20px] w-[814px] sp:w-[90%] rounded-[40px] block m-auto py-[70px] sp:py-[20px] shadow-lg">
                 <img
                     src="/img/logo(red).svg"
-                    className="blcok m-auto w-[265px] sp:hidden mb-[50px]"
+                    className="blcok m-auto w-[265px] sp:w-[200px] mobile:w-[200px] sp:pt-[20px] mobile:pt-[20px] mb-[50px]"
                 />
                 {paymentData !== '' && <div>
                     <div className="hidden" id='order-number'>
@@ -43,7 +43,7 @@ export default function PaymentConfirmPage() {
                         }}
                     />
                 </div>}
-                <div className="text-center justify-center w-full items-center mb-[20px] sp:mt-[50px] ">
+                <div className="text-center mobile:text-left justify-center w-full items-center mb-[20px] sp:mt-[50px] ">
                     <div className="mb-[20px]">インフルエンサーめぐりをご利用いただきありがとうございます。
                     </div>
                     <div>お支払い手続きが完了しましたので機能をご利用いただけます。
