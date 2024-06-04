@@ -14,13 +14,13 @@ export async function POST(request: NextRequest) {
   const body = await request.json();
   try {
     console.log("type", body.type);
-    console.log("data", body);
 
     switch (body.type) {
       case "checkout.session.completed":
         // Handle checkout session completion, provide access
         break;
       case "invoice.paid":
+        console.log("data", body);
         // Continue to provision the subscription as payments keep coming in
         break;
       case "invoice.payment_failed":
