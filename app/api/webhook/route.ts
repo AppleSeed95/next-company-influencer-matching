@@ -20,7 +20,8 @@ export async function POST(request: NextRequest) {
         // Handle checkout session completion, provide access
         break;
       case "invoice.paid":
-        console.log("data", body);
+        console.log("data", body.data.object.customer_email);
+        console.log("data", body.data.object.subscription);
         // Continue to provision the subscription as payments keep coming in
         break;
       case "invoice.payment_failed":
