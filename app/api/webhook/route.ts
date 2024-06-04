@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
   // const signature = request.headers.get('stripe-signature');
   const body = await request.json();
   try {
-    console.log(body.data);
+    console.log(body.type);
 
     switch (body.type) {
       case "checkout.session.completed":
