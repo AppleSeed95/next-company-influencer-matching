@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
         break;
       // ... handle other event types
       default:
-        console.log(`Unhandled event type ${event.type}`);
+        console.log(`Unhandled event type`);
     }
     // Verify the signature using the Stripe webhook secret
     // const event = stripe.webhooks.constructEvent(buf.toString(), signature, stripeWebhookSecret);
