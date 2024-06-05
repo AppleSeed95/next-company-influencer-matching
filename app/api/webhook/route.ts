@@ -47,13 +47,19 @@ export async function POST(request: NextRequest) {
         currentDate.setDate(currentDate.getDate() + 30);
         const dateString = currentDate.toISOString();
         let updateString;
+        console.log(rows[0].payment);
+
         if (rows[0].payment === "" || rows[0].payment === "null") {
+          console.log("null accepted");
+
           updateString = dateString;
         } else {
           const lastPaymentInfo = new Date(rows[0].payment);
           lastPaymentInfo.setDate(lastPaymentInfo.getDate() + 30);
           updateString = lastPaymentInfo.toISOString();
         }
+        console.log(updateString);
+
         let paymentCnt = rows[0].paymentCnt;
         if (!(paymentCnt > 0)) {
           paymentCnt = 0;
