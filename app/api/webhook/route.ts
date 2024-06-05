@@ -49,7 +49,11 @@ export async function POST(request: NextRequest) {
         let updateString;
         console.log(rows[0].payment);
 
-        if (rows[0].payment === "" || rows[0].payment === "null") {
+        if (
+          rows[0].payment === "" ||
+          rows[0].payment === "null" ||
+          rows[0].payment === null
+        ) {
           console.log("null accepted");
 
           updateString = dateString;
