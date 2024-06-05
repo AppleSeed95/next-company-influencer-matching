@@ -20,8 +20,53 @@ export async function POST(request: NextRequest) {
         // Handle checkout session completion, provide access
         break;
       case "invoice.paid":
-        console.log("data", body.data.object.customer_email);
-        console.log("data", body.data.object.subscription);
+        const email = body.data.object.customer_email;
+        const paymentId = body.data.object.subscription;
+        const query = `SELECT company.payment, company.paymentCnt
+                            FROM company
+                            LEFT JOIN users ON company.emailAddress = users.email
+                            WHERE company.emailAddress = '${email}'
+                         `;
+        const rows = await executeQuery(query).catch((e) => {
+          return NextResponse.json({ type: "error" });
+        });
+        if (!rows || !rows.length || rows.length === 0) {
+          return NextResponse.json({
+            type: "error",
+            msg: "no result.",
+          });
+        }
+        const query2 = `SELECT plan.monthCnt, plan.concurrentCnt from plan
+                      LEFT JOIN company ON company.plan = plan.id
+                      WHERE company.emailAddress = '${email}'
+                      `;
+        const rows2 = await executeQuery(query2).catch((e) => {
+          return NextResponse.json({ type: "error" });
+        });
+        const currentDate = new Date();
+        currentDate.setDate(currentDate.getDate() + 30);
+        const dateString = currentDate.toISOString();
+        let updateString;
+        if (rows[0].payment === "" || rows[0].payment === "null") {
+          updateString = dateString;
+        } else {
+          const lastPaymentInfo = new Date(rows[0].payment);
+          lastPaymentInfo.setDate(lastPaymentInfo.getDate() + 30);
+          updateString = lastPaymentInfo.toISOString();
+        }
+        let paymentCnt = rows[0].paymentCnt;
+        if (!(paymentCnt > 0)) {
+          paymentCnt = 0;
+        }
+        paymentCnt++;
+        const query1 = `update company set payment = '${updateString}',paymentId = '${paymentId}', paymentCnt = ${paymentCnt} ,
+                      monthlyCollectionCnt = ${rows2[0].monthCnt},
+                      concurrentCollectionCnt = ${rows2[0].concurrentCnt},
+                      thisMonthCollectionCnt = 0 where emailAddress = '${email}'`;
+
+        await executeQuery(query1).catch((e) => {
+          return NextResponse.json({ type: "error" });
+        });
         // Continue to provision the subscription as payments keep coming in
         break;
       case "invoice.payment_failed":
@@ -31,62 +76,6 @@ export async function POST(request: NextRequest) {
       default:
         console.log(`Unhandled event type`);
     }
-    // Verify the signature using the Stripe webhook secret
-    // const event = stripe.webhooks.constructEvent(buf.toString(), signature, stripeWebhookSecret);
-    // if (body.type === "payment_intent.succeeded") {
-    //   const email = body.data.object.receipt_email;
-    //   const paymentId = body.data.object.payment_method;
-    //   const query = `SELECT company.payment, company.paymentCnt
-    //                         FROM company
-    //                         LEFT JOIN users ON company.emailAddress = users.email
-    //                         WHERE company.emailAddress = '${email}'
-    //                      `;
-    //   const rows = await executeQuery(query).catch((e) => {
-    //     return NextResponse.json({ type: "error" });
-    //   });
-    //   if (!rows || !rows.length || rows.length === 0) {
-    //     return NextResponse.json({
-    //       type: "error",
-    //       msg: "no result.",
-    //     });
-    //   }
-    //   const query2 = `SELECT plan.monthCnt, plan.concurrentCnt from plan
-    //                   LEFT JOIN company ON company.plan = plan.id
-    //                   WHERE company.emailAddress = '${email}'
-    //                   `;
-    //   const rows2 = await executeQuery(query2).catch((e) => {
-    //     return NextResponse.json({ type: "error" });
-    //   });
-    //   const currentDate = new Date();
-    //   currentDate.setDate(currentDate.getDate() + 30);
-    //   const dateString = currentDate.toISOString();
-    //   let updateString;
-    //   if (rows[0].payment === "" || rows[0].payment === "null") {
-    //     updateString = dateString;
-    //   } else {
-    //     const lastPaymentInfo = new Date(rows[0].payment);
-    //     lastPaymentInfo.setDate(lastPaymentInfo.getDate() + 30);
-    //     updateString = lastPaymentInfo.toISOString();
-    //   }
-    //   let paymentCnt = rows[0].paymentCnt;
-    //   if (!(paymentCnt > 0)) {
-    //     paymentCnt = 0;
-    //   }
-    //   paymentCnt++;
-    //   const query1 = `update company set payment = '${updateString}',paymentId = '${paymentId}', paymentCnt = ${paymentCnt} ,
-    //                   monthlyCollectionCnt = ${rows2[0].monthCnt},
-    //                   concurrentCollectionCnt = ${rows2[0].concurrentCnt},
-    //                   thisMonthCollectionCnt = 0 where emailAddress = '${email}'`;
-
-    //   await executeQuery(query1).catch((e) => {
-    //     return NextResponse.json({ type: "error" });
-    //   });
-    //   return NextResponse.json({
-    //     type: "success",
-    //     updated: email,
-    //     result: updateString,
-    //   });
-    // }
     return NextResponse.json({ received: true });
   } catch (error) {
     console.error("Webhook signature verification failed:", error);
