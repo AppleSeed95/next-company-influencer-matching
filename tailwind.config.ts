@@ -24,7 +24,7 @@ const config: Config = {
       },
       screens: {
         mobile: {
-          max: "500px",
+          max: "700px",
         },
         sp: {
           max: "1200px",

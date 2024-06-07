@@ -54,8 +54,6 @@ export async function POST(request: NextRequest) {
           rows[0].payment === "null" ||
           rows[0].payment === null
         ) {
-          console.log("null accepted");
-
           updateString = dateString;
         } else {
           const lastPaymentInfo = new Date(rows[0].payment);
