@@ -24,9 +24,7 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ type: "error" });
     });
     if (!val) {
-      const subscription = await stripe.subscriptions.cancel(
-        `{{${paymentId}}}`
-      );
+      const subscription = await stripe.subscriptions.cancel(`${paymentId}`);
       console.log(subscription);
     }
     return NextResponse.json({
