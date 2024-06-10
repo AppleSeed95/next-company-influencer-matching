@@ -1,28 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
 import { executeQuery } from "../util/db";
-// import { Stripe } from 'stripe';
-// import { buffer } from 'micro';
-
-// const stripe = new Stripe('pk_test_51OV8DpHeC7VfJv8UJXLcBhECs81qBUSwD7ZJQmNuFtbien8WQCuZ2SCzkOYu2siAwkH1x4GqvCPUJqOVXQULsoz200ctmm80cL');
-
-// const stripeWebhookSecret = 'we_1OwfQoHeC7VfJv8U3lv6WL7D';
 
 export async function POST(request: NextRequest) {
-  // Verify the signature of the webhook event
-  // const buf = await buffer(request)
-  // const signature = request.headers.get('stripe-signature');
   const body = await request.json();
   try {
     console.log("type", body.type);
 
     switch (body.type) {
       case "checkout.session.completed":
-        // Handle checkout session completion, provide access
         break;
       case "invoice.paid":
         console.log(body.data.object);
 
         const email = body.data.object.customer_email;
+        const customerId = body.data.object.customer;
         const paymentId = body.data.object.subscription;
         const query = `SELECT company.payment, company.paymentCnt
                             FROM company
@@ -70,6 +61,7 @@ export async function POST(request: NextRequest) {
         }
         paymentCnt++;
         const query1 = `update company set payment = '${updateString}',paymentId = '${paymentId}', paymentCnt = ${paymentCnt} ,
+                      customerId = '${customerId}',
                       monthlyCollectionCnt = ${rows2[0].monthCnt},
                       concurrentCollectionCnt = ${rows2[0].concurrentCnt},
                       thisMonthCollectionCnt = 0 where emailAddress = '${email}'`;
@@ -77,12 +69,9 @@ export async function POST(request: NextRequest) {
         await executeQuery(query1).catch((e) => {
           return NextResponse.json({ type: "error" });
         });
-        // Continue to provision the subscription as payments keep coming in
         break;
       case "invoice.payment_failed":
-        // The payment failed or the subscription has a problem, alert the user, or revoke access
         break;
-      // ... handle other event types
       default:
         console.log(`Unhandled event type`);
     }
