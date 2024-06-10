@@ -27,6 +27,8 @@ export async function PUT(request: NextRequest) {
       try {
         await stripe.subscriptions.cancel(`${paymentId}`);
         const query = `UPDATE  company SET paymentId = '', paymentCnt = 0 WHERE paymentId = '${paymentId}' `;
+        console.log(query);
+
         await executeQuery(query);
         return NextResponse.json({
           type: "success",
