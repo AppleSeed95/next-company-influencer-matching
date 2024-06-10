@@ -295,6 +295,23 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
       fetchData();
     }
   }
+  const redirectToCustomerPortal = async () => {
+    setIsLoading(true);
+
+    const { data } = await axios.post('/api/customerPortalSession', { customerId: 'cus_QEhR3MlSO7sttI' }
+    );
+
+    console.log(data);
+
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      // Handle error
+      console.error('Error creating session:', data.message);
+    }
+
+    setIsLoading(false);
+  };
   return (
     <div
       className={
@@ -578,7 +595,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
             <Button
               buttonType={ButtonType.DANGER}
               buttonClassName="sp:ml-[0px]"
-              handleClick={handlePaymentInfoChange}
+              handleClick={data?.payment.length > 0 ? redirectToCustomerPortal : handlePaymentInfoChange}
             >
               決済情報変更
             </Button>

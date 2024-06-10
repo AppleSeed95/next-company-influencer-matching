@@ -20,6 +20,8 @@ export async function POST(request: NextRequest) {
         // Handle checkout session completion, provide access
         break;
       case "invoice.paid":
+        console.log(body.data.object);
+
         const email = body.data.object.customer_email;
         const paymentId = body.data.object.subscription;
         const query = `SELECT company.payment, company.paymentCnt
