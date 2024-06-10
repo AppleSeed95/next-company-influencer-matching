@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
         const query = `SELECT company.payment, company.paymentCnt
                             FROM company
                             LEFT JOIN users ON company.emailAddress = users.email
-                            WHERE company.emailAddress = '${email}'
+                            WHERE company.customerId = '${customerId}'
                          `;
         const rows = await executeQuery(query).catch((e) => {
           return NextResponse.json({ type: "error" });
@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
         }
         const query2 = `SELECT plan.monthCnt, plan.concurrentCnt from plan
                       LEFT JOIN company ON company.plan = plan.id
-                      WHERE company.emailAddress = '${email}'
+                      WHERE company.customerId = '${customerId}'
                       `;
         const rows2 = await executeQuery(query2).catch((e) => {
           return NextResponse.json({ type: "error" });
@@ -62,8 +62,9 @@ export async function POST(request: NextRequest) {
                       customerId = '${customerId}',
                       monthlyCollectionCnt = ${rows2[0].monthCnt},
                       concurrentCollectionCnt = ${rows2[0].concurrentCnt},
-                      thisMonthCollectionCnt = 0 where emailAddress = '${email}'`;
-
+                      thisMonthCollectionCnt = 0 
+                      WHERE company.customerId = '${customerId}'
+                      `;
         await executeQuery(query1).catch((e) => {
           return NextResponse.json({ type: "error" });
         });
