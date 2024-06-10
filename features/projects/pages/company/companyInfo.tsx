@@ -597,7 +597,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
             <Button
               buttonType={ButtonType.DANGER}
               buttonClassName="sp:ml-[0px]"
-              handleClick={data?.payment?.length > 0 ? redirectToCustomerPortal : handlePaymentInfoChange}
+              handleClick={data?.customerId?.length > 0 ? redirectToCustomerPortal : handlePaymentInfoChange}
             >
               <span className="flex ">
                 <div className="flex items-center">
