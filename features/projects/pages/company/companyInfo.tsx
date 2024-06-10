@@ -25,6 +25,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
   const [showPayment, setShowPayment] = useState(false);
   const [agree, setAgree] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoading1, setIsLoading1] = useState(false);
   const [data, setData] = useState({
     companyName: "",
     companyNameGana: "",
@@ -38,6 +39,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
     postalCode: "",
     address: "",
     payment: "",
+    customerId: "",
     building: "",
     date: "",
     status: "",
@@ -296,21 +298,21 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
     }
   }
   const redirectToCustomerPortal = async () => {
-    setIsLoading(true);
+    setIsLoading1(true);
 
-    const { data } = await axios.post('/api/customerPortalSession', { customerId: 'cus_QEhR3MlSO7sttI' }
+    const { data: result } = await axios.post('/api/customerPortalSession', { customerId: data?.customerId }
     );
 
-    console.log(data);
+    console.log(result);
 
-    if (data.url) {
-      window.location.href = data.url;
+    if (result.url) {
+      window.location.href = result.url;
     } else {
       // Handle error
-      console.error('Error creating session:', data.message);
+      console.error('Error creating session:', result.message);
     }
 
-    setIsLoading(false);
+    setIsLoading1(false);
   };
   return (
     <div
@@ -597,7 +599,20 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
               buttonClassName="sp:ml-[0px]"
               handleClick={data?.payment.length > 0 ? redirectToCustomerPortal : handlePaymentInfoChange}
             >
-              決済情報変更
+              <span className="flex ">
+                <div className="flex items-center">
+                  {isLoading1 ? (
+                    <img
+                      src="/img/refresh.svg"
+                      alt="rotate"
+                      className="mr-[5px] rotate"
+                    />
+                  ) : (
+                    ""
+                  )}
+                  決済情報変更
+                </div>
+              </span>
             </Button>
           </div>
         </div>

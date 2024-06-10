@@ -10,8 +10,6 @@ export async function POST(request: NextRequest) {
       case "checkout.session.completed":
         break;
       case "invoice.paid":
-        console.log(body.data.object);
-
         const email = body.data.object.customer_email;
         const customerId = body.data.object.customer;
         const paymentId = body.data.object.subscription;
