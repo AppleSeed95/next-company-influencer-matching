@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { executeQuery } from "../util/db";
 const bcrypt = require("bcrypt");
+import Stripe from "stripe";
+const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
 
 export interface RowType {
   id: number;
@@ -11,7 +13,7 @@ export interface RowType {
 
 export async function PUT(request: NextRequest) {
   const id = request.nextUrl.searchParams.get("id") || "";
-  const { val } = await request.json();
+  const { val, paymentId } = await request.json();
   try {
     const update = val ? 1 : 0;
 
@@ -21,6 +23,12 @@ export async function PUT(request: NextRequest) {
     await executeQuery(query).catch((e) => {
       return NextResponse.json({ type: "error" });
     });
+    if (!val) {
+      const subscription = await stripe.subscriptions.cancel(
+        `{{${paymentId}}}`
+      );
+      console.log(subscription);
+    }
     return NextResponse.json({
       type: "success",
     });

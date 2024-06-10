@@ -40,6 +40,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
     address: "",
     payment: "",
     customerId: "",
+    paymentId: "",
     building: "",
     date: "",
     status: "",
@@ -257,7 +258,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
     return formattedDate;
   }
   const handleUpdateAccount = async (val) => {
-    const res = await axios.put(`/api/auth?id=${data?.userId}`, { val: val });
+    const res = await axios.put(`/api/auth?id=${data?.userId}`, { val: val, paymentId: data?.paymentId });
     if (res.data.type === 'success') {
       if (!val) {
         await axios.post("/api/sendEmail", {
