@@ -13,14 +13,17 @@ export async function POST(request: NextRequest) {
         const email = body.data.object.customer_email;
         const customerId = body.data.object.customer;
         const paymentId = body.data.object.subscription;
-        const query = `SELECT company.payment, company.paymentCnt
+        const query = `SELECT payment, paymentCnt
                             FROM company
-                            LEFT JOIN users ON company.emailAddress = users.email
-                            WHERE company.emailAddress = '${email}'
+                            WHERE emailAddress = '${email}'
                          `;
+        console.log(query);
+
         const rows = await executeQuery(query).catch((e) => {
           return NextResponse.json({ type: "error" });
         });
+        console.log(rows);
+
         if (!rows || !rows.length || rows.length === 0) {
           return NextResponse.json({
             type: "error",
