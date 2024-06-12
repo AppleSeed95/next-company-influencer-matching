@@ -15,8 +15,6 @@ export async function POST(request: NextRequest) {
                             FROM company
                             WHERE emailAddress = '${email}'
                          `;
-        console.log(query);
-
         const rows = await executeQuery(query).catch((e) => {
           return NextResponse.json({ type: "error" });
         });

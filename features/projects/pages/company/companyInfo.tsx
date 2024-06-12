@@ -336,13 +336,15 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
             if (success) {
               await axios.post("/api/sendEmail", {
                 to: data.emailAddress,
-                subject: "【インフルエンサーめぐり】解約を受け付けました",
-                html: `<div>${data?.representativeName} 様
+                subject: "【インフルエンサーめぐり】決済完了のご連絡",
+                html: `<div>${data?.responsibleName} 様
                   <br/>
-                  <br/>いつもインフルエンサーめぐりをご利用いただきありがとうございます。
-                  <br/>正常に決済が完了しました。
-                  <br/>引き続き、サービスをご利用ください。
+                  <br/>いつもインフルエンサーめぐりをご利用いただきありがとうございます。<br/>
+                  <br/>本日、ご登録のカードで請求処理をさせていただきました。
+                  <br/>明細は、ログイン後に「企業情報変更」の「決済情報変更」ボタンよりご確認いただけます。
+                  <br/>請求書、領収書も発行可能となっております。<br/>
                   <br/>
+                  <br/>引き続き、インフルエンサーめぐりをよろしくお願いします。<br/>
                   <br/>-----------------------------------------------------
                   <br/>不明点がございましたらお問い合わせフォームよりご連絡ください。
                   </div>https://influencer-meguri.jp/ask
