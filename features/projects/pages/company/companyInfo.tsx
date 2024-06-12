@@ -354,16 +354,24 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
             if (fail) {
               await axios.post("/api/sendEmail", {
                 to: data.emailAddress,
-                subject: "【インフルエンサーめぐり】決済ができませんでした",
-                html: `<div>${data?.representativeName} 様
+                subject: "【インフルエンサーめぐり】決済エラーのご連絡",
+                html: `<div>${data?.responsibleName} 様
                   <br/>
-                  <br/>いつもインフルエンサーめぐりをご利用いただきありがとうございます。
-                  <br/>決済ができませんでした。
-                  <br/>ログインしてご確認をお願いします。
-                  <br/>https://influencer-meguri.jp/companyInfo
+                  <br/>いつもインフルエンサーめぐりをご利用いただきありがとうございます。<br/>
+                  <br/>ログイン後に「企業情報変更」の「決済情報変更」ボタンよりカード情報のご確認・変更をお願いします。
+                  <br/>
                   <br/>-----------------------------------------------------
                   <br/>不明点がございましたらお問い合わせフォームよりご連絡ください。
                   </div>https://influencer-meguri.jp/ask
+                  
+                  `,
+              });
+              await axios.post("/api/sendEmail", {
+                from: data.emailAddress,
+                subject: "【インフルエンサーめぐり】決済エラー",
+                html: `<div>以下の企業で決済ができませんでした。
+                  <br/>
+                  ${data?.companyName}
                   `,
               });
             }
