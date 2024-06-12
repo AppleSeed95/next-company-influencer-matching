@@ -4,8 +4,6 @@ import { executeQuery } from "../util/db";
 export async function POST(request: NextRequest) {
   const body = await request.json();
   try {
-    console.log("type", body.type);
-
     switch (body.type) {
       case "checkout.session.completed":
         break;
