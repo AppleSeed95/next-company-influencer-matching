@@ -249,7 +249,7 @@ export default function CompanyListPage() {
                         {aData.status}
                       </td>
                       <td className="px-[35px] py-[25px]  border border-[#D3D3D3]">
-                        {aData?.payment.length > 0 ? aData.payment?.substring(0, 10) + '' : ''}
+                        {aData?.payment?.length > 0 ? aData.payment?.substring(0, 10) + '' : ''}
                       </td>
                       <td className="px-[35px] py-[25px]  border border-[#D3D3D3]">
                         {aData.freeAccount === '1' || aData.freeAccount == 1 ? "無料アカウント" : ""}
