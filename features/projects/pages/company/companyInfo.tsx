@@ -333,49 +333,49 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
         <Modal
           body={confirmMsg}
           onOk={async () => {
-            if (success) {
-              await axios.post("/api/sendEmail", {
-                to: data.emailAddress,
-                subject: "【インフルエンサーめぐり】決済完了のご連絡",
-                html: `<div>${data?.responsibleName} 様
-                  <br/>
-                  <br/>いつもインフルエンサーめぐりをご利用いただきありがとうございます。<br/>
-                  <br/>本日、ご登録のカードで請求処理をさせていただきました。
-                  <br/>明細は、ログイン後に「企業情報変更」の「決済情報変更」ボタンよりご確認いただけます。
-                  <br/>請求書、領収書も発行可能となっております。<br/>
-                  <br/>引き続き、インフルエンサーめぐりをよろしくお願いします。<br/>
-                  <br/>-----------------------------------------------------
-                  <br/>不明点がございましたらお問い合わせフォームよりご連絡ください。
-                  </div>https://influencer-meguri.jp/ask
-                  
-                  `,
-              });
-            }
-            if (fail) {
-              await axios.post("/api/sendEmail", {
-                to: data.emailAddress,
-                subject: "【インフルエンサーめぐり】決済エラーのご連絡",
-                html: `<div>${data?.responsibleName} 様
-                  <br/>
-                  <br/>いつもインフルエンサーめぐりをご利用いただきありがとうございます。<br/>
-                  <br/>ご登録いただいたカードで決済ができませんでした。
-                  <br/>ログイン後に「企業情報変更」の「決済情報変更」ボタンよりカード情報のご確認・変更をお願いします。
-                  <br/>
-                  <br/>-----------------------------------------------------
-                  <br/>不明点がございましたらお問い合わせフォームよりご連絡ください。
-                  </div>https://influencer-meguri.jp/ask
-                  
-                  `,
-              });
-              await axios.post("/api/sendEmail", {
-                from: data.emailAddress,
-                subject: "【インフルエンサーめぐり】決済エラー",
-                html: `<div>以下の企業で決済ができませんでした。
-                  <br/>
-                  ${data?.companyName}
-                  `,
-              });
-            }
+            // if (success) {
+            //   await axios.post("/api/sendEmail", {
+            //     to: data.emailAddress,
+            //     subject: "【インフルエンサーめぐり】決済完了のご連絡",
+            //     html: `<div>${data?.responsibleName} 様
+            //       <br/>
+            //       <br/>いつもインフルエンサーめぐりをご利用いただきありがとうございます。<br/>
+            //       <br/>本日、ご登録のカードで請求処理をさせていただきました。
+            //       <br/>明細は、ログイン後に「企業情報変更」の「決済情報変更」ボタンよりご確認いただけます。
+            //       <br/>請求書、領収書も発行可能となっております。<br/>
+            //       <br/>引き続き、インフルエンサーめぐりをよろしくお願いします。<br/>
+            //       <br/>-----------------------------------------------------
+            //       <br/>不明点がございましたらお問い合わせフォームよりご連絡ください。
+            //       </div>https://influencer-meguri.jp/ask
+
+            //       `,
+            //   });
+            // }
+            // if (fail) {
+            //   await axios.post("/api/sendEmail", {
+            //     to: data.emailAddress,
+            //     subject: "【インフルエンサーめぐり】決済エラーのご連絡",
+            //     html: `<div>${data?.responsibleName} 様
+            //       <br/>
+            //       <br/>いつもインフルエンサーめぐりをご利用いただきありがとうございます。<br/>
+            //       <br/>ご登録いただいたカードで決済ができませんでした。
+            //       <br/>ログイン後に「企業情報変更」の「決済情報変更」ボタンよりカード情報のご確認・変更をお願いします。
+            //       <br/>
+            //       <br/>-----------------------------------------------------
+            //       <br/>不明点がございましたらお問い合わせフォームよりご連絡ください。
+            //       </div>https://influencer-meguri.jp/ask
+
+            //       `,
+            //   });
+            //   await axios.post("/api/sendEmail", {
+            //     from: data.emailAddress,
+            //     subject: "【インフルエンサーめぐり】決済エラー",
+            //     html: `<div>以下の企業で決済ができませんでした。
+            //       <br/>
+            //       ${data?.companyName}
+            //       `,
+            //   });
+            // }
             setShowConfirm(false)
             router.push("/companyInfo");
           }}

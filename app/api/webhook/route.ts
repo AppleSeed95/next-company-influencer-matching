@@ -1,5 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { executeQuery } from "../util/db";
+import sgMail from "@sendgrid/mail";
+
+sgMail.setApiKey(process.env.API_KEY);
+
+import { ADMIN_EMAIL } from "../sendEmail/config";
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
@@ -9,6 +14,38 @@ export async function POST(request: NextRequest) {
         break;
       case "invoice.paid":
         const email = body.data.object.customer_email;
+        const companyQuery = `SELECT responsibleName from company where emailAddress = '${email}'`;
+        const company = await executeQuery(companyQuery).catch((e) => {
+          return NextResponse.json({ type: "error" });
+        });
+        const customerCompany = company[0].responsibleName;
+        console.log(customerCompany);
+
+        const msg = {
+          to: email,
+          from: ADMIN_EMAIL,
+          subject: "【インフルエンサーめぐり】決済完了のご連絡",
+          html: `<div>${customerCompany} 様
+          <br/>
+          <br/>いつもインフルエンサーめぐりをご利用いただきありがとうございます。<br/>
+          <br/>本日、ご登録のカードで請求処理をさせていただきました。
+          <br/>明細は、ログイン後に「企業情報変更」の「決済情報変更」ボタンよりご確認いただけます。
+          <br/>請求書、領収書も発行可能となっております。<br/>
+          <br/>引き続き、インフルエンサーめぐりをよろしくお願いします。<br/>
+          <br/>-----------------------------------------------------
+          <br/>不明点がございましたらお問い合わせフォームよりご連絡ください。
+          </div>https://influencer-meguri.jp/ask
+          
+          `,
+        };
+
+        const res = await sgMail.send(msg).catch((e) => {
+          console.log(e.response.body.errors);
+        });
+        if (!res) {
+          return NextResponse.json({ type: "error" });
+        }
+
         const customerId = body.data.object.customer;
         const paymentId = body.data.object.subscription;
         const query = `SELECT payment, paymentCnt
