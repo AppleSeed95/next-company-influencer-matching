@@ -8,19 +8,17 @@ import { ADMIN_EMAIL } from "../sendEmail/config";
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
+  const email = body.data.object.customer_email;
+  const companyQuery = `SELECT responsibleName from company where emailAddress = '${email}'`;
+  const company = await executeQuery(companyQuery).catch((e) => {
+    return NextResponse.json({ type: "error" });
+  });
+  const customerCompany = company[0].responsibleName;
   try {
     switch (body.type) {
       case "checkout.session.completed":
         break;
       case "invoice.paid":
-        const email = body.data.object.customer_email;
-        const companyQuery = `SELECT responsibleName from company where emailAddress = '${email}'`;
-        const company = await executeQuery(companyQuery).catch((e) => {
-          return NextResponse.json({ type: "error" });
-        });
-        const customerCompany = company[0].responsibleName;
-        console.log("detected company:", customerCompany, company);
-
         const msg = {
           to: email,
           from: ADMIN_EMAIL,
@@ -55,7 +53,6 @@ export async function POST(request: NextRequest) {
         const rows = await executeQuery(query).catch((e) => {
           return NextResponse.json({ type: "error" });
         });
-        console.log(rows);
 
         if (!rows || !rows.length || rows.length === 0) {
           return NextResponse.json({
@@ -74,7 +71,6 @@ export async function POST(request: NextRequest) {
         currentDate.setDate(currentDate.getDate() + 30);
         const dateString = currentDate.toISOString();
         let updateString;
-        console.log(rows[0].payment);
 
         if (
           rows[0].payment === "" ||
@@ -104,6 +100,29 @@ export async function POST(request: NextRequest) {
         });
         break;
       case "invoice.payment_failed":
+        const msg_fail = {
+          to: email,
+          from: ADMIN_EMAIL,
+          subject: "【インフルエンサーめぐり】決済エラーのご連絡",
+          html: `<div>${customerCompany} 様
+                  <br/>
+                  <br/>いつもインフルエンサーめぐりをご利用いただきありがとうございます。<br/>
+                  <br/>ご登録いただいたカードで決済ができませんでした。
+                  <br/>ログイン後に「企業情報変更」の「決済情報変更」ボタンよりカード情報のご確認・変更をお願いします。
+                  <br/>
+                  <br/>-----------------------------------------------------
+                  <br/>不明点がございましたらお問い合わせフォームよりご連絡ください。
+                  </div>https://influencer-meguri.jp/ask
+
+                  `,
+        };
+
+        const res_fail = await sgMail.send(msg_fail).catch((e) => {
+          console.log(e.response.body.errors);
+        });
+        if (!res_fail) {
+          return NextResponse.json({ type: "error" });
+        }
         break;
       default:
         console.log(`Unhandled event type`);
