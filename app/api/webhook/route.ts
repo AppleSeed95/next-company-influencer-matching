@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
           return NextResponse.json({ type: "error" });
         });
         const customerCompany = company[0].responsibleName;
-        console.log(customerCompany);
+        console.log(customerCompany, company);
 
         const msg = {
           to: email,
