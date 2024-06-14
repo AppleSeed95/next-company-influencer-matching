@@ -8,17 +8,17 @@ import { ADMIN_EMAIL } from "../sendEmail/config";
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
-  const email = body.data.object.customer_email;
-  const companyQuery = `SELECT responsibleName from company where emailAddress = '${email}'`;
-  const company = await executeQuery(companyQuery).catch((e) => {
-    return NextResponse.json({ type: "error" });
-  });
-  const customerCompany = company[0].responsibleName;
   try {
     switch (body.type) {
       case "checkout.session.completed":
         break;
       case "invoice.paid":
+        const email = body.data.object.customer_email;
+        const companyQuery = `SELECT responsibleName from company where emailAddress = '${email}'`;
+        const company = await executeQuery(companyQuery).catch((e) => {
+          return NextResponse.json({ type: "error" });
+        });
+        const customerCompany = company[0].responsibleName;
         const msg = {
           to: email,
           from: ADMIN_EMAIL,
@@ -100,11 +100,19 @@ export async function POST(request: NextRequest) {
         });
         break;
       case "invoice.payment_failed":
+        const email_fail = body.data.object.customer_email;
+        const companyQuery_fail = `SELECT responsibleName from company where emailAddress = '${email_fail}'`;
+        const company_fail = await executeQuery(companyQuery_fail).catch(
+          (e) => {
+            return NextResponse.json({ type: "error" });
+          }
+        );
+        const customerCompany_fail = company_fail[0].responsibleName;
         const msg_fail = {
           to: email,
           from: ADMIN_EMAIL,
           subject: "【インフルエンサーめぐり】決済エラーのご連絡",
-          html: `<div>${customerCompany} 様
+          html: `<div>${customerCompany_fail} 様
                   <br/>
                   <br/>いつもインフルエンサーめぐりをご利用いただきありがとうございます。<br/>
                   <br/>ご登録いただいたカードで決済ができませんでした。
