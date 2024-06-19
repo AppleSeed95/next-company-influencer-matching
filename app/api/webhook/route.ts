@@ -12,45 +12,29 @@ export async function POST(request: NextRequest) {
     switch (body.type) {
       case "checkout.session.completed":
         break;
-      case "invoice.paid":
+      case "invoice.paid1":
         const email = body.data.object.customer_email;
         const companyQuery = `SELECT responsibleName from company where emailAddress = '${email}'`;
         const company = await executeQuery(companyQuery).catch((e) => {
           return NextResponse.json({ type: "error" });
         });
         const customerCompany = company[0].responsibleName;
-        // const msg = {
-        //   to: email,
-        //   from: ADMIN_EMAIL,
-        //   subject: "【インフルエンサーめぐり】決済完了のご連絡",
-        //   html: `<div>${customerCompany} 様
-        //   <br/>
-        //   <br/>いつもインフルエンサーめぐりをご利用いただきありがとうございます。<br/>
-        //   <br/>本日、ご登録のカードで請求処理をさせていただきました。
-        //   <br/>明細は、ログイン後に「企業情報変更」の「決済情報変更」ボタンよりご確認いただけます。
-        //   <br/>請求書、領収書も発行可能となっております。<br/>
-        //   <br/>引き続き、インフルエンサーめぐりをよろしくお願いします。<br/>
-        //   <br/>-----------------------------------------------------
-        //   <br/>不明点がございましたらお問い合わせフォームよりご連絡ください。
-        //   </div>https://influencer-meguri.jp/ask
-
-        //   `,
-        // };
         const msg = {
           to: email,
           from: ADMIN_EMAIL,
-          subject: "【インフルエンサーめぐり】決済エラーのご連絡",
+          subject: "【インフルエンサーめぐり】決済完了のご連絡",
           html: `<div>${customerCompany} 様
-                  <br/>
-                  <br/>いつもインフルエンサーめぐりをご利用いただきありがとうございます。<br/>
-                  <br/>ご登録いただいたカードで決済ができませんでした。
-                  <br/>ログイン後に「企業情報変更」の「決済情報変更」ボタンよりカード情報のご確認・変更をお願いします。
-                  <br/>
-                  <br/>-----------------------------------------------------
-                  <br/>不明点がございましたらお問い合わせフォームよりご連絡ください。
-                  </div>https://influencer-meguri.jp/ask
-
-                  `,
+          <br/>
+          <br/>いつもインフルエンサーめぐりをご利用いただきありがとうございます。<br/>
+          <br/>本日、ご登録のカードで請求処理をさせていただきました。
+          <br/>明細は、ログイン後に「企業情報変更」の「決済情報変更」ボタンよりご確認いただけます。
+          <br/>請求書、領収書も発行可能となっております。<br/>
+          <br/>引き続き、インフルエンサーめぐりをよろしくお願いします。<br/>
+          <br/>-----------------------------------------------------
+          <br/>不明点がございましたらお問い合わせフォームよりご連絡ください。
+          </div>https://influencer-meguri.jp/ask
+          
+          `,
         };
 
         const res = await sgMail.send(msg).catch((e) => {
@@ -115,15 +99,17 @@ export async function POST(request: NextRequest) {
           return NextResponse.json({ type: "error" });
         });
         break;
-      case "invoice.payment_failed":
+      // case "invoice.payment_failed":
+      case "invoice.paid":
         const email_fail = body.data.object.customer_email;
-        const companyQuery_fail = `SELECT responsibleName from company where emailAddress = '${email_fail}'`;
+        const companyQuery_fail = `SELECT responsibleName,companyName from company where emailAddress = '${email_fail}'`;
         const company_fail = await executeQuery(companyQuery_fail).catch(
           (e) => {
             return NextResponse.json({ type: "error" });
           }
         );
         const customerCompany_fail = company_fail[0].responsibleName;
+        const customerCompany_fail_name = company_fail[0].companyName;
         const msg_fail = {
           to: email,
           from: ADMIN_EMAIL,
@@ -147,6 +133,20 @@ export async function POST(request: NextRequest) {
         if (!res_fail) {
           return NextResponse.json({ type: "error" });
         }
+        const msg_fail_admin = {
+          from: email,
+          to: ADMIN_EMAIL,
+          subject: "【インフルエンサーめぐり】決済エラー",
+          html: `<div>以下の企業で決済ができませんでした。<br/>
+                 <br/>
+                  ${customerCompany_fail_name}
+                  `,
+        };
+        console.log(customerCompany_fail_name);
+
+        await sgMail.send(msg_fail_admin).catch((e) => {
+          console.log(e.response.body.errors);
+        });
         break;
       default:
         console.log(`Unhandled event type`);
