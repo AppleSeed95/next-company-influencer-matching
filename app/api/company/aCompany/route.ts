@@ -31,7 +31,6 @@ export async function GET(request: NextRequest) {
     const rows = await executeQuery(query).catch((e) => {
       return NextResponse.json({ type: "error" });
     });
-    console.log(rows, rows[0]);
 
     return NextResponse.json(rows[0]);
   } catch (error) {

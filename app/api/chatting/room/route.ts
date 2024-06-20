@@ -29,7 +29,6 @@ export async function POST(request: NextRequest) {
         msg: "record already exists.",
       });
     }
-    console.log(rows[0].influencerName?.length);
 
     const influencerName = rows[0].influencerName?.length
       ? rows[0].influencerName
