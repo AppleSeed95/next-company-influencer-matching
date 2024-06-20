@@ -102,7 +102,6 @@ export async function POST(request: NextRequest) {
       // case "invoice.payment_failed":
       case "invoice.paid":
         const email_fail = body.data.object.customer_email;
-        console.log(email_fail);
 
         const companyQuery_fail = `SELECT responsibleName,companyName from company where emailAddress = '${email_fail}'`;
         const company_fail = await executeQuery(companyQuery_fail).catch(
@@ -112,6 +111,7 @@ export async function POST(request: NextRequest) {
         );
         const customerCompany_fail = company_fail[0].responsibleName;
         const customerCompany_fail_name = company_fail[0].companyName;
+        console.log(customerCompany_fail_name);
         const msg_fail = {
           to: email_fail,
           from: ADMIN_EMAIL,
@@ -137,7 +137,7 @@ export async function POST(request: NextRequest) {
         }
         const msg_fail_admin = {
           from: ADMIN_EMAIL,
-          to: ADMIN_EMAIL,
+          // to: ADMIN_EMAIL,
           subject: "【インフルエンサーめぐり】決済エラー",
           html: `<div>以下の企業で決済ができませんでした。<br/>
                  <br/>
