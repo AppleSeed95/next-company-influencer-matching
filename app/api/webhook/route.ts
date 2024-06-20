@@ -113,7 +113,7 @@ export async function POST(request: NextRequest) {
         const customerCompany_fail = company_fail[0].responsibleName;
         const customerCompany_fail_name = company_fail[0].companyName;
         const msg_fail = {
-          to: email,
+          to: email_fail,
           from: ADMIN_EMAIL,
           subject: "【インフルエンサーめぐり】決済エラーのご連絡",
           html: `<div>${customerCompany_fail} 様
@@ -136,7 +136,7 @@ export async function POST(request: NextRequest) {
           return NextResponse.json({ type: "error" });
         }
         const msg_fail_admin = {
-          from: email,
+          from: email_fail,
           to: ADMIN_EMAIL,
           subject: "【インフルエンサーめぐり】決済エラー",
           html: `<div>以下の企業で決済ができませんでした。<br/>
