@@ -102,6 +102,8 @@ export async function POST(request: NextRequest) {
       // case "invoice.payment_failed":
       case "invoice.paid":
         const email_fail = body.data.object.customer_email;
+        console.log(email_fail);
+
         const companyQuery_fail = `SELECT responsibleName,companyName from company where emailAddress = '${email_fail}'`;
         const company_fail = await executeQuery(companyQuery_fail).catch(
           (e) => {
