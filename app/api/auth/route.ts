@@ -47,6 +47,7 @@ export async function PUT(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
+    console.log(body);
     const result = await executeQuery(
       `SELECT * FROM users where email = '${body.id}'`
     ).catch((e) => {
@@ -60,6 +61,7 @@ export async function POST(request: NextRequest) {
       });
     }
     const user = result[0];
+    console.log(user);
     if (user.role === "admin") {
       if (!(user?.plainPassword?.length > 0)) {
         if (body.password === "12345") {
