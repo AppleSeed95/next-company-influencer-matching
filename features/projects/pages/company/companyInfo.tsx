@@ -742,7 +742,9 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
           <Button
             buttonType={ButtonType.DEFAULT}
             buttonClassName="rounded-[5px]"
-            handleClick={() => router.back()}
+            handleClick={() => {
+              router.push("/companyInfo");
+            }}
           >
             戻る
           </Button>
