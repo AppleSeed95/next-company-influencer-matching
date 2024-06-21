@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
     switch (body.type) {
       case "checkout.session.completed":
         break;
-      case "invoice.paid1":
+      case "invoice.paid":
         const email = body.data.object.customer_email;
         const companyQuery = `SELECT responsibleName from company where emailAddress = '${email}'`;
         const company = await executeQuery(companyQuery).catch((e) => {
@@ -99,8 +99,7 @@ export async function POST(request: NextRequest) {
           return NextResponse.json({ type: "error" });
         });
         break;
-      // case "invoice.payment_failed":
-      case "invoice.paid":
+      case "invoice.payment_failed":
         const email_fail = body.data.object.customer_email;
 
         const companyQuery_fail = `SELECT responsibleName,companyName from company where emailAddress = '${email_fail}'`;
