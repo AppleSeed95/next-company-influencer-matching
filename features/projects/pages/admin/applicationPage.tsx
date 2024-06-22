@@ -44,8 +44,8 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
         } else {
           result = await axios.get(`/api/case/aCase/?id=${id}`);
           if (result.data.data.previous > 0) {
-            const previouseResult = await axios.get(`/api/case/aCase/?id=${result.data.data.previous}`);
-            setPreviousData(previouseResult.data.data);
+            const previousResult = await axios.get(`/api/case/aCase/?id=${result.data.data.previous}`);
+            setPreviousData(previousResult.data.data);
           }
         }
         if (result?.data.type === 'error') {
@@ -85,13 +85,14 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
         approveMode: true,
       });
       if (result.data.type === "success") {
+
         if (update === reject)
           await axios.post("/api/sendEmail", {
             to: data?.emailAddress,
             subject: "【インフルエンサーめぐり】募集案件の内容修正をお願いします",
             html: `
             <div>
-            ${data?.representativeName}様<br/>
+            ${data?.responsibleName}様<br/>
           <br/>いつもインフルエンサーめぐりをご利用いただきありがとうございます。<br/>
           <br/>募集案件「 ${data.caseName} 」が否認されました。
           <br/>否認理由をご確認の上、修正いただき再申請をお願いします。<br/>
@@ -107,7 +108,7 @@ const ApplicationPage: React.FC<ApplicatinProps> = ({
             subject: "【インフルエンサーめぐり】募集案件を承認しました",
             html: `
             <div>
-            ${data?.representativeName}様<br/>
+            ${data?.responsibleName}様<br/>
           <br/>いつもインフルエンサーめぐりをご利用いただきありがとうございます。<br/>
           <br/>募集案件「 ${data?.caseName} 」を承認しましたのでログインしてご確認ください。<br/>
           <br/>-----------------------------------------------------

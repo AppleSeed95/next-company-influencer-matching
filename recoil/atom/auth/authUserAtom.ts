@@ -9,6 +9,7 @@ interface AuthUserState {
     targetId?: number;
     targetStatus?: string;
     targetName?: string;
+    responsibleName?: string;
     isFree?: number;
     active?: number;
     payment?: string;

@@ -164,6 +164,7 @@ export default function CaseDetailPage({ caseProps }: caseData) {
       id,
     });
     if (result.data.type === "success") {
+
       if (val === "否決")
         await axios.post("/api/sendEmail", {
           to: influencerData?.emailAddress,

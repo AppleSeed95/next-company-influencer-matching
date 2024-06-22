@@ -195,7 +195,7 @@ const CasePage: React.FC = () => {
       await axios.post("/api/sendEmail", {
         to: user.user?.email,
         subject: "【インフルエンサーめぐり】募集案件の登録申請をしました",
-        html: `<div>${user.user?.name} 様<br/>
+        html: `<div>${user.user?.responsibleName} 様<br/>
         <br/>いつもインフルエンサーめぐりをご利用いただきありがとうございます。<br/>
         <br/>
         <br/>募集案件の登録申請を受け付けました。 
