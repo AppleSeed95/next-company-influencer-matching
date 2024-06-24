@@ -57,8 +57,8 @@ const ChattingRooms: React.FC = () => {
               onClick={() => setActive(key)}
               className={
                 key === active
-                  ? "w-full border-b-[1px] border-[#DDDDDD] bg-[#CCCCCC] px-[36px] py-[20px] duration-500"
-                  : "w-full border-b-[1px] border-[#DDDDDD] px-[36px] py-[20px] duration-500"
+                  ? "w-full overflow-auto	 border-b-[1px] border-[#DDDDDD] bg-[#CCCCCC] px-[36px] py-[20px] duration-500"
+                  : "w-full overflow-auto	 border-b-[1px] border-[#DDDDDD] px-[36px] py-[20px] duration-500"
               }
               id={key === active ? "active" : `room${key}`}
             >
