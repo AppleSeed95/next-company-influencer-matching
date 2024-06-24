@@ -264,7 +264,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
         await axios.post("/api/sendEmail", {
           to: data.emailAddress,
           subject: "【インフルエンサーめぐり】解約を受け付けました",
-          html: `<div>${data.companyName} ${data.representativeName} 様
+          html: `<div>${data.companyName} ${data.responsibleName} 様
             <br/>
             <br/>いつもインフルエンサーめぐりをご利用いただきありがとうございます。
             <br/>解約を受け付けました。
@@ -281,7 +281,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
         await axios.post("/api/sendEmail", {
           to: data.emailAddress,
           subject: "【インフルエンサーめぐり】継続を受け付けました",
-          html: `<div>${data.companyName} ${data.representativeName} 様
+          html: `<div>${data.companyName} ${data.responsibleName} 様
             <br/>
             <br/>いつもインフルエンサーめぐりをご利用いただきありがとうございます。
             <br/>継続を受け付けました。
