@@ -30,9 +30,10 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    const influencerName = rows[0].influencerName?.length
-      ? rows[0].influencerName
-      : rows[0].nickName;
+    const influencerName =
+      rows[0].influencerName?.length > 0 && rows[0].influencerName !== "null"
+        ? rows[0].influencerName
+        : rows[0].nickName;
     const body = {
       applyId: rows[0].id,
       companyName: rows[0].companyName,
