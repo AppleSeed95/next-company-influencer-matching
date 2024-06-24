@@ -137,7 +137,7 @@ export async function PUT(request: NextRequest) {
         if (company.thisMonthCollectionCnt === company.monthlyCollectionCnt) {
           return NextResponse.json({
             type: "fail",
-            msg: "今月の募集は上限になりました。次回の決済後に開始してください。",
+            msg: "今月の募集は上限になりました。来月に開始してください。",
           });
         }
       }
