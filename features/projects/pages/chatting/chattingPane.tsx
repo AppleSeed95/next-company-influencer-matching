@@ -141,7 +141,7 @@ export default function ChattingPane() {
                 ${roomData?.responsibleName} 様<br/>
                 <br/>以下の案件からチャットが届いてますのでログインしてご確認ください。
                 <br/>
-                <br/>インフルエンサー名：${roomData?.influencerName}
+                <br/>インフルエンサー名：${roomData?.influencerNickName}
                 <br/>案件名：${roomData?.caseName}
                 <br/>URL ：https://influencer-meguri.jp/chatting/${id}
                 <br/>
