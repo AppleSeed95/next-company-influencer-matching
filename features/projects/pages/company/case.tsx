@@ -196,13 +196,13 @@ const CasePage: React.FC = () => {
         to: user.user?.email,
         subject: "【インフルエンサーめぐり】募集案件の登録申請をしました",
         html: `<div>${user.user?.responsibleName} 様<br/>
-        <br/>いつもインフルエンサーめぐりをご利用いただきありがとうございます。<br/>
+        <br/>いつもインフルエンサーめぐりをご利用いただきありがとうございます。
         <br/>
         <br/>募集案件の登録申請を受け付けました。 
         <br/>申請内容を確認しますのでしばらくお待ちください。<br/>
         <br/>-----------------------------------------------------
         <br/>不明点がございましたらお問い合わせフォームよりご連絡ください。
-        </div> https://influencer-meguri.jp/ask。
+        </div> https://influencer-meguri.jp/ask
         `,
       });
       await axios.post("/api/sendEmail", {

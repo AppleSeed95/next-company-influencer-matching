@@ -169,7 +169,7 @@ export default function CaseDetailPage({ caseProps }: caseData) {
         await axios.post("/api/sendEmail", {
           to: influencerData?.emailAddress,
           subject: "【インフルエンサーめぐり】応募案件の返答がありました",
-          html: `<div>${influencerData?.influencerName?.length > 0 ? influencerData?.influencerName : influencerData.nickName} 様<br/>
+          html: `<div>${(influencerData?.influencerName?.length > 0 && influencerData?.influencerName !== 'null') ? influencerData?.influencerName : influencerData.nickName} 様<br/>
           <br/>いつもインフルエンサーめぐりをご利用いただきありがとうございます。<br/>
           <br/>「 ${caseData?.caseName} 」に応募いただきありがとうございます。
           <br/>応募内容をもとに慎重に検討しました結果、
@@ -185,7 +185,7 @@ export default function CaseDetailPage({ caseProps }: caseData) {
         await axios.post("/api/sendEmail", {
           to: influencerData?.emailAddress,
           subject: "【インフルエンサーめぐり】応募案件が承認されました",
-          html: `<div>${influencerData?.influencerName?.length > 0 ? influencerData?.influencerName : influencerData.nickName} 様<br/>
+          html: `<div>${(influencerData?.influencerName?.length > 0 && influencerData?.influencerName !== 'null') ? influencerData?.influencerName : influencerData.nickName} 様<br/>
           <br/>いつもインフルエンサーめぐりをご利用いただきありがとうございます。<br/>
           <br/>「 ${caseData?.caseName} 」に応募いただきありがとうございます。
           <br/>承認されましたのでログインしてご確認をお願いします。<br/>

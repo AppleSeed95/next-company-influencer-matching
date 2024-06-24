@@ -41,6 +41,7 @@ export default function InfluencerApplyPage() {
         <br/>60分以内に以下のURLから登録申請をお願いします。 
         <br/>※60分以上経過した場合は再度、仮申請をしてください。
         <br/>https://influencer-meguri.jp/applyInfluencer?id=${result.data.data.hash}
+        <br/>
         <br/>-----------------------------------------------------
         <br/>不明点がございましたらお問い合わせフォームよりご連絡ください。
         </div>
