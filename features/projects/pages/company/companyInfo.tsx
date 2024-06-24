@@ -198,7 +198,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
             to: data.emailAddress,
             subject: "【インフルエンサーめぐり】ご登録ありがとうございます",
             html: `<div>${data.responsibleName} 様
-              <br/><br/>
+              <br/>
               <br/>インフルエンサーめぐりにご登録いただきありがとうございます。 
               <br/>ログインしてお支払い情報をご登録いただくとサービスをご利用いただけます。
               <br/>
