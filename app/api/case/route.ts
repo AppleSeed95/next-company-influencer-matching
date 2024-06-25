@@ -97,6 +97,10 @@ export async function POST(request: NextRequest) {
     )}) VALUES(${query2.slice(0, -1)})`;
 
     const result = await executeQuery(query).catch((e) => {
+      console.log(query);
+
+      console.log(e);
+
       return NextResponse.json({ type: "error", msg: "error" });
     });
     let id = result.insertId;
