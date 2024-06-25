@@ -24,10 +24,10 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ type: "error" });
     });
     if (!val) {
+      await stripe.subscriptions.cancel(`${paymentId}`);
       try {
         const query = `UPDATE  company SET paymentId = '' WHERE paymentId = '${paymentId}' `;
         await executeQuery(query);
-        await stripe.subscriptions.cancel(`${paymentId}`);
         return NextResponse.json({
           type: "success",
         });
