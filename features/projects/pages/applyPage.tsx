@@ -69,17 +69,22 @@ export default function ApplyPage() {
           <div className="text-title text-center">
             企業登録フォーム
           </div>
-          <div className="ml-[70px] sp:ml-0 text-left sp:text-center mobile:ml-[0px] mobile:text-left">
-            <div className="pt-[40px] pb-[10px]">
-              インフルエンサーめぐりをご覧いただきありがとうございます。
-            </div>
-            <div className="py-[10px]">
-              企業登録をご希望の方は以下から仮申請をしてください。
-            </div>
-            <div className="py-[10px]">
-              ご入力いただいたメールアドレス宛に申請フォームをお送りします。
+          <div className="w-full flex justify-center">
+            <div className="block m-auto">
+              <div className="ml-[70px] sp:ml-0 text-left mobile:ml-[0px] mobile:text-left">
+                <div className="pt-[40px] pb-[10px]">
+                  インフルエンサーめぐりをご覧いただきありがとうございます。
+                </div>
+                <div className="py-[10px]">
+                  企業登録をご希望の方は以下から仮申請をしてください。
+                </div>
+                <div className="py-[10px]">
+                  ご入力いただいたメールアドレス宛に申請フォームをお送りします。
+                </div>
+              </div>
             </div>
           </div>
+
           <div className="flex mobile:gap-[5px] gap-[20px] mobile:flex-wrap justify-center w-full mt-[30px] mb-[20px] pr-[70px] mobile:pr-[0px] sp:mb-[30px]">
             <span className="mobile:w-full mobile:text-left mt-[5px] w-[100px] text-right">
               メールアドレス
