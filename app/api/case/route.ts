@@ -54,6 +54,7 @@ export async function POST(request: NextRequest) {
         aKey === "id" ||
         aKey === "companyName" ||
         aKey === "emailAddress" ||
+        aKey === "responsibleName" ||
         aKey === "representativeName"
       )
         return;
@@ -167,6 +168,7 @@ export async function PUT(request: NextRequest) {
         aKey !== "companyId" &&
         aKey !== "companyName" &&
         aKey !== "emailAddress" &&
+        aKey !== "responsibleName" &&
         aKey !== "representativeName"
       ) {
         query +=
