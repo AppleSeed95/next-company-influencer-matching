@@ -136,7 +136,7 @@ export async function GET() {
   try {
     const query = "SELECT * FROM company ORDER BY id DESC";
     const rows = await executeQuery(query).catch((e) => {
-      console.log(e);
+      console.log("error here4", e);
       return NextResponse.json({ type: "error", msg: "no table exists" });
     });
     // const deletingCompanyQuery = `DELETE message, chatroom, apply, cases, users

@@ -32,7 +32,7 @@ export async function PUT(request: NextRequest) {
           type: "success",
         });
       } catch (e) {
-        console.log(e);
+        console.log("error here", e);
       }
     }
     return NextResponse.json({

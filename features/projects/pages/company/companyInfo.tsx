@@ -222,7 +222,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
           setError(["メールアドレスが登録されていません。"])
         }
       } catch (e) {
-        console.log(e);
+        console.log("error here5", e);
       }
     }
     if (!isApply) {

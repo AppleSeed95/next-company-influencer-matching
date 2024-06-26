@@ -88,7 +88,7 @@ export async function PUT(request: NextRequest) {
       `;
       const count = await executeQuery(approvedInfluencerCtnQuery).catch(
         (e) => {
-          console.log(e);
+          console.log("error here2", e);
         }
       );
       const appliedInfluencerCtnQuery = `
@@ -96,7 +96,7 @@ export async function PUT(request: NextRequest) {
       `;
       const count1 = await executeQuery(appliedInfluencerCtnQuery).catch(
         (e) => {
-          console.log(e);
+          console.log("error here3", e);
         }
       );
       await executeQuery(queryWhenQuit);
