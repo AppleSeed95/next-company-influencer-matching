@@ -122,31 +122,31 @@ export async function POST(request: NextRequest) {
             LEFT JOIN company com ON c.companyId = com.id
             WHERE com.id = '${companyId}'`;
           await executeQuery(messageDeleteQuery);
-          const chatroomDeleteQuery = `DELETE c FROM chatroom c 
-            LEFT JOIN company com ON c.companyId = com.id
-            WHERE com.id = '${companyId}'`;
-          await executeQuery(chatroomDeleteQuery);
-          const applyDeleteQuery = `DELETE a FROM apply a 
-            LEFT JOIN cases c ON a.caseId = c.id
-            LEFT JOIN company com ON c.companyId = com.id
-            WHERE com.id = '${companyId}'`;
-          await executeQuery(applyDeleteQuery);
-          const caseDeleteQuery = `DELETE c FROM cases c
-            LEFT JOIN company com ON c.companyId = com.id
-            WHERE com.id = '${companyId}'
-          `;
-          await executeQuery(caseDeleteQuery);
-          const chatRoomDeleteQuery = `DELETE c FROM chatroom c
-            LEFT JOIN company com ON c.companyId = com.id
-            WHERE com.id = '${companyId}'
-          `;
-          await executeQuery(chatRoomDeleteQuery);
-          const companyDeleteQuery = `DELETE FROM company
-            WHERE company.id = '${companyId}'`;
-          await executeQuery(companyDeleteQuery);
-          const userDeleteQuery = `DELETE FROM users
-            WHERE id = '${user.id}'`;
-          await executeQuery(userDeleteQuery);
+          // const chatroomDeleteQuery = `DELETE c FROM chatroom c
+          //   LEFT JOIN company com ON c.companyId = com.id
+          //   WHERE com.id = '${companyId}'`;
+          // await executeQuery(chatroomDeleteQuery);
+          // const applyDeleteQuery = `DELETE a FROM apply a
+          //   LEFT JOIN cases c ON a.caseId = c.id
+          //   LEFT JOIN company com ON c.companyId = com.id
+          //   WHERE com.id = '${companyId}'`;
+          // await executeQuery(applyDeleteQuery);
+          // const caseDeleteQuery = `DELETE c FROM cases c
+          //   LEFT JOIN company com ON c.companyId = com.id
+          //   WHERE com.id = '${companyId}'
+          // `;
+          // await executeQuery(caseDeleteQuery);
+          // const chatRoomDeleteQuery = `DELETE c FROM chatroom c
+          //   LEFT JOIN company com ON c.companyId = com.id
+          //   WHERE com.id = '${companyId}'
+          // `;
+          // await executeQuery(chatRoomDeleteQuery);
+          // const companyDeleteQuery = `DELETE FROM company
+          //   WHERE company.id = '${companyId}'`;
+          // await executeQuery(companyDeleteQuery);
+          // const userDeleteQuery = `DELETE FROM users
+          //   WHERE id = '${user.id}'`;
+          // await executeQuery(userDeleteQuery);
           return NextResponse.json({
             type: "error",
             msg: "使用期間が切れました。",
