@@ -119,7 +119,7 @@ export async function POST(request: NextRequest) {
           const companyId = company[0].id;
           const messageDeleteQuery = `DELETE a FROM message a 
             LEFT JOIN apply app ON a.roomId = app.id
-            LEFT JOIN case c ON app.caseId = c.id
+            LEFT JOIN cases c ON app.caseId = c.id
             LEFT JOIN company com ON c.companyId = com.id
             WHERE com.id = ${companyId}`;
           await executeQuery(messageDeleteQuery);
