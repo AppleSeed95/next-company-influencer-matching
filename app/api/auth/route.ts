@@ -117,6 +117,11 @@ export async function POST(request: NextRequest) {
             });
           });
           const companyId = company[0].id;
+          const applyDeleteQuery = `DELETE a FROM apply a
+            LEFT JOIN cases c ON a.caseId = c.id
+            LEFT JOIN company com ON c.companyId = com.id
+            WHERE com.id = ${companyId}`;
+          await executeQuery(applyDeleteQuery);
           const messageDeleteQuery = `DELETE a FROM message a 
             LEFT JOIN chatroom c ON a.roomId = c.id
             LEFT JOIN company com ON c.companyId = com.id
@@ -126,11 +131,6 @@ export async function POST(request: NextRequest) {
             LEFT JOIN company com ON c.companyId = com.id
             WHERE com.id = ${companyId}`;
           await executeQuery(chatroomDeleteQuery);
-          const applyDeleteQuery = `DELETE a FROM apply a
-            LEFT JOIN cases c ON a.caseId = c.id
-            LEFT JOIN company com ON c.companyId = com.id
-            WHERE com.id = ${companyId}`;
-          await executeQuery(applyDeleteQuery);
           // const caseDeleteQuery = `DELETE c FROM cases c
           //   LEFT JOIN company com ON c.companyId = com.id
           //   WHERE com.id = ${companyId}
