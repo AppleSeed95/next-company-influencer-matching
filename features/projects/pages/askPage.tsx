@@ -270,8 +270,8 @@ export default function AskPageContent() {
           <Link href={'https://influencer-meguri.jp/company-overview.html'} className="underline underline-offset-[5px]">
             会社概要
           </Link>
-          <Link href={'https://influencer-meguri.jp/company-overview.html#tokusyo'} className="underline underline-offset-[5px]">特定商取引法に基づく表記</Link>
-          <a href={'https://influencer-meguri.jp/privacypolicy.html'} className="underline underline-offset-[5px]">プライバシーポリシー</a>
+          <a href={'https://influencer-meguri.jp/company-overview.html#tokusyo'} className="underline underline-offset-[5px]">特定商取引法に基づく表記</a>
+          <Link href={'https://influencer-meguri.jp/privacypolicy.html'} className="underline underline-offset-[5px]">プライバシーポリシー</Link>
           <Link href={'https://influencer-meguri.jp/terms-of-service.html'} className="underline underline-offset-[5px]">利用規約</Link>
           <Link href={'https://influencer-meguri.jp/company.html'} className="underline underline-offset-[5px]">運営会社</Link>
           <Link href={'https://influencer-meguri.jp/ask'} className="underline underline-offset-[5px]">お問い合わせ</Link>
