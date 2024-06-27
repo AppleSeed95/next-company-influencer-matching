@@ -139,21 +139,74 @@ export async function GET() {
       console.log("error here4", e);
       return NextResponse.json({ type: "error", msg: "no table exists" });
     });
-    // const deletingCompanyQuery = `DELETE message, chatroom, apply, cases, users
-    // FROM company
-    // LEFT JOIN users ON users.id = company.userId
-    // LEFT JOIN cases ON cases.companyId = company.id
-    // LEFT JOIN apply ON apply.caseId = cases.id
-    // LEFT JOIN chatroom ON chatroom.companyId = company.id
-    // LEFT JOIN message ON message.roomId = chatroom.id
-    // WHERE company.payment < NOW() AND users.active = 0`;
+    const deletingCompanyQuery = `SELECT * from users u
+    LEFT JOIN company c on c.userId = u.id
+    WHERE u.active = 0
+    AND c.payment < NOW()
+    `;
+    const deletingCompany = await executeQuery(deletingCompanyQuery).catch(
+      (e) => {
+        console.log("error here5", e);
+        return NextResponse.json({ type: "error", msg: "no table exists" });
+      }
+    );
+    console.log(deletingCompany.cnt, deletingCompany);
 
-    // const rows1 = await executeQuery(deletingCompanyQuery);
+    // AND collectionStart < NOW()
 
-    // const deleteQuery = `DELETE FROM influencer WHERE emailAddress = '${userEmail}'`;
-    //   const deleteUserQuery = `DELETE FROM users WHERE email = '${userEmail}'`;
-    //   await executeQuery(deleteQuery);
-    //   await executeQuery(deleteUserQuery);
+    // else {
+    //   if (user.role === "企業" && user.active === 0) {
+    //     const payment = result1[0].payment;
+    //     const paymentInfo = new Date(payment);
+    //     const today = new Date();
+    //     const allowed = paymentInfo > today;
+    //     if (!allowed) {
+    //       const companyQuery = `SELECT * FROM company where userId = '${user.id}'`;
+    //       const company = await executeQuery(companyQuery).catch((e) => {
+    //         return NextResponse.json({
+    //           type: "error",
+    //           msg: "入力に誤りがあります。",
+    //         });
+    //       });
+    //       const companyId = company[0].id;
+    //       const messageDeleteQuery = `DELETE a FROM message a
+    //         LEFT JOIN apply app ON a.roomId = app.id
+    //         LEFT JOIN cases c ON app.caseId = c.id
+    //         LEFT JOIN company com ON c.companyId = com.id
+    //         WHERE com.id = ${companyId}`;
+    //       await executeQuery(messageDeleteQuery);
+    //       const chatroomDeleteQuery = `DELETE c FROM chatroom c
+    //         LEFT JOIN company com ON c.companyId = com.id
+    //         WHERE com.id = ${companyId}`;
+    //       await executeQuery(chatroomDeleteQuery);
+    //       const applyDeleteQuery = `DELETE a FROM apply a
+    //         LEFT JOIN cases c ON a.caseId = c.id
+    //         LEFT JOIN company com ON c.companyId = com.id
+    //         WHERE com.id = ${companyId}`;
+    //       await executeQuery(applyDeleteQuery);
+    //       const caseDeleteQuery = `DELETE c FROM cases c
+    //         LEFT JOIN company com ON c.companyId = com.id
+    //         WHERE com.id = ${companyId}
+    //       `;
+    //       await executeQuery(caseDeleteQuery);
+    //       const chatRoomDeleteQuery = `DELETE c FROM chatroom c
+    //         LEFT JOIN company com ON c.companyId = com.id
+    //         WHERE com.id = ${companyId}
+    //       `;
+    //       await executeQuery(chatRoomDeleteQuery);
+    //       const companyDeleteQuery = `DELETE FROM company
+    //         WHERE company.id = ${companyId}`;
+    //       await executeQuery(companyDeleteQuery);
+    //       const userDeleteQuery = `DELETE FROM users
+    //         WHERE id = '${user.id}'`;
+    //       await executeQuery(userDeleteQuery);
+    //       return NextResponse.json({
+    //         type: "error",
+    //         msg: "使用期間が切れました。",
+    //       });
+    //     }
+    //   }
+    // }
     return NextResponse.json(rows);
   } catch (error) {
     console.error("Error fetching data:", error);
