@@ -28,7 +28,7 @@ export default function CaseDetailPage({ caseProps }: caseData) {
   const router = useRouter();
   const [active, setActive] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [showCollectionEndModal, setShowCollectionEndModal] = useState(true);
+  const [showCollectionEndModal, setShowCollectionEndModal] = useState(false);
   const [showInfluencer, setShowInfluencer] = useState(false);
   const [caseData, setCaseData] = useState(null);
   const [collectionStatusTemp, setCollectionStatusTemp] = useState("");
@@ -288,16 +288,19 @@ export default function CaseDetailPage({ caseProps }: caseData) {
           <button
             className="absolute bg-[#5E5E5E] text-[white] px-[15px] py-[10px] top-0 right-0 cursor-pointer"
             onClick={(e) => {
-              // if (onCancel) onCancel();
+              setShowCollectionEndModal(false);
             }}
           >
             x
           </button>
           <div className="pt-[30px] mt-[350px] sp:mt-[150px]">
-            <div>really?</div>
+            <div>本案件の募集を終了しますか?</div>
             <Button
               buttonType={ButtonType.PRIMARY}
-              // handleClick={() => onOk()}
+              handleClick={() => {
+                handleCollectionStateChange("募集終了");
+                setShowCollectionEndModal(false);
+              }}
               buttonClassName="m-[20px]"
             >
               確認
@@ -391,7 +394,7 @@ export default function CaseDetailPage({ caseProps }: caseData) {
                     buttonType={ButtonType.DANGER}
                     buttonClassName="rounded-[0px] px-[15px] py-[7px]"
                     handleClick={() => {
-                      handleCollectionStateChange("募集終了");
+                      setShowCollectionEndModal(true);
                     }}
                   >
                     募集終了
