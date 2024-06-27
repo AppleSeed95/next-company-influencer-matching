@@ -284,8 +284,25 @@ export default function CaseDetailPage({ caseProps }: caseData) {
             : "bg-black bg-opacity-25 w-full h-full fixed left-0 overflow-auto opacity-0 pointer-events-none duration-500"
         }
       >
-        <div>
-          are you really?
+        <div className="text-center bg-[white]  px-[35px] sp:px-[12px] sp:text-small w-[25%] sp:w-[90%] m-auto relative shadow-lg ">
+          <button
+            className="absolute bg-[#5E5E5E] text-[white] px-[15px] py-[10px] top-0 right-0 cursor-pointer"
+            onClick={(e) => {
+              // if (onCancel) onCancel();
+            }}
+          >
+            x
+          </button>
+          <div className="pt-[30px] mt-[350px] sp:mt-[150px]">
+            <div>really?</div>
+            <Button
+              buttonType={ButtonType.PRIMARY}
+              // handleClick={() => onOk()}
+              buttonClassName="m-[20px]"
+            >
+              確認
+            </Button>
+          </div>
         </div>
       </div>
       <div
