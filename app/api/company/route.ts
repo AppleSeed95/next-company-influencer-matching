@@ -150,7 +150,11 @@ export async function GET() {
         return NextResponse.json({ type: "error", msg: "no table exists" });
       }
     );
-    console.log(deletingCompany.length, deletingCompany);
+    if (deletingCompany.length > 0) {
+      deletingCompany.array.forEach((element) => {
+        console.log(element);
+      });
+    }
 
     // AND collectionStart < NOW()
 
