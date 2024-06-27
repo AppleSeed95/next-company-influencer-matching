@@ -194,6 +194,14 @@ export async function GET() {
           await executeQuery(userDeleteQuery);
         }
       });
+      const query = "SELECT * FROM company ORDER BY id DESC";
+      let rows = await executeQuery(query).catch((e) => {
+        console.log("error here4", e);
+        return NextResponse.json({ type: "error", msg: "no table exists" });
+      });
+      console.log("here finished");
+
+      return NextResponse.json(rows);
     }
     const query = "SELECT * FROM company ORDER BY id DESC";
     let rows = await executeQuery(query).catch((e) => {
