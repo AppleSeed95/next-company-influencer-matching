@@ -147,7 +147,7 @@ export async function GET() {
     );
     if (deletingCompany.length > 0) {
       const today = new Date();
-      deletingCompany.forEach(async (element) => {
+      await deletingCompany.forEach(async (element) => {
         const userId = element.userId;
         const payment = element.payment;
         const paymentInfo = new Date(payment);
@@ -199,8 +199,6 @@ export async function GET() {
         console.log("error here4", e);
         return NextResponse.json({ type: "error", msg: "no table exists" });
       });
-      console.log("here finished");
-
       return NextResponse.json(rows);
     }
     const query = "SELECT * FROM company ORDER BY id DESC";
@@ -208,7 +206,6 @@ export async function GET() {
       console.log("error here4", e);
       return NextResponse.json({ type: "error", msg: "no table exists" });
     });
-    console.log("return");
     return NextResponse.json(rows);
   } catch (error) {
     console.error("Error fetching data:", error);
