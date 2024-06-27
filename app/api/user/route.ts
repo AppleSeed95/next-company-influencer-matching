@@ -86,16 +86,25 @@ export async function PUT(request: NextRequest) {
     const todayString = today.toString();
     if (rows.length !== 0) {
       if (rows[0]?.name === null) {
+        const applyTime = new Date(rows[0]?.applyTime);
+        const timeDiff = today.getTime() - applyTime.getTime();
+        const minutesDiff = timeDiff / (1000 * 60);
+        console.log(minutesDiff);
+        if (minutesDiff > 60) {
+          const deleteQuery = `delete from users where email = '${email}'`;
+          await executeQuery(deleteQuery);
+        } else {
+          return NextResponse.json({
+            type: "error",
+            msg: "ご登録いただいたメールアドレスは仮申請中です",
+          });
+        }
+      } else {
         return NextResponse.json({
           type: "error",
-          msg: "ご登録いただいたメールアドレスは仮申請中です",
+          msg: "メールアドレスが既に登録されている",
         });
       }
-
-      return NextResponse.json({
-        type: "error",
-        msg: "メールアドレスが既に登録されている",
-      });
     }
 
     const randomString = generateRandomString();
