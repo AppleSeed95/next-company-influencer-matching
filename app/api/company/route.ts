@@ -208,6 +208,7 @@ export async function GET() {
       console.log("error here4", e);
       return NextResponse.json({ type: "error", msg: "no table exists" });
     });
+    console.log("return");
     return NextResponse.json(rows);
   } catch (error) {
     console.error("Error fetching data:", error);
