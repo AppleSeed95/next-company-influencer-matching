@@ -151,7 +151,7 @@ export async function GET() {
       }
     );
     if (deletingCompany.length > 0) {
-      deletingCompany.array.forEach((element) => {
+      deletingCompany.forEach((element) => {
         console.log(element);
       });
     }
