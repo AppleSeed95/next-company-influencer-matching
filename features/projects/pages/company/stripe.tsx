@@ -21,7 +21,7 @@ const CheckoutPage = ({ priceID, paymentCnt }: priceProps) => {
                     quantity: 1,
                 }],
                 mode: 'subscription',
-                successUrl: `${window.location.origin}/companyInfo?type=success`,
+                successUrl: `${window.location.origin}/paymentConfirm`,
                 cancelUrl: `${window.location.origin}/companyInfo?type=fail`,
             }
             );
