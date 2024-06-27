@@ -99,9 +99,22 @@ export async function PUT(request: NextRequest) {
           console.log("error here3", e);
         }
       );
+      const reportedInfluencerCtnQuery = `
+      SELECT COUNT(*) AS cnt FROM apply WHERE caseId = ${id} and status = '完了報告'
+      `;
+      const count2 = await executeQuery(reportedInfluencerCtnQuery).catch(
+        (e) => {
+          console.log("error here3", e);
+        }
+      );
       await executeQuery(queryWhenQuit);
 
-      if (count1 && count1[0].cnt === 0 && (!count || count[0].cnt === 0)) {
+      if (
+        count1 &&
+        count1[0].cnt === 0 &&
+        (!count || count[0].cnt === 0) &&
+        (!count2 || count2[0].cnt === 0)
+      ) {
         const caseUpdateQuery = `UPDATE cases SET collectionStatus = '完了'
         WHERE id = ${id}`;
         const result = await executeQuery(caseUpdateQuery);
