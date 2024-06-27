@@ -18,6 +18,9 @@ export async function POST(request: NextRequest) {
         const company = await executeQuery(companyQuery).catch((e) => {
           return NextResponse.json({ type: "error" });
         });
+        if (!(company.length > 0)) {
+          return NextResponse.json({ type: "error" });
+        }
         const customerCompany = company[0].responsibleName;
         const msg = {
           to: email,
@@ -108,6 +111,9 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ type: "error" });
           }
         );
+        if (!(company_fail.length > 0)) {
+          return NextResponse.json({ type: "error" });
+        }
         const customerCompany_fail = company_fail[0].responsibleName;
         const customerCompany_fail_name = company_fail[0].companyName;
         const msg_fail = {
