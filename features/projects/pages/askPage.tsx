@@ -271,7 +271,7 @@ export default function AskPageContent() {
             会社概要
           </Link>
           <span onClick={() => {
-            router.push('/compspanny-overview.html#tokusyo')
+            router.push('/company-overview.html#tokusyo')
           }} className="underline underline-offset-[5px]">特定商取引法に基づく表記</span>
           <Link href={'https://influencer-meguri.jp/privacypolicy.html'} className="underline underline-offset-[5px]">プライバシーポリシー</Link>
           <Link href={'https://influencer-meguri.jp/terms-of-service.html'} className="underline underline-offset-[5px]">利用規約</Link>
