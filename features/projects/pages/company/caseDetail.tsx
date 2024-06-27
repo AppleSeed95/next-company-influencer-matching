@@ -28,6 +28,7 @@ export default function CaseDetailPage({ caseProps }: caseData) {
   const router = useRouter();
   const [active, setActive] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [showCollectionEndModal, setShowCollectionEndModal] = useState(true);
   const [showInfluencer, setShowInfluencer] = useState(false);
   const [caseData, setCaseData] = useState(null);
   const [collectionStatusTemp, setCollectionStatusTemp] = useState("");
@@ -274,6 +275,17 @@ export default function CaseDetailPage({ caseProps }: caseData) {
             companyMode
             onCancel={() => setShowModal(false)}
           />
+        </div>
+      </div>
+      <div
+        className={
+          showCollectionEndModal
+            ? "bg-black bg-opacity-25 w-full h-full fixed left-0 overflow-auto duration-500"
+            : "bg-black bg-opacity-25 w-full h-full fixed left-0 overflow-auto opacity-0 pointer-events-none duration-500"
+        }
+      >
+        <div>
+          are you really?
         </div>
       </div>
       <div
