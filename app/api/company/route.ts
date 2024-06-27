@@ -151,66 +151,56 @@ export async function GET() {
       }
     );
     if (deletingCompany.length > 0) {
-      deletingCompany.forEach((element) => {
-        console.log(element);
+      const today = new Date();
+      deletingCompany.forEach(async (element) => {
+        const userId = element.userId;
+        const payment = element.payment;
+        const paymentInfo = new Date(payment);
+        const allowed = paymentInfo > today;
+        if (!allowed) {
+          const companyQuery = `SELECT * FROM company where userId = '${userId}'`;
+          const company = await executeQuery(companyQuery).catch((e) => {
+            return NextResponse.json({
+              type: "error",
+              msg: "入力に誤りがあります。",
+            });
+          });
+          const companyId = company[0].id;
+          const messageDeleteQuery = `DELETE a FROM message a
+            LEFT JOIN apply app ON a.roomId = app.id
+            LEFT JOIN cases c ON app.caseId = c.id
+            LEFT JOIN company com ON c.companyId = com.id
+            WHERE com.id = ${companyId}`;
+          await executeQuery(messageDeleteQuery);
+          const chatroomDeleteQuery = `DELETE c FROM chatroom c
+            LEFT JOIN company com ON c.companyId = com.id
+            WHERE com.id = ${companyId}`;
+          await executeQuery(chatroomDeleteQuery);
+          const applyDeleteQuery = `DELETE a FROM apply a
+            LEFT JOIN cases c ON a.caseId = c.id
+            LEFT JOIN company com ON c.companyId = com.id
+            WHERE com.id = ${companyId}`;
+          await executeQuery(applyDeleteQuery);
+          const caseDeleteQuery = `DELETE c FROM cases c
+            LEFT JOIN company com ON c.companyId = com.id
+            WHERE com.id = ${companyId}
+          `;
+          await executeQuery(caseDeleteQuery);
+          const chatRoomDeleteQuery = `DELETE c FROM chatroom c
+            LEFT JOIN company com ON c.companyId = com.id
+            WHERE com.id = ${companyId}
+          `;
+          await executeQuery(chatRoomDeleteQuery);
+          const companyDeleteQuery = `DELETE FROM company
+            WHERE company.id = ${companyId}`;
+          await executeQuery(companyDeleteQuery);
+          const userDeleteQuery = `DELETE FROM users
+            WHERE id = '${userId}'`;
+          await executeQuery(userDeleteQuery);
+        }
       });
     }
 
-    // AND collectionStart < NOW()
-
-    // else {
-    //   if (user.role === "企業" && user.active === 0) {
-    //     const payment = result1[0].payment;
-    //     const paymentInfo = new Date(payment);
-    //     const today = new Date();
-    //     const allowed = paymentInfo > today;
-    //     if (!allowed) {
-    //       const companyQuery = `SELECT * FROM company where userId = '${user.id}'`;
-    //       const company = await executeQuery(companyQuery).catch((e) => {
-    //         return NextResponse.json({
-    //           type: "error",
-    //           msg: "入力に誤りがあります。",
-    //         });
-    //       });
-    //       const companyId = company[0].id;
-    //       const messageDeleteQuery = `DELETE a FROM message a
-    //         LEFT JOIN apply app ON a.roomId = app.id
-    //         LEFT JOIN cases c ON app.caseId = c.id
-    //         LEFT JOIN company com ON c.companyId = com.id
-    //         WHERE com.id = ${companyId}`;
-    //       await executeQuery(messageDeleteQuery);
-    //       const chatroomDeleteQuery = `DELETE c FROM chatroom c
-    //         LEFT JOIN company com ON c.companyId = com.id
-    //         WHERE com.id = ${companyId}`;
-    //       await executeQuery(chatroomDeleteQuery);
-    //       const applyDeleteQuery = `DELETE a FROM apply a
-    //         LEFT JOIN cases c ON a.caseId = c.id
-    //         LEFT JOIN company com ON c.companyId = com.id
-    //         WHERE com.id = ${companyId}`;
-    //       await executeQuery(applyDeleteQuery);
-    //       const caseDeleteQuery = `DELETE c FROM cases c
-    //         LEFT JOIN company com ON c.companyId = com.id
-    //         WHERE com.id = ${companyId}
-    //       `;
-    //       await executeQuery(caseDeleteQuery);
-    //       const chatRoomDeleteQuery = `DELETE c FROM chatroom c
-    //         LEFT JOIN company com ON c.companyId = com.id
-    //         WHERE com.id = ${companyId}
-    //       `;
-    //       await executeQuery(chatRoomDeleteQuery);
-    //       const companyDeleteQuery = `DELETE FROM company
-    //         WHERE company.id = ${companyId}`;
-    //       await executeQuery(companyDeleteQuery);
-    //       const userDeleteQuery = `DELETE FROM users
-    //         WHERE id = '${user.id}'`;
-    //       await executeQuery(userDeleteQuery);
-    //       return NextResponse.json({
-    //         type: "error",
-    //         msg: "使用期間が切れました。",
-    //       });
-    //     }
-    //   }
-    // }
     return NextResponse.json(rows);
   } catch (error) {
     console.error("Error fetching data:", error);
