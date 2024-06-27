@@ -135,7 +135,7 @@ export async function POST(request: NextRequest) {
 export async function GET() {
   try {
     const query = "SELECT * FROM company ORDER BY id DESC";
-    const rows = await executeQuery(query).catch((e) => {
+    let rows = await executeQuery(query).catch((e) => {
       console.log("error here4", e);
       return NextResponse.json({ type: "error", msg: "no table exists" });
     });
@@ -198,6 +198,10 @@ export async function GET() {
             WHERE id = '${userId}'`;
           await executeQuery(userDeleteQuery);
         }
+      });
+      rows = await executeQuery(query).catch((e) => {
+        console.log("error here4", e);
+        return NextResponse.json({ type: "error", msg: "no table exists" });
       });
     }
 
