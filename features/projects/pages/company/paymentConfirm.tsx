@@ -16,7 +16,7 @@ export default function PaymentConfirmPage() {
         document.title = 'お支払いが成功しました';
         const fetchPaymentInfo = async () => {
             const { data: { data } } = await axios.get(`/api/company/aCompany/getPayment?id=${authUser.user?.id}`)
-            setPaymentData(data.paymentId);
+            setPaymentData(data?.paymentId);
         }
         fetchPaymentInfo();
     }, [])
@@ -43,17 +43,22 @@ export default function PaymentConfirmPage() {
                         }}
                     />
                 </div>}
-                <div className="text-center mobile:text-left justify-center w-full items-center mb-[20px] sp:mt-[50px] ">
-                    <div className="mb-[20px]">インフルエンサーめぐりをご利用いただきありがとうございます。
-                    </div>
-                    <div>お支払い手続きが完了しましたので機能をご利用いただけます。
-                    </div>
-                    <div className="mb-[20px]">
-                        今後のお支払いはご登録いただいたクレジットカードで処理されます。
-                    </div>
-                    <div>ご不明な点がございましたらお問い合わせよりご連絡ください。
+                <div className="w-full flex justify-center">
+                    <div className="block m-auto">
+                        <div className="text-center mobile:text-left mobile:px-[20px] justify-center w-full items-center mb-[20px]">
+                            <div className="mb-[20px]">インフルエンサーめぐりをご利用いただきありがとうございます。
+                            </div>
+                            <div>お支払い手続きが完了しましたので機能をご利用いただけます。
+                            </div>
+                            <div className="mb-[20px]">
+                                今後のお支払いはご登録いただいたクレジットカードで処理されます。
+                            </div>
+                            <div>ご不明な点がございましたらお問い合わせよりご連絡ください。
+                            </div>
+                        </div>
                     </div>
                 </div>
+
                 <div className="text-center mb-[10px]">
                     <Link href={"/companyInfo"}>
                         <Button buttonType={ButtonType.PRIMARY}>企業情報ページへ</Button>
