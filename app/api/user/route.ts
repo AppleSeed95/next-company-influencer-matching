@@ -89,8 +89,7 @@ export async function PUT(request: NextRequest) {
         const applyTime = new Date(rows[0]?.applyTime);
         const timeDiff = today.getTime() - applyTime.getTime();
         const minutesDiff = timeDiff / (1000 * 60);
-        console.log(minutesDiff);
-        if (minutesDiff > 1) {
+        if (minutesDiff > 60) {
           const deleteQuery = `delete from users where email = '${email}'`;
           await executeQuery(deleteQuery);
         } else {
