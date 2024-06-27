@@ -134,11 +134,6 @@ export async function POST(request: NextRequest) {
 }
 export async function GET() {
   try {
-    const query = "SELECT * FROM company ORDER BY id DESC";
-    let rows = await executeQuery(query).catch((e) => {
-      console.log("error here4", e);
-      return NextResponse.json({ type: "error", msg: "no table exists" });
-    });
     const deletingCompanyQuery = `SELECT * from users u
     LEFT JOIN company c on c.userId = u.id
     WHERE u.active = 0
@@ -199,12 +194,12 @@ export async function GET() {
           await executeQuery(userDeleteQuery);
         }
       });
-      rows = await executeQuery(query).catch((e) => {
-        console.log("error here4", e);
-        return NextResponse.json({ type: "error", msg: "no table exists" });
-      });
     }
-
+    const query = "SELECT * FROM company ORDER BY id DESC";
+    let rows = await executeQuery(query).catch((e) => {
+      console.log("error here4", e);
+      return NextResponse.json({ type: "error", msg: "no table exists" });
+    });
     return NextResponse.json(rows);
   } catch (error) {
     console.error("Error fetching data:", error);
