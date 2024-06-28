@@ -93,7 +93,17 @@ export async function PUT(request: NextRequest) {
       ).catch((e) => {
         console.log("error here2", e);
       });
-      console.log(appliedInfluencer);
+      let finishedApplyCnt = 0;
+      let rejectedApplyCnt = 0;
+      appliedInfluencer.forEach((apply) => {
+        if (apply.status === "否決") {
+          rejectedApplyCnt++;
+        }
+        if (apply.status === "完了") {
+          finishedApplyCnt = 0;
+        }
+      });
+      console.log(appliedInfluencer.length, finishedApplyCnt, rejectedApplyCnt);
 
       await executeQuery(queryWhenQuit);
 
