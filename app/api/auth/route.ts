@@ -71,8 +71,7 @@ export async function POST(request: NextRequest) {
           });
         }
       } else {
-        // const isMatch = await bcrypt.compare(body.password, user.password);
-        const isMatch = body.password === user.plainPassword;
+        const isMatch = await bcrypt.compare(body.password, user.password);
         if (isMatch) {
           return NextResponse.json({
             type: "success",

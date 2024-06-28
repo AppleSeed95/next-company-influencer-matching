@@ -105,6 +105,7 @@ export async function PUT(request: NextRequest) {
       });
 
       await executeQuery(queryWhenQuit);
+      console.log(appliedInfluencer.length, finishedApplyCnt, rejectedApplyCnt);
 
       if (
         !(appliedInfluencer.length > 0) ||
