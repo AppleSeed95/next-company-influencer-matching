@@ -139,7 +139,7 @@ export async function PUT(request: NextRequest) {
     const result = await executeQuery(query).catch((e) => {
       return NextResponse.json({ type: "error" });
     });
-    let query1 = `SELECT apply.*,cases.caseName,influencer.influencerName,company.representativeName,company.emailAddress
+    let query1 = `SELECT apply.*,cases.caseName,influencer.influencerName,influencer.nickName,company.representativeName,company.responsibleName,company.emailAddress
     FROM apply
     LEFT JOIN cases ON apply.caseId = cases.id
     LEFT JOIN company ON cases.companyId = company.id
