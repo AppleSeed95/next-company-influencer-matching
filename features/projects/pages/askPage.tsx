@@ -267,7 +267,7 @@ export default function AskPageContent() {
           }
         </div>
         <div className="mt-[154px] flex mobile:flex-wrap mb-[27px] flex justify-center gap-[20px] w-[full] m-auto text-[#AAAAAA]">
-          <Link href={'https://influencer-meguri.jp/company-overview.html'} className="underline underline-offset-[5px]">
+          <Link href={'https://influencer-meguri.jp/company-overview.html'} target="_blank" className="underline underline-offset-[5px]">
             会社概要
           </Link>
           <Link href={'https://influencer-meguri.jp/company-overview.html#tokusyo'} target="_blank" className="underline underline-offset-[5px]">特定商取引法に基づく表記</Link>
