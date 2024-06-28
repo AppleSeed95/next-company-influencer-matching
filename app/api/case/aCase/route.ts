@@ -84,7 +84,7 @@ export async function PUT(request: NextRequest) {
       const queryWhenQuit = `UPDATE company SET conCurrentCnt = conCurrentCnt - 1
       WHERE id = ${companyId}`;
       const approvedInfluencerCtnQuery = `
-      SELECT influencer.* FROM apply 
+      SELECT apply.* FROM apply 
       LEFT JOIN influencer ON apply.influencerId = influencer.id
       WHERE caseId = ${id}
       `;
