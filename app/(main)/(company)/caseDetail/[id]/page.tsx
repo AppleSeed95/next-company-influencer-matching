@@ -14,7 +14,7 @@ const CaseDetail: React.FC = () => {
   const user = useRecoilValue(authUserState);
   const { id } = useParams();
   const router = useRouter();
-  if (!user?.user) {
+  if (!user?.user && router) {
     router.push("/logout");
   }
   useEffect(() => {
@@ -23,12 +23,12 @@ const CaseDetail: React.FC = () => {
       const result = await axios.get(`/api/case/aCase?id=${id}&&companyId=${user.user.targetId}`);
       if (result.data.type === 'error') {
         setValid(false);
-        if (typeof window !== "undefined") {
+        if (typeof window !== "undefined" && router) {
           router.push("/appliedList");
         }
       }
       else {
-        if (!(result.data.companyCases.some((a) => a.id == id))) {
+        if (!(result.data.companyCases.some((a) => a.id == id)) && router) {
           router.push("/appliedList");
         } else {
           setData(result.data.data);
