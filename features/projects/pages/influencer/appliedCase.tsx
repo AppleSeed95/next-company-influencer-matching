@@ -70,6 +70,7 @@ export default function AppledCase() {
         to: data.emailAddress,
         subject: "【インフルエンサーめぐり】案件の完了報告が届きました",
         html: `<div>${data.responsibleName} 様
+          <br/>
           <br/>いつもインフルエンサーめぐりをご利用いただきありがとうございます。
           <br/>以下の案件で完了報告が届いてます。
           <br/>ログインしてご確認をお願いします。
