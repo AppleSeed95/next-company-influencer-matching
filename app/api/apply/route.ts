@@ -144,6 +144,7 @@ export async function PUT(request: NextRequest) {
     LEFT JOIN cases ON apply.caseId = cases.id
     LEFT JOIN company ON cases.companyId = company.id
     LEFT JOIN influencer ON apply.influencerId = influencer.id
+    WHERE apply.id = ${body.id}
     `;
     const rows = await executeQuery(query1).catch((e) => {
       return NextResponse.json({ type: "error" });

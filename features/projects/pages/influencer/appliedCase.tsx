@@ -75,7 +75,7 @@ export default function AppledCase() {
           <br/>ログインしてご確認をお願いします。
           <br/>
           <br/>案件名  ：${data.caseName}
-          <br/>インフルエンサー名：${data.influencerName}
+          <br/>インフルエンサー名：${data.nickName}
           <br/>URL   ：https://influencer-meguri.jp/caseDetail/${data.caseId}
           <br/>
           <br/>-----------------------------------------------------
