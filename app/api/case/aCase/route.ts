@@ -100,7 +100,7 @@ export async function PUT(request: NextRequest) {
           rejectedApplyCnt++;
         }
         if (apply.status === "完了") {
-          finishedApplyCnt = 0;
+          finishedApplyCnt++;
         }
       });
 
