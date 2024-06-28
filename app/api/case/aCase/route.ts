@@ -103,12 +103,11 @@ export async function PUT(request: NextRequest) {
           finishedApplyCnt = 0;
         }
       });
-      console.log(appliedInfluencer.length, finishedApplyCnt, rejectedApplyCnt);
 
       await executeQuery(queryWhenQuit);
 
       if (
-        appliedInfluencer.length === 0 ||
+        !(appliedInfluencer.length > 0) ||
         appliedInfluencer.length === finishedApplyCnt + rejectedApplyCnt
       ) {
         const caseUpdateQuery = `UPDATE cases SET collectionStatus = '完了'
