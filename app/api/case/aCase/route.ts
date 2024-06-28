@@ -106,6 +106,10 @@ export async function PUT(request: NextRequest) {
       console.log(appliedInfluencer.length, finishedApplyCnt, rejectedApplyCnt);
 
       await executeQuery(queryWhenQuit);
+      console.log(
+        appliedInfluencer.length === 0,
+        appliedInfluencer.length === finishedApplyCnt + rejectedApplyCnt
+      );
 
       if (
         appliedInfluencer.length === 0 ||
