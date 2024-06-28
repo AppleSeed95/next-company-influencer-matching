@@ -330,7 +330,7 @@ export default function AppledCase() {
                         />
                       </td>
                       <td className="px-[15px] py-[25px]  border border-[#D3D3D3] text-center">
-                        {aData.status === "完了報告" || aData.status === '完了' ? (
+                        {aData.status === "完了報告" ? (
                           <div className="text-white bg-[#236997] p-[10px] m-[5px] rounded-lg shadow-sm">
                             完了
                           </div>
