@@ -107,7 +107,10 @@ export async function PUT(request: NextRequest) {
 
       await executeQuery(queryWhenQuit);
 
-      if (false) {
+      if (
+        appliedInfluencer.length === 0 ||
+        appliedInfluencer.length === finishedApplyCnt + rejectedApplyCnt
+      ) {
         const caseUpdateQuery = `UPDATE cases SET collectionStatus = '完了'
         WHERE id = ${id}`;
         const result = await executeQuery(caseUpdateQuery);
