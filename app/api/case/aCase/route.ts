@@ -84,37 +84,20 @@ export async function PUT(request: NextRequest) {
       const queryWhenQuit = `UPDATE company SET conCurrentCnt = conCurrentCnt - 1
       WHERE id = ${companyId}`;
       const approvedInfluencerCtnQuery = `
-      SELECT COUNT(*) AS cnt FROM apply WHERE caseId = ${id} and status = '承認'
+      SELECT influencer.* FROM apply 
+      LEFT JOIN influencer ON apply.influencerId = influencer.id
+      WHERE caseId = ${id}
       `;
-      const count = await executeQuery(approvedInfluencerCtnQuery).catch(
-        (e) => {
-          console.log("error here2", e);
-        }
-      );
-      const appliedInfluencerCtnQuery = `
-      SELECT COUNT(*) AS cnt FROM apply WHERE caseId = ${id} and status = '申請中'
-      `;
-      const count1 = await executeQuery(appliedInfluencerCtnQuery).catch(
-        (e) => {
-          console.log("error here3", e);
-        }
-      );
-      const reportedInfluencerCtnQuery = `
-      SELECT COUNT(*) AS cnt FROM apply WHERE caseId = ${id} and status = '完了報告'
-      `;
-      const count2 = await executeQuery(reportedInfluencerCtnQuery).catch(
-        (e) => {
-          console.log("error here3", e);
-        }
-      );
+      const appliedInfluencer = await executeQuery(
+        approvedInfluencerCtnQuery
+      ).catch((e) => {
+        console.log("error here2", e);
+      });
+      console.log(appliedInfluencer);
+
       await executeQuery(queryWhenQuit);
 
-      if (
-        count1 &&
-        count1[0].cnt === 0 &&
-        (!count || count[0].cnt === 0) &&
-        (!count2 || count2[0].cnt === 0)
-      ) {
+      if (false) {
         const caseUpdateQuery = `UPDATE cases SET collectionStatus = '完了'
         WHERE id = ${id}`;
         const result = await executeQuery(caseUpdateQuery);
