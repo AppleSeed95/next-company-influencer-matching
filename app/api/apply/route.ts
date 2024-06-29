@@ -136,6 +136,8 @@ export async function PUT(request: NextRequest) {
     query = query.slice(0, -2);
     query += " ";
     query += `WHERE id = ${body.id}`;
+    console.log(query);
+
     const result = await executeQuery(query).catch((e) => {
       return NextResponse.json({ type: "error" });
     });
