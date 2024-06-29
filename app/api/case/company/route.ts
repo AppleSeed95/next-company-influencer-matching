@@ -85,7 +85,7 @@ export async function GET(request: NextRequest) {
     const collectionEndedCases = await executeQuery(collectionEndedCasesQuery);
     collectionEndedCases.forEach(async (element) => {
       const updateQuery2 = `UPDATE cases SET collectionStatus = '完了'
-          WHERE id = ${element.id} and collectionStatus = '募集終了' and (SELECT COUNT(*) FROM apply WHERE caseId = ${element.id} and status = '承認') = 0
+          WHERE id = ${element.id} and collectionStatus = '募集終了' and (SELECT COUNT(*) FROM apply WHERE caseId = ${element.id} and (status = '承認' OR status = '完了報告')) = 0
           and (SELECT COUNT(*) FROM apply WHERE caseId = ${element.id} and status = '申請中') = 0
           `;
       const test = await executeQuery(updateQuery2);
