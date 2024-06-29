@@ -198,7 +198,6 @@ export default function CaseDetailPage({ caseProps }: caseData) {
       setShowInfluencer(false);
       setConfirmMsg("操作が成功しました。");
       setShowConfirm(true);
-      setReload(!reload);
     } else {
       setConfirmMsg("操作が失敗しました。");
       setShowConfirm(true);
