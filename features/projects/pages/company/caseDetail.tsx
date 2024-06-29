@@ -61,6 +61,9 @@ export default function CaseDetailPage({ caseProps }: caseData) {
     document.title = '募集案件詳細';
 
     setCollectionStatusTemp(caseProps?.collectionStatus);
+  }, [caseProps])
+  useEffect(() => {
+
     const fetchData = async () => {
       try {
         const result = await axios.get(`/api/apply/company?id=${id}`);
