@@ -39,6 +39,7 @@ export default function CompanyListPage() {
         if (res.data?.length) {
           const modifiedData = res.data.map((aData) => {
             if (aData.payment) aData.payment = dateString(aData.payment)
+            return aData
           })
           setData(modifiedData);
           setOptionedData(modifiedData);
