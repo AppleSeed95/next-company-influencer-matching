@@ -185,7 +185,7 @@ export default function CollectedCase() {
       <div
         className={
           showConfirm
-            ? "bg-black bg-opacity-25 w-full h-full fixed left-0 overflow-auto duration-500"
+            ? "bg-black bg-opacity-25 w-full h-full fixed left-0 overflow-auto duration-500 z-10"
             : "bg-black bg-opacity-25 w-full h-full fixed left-0 overflow-auto opacity-0 pointer-events-none duration-500"
         }
       >
@@ -198,7 +198,7 @@ export default function CollectedCase() {
       <div
         className={
           showModal
-            ? "bg-black bg-opacity-25 w-full h-full fixed left-0 overflow-auto duration-500"
+            ? "bg-black bg-opacity-25 w-full h-full fixed left-0 overflow-auto duration-500 z-10"
             : "bg-black bg-opacity-25 w-full h-full fixed left-0 overflow-auto opacity-0 pointer-events-none duration-500"
         }
       >
