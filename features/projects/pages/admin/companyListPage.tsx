@@ -134,12 +134,8 @@ export default function CompanyListPage() {
   })
   )
   const dateString = (dateValue: string) => {
-    console.log(dateValue);
-
     const date = new Date(dateValue);
     if (isNaN(date.getUTCFullYear())) {
-      console.log('return');
-
       return "";
     }
     const year = date.getUTCFullYear();
@@ -159,7 +155,6 @@ export default function CompanyListPage() {
         <SearchBar
           data={composeSearchData(data.map((aData) => {
             if (aData?.address) aData.address = aData?.building?.length > 0 ? `${aData?.address} - ${aData?.building}` : aData?.address;
-            // if (aData.payment) aData.payment = dateString(aData.payment)
             return aData;
           }))}
           setVisibleData={handleSearch}
@@ -264,7 +259,7 @@ export default function CompanyListPage() {
                         {aData.status}
                       </td>
                       <td className="px-[35px] py-[25px]  border border-[#D3D3D3]">
-                        {aData?.payment !== 'null' ?? aData?.payment}
+                        {aData?.payment}
                       </td>
                       <td className="px-[35px] py-[25px]  border border-[#D3D3D3]">
                         {aData.freeAccount === '1' || aData.freeAccount == 1 ? "無料アカウント" : ""}
@@ -353,7 +348,7 @@ export default function CompanyListPage() {
                       決算
                     </div>
                     <span className="mb-[7px] sp:text-spsmall">
-                      {aData?.payment !== 'null' ?? aData?.payment}
+                      {aData?.payment}
                     </span>
                   </div>
                   <div className="flex my-[10px]">
