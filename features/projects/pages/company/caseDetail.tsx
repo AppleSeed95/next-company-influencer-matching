@@ -617,7 +617,14 @@ export default function CaseDetailPage({ caseProps }: caseData) {
                           完了
                         </div>}
                       {(aData.status === '承認' || aData.status === '完了報告') && <Button
-                        handleClick={() => handleApprove("完了", aData.id)}
+                        handleClick={() => {
+                          if (aData.status === '完了報告') {
+                            handleApprove("完了", aData.id)
+                          } else {
+                            setCompleteCandidate(aData.id);
+                            setShowCompleteConfirmModal(true);
+                          }
+                        }}
                         buttonType={ButtonType.PRIMARY}
                       >
                         完了
@@ -760,8 +767,12 @@ export default function CaseDetailPage({ caseProps }: caseData) {
                         </div>}
                       {(aData.status === '承認' || aData.status === '完了報告') && <Button
                         handleClick={() => {
-                          setCompleteCandidate(aData.id);
-                          setShowCompleteConfirmModal(true);
+                          if (aData.status === '完了報告') {
+                            handleApprove("完了", aData.id)
+                          } else {
+                            setCompleteCandidate(aData.id);
+                            setShowCompleteConfirmModal(true);
+                          }
                         }}
                         buttonType={ButtonType.PRIMARY}
                       >
