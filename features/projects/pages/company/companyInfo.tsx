@@ -250,11 +250,22 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
     )
   }
   const dateString = (dateValue: string) => {
+    console.log(dateValue);
+
     const date = new Date(dateValue);
-    if (isNaN(date.getFullYear())) {
+    if (isNaN(date.getUTCFullYear())) {
+      console.log('return');
+
       return "";
     }
-    const formattedDate = `${date.getUTCFullYear()}/${(date.getUTCMonth() + 1).toString().padStart(2, '0')}/${date.getUTCDate().toString().padStart(2, '0')} ${date.getUTCHours().toString().padStart(2, '0')}:${date.getUTCMinutes().toString().padStart(2, '0')}`;
+    const year = date.getUTCFullYear();
+    const month = date.getUTCMonth() + 1;
+    const day = date.getUTCDate();
+    const hours = date.getUTCHours();
+    const minutes = date.getUTCMinutes();
+
+    const formattedDate = `${year}/${month}/${day} ${hours}:${minutes}`;
+
     return formattedDate;
   }
   const handleUpdateAccount = async (val) => {
