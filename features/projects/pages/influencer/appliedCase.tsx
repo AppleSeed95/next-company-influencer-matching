@@ -12,7 +12,6 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import Image from "next/image";
 import ReactPaginate from "react-paginate";
-import Link from "next/link";
 export default function AppledCase() {
   const user = useRecoilValue(authUserState);
   const router = useRouter();
@@ -332,16 +331,16 @@ export default function AppledCase() {
                         />
                       </td>
                       <td className="px-[15px] py-[25px]  border border-[#D3D3D3] text-center">
-                        {aData.status === "完了報告" || aData.status === "完了" ? (
+                        {aData.status === "完了報告" || aData.status === '完了' ? (
                           <div className="text-white bg-[#236997] p-[10px] m-[5px] rounded-lg shadow-sm">
                             完了
                           </div>
-                        ) : aData.status !== '承認' ? (
+                        ) : aData.status === '承認' ? (
                           <Button
                             handleClick={() => handleEndReport(aData.id)}
                             buttonType={ButtonType.PRIMARY}
                           >
-                            <span className="text-[12px]">完了報告</span>
+                            <span className="text-small">完了報告</span>
                           </Button>
                         ) : ''}
                       </td>
@@ -457,7 +456,7 @@ export default function AppledCase() {
                   <div className="flex">
                     {aData.status === "完了報告" || aData.status === '完了' ? (
                       <div className="text-white bg-[#236997] p-[10px] m-[5px] rounded-lg shadow-sm">
-                        完了した
+                        完了
                       </div>
                     ) : aData.status === '承認' ? (
                       <Button
