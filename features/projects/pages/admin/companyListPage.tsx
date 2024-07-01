@@ -37,9 +37,12 @@ export default function CompanyListPage() {
       try {
         const res = await axios.get("api/company");
         if (res.data?.length) {
-          setData(res.data);
-          setOptionedData(res.data);
-          setVisibleData(res.data);
+          const modifiedData = res.data.map((aData) => {
+            if (aData.payment) aData.payment = dateString(aData.payment)
+          })
+          setData(modifiedData);
+          setOptionedData(modifiedData);
+          setVisibleData(modifiedData);
         }
         setIsLoading(false);
       }
@@ -163,7 +166,7 @@ export default function CompanyListPage() {
         <SearchBar
           data={composeSearchData(data.map((aData) => {
             if (aData.address) aData.address = aData?.building?.length > 0 ? `${aData?.address} - ${aData?.building}` : aData?.address;
-            if (aData.payment) aData.payment = dateString(aData.payment)
+            // if (aData.payment) aData.payment = dateString(aData.payment)
             return aData;
           }))}
           setVisibleData={handleSearch}
