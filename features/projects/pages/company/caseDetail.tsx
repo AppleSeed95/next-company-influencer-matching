@@ -315,7 +315,7 @@ export default function CaseDetailPage({ caseProps }: caseData) {
                 handleClick={() => {
                   setShowCompleteConfirmModal(false);
                 }}
-                buttonClassName="my-[20px]"
+                buttonClassName="my-[20px] rounded-[5px]"
               >
                 いいえ
               </Button>
