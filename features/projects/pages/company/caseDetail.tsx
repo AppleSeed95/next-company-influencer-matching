@@ -287,8 +287,39 @@ export default function CaseDetailPage({ caseProps }: caseData) {
             : "bg-black bg-opacity-25 w-full h-full fixed left-0 overflow-auto opacity-0 pointer-events-none duration-500"
         }
       >
-        <div>
-          really?
+        <div className="text-center bg-[white]  px-[35px] sp:px-[12px] sp:text-small w-[25%] sp:w-[90%] m-auto relative shadow-lg ">
+          <button
+            className="absolute bg-[#5E5E5E] text-[white] px-[15px] py-[10px] top-0 right-0 cursor-pointer"
+            onClick={(e) => {
+              setShowCompleteConfirmModal(false);
+            }}
+          >
+            x
+          </button>
+          <div className="pt-[30px] mt-[350px] sp:mt-[150px]">
+            <div>完了報告されてませんが、完了しますか？</div>
+            <div className="flex justify-center gap-[10px]">
+              <Button
+                buttonType={ButtonType.PRIMARY}
+                handleClick={() => {
+                  handleCollectionStateChange("募集終了");
+                  setShowCompleteConfirmModal(false);
+                }}
+                buttonClassName="m-[20px]"
+              >
+                はい
+              </Button>
+              <Button
+                buttonType={ButtonType.DEFAULT}
+                handleClick={() => {
+                  setShowCompleteConfirmModal(false);
+                }}
+                buttonClassName="m-[20px]"
+              >
+                いいえ
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
       <div
