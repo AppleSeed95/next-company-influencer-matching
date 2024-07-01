@@ -305,7 +305,6 @@ export default function CaseDetailPage({ caseProps }: caseData) {
                   handleCollectionStateChange("募集終了");
                   setShowCompleteConfirmModal(false);
                 }}
-                buttonClassName="m-[20px]"
               >
                 はい
               </Button>
@@ -314,7 +313,6 @@ export default function CaseDetailPage({ caseProps }: caseData) {
                 handleClick={() => {
                   setShowCompleteConfirmModal(false);
                 }}
-                buttonClassName="m-[20px]"
               >
                 いいえ
               </Button>
