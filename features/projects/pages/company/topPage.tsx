@@ -51,7 +51,7 @@ export default function TopPage({ influencerMode }: topProps) {
     const hours = date.getUTCHours();
     const minutes = date.getUTCMinutes();
 
-    const formattedDate = `${year}年${month}月${day}日${hours}時${minutes}分`;
+    const formattedDate = `${year}年 ${month}月 ${day}日 ${hours}時 ${minutes}分`;
 
     return formattedDate;
   }
