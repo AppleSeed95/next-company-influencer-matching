@@ -134,7 +134,7 @@ export default function CompanyListPage() {
     if (isNaN(date.getFullYear())) {
       return "";
     }
-    const formattedDate = `${date.getUTCFullYear()}/${(date.getUTCMonth() + 1).toString().padStart(2, '0')}/${date.getUTCDate().toString().padStart(2, '0')} ${date.getUTCHours().toString().padStart(2, '0')}:${date.getUTCMinutes().toString().padStart(2, '0')}`;
+    const formattedDate = `${date.getUTCFullYear()}/${(date.getUTCMonth() + 1).toString()}/${date.getUTCDate().toString()} ${date.getUTCHours().toString()}:${date.getUTCMinutes().toString()}`;
     return formattedDate;
   }
   return (
