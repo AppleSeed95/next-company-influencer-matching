@@ -165,7 +165,6 @@ export default function CollectedCase() {
   const dateString = (dateValue: string) => {
     const date = new Date(dateValue);
     if (isNaN(date.getUTCFullYear())) {
-      console.log('return');
 
       return "";
     }
