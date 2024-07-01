@@ -259,7 +259,7 @@ export default function CompanyListPage() {
                         {aData.status}
                       </td>
                       <td className="px-[35px] py-[25px]  border border-[#D3D3D3]">
-                        {aData?.payment}
+                        {aData?.payment !== 'null' ? aData?.payment : ''}
                       </td>
                       <td className="px-[35px] py-[25px]  border border-[#D3D3D3]">
                         {aData.freeAccount === '1' || aData.freeAccount == 1 ? "無料アカウント" : ""}
@@ -348,7 +348,7 @@ export default function CompanyListPage() {
                       決算
                     </div>
                     <span className="mb-[7px] sp:text-spsmall">
-                      {aData?.payment}
+                      {aData?.payment !== 'null' ? aData?.payment : ''}
                     </span>
                   </div>
                   <div className="flex my-[10px]">
