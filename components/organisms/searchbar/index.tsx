@@ -28,7 +28,10 @@ const SearchBar: React.FC<SearchBarProps> = ({
     }
   };
   const handleSearch = () => {
+
     const passtest = (aData) => {
+      console.log(aData);
+
       if (keyword === "" || !keyword) return true;
       let isMatch = false;
       [...keys, ...Object.keys(data[0])].forEach((aKey) => {
