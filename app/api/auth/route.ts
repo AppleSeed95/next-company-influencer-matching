@@ -119,21 +119,12 @@ export async function POST(request: NextRequest) {
     if (user.role === "企業") {
       const paymentInfo = new Date(result1[0].payment);
       const today = new Date();
-      const options: Intl.DateTimeFormatOptions = {
-        timeZone: "Asia/Tokyo",
-        timeZoneName: "short",
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit",
-      };
-      const jstTime = today.toLocaleString("en-US", options);
-      console.log(jstTime);
+      const utc = today.getTime() + today.getTimezoneOffset() * 60000; // Convert to UTC
+      const jstOffset = 9 * 60 * 60000; // JST is UTC + 9 hours
+      const jstTime = new Date(utc + jstOffset);
 
-      const allowed = paymentInfo > today;
-      console.log(paymentInfo, today, allowed, active);
+      const allowed = paymentInfo > jstTime;
+      console.log(paymentInfo, jstTime, allowed, active);
 
       if (!allowed && active !== 1) {
         return NextResponse.json({
