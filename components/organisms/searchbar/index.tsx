@@ -28,9 +28,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
     }
   };
   const handleSearch = () => {
-
-    const passtest = (aData) => {
-
+    const passTest = (aData) => {
       if (keyword === "" || !keyword) return true;
       let isMatch = false;
       [...keys, ...Object.keys(data[0])].forEach((aKey) => {
@@ -41,7 +39,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
       });
       return isMatch;
     };
-    setVisibleData(data.filter(passtest));
+    setVisibleData(data.filter(passTest));
   }
   return (
     <div className="bg-[#F8F9FA] w-full border border-[#D3D3D3] mt-[28px] sp:mt-[0px] px-[35px] sp:px-[14px] mb-[34px] sp:mb-[14px]">
