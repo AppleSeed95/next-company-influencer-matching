@@ -141,7 +141,9 @@ export default function CompanyListPage() {
     console.log(dateValue);
 
     const date = new Date(dateValue);
-    if (isNaN(date.getFullYear())) {
+    if (isNaN(date.getUTCFullYear())) {
+      console.log('return');
+
       return "";
     }
     const year = date.getUTCFullYear();
@@ -150,7 +152,7 @@ export default function CompanyListPage() {
     const hours = date.getUTCHours();
     const minutes = date.getUTCMinutes();
 
-    const formattedDate = `${year}年 ${month}月 ${day}日 ${hours}時 ${minutes}分`;
+    const formattedDate = `${year}/${month}/${day} ${hours}:${minutes}分`;
 
     return formattedDate;
   }
