@@ -119,6 +119,19 @@ export async function POST(request: NextRequest) {
     if (user.role === "企業") {
       const paymentInfo = new Date(result1[0].payment);
       const today = new Date();
+      const options: Intl.DateTimeFormatOptions = {
+        timeZone: "Asia/Tokyo",
+        timeZoneName: "short",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+      };
+      const jstTime = today.toLocaleString("en-US", options);
+      console.log(jstTime);
+
       const allowed = paymentInfo > today;
       console.log(paymentInfo, today, allowed, active);
 
