@@ -165,7 +165,7 @@ export default function CompanyListPage() {
         <div className="text-title sp:hidden">企業一覧</div>
         <SearchBar
           data={composeSearchData(data.map((aData) => {
-            if (aData.address) aData.address = aData?.building?.length > 0 ? `${aData?.address} - ${aData?.building}` : aData?.address;
+            if (aData?.address) aData.address = aData?.building?.length > 0 ? `${aData?.address} - ${aData?.building}` : aData?.address;
             // if (aData.payment) aData.payment = dateString(aData.payment)
             return aData;
           }))}
