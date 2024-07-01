@@ -138,6 +138,8 @@ export default function CompanyListPage() {
   //   return formattedDate;
   // }
   const dateString = (dateValue: string) => {
+    console.log(dateValue);
+
     const date = new Date(dateValue);
     if (isNaN(date.getFullYear())) {
       return "";
