@@ -117,6 +117,15 @@ export async function POST(request: NextRequest) {
       active,
     };
     if (user.role === "企業") {
+      const paymentInfo = new Date(result1[0].payment);
+      const today = new Date();
+      const allowed = paymentInfo > today;
+      if (!allowed && active !== 1) {
+        return NextResponse.json({
+          type: "error",
+          msg: "利用期限が過ぎました。",
+        });
+      }
       data = {
         ...data,
         payment: result1[0].payment,
