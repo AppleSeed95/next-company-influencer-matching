@@ -341,16 +341,27 @@ export default function CaseDetailPage({ caseProps }: caseData) {
           </button>
           <div className="pt-[30px] mt-[350px] sp:mt-[150px]">
             <div>本案件の募集を終了しますか?</div>
-            <Button
-              buttonType={ButtonType.PRIMARY}
-              handleClick={() => {
-                handleCollectionStateChange("募集終了");
-                setShowCollectionEndModal(false);
-              }}
-              buttonClassName="m-[20px]"
-            >
-              確認
-            </Button>
+            <div className="flex justify-center gap-[10px]">
+              <Button
+                buttonType={ButtonType.PRIMARY}
+                handleClick={() => {
+                  handleCollectionStateChange("募集終了");
+                  setShowCollectionEndModal(false);
+                }}
+                buttonClassName="my-[20px]"
+              >
+                はい
+              </Button>
+              <Button
+                buttonType={ButtonType.DEFAULT}
+                handleClick={() => {
+                  setShowCollectionEndModal(false);
+                }}
+                buttonClassName="my-[20px] rounded-[5px]"
+              >
+                いいえ
+              </Button>
+            </div>
           </div>
         </div>
       </div>
