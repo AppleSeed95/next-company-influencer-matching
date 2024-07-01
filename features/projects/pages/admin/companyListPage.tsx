@@ -144,7 +144,7 @@ export default function CompanyListPage() {
         <SearchBar
           data={composeSearchData(data.map((aData) => {
             if (aData.address) aData.address = aData?.building?.length > 0 ? `${aData?.address} - ${aData?.building}` : aData?.address;
-            if (aData.payment) aData.payment = aData.payment.substring(0, 10) + ''
+            if (aData.payment) aData.payment = dateString(aData.payment)
             return aData;
           }))}
           setVisibleData={handleSearch}
@@ -249,7 +249,7 @@ export default function CompanyListPage() {
                         {aData.status}
                       </td>
                       <td className="px-[35px] py-[25px]  border border-[#D3D3D3]">
-                        {aData?.payment?.length > 0 ? aData.payment?.substring(0, 10) + '' : ''}
+                        {aData?.payment?.length > 0 ? dateString(aData?.payment) : ''}
                       </td>
                       <td className="px-[35px] py-[25px]  border border-[#D3D3D3]">
                         {aData.freeAccount === '1' || aData.freeAccount == 1 ? "無料アカウント" : ""}
@@ -338,7 +338,7 @@ export default function CompanyListPage() {
                       決算
                     </div>
                     <span className="mb-[7px] sp:text-spsmall">
-                      {aData?.payment.length > 0 ? aData.payment?.substring(0, 10) + '' : ''}
+                      {aData?.payment?.length > 0 ? dateString(aData?.payment) : ''}
                     </span>
                   </div>
                   <div className="flex my-[10px]">
