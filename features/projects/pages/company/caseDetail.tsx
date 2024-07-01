@@ -28,7 +28,8 @@ export default function CaseDetailPage({ caseProps }: caseData) {
   const router = useRouter();
   const [active, setActive] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [showCompleteConfirmModal, setShowCompleteConfirmModal] = useState(true);
+  const [showCompleteConfirmModal, setShowCompleteConfirmModal] = useState(false);
+  const [completeCandidate, setCompleteCandidate] = useState(0)
   const [showCollectionEndModal, setShowCollectionEndModal] = useState(false);
   const [showInfluencer, setShowInfluencer] = useState(false);
   const [caseData, setCaseData] = useState(null);
@@ -302,9 +303,10 @@ export default function CaseDetailPage({ caseProps }: caseData) {
               <Button
                 buttonType={ButtonType.PRIMARY}
                 handleClick={() => {
-                  handleCollectionStateChange("募集終了");
+                  handleApprove("完了", completeCandidate);
                   setShowCompleteConfirmModal(false);
                 }}
+                buttonClassName="my-[20px]"
               >
                 はい
               </Button>
@@ -313,6 +315,7 @@ export default function CaseDetailPage({ caseProps }: caseData) {
                 handleClick={() => {
                   setShowCompleteConfirmModal(false);
                 }}
+                buttonClassName="my-[20px]"
               >
                 いいえ
               </Button>
@@ -756,7 +759,10 @@ export default function CaseDetailPage({ caseProps }: caseData) {
                           完了
                         </div>}
                       {(aData.status === '承認' || aData.status === '完了報告') && <Button
-                        handleClick={() => handleApprove("完了", aData.id)}
+                        handleClick={() => {
+                          setCompleteCandidate(aData.id);
+                          setShowCompleteConfirmModal(true);
+                        }}
                         buttonType={ButtonType.PRIMARY}
                       >
                         完了
