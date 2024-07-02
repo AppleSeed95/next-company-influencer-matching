@@ -119,17 +119,17 @@ export async function POST(request: NextRequest) {
     if (user.role === "企業") {
       const paymentInfo = new Date(result1[0].payment);
       const today = new Date();
-      const utc = today.getTime() + today.getTimezoneOffset() * 60000; // Convert to UTC
-      console.log(
-        today.getTimezoneOffset(),
-        new Date(today.getTime() + today.getTimezoneOffset() * 60000)
-      );
+      // const utc = today.getTime() + today.getTimezoneOffset() * 60000; // Convert to UTC
+      // console.log(
+      //   today.getTimezoneOffset(),
+      //   new Date(today.getTime() + today.getTimezoneOffset() * 60000)
+      // );
 
       const jstOffset = 9 * 60 * 60000; // JST is UTC + 9 hours
-      const jstTime = new Date(utc + jstOffset);
+      const jstTime = new Date(today.getTime() + jstOffset);
 
       const allowed = paymentInfo > jstTime;
-      console.log(paymentInfo, today, utc, jstTime, allowed, active);
+      console.log(paymentInfo, today, jstTime, allowed, active);
 
       if (!allowed && active !== 1) {
         return NextResponse.json({
