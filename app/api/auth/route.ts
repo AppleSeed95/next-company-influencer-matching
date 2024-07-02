@@ -120,6 +120,11 @@ export async function POST(request: NextRequest) {
       const paymentInfo = new Date(result1[0].payment);
       const today = new Date();
       const utc = today.getTime() + today.getTimezoneOffset() * 60000; // Convert to UTC
+      console.log(
+        today.getTimezoneOffset(),
+        new Date(today.getTime() + today.getTimezoneOffset() * 60000)
+      );
+
       const jstOffset = 9 * 60 * 60000; // JST is UTC + 9 hours
       const jstTime = new Date(utc + jstOffset);
 
