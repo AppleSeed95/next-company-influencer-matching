@@ -70,7 +70,15 @@ export async function POST(request: NextRequest) {
         const rows2 = await executeQuery(query2).catch((e) => {
           return NextResponse.json({ type: "error" });
         });
-        const currentDate = new Date();
+        let currentDate = new Date();
+        // const utc = today.getTime() + today.getTimezoneOffset() * 60000; // Convert to UTC
+        // console.log(
+        //   today.getTimezoneOffset(),
+        //   new Date(today.getTime() + today.getTimezoneOffset() * 60000)
+        // );
+
+        const jstOffset = 9 * 60 * 60000; // JST is UTC + 9 hours
+        currentDate = new Date(currentDate.getTime() + jstOffset);
         currentDate.setDate(currentDate.getDate() + 30);
         const dateString = currentDate.toISOString();
         let updateString;
