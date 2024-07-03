@@ -10,7 +10,7 @@ import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
 import Modal from "../../utils/modal";
 import CheckoutPage from "./stripe";
-import AppyExpired from "./applyExpired";
+import ApplyExpired from "./applyExpired";
 import Link from "next/link";
 
 export interface CompanyInfoProps {
@@ -72,6 +72,8 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
   const type = searchParams.get('type');
 
   const [confirmMsg, setConfirmMsg] = useState('操作が成功しました。')
+
+
   const fetchData = async () => {
     try {
       const result = await axios.get(
@@ -245,12 +247,11 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
   if (applyMode && (!applyId || expired)) {
     return (
       <div className="flex grow min-h-full">
-        <AppyExpired />
+        <ApplyExpired />
       </div>
     )
   }
   const dateString = (dateValue: string) => {
-    console.log(dateValue);
 
     const date = new Date(dateValue);
     if (isNaN(date.getUTCFullYear())) {
@@ -615,7 +616,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
             }
           </span>
           <div className="flex w-full gap-[20px] max-w-[250px] mobile:max-w-full flex-wrap sp:text-center">
-            {data?.payment?.length > 0 && <span>{data.payment?.substring(0, 10) + '日まで'}</span>}
+            {data?.payment?.length > 0 && <span>{dateString(data?.payment) + '日まで'}</span>}
             <Button
               buttonType={ButtonType.DANGER}
               buttonClassName="sp:ml-[0px]"
