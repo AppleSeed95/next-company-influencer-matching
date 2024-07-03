@@ -74,6 +74,7 @@ export async function POST(request: NextRequest) {
         currentDate.setDate(currentDate.getDate() + 30);
         const dateString = currentDate.toISOString();
         let updateString;
+        console.log("updateString", updateString);
 
         if (
           rows[0].payment === "" ||
