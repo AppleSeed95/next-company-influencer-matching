@@ -74,7 +74,6 @@ export async function POST(request: NextRequest) {
         currentDate.setDate(currentDate.getDate() + 30);
         const dateString = currentDate.toISOString();
         let updateString;
-        console.log("updateString", updateString);
 
         if (
           rows[0].payment === "" ||
@@ -87,6 +86,7 @@ export async function POST(request: NextRequest) {
           lastPaymentInfo.setDate(lastPaymentInfo.getDate() + 30);
           updateString = lastPaymentInfo.toISOString();
         }
+        console.log("updateString", updateString);
 
         let paymentCnt = rows[0].paymentCnt;
         if (!(paymentCnt > 0)) {
