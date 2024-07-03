@@ -129,7 +129,7 @@ export async function POST(request: NextRequest) {
       const jstTime = new Date(today.getTime() + jstOffset);
 
       const allowed = paymentInfo > jstTime;
-      console.log(paymentInfo, today, jstTime, allowed, active);
+      console.log(paymentInfo, today, "currentJST:", jstTime, allowed, active);
 
       if (!allowed && active !== 1) {
         return NextResponse.json({
