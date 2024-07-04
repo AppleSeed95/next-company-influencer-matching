@@ -137,7 +137,7 @@ export async function GET() {
     const deletingCompanyQuery = `SELECT * from users u
     LEFT JOIN company c on c.userId = u.id
     WHERE 
-    u.name = NULL or (
+    u.name IS NULL or (
     u.active = 0
     AND c.payment < NOW())
     `;
