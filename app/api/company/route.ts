@@ -136,8 +136,10 @@ export async function GET() {
   try {
     const deletingCompanyQuery = `SELECT * from users u
     LEFT JOIN company c on c.userId = u.id
-    WHERE u.active = 0
-    AND c.payment < NOW() or u.name = NULL
+    WHERE 
+    u.name = NULL or (
+    u.active = 0
+    AND c.payment < NOW())
     `;
     const deletingCompany = await executeQuery(deletingCompanyQuery).catch(
       (e) => {
