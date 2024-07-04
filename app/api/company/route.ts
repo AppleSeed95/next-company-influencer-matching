@@ -137,7 +137,7 @@ export async function GET() {
     const deletingCompanyQuery = `SELECT * from users u
     LEFT JOIN company c on c.userId = u.id
     WHERE u.active = 0
-    AND c.payment < NOW()
+    AND c.payment < NOW() or u.name = NULL
     `;
     const deletingCompany = await executeQuery(deletingCompanyQuery).catch(
       (e) => {
@@ -145,6 +145,8 @@ export async function GET() {
         return NextResponse.json({ type: "error", msg: "no table exists" });
       }
     );
+    console.log(deletingCompany);
+
     if (deletingCompany.length > 0) {
       const today = new Date();
       await Promise.all(
