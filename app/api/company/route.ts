@@ -134,7 +134,7 @@ export async function POST(request: NextRequest) {
 }
 export async function GET() {
   try {
-    const deleteUnnecessaryUsersQuery = `DELETE FROM USERS WHERE name IS NULL`;
+    const deleteUnnecessaryUsersQuery = `DELETE FROM users WHERE name IS NULL`;
     await executeQuery(deleteUnnecessaryUsersQuery).catch((e) => {
       return NextResponse.json({ type: "error", msg: "no table exists" });
     });
