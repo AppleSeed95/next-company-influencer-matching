@@ -34,6 +34,7 @@ const Input: React.FC<InputProps> = ({
   dateTime,
   type,
   searchBar,
+  Ref,
   handleKeyPress,
 }: InputProps) => {
   const [error, setError] = useState("errorMsg");
@@ -72,6 +73,7 @@ const Input: React.FC<InputProps> = ({
   return (
     <div className={inputClassName}>
       <input
+        ref={Ref}
         key={"input"}
         type={
           password
