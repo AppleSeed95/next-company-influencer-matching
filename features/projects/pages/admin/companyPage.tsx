@@ -173,7 +173,7 @@ const CompanyPage: React.FC<CompanyProps> = ({ companyData }: CompanyProps) => {
           inputClassName="max-w-[250px] grow border-[#D3D3D3] w-[100%]"
           format="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
           formatMsg="メールアドレス形式ではありません"
-          requirMsg="メールアドレスを入力してください。"
+          requireMsg="メールアドレスを入力してください。"
           value={data?.emailAddress}
           handleChange={(val) => setData({ ...data, emailAddress: val })}
         />
@@ -231,7 +231,7 @@ const CompanyPage: React.FC<CompanyProps> = ({ companyData }: CompanyProps) => {
           type={"number"}
           format="n"
           formatMsg="月の募集数は半角数字で入力してください。"
-          requirMsg="月の募集数を入力してください。"
+          requireMsg="月の募集数を入力してください。"
           inputClassName="w-[170px] border-[#D3D3D3]"
           value={data?.monthlyCollectionCnt}
           handleChange={(val) => {
@@ -249,7 +249,7 @@ const CompanyPage: React.FC<CompanyProps> = ({ companyData }: CompanyProps) => {
           type={"number"}
           format="n"
           formatMsg="同時募集数は半角数字で入力してください。"
-          requirMsg="同時募集数を入力してください。"
+          requireMsg="同時募集数を入力してください。"
           inputClassName="w-[170px] border-[#D3D3D3]"
           value={data?.concurrentCollectionCnt}
           handleChange={(val) => {

@@ -7,7 +7,7 @@ export interface TextAreaProps {
   reset?: boolean;
   resizable?: boolean;
   notRequired?: boolean;
-  requirMsg?: string;
+  requireMsg?: string;
   value?: string;
   handleChange?: (val: string) => void;
   handleCtrlEnter?: () => void;
@@ -20,7 +20,7 @@ const TextArea: React.FC<TextAreaProps> = ({
   reset,
   resizable,
   notRequired,
-  requirMsg,
+  requireMsg,
   value,
   handleCtrlEnter,
 }: TextAreaProps) => {
@@ -29,7 +29,7 @@ const TextArea: React.FC<TextAreaProps> = ({
   const [textValue, setTextValue] = useState(value);
   const validate = (val: string) => {
     if (!notRequired && val === "") {
-      setError(requirMsg);
+      setError(requireMsg);
       handleChange(val);
       setTextValue(val);
       setIsValid(false);
@@ -66,7 +66,7 @@ const TextArea: React.FC<TextAreaProps> = ({
         }
         placeholder={placeholder}
       ></textarea>
-      {(requirMsg && requirMsg !== '') ? (<div
+      {(requireMsg && requireMsg !== '') ? (<div
         className={
           isValid
             ? "text-left text-[#EE5736] text-[11px] opacity-0 mt-[-4px] duration-700"

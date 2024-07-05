@@ -329,7 +329,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
           {<span className="ml-[10px] text-[#EE5736] text-[11px]">必須</span>}
         </span>
         <Input
-          requirMsg="ニックネームを入力してください"
+          requireMsg="ニックネームを入力してください"
           placeholder="ヤマタロウ"
           handleChange={(val) => setData({ ...data, nickName: val })}
           inputClassName="max-w-[250px] mobile:max-w-full grow border-[#D3D3D3] w-[100%]"
@@ -343,7 +343,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
         </span>
         <Input
           placeholder="03-1234-5678"
-          requirMsg="電話番号を入力してください"
+          requireMsg="電話番号を入力してください"
           formatMsg="電話番号形式ではありません"
           format="^0\d{1,4}-\d{1,4}-\d{4}$"
           handleChange={(val) => setData({ ...data, phoneNumber: val })}
@@ -360,7 +360,7 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
         <Input
           formatMsg="メールアドレス形式ではありません"
           format="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-          requirMsg="メールアドレスを入力してください"
+          requireMsg="メールアドレスを入力してください"
           handleChange={(val) => setData({ ...data, emailAddress: val })}
           inputClassName="max-w-[250px] mobile:max-w-full grow border-[#D3D3D3] w-[100%]"
           value={data ? data.emailAddress : ""}

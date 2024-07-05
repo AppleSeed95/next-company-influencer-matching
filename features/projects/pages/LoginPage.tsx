@@ -9,7 +9,7 @@ import { login } from "@/features/auth/provider";
 
 import { useRouter } from "next/navigation";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export default function LoginPage() {
   const [id, setId] = useState("");
@@ -18,11 +18,19 @@ export default function LoginPage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [_, setAuthUser] = useRecoilState(authUserState);
+
+  const idRef = useRef(null);
+  const passwordRef = useRef(null);
+
+
+
   useEffect(() => {
     document.title = 'ログイン';
   }, [])
   const handleLogin = async () => {
     setError('');
+    console.log(idRef.current.value, passwordRef.current.value);
+
     if (password === "" && id === "") {
       setError("ID・PWを入力してください。");
       return;
@@ -81,6 +89,7 @@ export default function LoginPage() {
         <div className="flex justify-center w-full mobile:gap-[5px] gap-[20px] mobile:flex-wrap mb-[20px] pr-[70px] sp:pr-[30px] sp:mt-[50px]">
           <span className="mobile:w-[250px] mobile:text-left mt-[5px] w-[70px] text-right">Email</span>
           <Input
+            Ref={idRef}
             handleChange={(val) => setId(val)}
             inputClassName={"max-w-[250px] grow"}
             handleKeyPress={handleKeyPress}
@@ -91,6 +100,7 @@ export default function LoginPage() {
             パスワード
           </span>
           <Input
+            Ref={passwordRef}
             password
             handleChange={(val) => setPassword(val)}
             handleKeyPress={handleKeyPress}

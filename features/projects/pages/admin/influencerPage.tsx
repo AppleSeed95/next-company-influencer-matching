@@ -206,7 +206,7 @@ const InfluencerPage: React.FC<InfluencerProps> = ({
         <Input
           format="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
           formatMsg="メールアドレス形式ではありません"
-          requirMsg="メールアドレスを入力してください。"
+          requireMsg="メールアドレスを入力してください。"
           handleChange={(val) => setData({ ...data, emailAddress: val })}
           inputClassName="max-w-[250px] grow border-[#D3D3D3] w-[100%]"
           value={data?.emailAddress}

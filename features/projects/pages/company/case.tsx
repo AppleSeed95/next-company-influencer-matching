@@ -280,7 +280,7 @@ const CasePage: React.FC = () => {
           value={data.caseName}
           inputClassName="max-w-[300px] mobile:max-w-full grow border-[#D3D3D3] w-[100%]"
           placeholder="例：日本初のイタリアンスイーツ店のPR"
-          requirMsg="案件概要を入力してください"
+          requireMsg="案件概要を入力してください"
           handleChange={(val) => setData({ ...data, caseName: val })}
         />
       </div>
@@ -293,7 +293,7 @@ const CasePage: React.FC = () => {
           value={data.caseContent}
           textAreaClassName="max-w-[300px] mobile:max-w-full grow h-[110px] border-[#D3D3D3] w-[100%]"
           placeholder="例：イタリアで話題のスイーツが日本に初上陸！バリスタがいれるエスプレッソと新感覚スイーツをご提供しますのでSNSでPRをお願いします。"
-          requirMsg="案件内容を入力してください"
+          requireMsg="案件内容を入力してください"
           handleChange={(val) => setData({ ...data, caseContent: val })}
         />
       </div>

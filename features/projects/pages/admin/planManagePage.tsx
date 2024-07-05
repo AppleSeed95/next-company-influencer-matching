@@ -46,7 +46,7 @@ const PlanManagePage: React.FC = () => {
                     inputClassName="w-[300px]"
 
                     value={data?.name ?? ""}
-                    requirMsg="値を入力してください。" handleChange={(val) => {
+                    requireMsg="値を入力してください。" handleChange={(val) => {
                         setData({ ...data, name: val });
                     }} />
             </div>
@@ -55,7 +55,7 @@ const PlanManagePage: React.FC = () => {
                 <Input
                     inputClassName="w-[300px]"
                     value={data?.priceID ?? ""}
-                    requirMsg="値を入力してください。" handleChange={(val) => {
+                    requireMsg="値を入力してください。" handleChange={(val) => {
                         setData({ ...data, priceID: val });
                     }} />
             </div>
@@ -65,7 +65,7 @@ const PlanManagePage: React.FC = () => {
                     inputClassName="w-[300px]"
 
                     value={data?.monthCnt ?? ""}
-                    type="number" requirMsg="値を入力してください。" handleChange={(val) => {
+                    type="number" requireMsg="値を入力してください。" handleChange={(val) => {
                         setData({ ...data, monthCnt: val });
                     }} />
             </div>
@@ -75,7 +75,7 @@ const PlanManagePage: React.FC = () => {
                     inputClassName="w-[300px]"
 
                     value={data?.concurrentCnt ?? ''}
-                    type="number" requirMsg="値を入力してください。" handleChange={(val) => {
+                    type="number" requireMsg="値を入力してください。" handleChange={(val) => {
                         setData({ ...data, concurrentCnt: val });
                     }} />
             </div>

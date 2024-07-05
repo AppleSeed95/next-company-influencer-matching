@@ -1,12 +1,13 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, ForwardedRef } from "react";
+
 
 export interface InputProps {
   inputClassName?: string;
   placeholder?: string;
   password?: boolean;
   notRequired?: boolean;
-  requirMsg?: string;
+  requireMsg?: string;
   style?: string;
   styleMsg?: string;
   value?: string;
@@ -15,6 +16,7 @@ export interface InputProps {
   searchBar?: boolean;
   formatMsg?: string;
   type?: string;
+  Ref?: ForwardedRef<null>;
   handleChange: (val: string) => void;
   handleKeyPress?: (event: any) => void;
 }
@@ -26,7 +28,7 @@ const Input: React.FC<InputProps> = ({
   placeholder,
   handleChange,
   notRequired,
-  requirMsg,
+  requireMsg,
   format,
   formatMsg,
   dateTime,
@@ -43,7 +45,7 @@ const Input: React.FC<InputProps> = ({
   }, [value])
   const validate = (val: string) => {
     if (!notRequired && val === "") {
-      setError(requirMsg);
+      setError(requireMsg);
       setIsValid(false);
       handleChange(val);
       return;
@@ -90,7 +92,7 @@ const Input: React.FC<InputProps> = ({
         onKeyPress={handleKeyPress}
       ></input>
       {
-        (requirMsg || formatMsg) ? (
+        (requireMsg || formatMsg) ? (
           <div
             className={
               isValid

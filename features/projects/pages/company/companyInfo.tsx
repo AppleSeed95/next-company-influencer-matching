@@ -422,7 +422,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
           {<span className="ml-[10px] text-[#EE5736] text-[11px] mt-[3px]">必須</span>}
         </span>
         <Input
-          requirMsg={msgs.companyName}
+          requireMsg={msgs.companyName}
           placeholder="めぐり株式会社"
           inputClassName="max-w-[250px] mobile:max-w-full grow border-[#D3D3D3] w-[100%]"
           value={data?.companyName}
@@ -440,7 +440,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
           inputClassName="max-w-[250px] mobile:max-w-full grow border-[#D3D3D3] w-[100%]"
           value={data?.companyNameGana}
           placeholder="メグリカブシキガイシャ"
-          requirMsg={msgs.companyNameGana}
+          requireMsg={msgs.companyNameGana}
           handleChange={(val) => {
             setData({ ...data, companyNameGana: val });
           }}
@@ -455,7 +455,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
           placeholder="代表 太郎"
           inputClassName="max-w-[250px] mobile:max-w-full grow border-[#D3D3D3] w-[100%]"
           value={data?.representativeName}
-          requirMsg={msgs.representativeName}
+          requireMsg={msgs.representativeName}
           handleChange={(val) => {
             setData({ ...data, representativeName: val });
           }}
@@ -470,7 +470,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
           placeholder="ダイヒョウ タロウ"
           inputClassName="max-w-[250px] mobile:max-w-full grow border-[#D3D3D3] w-[100%]"
           value={data?.representativeNameGana}
-          requirMsg={msgs.representativeNameGana}
+          requireMsg={msgs.representativeNameGana}
           handleChange={(val) => {
             setData({ ...data, representativeNameGana: val });
           }}
@@ -485,7 +485,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
           placeholder="担当 次郎"
           inputClassName="max-w-[250px] mobile:max-w-full grow border-[#D3D3D3] w-[100%]"
           value={data?.responsibleName}
-          requirMsg={msgs.responsibleName}
+          requireMsg={msgs.responsibleName}
           handleChange={(val) => {
             setData({ ...data, responsibleName: val });
           }}
@@ -497,7 +497,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
           {<span className="ml-[10px] text-[#EE5736] text-[11px] mt-[3px]">必須</span>}
         </span>
         <Input
-          requirMsg={msgs.responsibleNameGana}
+          requireMsg={msgs.responsibleNameGana}
           placeholder="タントウ ジロウ"
           inputClassName="max-w-[250px] mobile:max-w-full grow border-[#D3D3D3] w-[100%]"
           value={data?.responsibleNameGana}
@@ -512,7 +512,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
           {<span className="ml-[10px] text-[#EE5736] text-[11px] mt-[3px]">必須</span>}
         </span>
         <Input
-          requirMsg={msgs.webSite}
+          requireMsg={msgs.webSite}
           placeholder="https://〇〇〇〇.com"
           inputClassName="max-w-[250px] mobile:max-w-full grow border-[#D3D3D3] w-[100%]"
           value={data?.webSite}
@@ -530,7 +530,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
           placeholder="03-1234-5678"
           inputClassName="max-w-[250px] mobile:max-w-full grow border-[#D3D3D3] w-[100%]"
           value={data?.phoneNumber}
-          requirMsg={msgs.phoneNumber}
+          requireMsg={msgs.phoneNumber}
           format="^0\d{1,4}-\d{1,4}-\d{4}$"
           formatMsg="電話番号形式ではありません"
           handleChange={(val) => {
@@ -546,7 +546,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
         <Input
           inputClassName="max-w-[250px] mobile:max-w-full grow border-[#D3D3D3] w-[100%]"
           value={data?.emailAddress}
-          requirMsg={msgs.emailAddress}
+          requireMsg={msgs.emailAddress}
           format="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
           formatMsg="メールアドレス形式ではありません。"
           handleChange={(val) => {
@@ -563,7 +563,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
           placeholder="123-4567"
           inputClassName="max-w-[250px] mobile:max-w-full grow border-[#D3D3D3] w-[100%]"
           value={data?.postalCode}
-          requirMsg={msgs.postalCode}
+          requireMsg={msgs.postalCode}
           format="^\d{3}-\d{4}$"
           formatMsg="郵便番号形式ではありません"
           handleChange={(val) => {
@@ -580,7 +580,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
           placeholder="東京都台東区浅草橋〇〇〇"
           inputClassName="max-w-[250px] mobile:max-w-full grow border-[#D3D3D3] w-[100%]"
           value={data?.address}
-          requirMsg={msgs.address}
+          requireMsg={msgs.address}
           handleChange={(val) => {
             setData({ ...data, address: val });
           }}
