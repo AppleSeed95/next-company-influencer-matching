@@ -254,6 +254,8 @@ export async function PUT(request: NextRequest) {
       console.log(updateFreeCompanyQuery);
 
       await executeQuery(updateFreeCompanyQuery).catch((e) => {
+        console.log(e);
+
         return NextResponse.json({ type: "error" });
       });
     }
