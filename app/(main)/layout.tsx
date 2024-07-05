@@ -24,7 +24,6 @@ const Auth = ({ children }: { children: React.ReactNode }) => {
       parsedUser = null;
     }
   }
-  console.log(savedUser, parsedUser, authUser);
 
   if (!parsedUser || parsedUser === undefined) {
 
