@@ -26,7 +26,7 @@ const Auth = ({ children }: { children: React.ReactNode }) => {
   }
   console.log(savedUser, parsedUser, authUser);
 
-  if (!parsedUser || parsedUser === undefined || !authUser.user) {
+  if (!parsedUser || parsedUser === undefined) {
 
     if (typeof window !== "undefined") {
       router.push("/login");
