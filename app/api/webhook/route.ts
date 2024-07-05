@@ -101,10 +101,13 @@ export async function POST(request: NextRequest) {
           paymentCnt = 0;
         }
         paymentCnt++;
+        // const query1 = `update company set payment = '${updateString}',paymentId = '${paymentId}', paymentCnt = ${paymentCnt} ,
+        //               customerId = '${customerId}',
+        //               monthlyCollectionCnt = ${rows2[0].monthCnt},
+        //               concurrentCollectionCnt = ${rows2[0].concurrentCnt},
+        //               thisMonthCollectionCnt = 0 where emailAddress = '${email}'`;
         const query1 = `update company set payment = '${updateString}',paymentId = '${paymentId}', paymentCnt = ${paymentCnt} ,
                       customerId = '${customerId}',
-                      monthlyCollectionCnt = ${rows2[0].monthCnt},
-                      concurrentCollectionCnt = ${rows2[0].concurrentCnt},
                       thisMonthCollectionCnt = 0 where emailAddress = '${email}'`;
 
         await executeQuery(query1).catch((e) => {
