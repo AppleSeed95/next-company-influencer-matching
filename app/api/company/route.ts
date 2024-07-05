@@ -239,7 +239,6 @@ export async function PUT(request: NextRequest) {
     const isFree = body.freeAccount === 1;
     if (isFree) {
       if (body.paymentId.length > 0) {
-        console.log("cancel");
         try {
           await stripe.subscriptions.cancel(`${body.paymentId}`);
         } catch (e) {
@@ -251,11 +250,8 @@ export async function PUT(request: NextRequest) {
         SET payment = '', paymentId = '', customerId = ''
         WHERE id = ${body.id} 
       `;
-      console.log(updateFreeCompanyQuery);
 
       await executeQuery(updateFreeCompanyQuery).catch((e) => {
-        console.log(e);
-
         return NextResponse.json({ type: "error" });
       });
     }
