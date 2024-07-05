@@ -134,12 +134,14 @@ export async function POST(request: NextRequest) {
 }
 export async function GET() {
   try {
+    const deleteUnnecessaryUsersQuery = `DELETE FROM USERS WHERE name IS NULL`;
+    await executeQuery(deleteUnnecessaryUsersQuery).catch((e) => {
+      return NextResponse.json({ type: "error", msg: "no table exists" });
+    });
     const deletingCompanyQuery = `SELECT * from users u
     LEFT JOIN company c on c.userId = u.id
-    WHERE 
-    u.name IS NULL or (
-    u.active = 0
-    AND c.payment < NOW())
+    WHERE u.active = 0
+    AND c.payment < NOW()
     `;
     const deletingCompany = await executeQuery(deletingCompanyQuery).catch(
       (e) => {
@@ -147,8 +149,6 @@ export async function GET() {
         return NextResponse.json({ type: "error", msg: "no table exists" });
       }
     );
-    console.log(deletingCompany);
-
     if (deletingCompany.length > 0) {
       const today = new Date();
       await Promise.all(
