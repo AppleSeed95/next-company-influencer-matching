@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { executeQuery } from "../util/db";
 import { RowDataPacket } from "mysql";
+import Stripe from "stripe";
+const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
+
 interface RowType extends RowDataPacket {
   // Define the structure of your row
   id: number;
@@ -232,6 +235,22 @@ export async function PUT(request: NextRequest) {
   try {
     let body = await request.json();
     const userEmail = body.emailAddress;
+
+    const isFree = body.freeAccount === 1;
+    if (isFree) {
+      if (body.paymentId.length > 0) {
+        console.log("cancel");
+        await stripe.subscriptions.cancel(`${body.paymentId}`);
+      }
+      const updateFreeCompanyQuery = `
+        UPDATE company SET payment = '', paymentId = '',  customerId = ''
+        WHERE id = ${body.id} 
+      `;
+      await executeQuery(updateFreeCompanyQuery).catch((e) => {
+        return NextResponse.json({ type: "error" });
+      });
+    }
+
     const query1 = `select id, plainPassword from users where email = '${userEmail}'`;
     const rows1 = await executeQuery(query1).catch((e) => {
       return NextResponse.json({ type: "error" });
