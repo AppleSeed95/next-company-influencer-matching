@@ -246,6 +246,8 @@ export async function PUT(request: NextRequest) {
         UPDATE company SET payment = '', paymentId = '',  customerId = ''
         WHERE id = ${body.id} 
       `;
+      console.log(updateFreeCompanyQuery);
+
       await executeQuery(updateFreeCompanyQuery).catch((e) => {
         return NextResponse.json({ type: "error" });
       });
