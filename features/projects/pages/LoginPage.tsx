@@ -22,6 +22,7 @@ export default function LoginPage() {
     document.title = 'ログイン';
   }, [])
   const handleLogin = async () => {
+    setError('');
     if (password === "" && id === "") {
       setError("ID・PWを入力してください。");
       return;
