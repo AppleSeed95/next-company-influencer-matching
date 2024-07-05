@@ -247,7 +247,8 @@ export async function PUT(request: NextRequest) {
         }
       }
       const updateFreeCompanyQuery = `
-        UPDATE company SET payment = '', paymentId = '',  customerId = ''
+        UPDATE company 
+        SET payment = NULL, paymentId = NULL, customerId = NULL
         WHERE id = ${body.id} 
       `;
       console.log(updateFreeCompanyQuery);
