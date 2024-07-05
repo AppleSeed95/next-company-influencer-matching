@@ -240,7 +240,11 @@ export async function PUT(request: NextRequest) {
     if (isFree) {
       if (body.paymentId.length > 0) {
         console.log("cancel");
-        await stripe.subscriptions.cancel(`${body.paymentId}`);
+        try {
+          await stripe.subscriptions.cancel(`${body.paymentId}`);
+        } catch (e) {
+          console.log(e);
+        }
       }
       const updateFreeCompanyQuery = `
         UPDATE company SET payment = '', paymentId = '',  customerId = ''
