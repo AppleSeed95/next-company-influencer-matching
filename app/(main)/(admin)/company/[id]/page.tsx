@@ -14,7 +14,7 @@ const Company: React.FC = () => {
       if (result.data.type === 'error') {
         if (typeof window !== "undefined") {
           setValid(false)
-          router.push("/companyList");
+          router.push("/login");
         }
       }
       if (result.data) {

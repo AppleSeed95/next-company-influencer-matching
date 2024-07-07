@@ -24,12 +24,12 @@ const CaseDetail: React.FC = () => {
       if (result.data.type === 'error') {
         setValid(false);
         if (typeof window !== "undefined" && router) {
-          router.push("/appliedList");
+          router.push("/login");
         }
       }
       else {
         if (!(result.data.companyCases.some((a) => a.id == id)) && router) {
-          router.push("/appliedList");
+          router.push("/login");
         } else {
           setData(result.data.data);
           setValid(true);
