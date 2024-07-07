@@ -46,13 +46,13 @@ const CasePage: React.FC = () => {
       try {
         const result = await axios.get(`/api/case/aCase?id=${id}`);
         if (result.data.type === 'error') {
-          router.push('/appliedList');
+          router.push('/login');
           return;
         }
         if (result.data) setData(result.data.data);
         setWantedSNS(JSON.parse(result.data?.data.wantedSNS));
       } catch (e) {
-        router.push('/appliedList')
+        router.push('/login')
       }
     };
     if (id) fetchData();
