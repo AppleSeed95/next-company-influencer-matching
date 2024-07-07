@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { executeQuery } from "../util/db";
 import { RowDataPacket } from "mysql";
 import Stripe from "stripe";
+import { Result } from "postcss";
 const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
 
 interface RowType extends RowDataPacket {
@@ -240,7 +241,8 @@ export async function PUT(request: NextRequest) {
     if (isFree) {
       if (body.paymentId.length > 0) {
         try {
-          await stripe.subscriptions.cancel(`${body.paymentId}`);
+          const result = await stripe.subscriptions.cancel(`${body.paymentId}`);
+          console.log(result);
         } catch (e) {
           console.log(e);
         }
