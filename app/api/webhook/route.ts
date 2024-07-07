@@ -78,9 +78,11 @@ export async function POST(request: NextRequest) {
         // );
 
         const jstOffset = 9 * 60 * 60000; // JST is UTC + 9 hours
-        currentDate = new Date(currentDate.getTime() + jstOffset);
-        currentDate.setDate(currentDate.getDate() + 30);
-        const dateString = currentDate.toISOString();
+        const jstTime = new Date(currentDate.getTime() + jstOffset);
+
+        currentDate = new Date(jstTime.getTime() + jstOffset);
+        currentDate.setDate(jstTime.getDate() + 30);
+        const dateString = jstTime.toISOString();
         let updateString;
 
         if (
