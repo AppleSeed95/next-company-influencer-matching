@@ -237,7 +237,7 @@ export async function PUT(request: NextRequest) {
     let body = await request.json();
     const userEmail = body.emailAddress;
 
-    const isFree = body.freeAccount === 1;
+    const isFree = body.freeAccount;
     if (isFree) {
       if (body.paymentId.length > 0) {
         try {
