@@ -238,6 +238,7 @@ export async function PUT(request: NextRequest) {
     const userEmail = body.emailAddress;
 
     const isFree = body.freeAccount;
+    console.log(body.freeAccount, isFree);
     if (isFree) {
       if (body.paymentId.length > 0) {
         try {
