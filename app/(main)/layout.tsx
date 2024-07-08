@@ -4,40 +4,49 @@ import { authUserState } from "@/recoil/atom/auth/authUserAtom";
 
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { useState, useEffect } from "react";
 
 const Auth = ({ children }: { children: React.ReactNode }) => {
+
   const authUser = useRecoilValue(authUserState);
   const router = useRouter();
 
   const [_, setAuthUser] = useRecoilState(authUserState);
-  let savedUser = null;
-  if (typeof window !== "undefined") {
-    savedUser = localStorage.getItem("user");
-    const token = localStorage.getItem('token');
-    axios.defaults.headers.common["Authorization"] = token;
-  }
-  let parsedUser;
-  if (savedUser) {
-    try {
-      parsedUser = JSON.parse(savedUser);
-    } catch (e) {
-      parsedUser = null;
-    }
-  }
 
-  if (!parsedUser || parsedUser === undefined) {
-
+  const [authChecked, setAuthChecked] = useState(false);
+  useEffect(() => {
+    let savedUser = null;
     if (typeof window !== "undefined") {
-      router.push("/login");
+      savedUser = localStorage.getItem("user");
+      const token = localStorage.getItem('token');
+      axios.defaults.headers.common["Authorization"] = token;
+    }
+    let parsedUser;
+    if (savedUser) {
+      try {
+        parsedUser = JSON.parse(savedUser);
+      } catch (e) {
+        parsedUser = null;
+      }
     }
 
-  }
-  if (savedUser && !authUser.user) {
-    if (savedUser) {
-      setAuthUser({ user: parsedUser });
+    if (!parsedUser || parsedUser === undefined) {
+
+      if (typeof window !== "undefined") {
+        setAuthChecked(true);
+        router.push("/login");
+      }
+
     }
-  }
-  return children;
+    if (savedUser && !authUser.user) {
+      if (savedUser) {
+        setAuthUser({ user: parsedUser });
+      }
+    }
+  }, [])
+
+
+  return authChecked ? children : null;
 };
 
 export default function MainLayout({
@@ -45,5 +54,5 @@ export default function MainLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <Auth>{children}</Auth>;
+  return <Auth> {children}</Auth>;
 }
