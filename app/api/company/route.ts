@@ -154,6 +154,8 @@ export async function GET() {
         return NextResponse.json({ type: "error", msg: "no table exists" });
       }
     );
+    console.log(deletingCompanyQuery, deletingCompany);
+
     if (deletingCompany.length > 0) {
       const today = new Date();
       await Promise.all(
