@@ -33,7 +33,6 @@ const Auth = ({ children }: { children: React.ReactNode }) => {
     if (!parsedUser || parsedUser === undefined) {
 
       if (typeof window !== "undefined") {
-        setAuthChecked(true);
         router.push("/login");
       }
 
@@ -43,7 +42,8 @@ const Auth = ({ children }: { children: React.ReactNode }) => {
         setAuthUser({ user: parsedUser });
       }
     }
-  }, [])
+    setAuthChecked(true);
+  }, [authUser, router, setAuthUser])
 
 
   return authChecked ? children : null;
