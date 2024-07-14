@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body{
-  color: black;
+  color: black !important;
 }
 
 :root {
