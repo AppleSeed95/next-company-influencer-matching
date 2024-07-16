@@ -721,10 +721,11 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
           </Button>
         </div>
       ) : (
-        <div className="flex gap-[20px] mobile:gap-[10px] justify-center mt-[36px] mb-[160px] sp:mb-[60px]">
+        <div className="flex gap-[20px] justify-center mt-[36px] mb-[160px] sp:mb-[60px]">
           <Button
             buttonType={ButtonType.PRIMARY}
             handleClick={() => handleApply(false)}
+            buttonClassName="mobile:mr-[10px]"
           >
             <span className="flex ">
               <span>更新</span>
@@ -737,20 +738,24 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
               />
             </span>
           </Button>
-          {(data?.paymentCnt >= 6 && active === 1) && < Button buttonType={ButtonType.PRIMARY}
-            handleClick={() => handleUpdateAccount(false)}
-          >
-            <span className="flex ">
-              <span>解約</span>
-            </span>
-          </Button>}
-          {active === 0 && < Button buttonType={ButtonType.PRIMARY}
-            handleClick={() => handleUpdateAccount(true)}
-          >
-            <span className="flex ">
-              <span>継続</span>
-            </span>
-          </Button>}
+          {(data?.paymentCnt >= 6 && active === 1) &&
+            < Button buttonType={ButtonType.PRIMARY}
+              buttonClassName="mobile:mr-[10px]"
+              handleClick={() => handleUpdateAccount(false)}
+            >
+              <span className="flex ">
+                <span>解約</span>
+              </span>
+            </Button>}
+          {active === 0 &&
+            < Button buttonType={ButtonType.PRIMARY}
+              buttonClassName="mobile:mr-[10px]"
+              handleClick={() => handleUpdateAccount(true)}
+            >
+              <span className="flex ">
+                <span>継続</span>
+              </span>
+            </Button>}
           <Button
             buttonType={ButtonType.DEFAULT}
             buttonClassName="rounded-[5px]"
