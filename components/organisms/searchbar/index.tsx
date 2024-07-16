@@ -75,7 +75,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
           <img
             src="/img/triangle-down.svg"
             alt="img"
-            className="min-w-[13px] ml-[5px]"
+            className="min-w-[15px] ml-[5px]"
           />
         </div>
       </div>
