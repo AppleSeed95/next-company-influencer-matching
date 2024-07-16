@@ -43,7 +43,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   }
   return (
     <div className="bg-[#F8F9FA] w-full border border-[#D3D3D3] mt-[28px] sp:mt-[0px] px-[35px] sp:px-[14px] mb-[34px] sp:mb-[14px]">
-      <div className="flex gap-x-[20px] mobile:gap-x-[0px] sp:gap-x-[12px] py-[12px] items-center  ">
+      <div className="flex gap-x-[20px] mobile:gap-x-[0px]  py-[12px] items-center  ">
         {!title && (
           <Input
             searchBar
