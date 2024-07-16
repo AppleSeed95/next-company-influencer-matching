@@ -104,7 +104,7 @@ const Input: React.FC<InputProps> = ({
           >
             {error}
           </div>
-        ) : !searchBar && <div className='text-left text-[#EE5736] text-[11px] opacity-0 duration-700'
+        ) : !(searchBar || dateTime) && <div className='text-left text-[#EE5736] text-[11px] opacity-0 duration-700'
         >
           test
         </div>
