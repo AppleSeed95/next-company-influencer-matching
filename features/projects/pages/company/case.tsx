@@ -404,16 +404,14 @@ const CasePage: React.FC = () => {
             必須
           </span>
         </span>
-        <div className="w-full flex justify-start">
-          <Input
-            value={data.collectionStart}
-            notRequired
-            dateTime
-            handleChange={(val) => setData({ ...data, collectionStart: val })}
-            inputClassName="max-w-[300px] mobile:max-w-full grow border-[#D3D3D3] w-[100%]"
-            placeholder="yyyy/mm/dd hh:mm"
-          />
-        </div>
+        <Input
+          value={data.collectionStart}
+          notRequired
+          dateTime
+          handleChange={(val) => setData({ ...data, collectionStart: val })}
+          inputClassName="flex max-w-[300px] mobile:max-w-full grow border-[#D3D3D3] w-[100%]"
+          placeholder="yyyy/mm/dd hh:mm"
+        />
       </div>
       <div className="flex mobile:flex-wrap  pt-[20px] mobile:pt-[10px] pb-[3px] w-[60%] sp:w-full m-auto border-b-[1px] border-[#DDDDDD]   sp:px-[18px]">
         <span className="w-[30%] mobile:w-full mt-[5px] mobile:w-full flex justify-end sp:justify-start  mr-[67px]">
