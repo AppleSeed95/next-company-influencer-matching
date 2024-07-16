@@ -319,7 +319,7 @@ const CasePage: React.FC = () => {
             必須
           </span>
         </span>
-        <div className="flex gap-y-[10px] flex-wrap max-w-[300px] mobile:max-w-full">
+        <div className="flex gap-y-[10px] mobile:gap-y-[0px] flex-wrap max-w-[300px] mobile:max-w-full">
           <Checkbox
             value={wantedSNS.includes("instagram")}
             handleChange={(val) => handleSNSChange("instagram")}
@@ -330,7 +330,7 @@ const CasePage: React.FC = () => {
                 alt="instagram"
               />
             }
-            checkBoxClassName="mr-[20px]"
+            checkBoxClassName="mr-[20px] mobile:mb-[10px] mobile:mb-[10px]"
           />
           <Checkbox
             value={wantedSNS.includes("tiktok")}
@@ -342,13 +342,13 @@ const CasePage: React.FC = () => {
                 alt="tiktok"
               />
             }
-            checkBoxClassName="mr-[20px]"
+            checkBoxClassName="mr-[20px] mobile:mb-[10px]"
           />
           <Checkbox
             handleChange={(val) => handleSNSChange("x")}
             value={wantedSNS.includes("x")}
             title={<img className="w-[35px]" src="/img/sns/x.svg" alt="x" />}
-            checkBoxClassName="mr-[20px]"
+            checkBoxClassName="mr-[20px] mobile:mb-[10px]"
           />
           <Checkbox
             value={wantedSNS.includes("youtube")}
@@ -360,7 +360,7 @@ const CasePage: React.FC = () => {
                 alt="youtube"
               />
             }
-            checkBoxClassName="mr-[20px]"
+            checkBoxClassName="mr-[20px] mobile:mb-[10px]"
           />
           <Checkbox
             value={wantedSNS.includes("facebook")}
@@ -372,13 +372,13 @@ const CasePage: React.FC = () => {
                 alt="youtube"
               />
             }
-            checkBoxClassName="mr-[20px]"
+            checkBoxClassName="mr-[20px] mobile:mb-[10px]"
           />
           <Checkbox
             value={wantedSNS.includes("etc.")}
             handleChange={(val) => handleSNSChange("etc.")}
             title={"etc."}
-            checkBoxClassName="mr-[20px]"
+            checkBoxClassName="mr-[20px] mobile:mb-[10px]"
           />
         </div>
       </div>
@@ -518,12 +518,13 @@ const CasePage: React.FC = () => {
           )
         )
       }
-      <div className="flex gap-[20px] mobile:gap-[10px] justify-center mt-[36px] mb-[160px] sp:mb-[60px]">
+      <div className="flex gap-[20px] mobile:gap-[0px] justify-center mt-[36px] mb-[160px] sp:mb-[60px]">
         {determineEditable() && [
           <Button
             key={"1"}
             buttonType={ButtonType.PRIMARY}
             handleClick={() => handleRequest(false)}
+            buttonClassName="mobile:mr-[10px]"
           >
             <span className="flex ">
               <span>申請</span>
@@ -540,6 +541,8 @@ const CasePage: React.FC = () => {
             key={"2"}
             buttonType={ButtonType.DANGER}
             handleClick={() => handleRequest(true)}
+            buttonClassName="mobile:mr-[10px]"
+
           >
             <span className="flex ">
               <span>保存</span>
