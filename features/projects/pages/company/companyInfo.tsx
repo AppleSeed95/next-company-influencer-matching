@@ -615,8 +615,8 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
               </span>
             }
           </span>
-          <div className="flex w-full gap-[20px] max-w-[250px] mobile:max-w-full flex-wrap mobile:flex-col sp:text-center">
-            {data?.payment?.length > 0 && <span>{dateString(data?.payment) + 'まで'}</span>}
+          <div className="flex w-full gap-[20px] mobile:gap-[0px] max-w-[250px] mobile:max-w-full flex-wrap mobile:flex-col sp:text-center">
+            {data?.payment?.length > 0 && <span className="text-left">{dateString(data?.payment) + 'まで'}</span>}
             <Button
               buttonType={ButtonType.DANGER}
               buttonClassName="sp:ml-[0px]"
