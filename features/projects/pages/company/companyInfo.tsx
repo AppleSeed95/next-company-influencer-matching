@@ -721,7 +721,7 @@ const CompanyInfoPage: React.FC<CompanyInfoProps> = ({
           </Button>
         </div>
       ) : (
-        <div className="flex gap-[20px] justify-center mt-[36px] mb-[160px] sp:mb-[60px]">
+        <div className="flex gap-[20px] mobile:gap-[0px] justify-center mt-[36px] mb-[160px] sp:mb-[60px]">
           <Button
             buttonType={ButtonType.PRIMARY}
             handleClick={() => handleApply(false)}
