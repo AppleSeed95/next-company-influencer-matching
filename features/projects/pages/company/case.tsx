@@ -422,7 +422,7 @@ const CasePage: React.FC = () => {
           value={data.collectionEnd}
           dateTime
           handleChange={(val) => setData({ ...data, collectionEnd: val })}
-          inputClassName="max-w-[300px] mobile:max-w-full grow border-[#D3D3D3] w-[100%]"
+          inputClassName="flex mb-[15px] max-w-[300px] mobile:max-w-full grow border-[#D3D3D3] w-[100%]"
           placeholder="yyyy/mm/dd hh:mm"
         />
       </div>
@@ -435,7 +435,7 @@ const CasePage: React.FC = () => {
           value={data.caseEnd}
           dateTime
           handleChange={(val) => setData({ ...data, caseEnd: val })}
-          inputClassName="max-w-[300px] mobile:max-w-full grow border-[#D3D3D3] w-[100%]"
+          inputClassName="flex mb-[15px] max-w-[300px] mobile:max-w-full grow border-[#D3D3D3] w-[100%]"
           placeholder="yyyy/mm/dd hh:mm"
         />
       </div>
