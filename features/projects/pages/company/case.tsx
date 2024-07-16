@@ -409,7 +409,7 @@ const CasePage: React.FC = () => {
           notRequired
           dateTime
           handleChange={(val) => setData({ ...data, collectionStart: val })}
-          inputClassName="flex max-w-[300px] mobile:max-w-full grow border-[#D3D3D3] w-[100%]"
+          inputClassName="flex mb-[15px] max-w-[300px] mobile:max-w-full grow border-[#D3D3D3] w-[100%]"
           placeholder="yyyy/mm/dd hh:mm"
         />
       </div>
