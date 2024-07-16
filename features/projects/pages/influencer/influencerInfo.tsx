@@ -946,11 +946,12 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
           <div key={idx} className="text-center m-[10px] text-[#EE5736]">{aError}</div>
         )
       )}
-      <div className="flex gap-[20px] mobile:gap-[10px] mobile:flex-wrap justify-center mt-[36px] mb-[160px] sp:mb-[60px]">
+      <div className="flex gap-[20px] mobile:gap-[0px] mobile:flex-wrap justify-center mt-[36px] mb-[160px] sp:mb-[60px]">
         {!applyMode && (
           <Button
             buttonType={ButtonType.PRIMARY}
             handleClick={() => handleSend(false)}
+            buttonClassName="mobile:mr-[10px]"
           >
             <span className="flex mobile:flex-wrap items-center">
               <span>更新</span>
@@ -968,6 +969,8 @@ const InfluencerInfoPage: React.FC<InfluencerInfoProps> = ({
           <Button
             buttonType={ButtonType.PRIMARY}
             handleClick={() => handleSend(true)}
+            buttonClassName="mobile:mr-[10px]"
+
           >
             <div className="flex mobile:flex-wrap items-center">
               {isLoading ? (
