@@ -426,7 +426,7 @@ export default function CaseDetailPage({ caseProps }: caseData) {
           setVisibleData={handleSearch}
           keys={["nickName", "date"]}
           title={
-            <div className="flex flex-wrap items-center gap-x-[20px] gap-y-[10px]">
+            <div className="flex flex-wrap items-center gap-x-[20px] mobile:gap-x-[0px] mobile:gap-y-[0px] gap-y-[10px]">
               <span
                 className="text-[#3F8DEB] underline hover:cursor-pointer underline-offset-3"
                 onClick={() => setShowModal(true)}
@@ -448,7 +448,7 @@ export default function CaseDetailPage({ caseProps }: caseData) {
               {collectionStatusTemp === "募集前" && (
                 <Button
                   buttonType={ButtonType.PRIMARY}
-                  buttonClassName="rounded-[0px] px-[15px] py-[7px]"
+                  buttonClassName="mobile:mr-[10px] mobile:mt-[10px] rounded-[0px] px-[15px] py-[7px]"
                   handleClick={() => {
                     handleCollectionStateChange("募集中");
                   }}
@@ -460,7 +460,7 @@ export default function CaseDetailPage({ caseProps }: caseData) {
                 collectionStatusTemp === "停止中") && (
                   <Button
                     buttonType={ButtonType.DANGER}
-                    buttonClassName="rounded-[0px] px-[15px] py-[7px]"
+                    buttonClassName="mobile:mr-[10px] mobile:mt-[10px] rounded-[0px] px-[15px] py-[7px]"
                     handleClick={() => {
                       setShowCollectionEndModal(true);
                     }}
@@ -471,7 +471,7 @@ export default function CaseDetailPage({ caseProps }: caseData) {
               {collectionStatusTemp === "募集中" && (
                 <Button
                   buttonType={ButtonType.DEFAULT}
-                  buttonClassName="rounded-[0px]"
+                  buttonClassName="mobile:mr-[10px] mobile:mt-[10px] rounded-[0px]"
                   handleClick={() => {
                     handleCollectionStateChange("停止中");
                   }}
@@ -482,7 +482,7 @@ export default function CaseDetailPage({ caseProps }: caseData) {
               {collectionStatusTemp === "停止中" && (
                 <Button
                   buttonType={ButtonType.DEFAULT}
-                  buttonClassName="rounded-[0px]"
+                  buttonClassName="mobile:mr-[10px] mobile:mt-[10px] rounded-[0px]"
                   handleClick={() => {
 
                     if (caseData.edited) {
