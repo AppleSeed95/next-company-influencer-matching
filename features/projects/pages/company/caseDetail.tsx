@@ -78,7 +78,7 @@ export default function CaseDetailPage({ caseProps }: caseData) {
       } catch (e) {
         console.log(e);
 
-        // router.push('/logout')
+        router.push('/logout')
       }
 
     };

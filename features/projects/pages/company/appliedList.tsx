@@ -456,9 +456,9 @@ export default function AppliedList() {
                   <div className="flex my-[10px]">
                     <div className="w-[80px] mr-[36px] text-right text-[#3F8DEB] underline hover:cursor-pointer underline-offset-3 sp:text-spsmall ">
                       <span
-                        onClick={() => {
-                          router.push(`/caseDetail/${aData.id}`)
-                        }}
+                      // onClick={() => {
+                      //   router.push(`/caseDetail/${aData.id}`)
+                      // }}
                       >詳細</span>
                     </div>
                   </div>
