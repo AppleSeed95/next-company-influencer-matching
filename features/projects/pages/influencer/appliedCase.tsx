@@ -443,10 +443,10 @@ export default function AppledCase() {
                   <div className="flex">
                     <div className="w-[80px] mr-[36px] text-right text-[#3F8DEB] underline hover:cursor-pointer underline-offset-3 sp:text-spsmall ">
                       <span
-                      // onClick={() => {
-                      //   setCaseId(aData.caseId);
-                      //   setShowModal(true);
-                      // }}
+                        onClick={() => {
+                          setCaseId(aData.caseId);
+                          setShowModal(true);
+                        }}
                       >詳細</span>
                     </div>
                   </div>
