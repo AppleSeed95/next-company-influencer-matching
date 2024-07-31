@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import axios from "axios";
 import Image from "next/image";
-import ReactPaginate from "react-paginate";
+// import ReactPaginate from "react-paginate";
 import { useRouter } from "next/navigation";
 
 export default function CompanyListPage() {
@@ -279,7 +279,7 @@ export default function CompanyListPage() {
           </div>
         )}
         <div className="sp:hidden">
-          <ReactPaginate
+          {/* <ReactPaginate
             containerClassName="pagination-conatiner"
             pageClassName="pagination-page"
             activeClassName="pagination-active"
@@ -293,7 +293,7 @@ export default function CompanyListPage() {
             pageCount={pageCount}
             previousLabel="<"
             renderOnZeroPageCount={null}
-          />
+          /> */}
         </div>
 
         <div className="lg:hidden grow">
@@ -365,7 +365,7 @@ export default function CompanyListPage() {
           ))}
         </div>
         <div className="lg:hidden">
-          <ReactPaginate
+          {/* <ReactPaginate
             containerClassName="pagination-conatiner"
             pageClassName="pagination-page"
             activeClassName="pagination-active"
@@ -379,7 +379,7 @@ export default function CompanyListPage() {
             pageCount={pageCount}
             previousLabel="<"
             renderOnZeroPageCount={null}
-          />
+          /> */}
         </div>
       </div>
     </div>

@@ -3,7 +3,7 @@
 import Checkbox from "@/components/atoms/checkbox";
 import SearchBar from "@/components/organisms/searchbar";
 import { useEffect, useState } from "react";
-import ReactPaginate from "react-paginate";
+// import ReactPaginate from "react-paginate";
 import Link from "next/link";
 import axios from "axios";
 import Image from "next/image";
@@ -357,7 +357,7 @@ export default function InfluencerListPage() {
           </div>
         )}
         <div className="sp:hidden">
-          <ReactPaginate
+          {/* <ReactPaginate
             containerClassName="pagination-conatiner"
             pageClassName="pagination-page"
             activeClassName="pagination-active"
@@ -371,7 +371,7 @@ export default function InfluencerListPage() {
             pageCount={pageCount}
             previousLabel="<"
             renderOnZeroPageCount={null}
-          />
+          /> */}
         </div>
         <div className="lg:hidden grow">
           {currentItems?.map((aData, idx) => {
@@ -474,7 +474,7 @@ export default function InfluencerListPage() {
 
         </div>
         <div className="lg:hidden">
-          <ReactPaginate
+          {/* <ReactPaginate
             containerClassName="pagination-conatiner"
             pageClassName="pagination-page"
             activeClassName="pagination-active"
@@ -488,7 +488,7 @@ export default function InfluencerListPage() {
             pageCount={pageCount}
             previousLabel="<"
             renderOnZeroPageCount={null}
-          />
+          /> */}
         </div>
       </div>
     </div>
