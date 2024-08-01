@@ -257,7 +257,7 @@ export default function AskPageContent() {
               ) : (
                 ""
               )}
-              確認画面へ
+              送信する
             </div>
           </Button>
           {error.length !== 0 &&

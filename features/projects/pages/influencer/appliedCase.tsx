@@ -11,7 +11,7 @@ import { authUserState } from "@/recoil/atom/auth/authUserAtom";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import Image from "next/image";
-// import ReactPaginate from "react-paginate";
+import ReactPaginate from "react-paginate";
 export default function AppledCase() {
   const user = useRecoilValue(authUserState);
   const router = useRouter();
@@ -367,7 +367,7 @@ export default function AppledCase() {
           </div>
         )}
         <div className="sp:hidden">
-          {/* <ReactPaginate
+          <ReactPaginate
             containerClassName="pagination-conatiner"
             pageClassName="pagination-page"
             activeClassName="pagination-active"
@@ -381,7 +381,7 @@ export default function AppledCase() {
             pageCount={pageCount}
             previousLabel="<"
             renderOnZeroPageCount={null}
-          /> */}
+          />
         </div>
         <div className="lg:hidden grow">
           {currentItems?.map((aData, idx) => (
@@ -484,7 +484,7 @@ export default function AppledCase() {
           ))}
         </div>
         <div className="lg:hidden">
-          {/* <ReactPaginate
+          <ReactPaginate
             containerClassName="pagination-conatiner"
             pageClassName="pagination-page"
             activeClassName="pagination-active"
@@ -498,7 +498,7 @@ export default function AppledCase() {
             pageCount={pageCount}
             previousLabel="<"
             renderOnZeroPageCount={null}
-          /> */}
+          />
         </div>
       </div>
     </div>
