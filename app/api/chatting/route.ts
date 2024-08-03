@@ -36,10 +36,12 @@ export async function POST(request: NextRequest) {
     )}) VALUES(${query2.slice(0, -1)})`;
 
     await executeQuery(query).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error", msg: "error" });
     });
     return NextResponse.json({ type: "success" });
   } catch (error) {
+    throw new Error("something went wrong");
     console.error("Error", error);
     return NextResponse.json({ type: "error", msg: "error" });
   }
@@ -53,6 +55,7 @@ export async function GET(request: NextRequest) {
   try {
     const preQuery = `SELECT * from chatroom where applyId = ${id}`;
     const room = await executeQuery(preQuery).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error", msg: "no table exists" });
     });
 
@@ -65,17 +68,20 @@ export async function GET(request: NextRequest) {
       UPDATE message SET checked = 1 WHERE userId != ${user} and roomId = ${id}
     `;
     await executeQuery(checkQuery).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error", msg: "no table exists" });
     });
     const query = `SELECT message.*,users.name FROM message
     LEFT JOIN users ON message.userId = users.id 
     where roomId = ${id}`;
     const rows = await executeQuery(query).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error", msg: "no table exists" });
     });
 
     return NextResponse.json({ messages: rows, valid: isValid });
   } catch (error) {
+    throw new Error("something went wrong");
     console.error("Error fetching data:", error);
     return NextResponse.json({ type: "error", msg: "no table exists" });
   }

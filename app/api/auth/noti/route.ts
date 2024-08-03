@@ -25,6 +25,7 @@ export async function POST(request: NextRequest) {
           `);
     return NextResponse.json({ type: "success" });
   } catch (error) {
+    throw new Error("something went wrong");
     console.error("Error creating table or inserting record:", error);
     return NextResponse.json({ type: "error" });
   }
@@ -35,6 +36,7 @@ export async function GET() {
     const notification = await executeQuery(
       `SELECT * from notification `
     ).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error" });
     });
     const last =
@@ -44,6 +46,7 @@ export async function GET() {
     return NextResponse.json({ type: "success", data: last });
   } catch (error) {
     console.error("Error creating table or inserting record:", error);
+    throw new Error("Error creating table or inserting record:");
     return NextResponse.json({ type: "error" });
   }
 }

@@ -25,6 +25,7 @@ export async function POST(request: NextRequest) {
     const companyId = body.companyId;
     const preQuery = `SELECT * FROM company where id=${companyId}`;
     const rows = await executeQuery(preQuery).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error" });
     });
     const companyStatus = rows[0].status;
@@ -98,7 +99,7 @@ export async function POST(request: NextRequest) {
     )}) VALUES(${query2.slice(0, -1)})`;
 
     const result = await executeQuery(query).catch((e) => {
-      console.log("error here1", e);
+      throw new Error("something went wrong");
 
       return NextResponse.json({ type: "error", msg: "error" });
     });
@@ -106,16 +107,19 @@ export async function POST(request: NextRequest) {
     if (isReApply) {
       const query1 = `select * from cases where previous = ${body.previous}`;
       const row = await executeQuery(query1).catch((e) => {
+        throw new Error("something went wrong");
         return NextResponse.json({ type: "error" });
       });
       const query2 = `update cases set next = ${row[0].id} where id = ${body.previous}`;
       const result = await executeQuery(query2).catch((e) => {
+        throw new Error("something went wrong");
         return NextResponse.json({ type: "error" });
       });
       id = row[0].id;
     }
     return NextResponse.json({ type: "success", id });
   } catch (error) {
+    throw new Error("something went wrong");
     console.error("Error creating table or inserting record:", error);
     return NextResponse.json({ type: "error", msg: "error" });
   }
@@ -129,10 +133,12 @@ export async function GET() {
     ORDER BY cases.id DESC`;
 
     const rows = await executeQuery(query).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error" });
     });
     return NextResponse.json(rows);
   } catch (error) {
+    throw new Error("something went wrong");
     console.error("Error fetching data:", error);
     return NextResponse.json({ type: "error" });
   }
@@ -181,6 +187,7 @@ export async function PUT(request: NextRequest) {
     executeQuery(query);
     return NextResponse.json({ type: "success" });
   } catch (error) {
+    throw new Error("something went wrong");
     console.error("Error fetching data:", error);
     return NextResponse.json({ type: "error" });
   }

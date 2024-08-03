@@ -8,6 +8,7 @@ export async function POST(request: NextRequest) {
     const { email } = await request.json();
     const query3 = `SELECT * FROM users where email = '${email}'`;
     const rows = await executeQuery(query3).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({
         type: "error",
       });
@@ -32,6 +33,7 @@ export async function POST(request: NextRequest) {
       data: { email, password: randomString },
     });
   } catch (e) {
+    throw new Error("something went wrong");
     console.error("Error creating user record:", e);
     return NextResponse.json({ type: "error" });
   }

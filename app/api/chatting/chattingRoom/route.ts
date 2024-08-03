@@ -12,6 +12,7 @@ export async function GET(request: NextRequest) {
      `;
 
     const rows = await executeQuery(query).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error", msg: "no table exists" });
     });
     if (!rows.length) {
@@ -19,6 +20,7 @@ export async function GET(request: NextRequest) {
     }
     return NextResponse.json(rows[0]);
   } catch (error) {
+    throw new Error("something went wrong");
     console.error("Error fetching data:", error);
     return NextResponse.json({ type: "error", msg: "no table exists" });
   }

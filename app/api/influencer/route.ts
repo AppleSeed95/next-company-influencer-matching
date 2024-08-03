@@ -7,6 +7,7 @@ export async function POST(request: NextRequest) {
 
     const query3 = `SELECT * FROM users where email = '${body.emailAddress}'`;
     const rows = await executeQuery(query3).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error" });
     });
     if (!rows || !rows.length || rows.length === 0) {
@@ -73,6 +74,7 @@ export async function POST(request: NextRequest) {
       -1
     )}) VALUES(${query2.slice(0, -1)})`;
     await executeQuery(query).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error", msg: "error" });
     });
     const influencerIdQuery = `SELECT id FROM influencer WHERE userId = ${user.id}`;
@@ -83,6 +85,7 @@ export async function POST(request: NextRequest) {
       id: influencer[0].id,
     });
   } catch (error) {
+    throw new Error("something went wrong");
     console.error("Error creating table or inserting record:", error);
     return NextResponse.json({ type: "error", msg: "error" });
   }
@@ -91,10 +94,12 @@ export async function GET() {
   try {
     const query = "SELECT * FROM influencer ORDER BY id DESC";
     const rows = await executeQuery(query).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error", msg: "no table exists" });
     });
     return NextResponse.json(rows);
   } catch (error) {
+    throw new Error("something went wrong");
     console.error("Error fetching data:", error);
     return NextResponse.json({ type: "error", msg: "no table exists" });
   }
@@ -105,6 +110,7 @@ export async function PUT(request: NextRequest) {
     const userEmail = body.emailAddress;
     const query1 = `select id, plainPassword from users where email = '${userEmail}'`;
     const rows1 = await executeQuery(query1).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error" });
     });
 
@@ -116,6 +122,7 @@ export async function PUT(request: NextRequest) {
     }
     const query2 = `select id, plainPassword from users where id = ${body.userId}`;
     const rows2 = await executeQuery(query2).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error" });
     });
     let query = "UPDATE influencer SET ";
@@ -130,11 +137,13 @@ export async function PUT(request: NextRequest) {
     query += `WHERE id = ${body.id}`;
 
     await executeQuery(query).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error" });
     });
     const userQuery = `UPDATE users SET email = '${userEmail}' where id = ${body.userId}`;
 
     await executeQuery(userQuery).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error" });
     });
     if (body["status"] && body["status"] === "否認") {
@@ -148,6 +157,7 @@ export async function PUT(request: NextRequest) {
       password: rows2[0].plainPassword,
     });
   } catch (error) {
+    throw new Error("something went wrong");
     console.error("Error fetching data:", error);
     return NextResponse.json({ type: "error" });
   }

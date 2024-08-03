@@ -71,10 +71,12 @@ export async function POST(request: NextRequest) {
     )}) VALUES(${query2.slice(0, -1)})`;
 
     const result = await executeQuery(query).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error", msg: "error" });
     });
     return NextResponse.json({ type: "success" });
   } catch (error) {
+    throw new Error("something went wrong");
     console.error("Error creating table or inserting record:", error);
     return NextResponse.json({ type: "error", msg: "error" });
   }
@@ -87,10 +89,12 @@ export async function GET() {
     where collectionStatus = '募集中' AND company.status = '稼動中' ORDER BY id DESC`;
 
     const rows = await executeQuery(query).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error" });
     });
     return NextResponse.json(rows);
   } catch (error) {
+    throw new Error("something went wrong");
     console.error("Error fetching data:", error);
     return NextResponse.json({ type: "error" });
   }
@@ -122,6 +126,7 @@ export async function PUT(request: NextRequest) {
     executeQuery(query);
     return NextResponse.json({ type: "success" });
   } catch (error) {
+    throw new Error("something went wrong");
     console.error("Error fetching data:", error);
     return NextResponse.json({ type: "error" });
   }

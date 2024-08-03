@@ -41,6 +41,7 @@ export async function GET(request: NextRequest) {
       WHERE apply.caseId = '${id}'
       ORDER BY apply.id DESC`;
     const rows = await executeQuery(query).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error" });
     });
 
@@ -56,12 +57,14 @@ export async function GET(request: NextRequest) {
       `;
 
       await executeQuery(updateQuery1).catch((e) => {
+        throw new Error("something went wrong");
         return NextResponse.json({ type: "error" });
       });
     }
     return NextResponse.json(rows);
   } catch (error) {
     console.error("Error fetching data:", error);
+    throw new Error("Error fetching data:");
     return NextResponse.json({ type: "error" });
   }
 }

@@ -21,6 +21,7 @@ export async function PUT(request: NextRequest) {
       UPDATE users set active = ${update} where id = ${id}
     `;
     await executeQuery(query).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error" });
     });
     if (!val) {
@@ -32,6 +33,7 @@ export async function PUT(request: NextRequest) {
           type: "success",
         });
       } catch (e) {
+        throw new Error("something went wrong");
         console.log("error here", e);
       }
     }
@@ -39,6 +41,7 @@ export async function PUT(request: NextRequest) {
       type: "success",
     });
   } catch (error) {
+    throw new Error("something went wrong");
     console.error("Error creating table or inserting record:", error);
     return NextResponse.json({ error: error });
   }
@@ -51,6 +54,7 @@ export async function POST(request: NextRequest) {
     const result = await executeQuery(
       `SELECT * FROM users where email = '${body.id}'`
     ).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error" });
     });
     if (!result || !result.length || result.length === 0) {
@@ -96,6 +100,7 @@ export async function POST(request: NextRequest) {
     const result1 = await executeQuery(
       `SELECT * FROM ${type} where userId = ${user.id}`
     ).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error" });
     });
 
@@ -153,6 +158,7 @@ export async function POST(request: NextRequest) {
     });
   } catch (error) {
     console.error("Error creating table or inserting record:", error);
-    return NextResponse.json({ error: error });
+    throw new Error("Error creating table or inserting record:");
+    // return NextResponse.json({ error: error });
   }
 }

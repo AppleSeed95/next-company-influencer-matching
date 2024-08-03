@@ -8,6 +8,7 @@ export async function POST(request: NextRequest) {
     const caseId = body.caseId;
     const preQuery = `SELECT * FROM influencer where id=${influencerId}`;
     const rows = await executeQuery(preQuery).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error" });
     });
     const influencerStatus = rows[0].status;
@@ -19,6 +20,7 @@ export async function POST(request: NextRequest) {
     LEFT JOIN cases on cases.companyId = company.id
      where cases.id=${caseId}`;
     const rows1 = await executeQuery(preQuery1).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error" });
     });
     const companyStatus = rows1[0].status;
@@ -33,6 +35,7 @@ export async function POST(request: NextRequest) {
     const preQuery2 = `SELECT * FROM cases
     where id=${caseId}`;
     const rows2 = await executeQuery(preQuery2).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error" });
     });
     const caseStatus = rows2[0].collectionStatus;
@@ -83,10 +86,12 @@ export async function POST(request: NextRequest) {
     )}) VALUES(${query2.slice(0, -1)})`;
 
     await executeQuery(query).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error", msg: "error" });
     });
     return NextResponse.json({ type: "success" });
   } catch (error) {
+    throw new Error("something went wrong");
     console.error("Error creating table or inserting record:", error);
     return NextResponse.json({ type: "error", msg: "error" });
   }
@@ -112,11 +117,13 @@ export async function GET(request: NextRequest) {
       `;
 
     const rows = await executeQuery(query).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error" });
     });
 
     return NextResponse.json(rows);
   } catch (error) {
+    throw new Error("something went wrong");
     console.error("Error fetching data:", error);
     return NextResponse.json({ type: "error" });
   }
@@ -139,6 +146,7 @@ export async function PUT(request: NextRequest) {
 
     console.log(query);
     const result = await executeQuery(query).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error" });
     });
     let query1 = `SELECT apply.*,cases.caseName,influencer.influencerName,influencer.nickName,company.representativeName,company.responsibleName,company.emailAddress
@@ -149,6 +157,7 @@ export async function PUT(request: NextRequest) {
     WHERE apply.id = ${body.id}
     `;
     const rows = await executeQuery(query1).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error" });
     });
     if (rows.length) {
@@ -156,6 +165,7 @@ export async function PUT(request: NextRequest) {
     }
   } catch (error) {
     console.error("Error fetching data:", error);
+    throw new Error("Error fetching data:");
     return NextResponse.json({ type: "error" });
   }
 }

@@ -18,11 +18,14 @@ export async function POST(request: NextRequest) {
     INSERT INTO users (name, email)
     VALUES ('John Doye', 'john@exatmple.com')
   `).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error" });
     });
     console.log("Record inserted successfully!", result);
     return NextResponse.json({ res: "success" });
   } catch (error) {
+    throw new Error("something went wrong");
+
     console.error("Error creating table or inserting record:", error);
     return NextResponse.json({ error: error });
   }
@@ -32,6 +35,7 @@ export async function GET(request: NextRequest) {
 
   const query = `SELECT * FROM users where password = '${id}'`;
   const rows = await executeQuery(query).catch((e) => {
+    throw new Error("something went wrong");
     return NextResponse.json({
       type: "error",
     });
@@ -54,6 +58,7 @@ export async function DELETE(request: NextRequest) {
   const id = request.nextUrl.searchParams.get("id") || "";
   const query1 = `select name from users where password = '${id}' `;
   const row = await executeQuery(query1).catch((e) => {
+    throw new Error("something went wrong");
     return NextResponse.json({
       type: "error",
     });
@@ -65,6 +70,7 @@ export async function DELETE(request: NextRequest) {
   }
   const query = `delete from users where password = '${id}'`;
   const result = await executeQuery(query).catch((e) => {
+    throw new Error("something went wrong");
     return NextResponse.json({
       type: "error",
     });
@@ -78,6 +84,7 @@ export async function PUT(request: NextRequest) {
     const { email, type } = await request.json();
     const query3 = `SELECT * FROM users where email = '${email}'`;
     const rows = await executeQuery(query3).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({
         type: "error",
       });
@@ -115,6 +122,7 @@ export async function PUT(request: NextRequest) {
       VALUES ('${email}','${hash}','${type}', '${todayString}', '${randomString}')
       `);
     const rows1 = await executeQuery(query3).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({
         type: "error",
       });
@@ -127,6 +135,7 @@ export async function PUT(request: NextRequest) {
       });
     }
   } catch (e) {
+    throw new Error("something went wrong");
     console.error("Error creating user record:", e);
     return NextResponse.json({ type: "error" });
   }

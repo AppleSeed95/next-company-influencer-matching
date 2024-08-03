@@ -8,10 +8,12 @@ export async function POST(request: NextRequest) {
             INSERT INTO plan (name, priceID, monthCnt, concurrentCnt)
             VALUES ('${name}', '${priceID}',${monthCnt},${concurrentCnt})
           `).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error" });
     });
     return NextResponse.json({ type: "success" });
   } catch (error) {
+    throw new Error("something went wrong");
     return NextResponse.json({ type: "error" });
   }
 }
@@ -23,10 +25,12 @@ export async function PUT(request: NextRequest) {
     `;
 
     await executeQuery(query).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error" });
     });
     return NextResponse.json({ type: "success" });
   } catch (error) {
+    throw new Error("something went wrong");
     return NextResponse.json({ type: "error" });
   }
 }
@@ -42,10 +46,12 @@ export async function DELETE(request: NextRequest) {
       DELETE from plan WHERE id = ${id}
     `;
     await executeQuery(query).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error" });
     });
     return NextResponse.json({ type: "success" });
   } catch (error) {
+    throw new Error("something went wrong");
     return NextResponse.json({ type: "error" });
   }
 }
@@ -53,10 +59,12 @@ export async function DELETE(request: NextRequest) {
 export async function GET() {
   try {
     const plan = await executeQuery(`SELECT * from plan `).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error" });
     });
     return NextResponse.json({ type: "success", data: plan });
   } catch (error) {
+    throw new Error("something went wrong");
     return NextResponse.json({ type: "error" });
   }
 }

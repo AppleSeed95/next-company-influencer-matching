@@ -6,6 +6,7 @@ export async function GET(request: NextRequest) {
   try {
     const queryForCompany = `SELECT * FROM company WHERE id = '${id}'`;
     const result = await executeQuery(queryForCompany).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error" });
     });
     if (result.length === 0) {
@@ -35,6 +36,7 @@ export async function GET(request: NextRequest) {
       AND collectionStart <> '' 
       `;
     const count = await executeQuery(countQuery).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error" });
     });
 
@@ -54,6 +56,7 @@ export async function GET(request: NextRequest) {
       LIMIT ${company.freeAccount ? 1000 : possibleAutoCollectionCnt} ;    
       `;
     await executeQuery(updateQuery).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error" });
     });
     const countQuery1 = `
@@ -66,6 +69,7 @@ export async function GET(request: NextRequest) {
       AND collectionEnd <> ''
     `;
     const count1 = await executeQuery(countQuery1).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error" });
     });
     const updateQuery1 = `UPDATE cases
@@ -78,6 +82,7 @@ export async function GET(request: NextRequest) {
       `;
 
     await executeQuery(updateQuery1).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error" });
     });
 
@@ -103,15 +108,18 @@ export async function GET(request: NextRequest) {
     `;
 
     await executeQuery(updateCompanyQuery).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error" });
     });
     const query = `SELECT * FROM cases where companyId = ${id} ORDER BY id DESC`;
     const rows = await executeQuery(query).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error" });
     });
 
     return NextResponse.json(rows);
   } catch (error) {
+    throw new Error("something went wrong");
     console.error("Error fetching data:", error);
     return NextResponse.json({ type: "error" });
   }

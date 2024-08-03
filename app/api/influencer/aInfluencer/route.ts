@@ -6,10 +6,12 @@ export async function GET(request: NextRequest) {
   try {
     const query = `SELECT * FROM influencer where id = ${id}  ORDER BY id DESC`;
     const rows = await executeQuery(query).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error" });
     });
     return NextResponse.json(rows[0]);
   } catch (error) {
+    throw new Error("something went wrong");
     console.error("Error fetching data:", error);
     return NextResponse.json({ type: "error" });
   }

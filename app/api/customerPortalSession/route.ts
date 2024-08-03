@@ -12,12 +12,14 @@ export async function POST(request: NextRequest) {
       });
       return NextResponse.json({ url: session.url });
     } catch (err) {
+      throw new Error("something went wrong");
       return NextResponse.json({
         type: "error",
         msg: err.message,
       });
     }
   } catch (error) {
+    throw new Error("something went wrong");
     console.error("Webhook signature verification failed:", error);
     return NextResponse.json({
       type: "error",

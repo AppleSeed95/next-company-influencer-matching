@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
     };
 
     const res = await sgMail.send(msg).catch((e) => {
-      console.log(e.response.body.errors);
+      throw new Error("something went wrong");
     });
     if (!res) {
       return NextResponse.json({ type: "error" });
@@ -25,6 +25,6 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(res);
     // return NextResponse.json({type:'success'});
   } catch (error) {
-    throw error;
+    throw new Error("something went wrong");
   }
 }

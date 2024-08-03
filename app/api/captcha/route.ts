@@ -20,6 +20,7 @@ export async function POST(request: Request, response: Response) {
       }
     );
   } catch (e) {
+    throw new Error("something went wrong");
     console.log("recaptcha error:", e);
   }
 

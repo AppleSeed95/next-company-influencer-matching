@@ -16,6 +16,7 @@ export async function POST(request: NextRequest) {
         const email = body.data.object.customer_email;
         const companyQuery = `SELECT responsibleName from company where emailAddress = '${email}'`;
         const company = await executeQuery(companyQuery).catch((e) => {
+          throw new Error("something went wrong");
           return NextResponse.json({ type: "error" });
         });
         if (!(company.length > 0)) {
@@ -41,6 +42,7 @@ export async function POST(request: NextRequest) {
         };
 
         const res = await sgMail.send(msg).catch((e) => {
+          throw new Error("something went wrong");
           console.log(e.response.body.errors);
         });
         if (!res) {
@@ -54,6 +56,7 @@ export async function POST(request: NextRequest) {
                             WHERE emailAddress = '${email}'
                          `;
         const rows = await executeQuery(query).catch((e) => {
+          throw new Error("something went wrong");
           return NextResponse.json({ type: "error" });
         });
 
@@ -68,6 +71,7 @@ export async function POST(request: NextRequest) {
                       WHERE company.emailAddress = '${email}'
                       `;
         const rows2 = await executeQuery(query2).catch((e) => {
+          throw new Error("something went wrong");
           return NextResponse.json({ type: "error" });
         });
         let currentDate = new Date();
@@ -112,6 +116,7 @@ export async function POST(request: NextRequest) {
                       thisMonthCollectionCnt = 0 where emailAddress = '${email}'`;
 
         await executeQuery(query1).catch((e) => {
+          throw new Error("something went wrong");
           return NextResponse.json({ type: "error" });
         });
         break;
@@ -121,6 +126,7 @@ export async function POST(request: NextRequest) {
         const companyQuery_fail = `SELECT responsibleName,companyName from company where emailAddress = '${email_fail}'`;
         const company_fail = await executeQuery(companyQuery_fail).catch(
           (e) => {
+            throw new Error("something went wrong");
             return NextResponse.json({ type: "error" });
           }
         );
@@ -147,7 +153,7 @@ export async function POST(request: NextRequest) {
         };
 
         const res_fail = await sgMail.send(msg_fail).catch((e) => {
-          console.log(e.response.body.errors);
+          throw new Error("something went wrong");
         });
         if (!res_fail) {
           return NextResponse.json({ type: "error" });
@@ -164,7 +170,7 @@ export async function POST(request: NextRequest) {
         console.log(customerCompany_fail_name);
 
         await sgMail.send(msg_fail_admin).catch((e) => {
-          console.log(e.response.body.errors);
+          throw new Error("something went wrong");
         });
         break;
       default:
@@ -172,7 +178,7 @@ export async function POST(request: NextRequest) {
     }
     return NextResponse.json({ received: true });
   } catch (error) {
-    console.error("Webhook signature verification failed:", error);
+    throw new Error("something went wrong");
     return NextResponse.json({
       type: "error",
       msg: "Webhook signature verification failed",

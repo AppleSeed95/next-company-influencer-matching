@@ -31,6 +31,7 @@ export async function POST(request: NextRequest) {
 
     const query3 = `SELECT * FROM users where email = '${body.emailAddress}'`;
     const rows = await executeQuery(query3).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error" });
     });
     if (!rows && !rows.length && rows.length === 0) {
@@ -52,6 +53,7 @@ export async function POST(request: NextRequest) {
 
     const query4 = `SELECT * FROM plan`;
     const rows4 = await executeQuery(query4).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error" });
     });
 
@@ -128,10 +130,12 @@ export async function POST(request: NextRequest) {
     )}) VALUES(${query2.slice(0, -1)})`;
 
     await executeQuery(query).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error", msg: "error" });
     });
     return NextResponse.json({ type: "success", password: user.plainPassword });
   } catch (error) {
+    throw new Error("something went wrong");
     console.error("Error creating table or inserting record:", error);
     return NextResponse.json({ type: "error", msg: "error" });
   }
@@ -140,6 +144,7 @@ export async function GET() {
   try {
     const deleteUnnecessaryUsersQuery = `DELETE FROM users WHERE name IS NULL`;
     await executeQuery(deleteUnnecessaryUsersQuery).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error", msg: "no table exists" });
     });
 
@@ -151,6 +156,7 @@ export async function GET() {
     const deletingCompany = await executeQuery(deletingCompanyQuery).catch(
       (e) => {
         console.log("error here5", e);
+        throw new Error("something went wrong");
         return NextResponse.json({ type: "error", msg: "no table exists" });
       }
     );
@@ -202,6 +208,7 @@ export async function GET() {
               WHERE id = '${userId}'`;
             await executeQuery(userDeleteQuery);
           } catch (e) {
+            throw new Error("something went wrong");
             return NextResponse.json({
               type: "error",
               msg: "入力に誤りがあります。",
@@ -212,18 +219,19 @@ export async function GET() {
 
       const query = "SELECT * FROM company ORDER BY id DESC";
       let rows = await executeQuery(query).catch((e) => {
-        console.log("error here4", e);
+        throw new Error("something went wrong");
         return NextResponse.json({ type: "error", msg: "no table exists" });
       });
       return NextResponse.json(rows);
     }
     const query = "SELECT * FROM company ORDER BY id DESC";
     let rows = await executeQuery(query).catch((e) => {
-      console.log("error here4", e);
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error", msg: "no table exists" });
     });
     return NextResponse.json(rows);
   } catch (error) {
+    throw new Error("something went wrong");
     console.error("Error fetching data:", error);
     return NextResponse.json({ type: "error", msg: "no table exists" });
   }
@@ -241,6 +249,7 @@ export async function PUT(request: NextRequest) {
           const result = await stripe.subscriptions.cancel(`${body.paymentId}`);
           console.log(result);
         } catch (e) {
+          throw new Error("something went wrong");
           console.log(e);
         }
       }
@@ -251,12 +260,14 @@ export async function PUT(request: NextRequest) {
       `;
 
       await executeQuery(updateFreeCompanyQuery).catch((e) => {
+        throw new Error("something went wrong");
         return NextResponse.json({ type: "error" });
       });
     }
 
     const query1 = `select id, plainPassword from users where email = '${userEmail}'`;
     const rows1 = await executeQuery(query1).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error" });
     });
     if (rows1.length > 0 && rows1[0].id !== body.userId) {
@@ -290,14 +301,17 @@ export async function PUT(request: NextRequest) {
     query += `WHERE id = ${body.id}`;
 
     await executeQuery(query).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error", msg: "no table exists" });
     });
     const userQuery = `UPDATE users SET email = '${userEmail}' where id = ${body.userId}`;
     await executeQuery(userQuery).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error" });
     });
     return NextResponse.json({ type: "success" });
   } catch (error) {
+    throw new Error("something went wrong");
     console.error("Error fetching data:", error);
     return NextResponse.json({ type: "error", msg: "no table exists" });
   }

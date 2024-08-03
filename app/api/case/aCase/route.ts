@@ -13,16 +13,19 @@ export async function GET(request: NextRequest) {
       `;
 
     const rows = await executeQuery(query).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error" });
     });
     const companyId = rows[0].companyId;
 
     const query1 = `SELECT id FROM cases WHERE companyId = ${companyId}`;
     const rows1 = await executeQuery(query1).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error" });
     });
     return NextResponse.json({ data: rows[0], companyCases: rows1 });
   } catch (error) {
+    throw new Error("something went wrong");
     console.error("Error fetching data:", error);
     return NextResponse.json({ type: "error" });
   }
@@ -37,6 +40,7 @@ export async function PUT(request: NextRequest) {
       LEFT JOIN  company ON company.id = cases.companyId
       where cases.id=${id}`;
       const rows = await executeQuery(preQuery).catch((e) => {
+        throw new Error("something went wrong");
         return NextResponse.json({ type: "error" });
       });
       const companyStatus = rows[0].status;
@@ -58,6 +62,7 @@ export async function PUT(request: NextRequest) {
     }
     const caseQeury = `select collectionStart,collectionEnd from cases where id=${id}`;
     const caseRow = await executeQuery(caseQeury).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error" });
     });
     const collectionStart = new Date(caseRow[0].collectionStart);
@@ -91,6 +96,7 @@ export async function PUT(request: NextRequest) {
       const appliedInfluencer = await executeQuery(
         approvedInfluencerCtnQuery
       ).catch((e) => {
+        throw new Error("something went wrong");
         console.log("error here2", e);
       });
       let finishedApplyCnt = 0;
@@ -127,6 +133,7 @@ export async function PUT(request: NextRequest) {
     if (!approveMode && !resumeMode) {
       const queryForCompany = `SELECT * FROM company WHERE id = '${companyId}'`;
       const result = await executeQuery(queryForCompany).catch((e) => {
+        throw new Error("something went wrong");
         return NextResponse.json({ type: "error" });
       });
       if (result.length === 0) {
@@ -173,6 +180,7 @@ export async function PUT(request: NextRequest) {
     if (result) return NextResponse.json({ type: "success" });
     else return NextResponse.json({ type: "error" });
   } catch (error) {
+    throw new Error("something went wrong");
     console.error("Error fetching data:", error);
     return NextResponse.json({ error: error }, { status: 500 });
   }

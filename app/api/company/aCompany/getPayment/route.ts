@@ -5,6 +5,7 @@ export async function GET(request: NextRequest) {
   try {
     const query = `SELECT company.payment,company.paymentId, freeAccount FROM company left join users on company.userId = users.id where users.id = ${id} `;
     const rows = await executeQuery(query).catch((e) => {
+      throw new Error("something went wrong");
       return NextResponse.json({ type: "error" });
     });
     if (!rows || !rows.length || rows.length === 0) {
@@ -17,6 +18,7 @@ export async function GET(request: NextRequest) {
     const todayString = today.toISOString();
     return NextResponse.json({ data: rows[0], todayString });
   } catch (error) {
+    throw new Error("something went wrong");
     console.error("Error fetching data:", error);
     return NextResponse.json({ type: "error" });
   }
