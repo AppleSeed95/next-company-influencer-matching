@@ -19,7 +19,6 @@ const CheckoutPage = ({ priceID, paymentCnt }: priceProps) => {
         setIsLoading(true);
         // const { data: { customer: { id: customerId } } } = await axios.post('/api/company/stripe/customer', { email: user?.email, name: user?.targetName });
         // const { data } = await axios.post('/api/company/stripe/subscription', { customerId });
-        // console.log(data);
         const { data } = await axios.post('/api/company/stripe/customer', { email: user?.email, name: user?.targetName });
 
         setIsLoading(false);

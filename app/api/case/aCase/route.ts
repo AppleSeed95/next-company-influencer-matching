@@ -97,7 +97,6 @@ export async function PUT(request: NextRequest) {
         approvedInfluencerCtnQuery
       ).catch((e) => {
         throw new Error("something went wrong");
-        console.log("error here2", e);
       });
       let finishedApplyCnt = 0;
       let rejectedApplyCnt = 0;

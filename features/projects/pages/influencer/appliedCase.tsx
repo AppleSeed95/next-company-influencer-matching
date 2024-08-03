@@ -172,11 +172,9 @@ export default function AppledCase() {
     createChatRoom();
   };
   const dateString = (dateValue: string) => {
-    console.log(dateValue);
 
     const date = new Date(dateValue);
     if (isNaN(date.getUTCFullYear())) {
-      console.log('return');
 
       return "";
     }

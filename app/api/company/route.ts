@@ -155,12 +155,10 @@ export async function GET() {
     `;
     const deletingCompany = await executeQuery(deletingCompanyQuery).catch(
       (e) => {
-        console.log("error here5", e);
         throw new Error("something went wrong");
         return NextResponse.json({ type: "error", msg: "no table exists" });
       }
     );
-    console.log(deletingCompanyQuery, deletingCompany);
 
     if (deletingCompany.length > 0) {
       await Promise.all(
@@ -242,12 +240,10 @@ export async function PUT(request: NextRequest) {
     const userEmail = body.emailAddress;
 
     const isFree = body.freeAccount;
-    console.log(body.freeAccount, isFree);
     if (isFree) {
       if (body.paymentId.length > 0) {
         try {
           const result = await stripe.subscriptions.cancel(`${body.paymentId}`);
-          console.log(result);
         } catch (e) {
           throw new Error("something went wrong");
           console.log(e);

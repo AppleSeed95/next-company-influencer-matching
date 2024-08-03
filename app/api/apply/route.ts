@@ -144,7 +144,6 @@ export async function PUT(request: NextRequest) {
     query += " ";
     query += `WHERE id = ${body.id}`;
 
-    console.log(query);
     const result = await executeQuery(query).catch((e) => {
       throw new Error("something went wrong");
       return NextResponse.json({ type: "error" });
