@@ -118,6 +118,11 @@ export async function POST(request: NextRequest) {
     };
     if (user.role === "企業") {
       const paymentInfo = new Date(result1[0].payment);
+      const moment = require("moment-timezone");
+
+      // Get current time in JST
+      const currentJSTTime = moment.tz("Asia/Tokyo").format();
+      console.log("Current JST time:", currentJSTTime);
       const today = new Date();
       // const utc = today.getTime() + today.getTimezoneOffset() * 60000; // Convert to UTC
       // console.log(
