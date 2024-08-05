@@ -82,11 +82,9 @@ export default function ChattingPane() {
         const result = await axios.get(`/api/chatting/chattingRoom?id=${id}`);
         if (result.data) {
           setRoomData(result.data);
-
         }
-
       } catch (e) {
-        router.push('/logout')
+        // router.push('/logout')
       }
     };
     document.title = 'チャット'
