@@ -457,7 +457,6 @@ export default function AppliedList() {
                     <div className="w-[80px] mr-[36px] text-right text-[#3F8DEB] underline hover:cursor-pointer underline-offset-3 sp:text-spsmall ">
                       <Link
                         href={`/caseDetail/${aData.id}`}
-                        target="_blank"
                       // onClick={() => {
                       //   router.push(`/caseDetail/${aData.id}`)
                       // }}
