@@ -172,21 +172,10 @@ export default function AppledCase() {
     createChatRoom();
   };
   const dateString = (dateValue: string) => {
-
-    const date = new Date(dateValue);
-    if (isNaN(date.getUTCFullYear())) {
-
-      return "";
+    if (dateValue?.length > 0) {
+      return dateValue.replace('-', '/').replace('T', ' ');
     }
-    const year = date.getUTCFullYear();
-    const month = date.getUTCMonth() + 1;
-    const day = date.getUTCDate();
-    const hours = date.getUTCHours();
-    const minutes = date.getUTCMinutes();
-
-    const formattedDate = `${year}/${month}/${day} ${hours}:${minutes}`;
-
-    return formattedDate;
+    return '';
   }
   return (
     <div className="h-full">

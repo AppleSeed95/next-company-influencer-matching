@@ -41,19 +41,10 @@ export default function TopPage({ influencerMode }: topProps) {
     fetchCompanyData();
   }, [authUser]);
   const dateString = (dateValue: string) => {
-    const date = new Date(dateValue);
-    if (isNaN(date.getFullYear())) {
-      return "";
+    if (dateValue?.length > 0) {
+      return dateValue.replace('-', '/').replace('T', ' ');
     }
-    const year = date.getUTCFullYear();
-    const month = date.getUTCMonth() + 1;
-    const day = date.getUTCDate();
-    const hours = date.getUTCHours();
-    const minutes = date.getUTCMinutes();
-
-    const formattedDate = `${year}年 ${month}月 ${day}日 ${hours}時 ${minutes}分`;
-
-    return formattedDate;
+    return '';
   }
   return (
     <div className="bg-[white] px-[35px] sp:px-[12px] sp:text-small ">
