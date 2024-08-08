@@ -39,17 +39,10 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ type: "error" });
     });
     const caseStatus = rows2[0].collectionStatus;
-
-    if (caseStatus === "停止中") {
+    if (caseStatus !== "募集中") {
       return NextResponse.json({
         type: "error",
         msg: "募集が停止されたため、応募できません",
-      });
-    }
-    if (caseStatus === "募集終了") {
-      return NextResponse.json({
-        type: "error",
-        msg: "募集が終了したため、応募できません",
       });
     }
     const today = new Date();
